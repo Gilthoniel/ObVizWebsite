@@ -1,0 +1,161 @@
+getResponse {
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1432566737352
+    starRating: 1
+    title: "Would not open"
+    comment: "After I down loaded this app.  I pressed the Lego app and it wouldn\'t open.  I have Galaxy III phone.  Very sad.  I\'m a big fan of Lego.  Uninstalled"
+    commentId: "gp:AOqpTOEYN6WfK5-3Kb4QhbNKCa8ydDlt7oUbnY5o4gLeA3NKDHr1oVh_-H81Mg99n32r11DUwjGzrPDApdzSJrU"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1433139621884
+    starRating: 2
+    title: "Borin"
+    comment: "Needs more levels characters and is alright( if you want to waist time)"
+    commentId: "gp:AOqpTOETITh9Mqwi2EdTRiSyb3F1vGZSDz1_NgrGTZUvYIXNSz1KLOsjzRHqG50HiMazuEL9MHypkfy2owTGrWI"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1432505008798
+    starRating: 3
+    title: "Update bug?"
+    comment: "I dunno what happened but when the game updated it wont even open on my phone. I have a galaxy s3 and it worked great on my phone until this ladt update. Please fix."
+    commentId: "gp:AOqpTOHE4jvLDb-m7BJ3YKBPgdneWwlc2khobg03vJs5Fl0Chhg1rD8OBX0DafTiJVGe0l6dXQugcS-TlvL38Ds"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1432497004340
+    starRating: 5
+    title: "Perfect"
+    comment: "It is a good game it will be better if we could play as golden kai , zane, cole, jay , lloyd and play as green lloyd and play as shade, ash, bolobo, neuro, griffin turner and other masters"
+    commentId: "gp:AOqpTOGWyzsq2qalY5XrtD54OrqGv5w0WTJyKTiS1y4_Mzl8hw2ddG5xdasvaZ8s5xGqL7NHUJIDLMKrF612YcE"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1433613300268
+    starRating: 5
+    title: "Lego ninjago tourtument is out"
+    comment: "Its out now do not listen to the reviews listen to the updates and picture of the game its better than this game this one sucks mabye make ninjago shadow of ronin\'s on iPad if you do I will give all of your games five stars \342\255\220\342\255\220\342\255\220\342\255\220\342\255\220ps this is my first ever review"
+    commentId: "gp:AOqpTOFlmEiRr3WWmJP6yB-X-zqimYYXjVC9jgP6bnrvUIW4dlui4mjxdBQQn1A2W9llTtq7-cN3DoeDesFqk48"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1433697840611
+    starRating: 5
+    title: "Great!"
+    comment: "I love the program so obviously I love the game. Keep up the good work guys! And also, please make some more Ninjago games. :-)"
+    commentId: "gp:AOqpTOGg6cBOGq3QURjfkDD-Oc2FVzOPSdMltiq4abZ4AI8pHEjmwwmrXIb-viY5SLJ1uGs7Z2Cwp2vDU2_pI5Q"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1434508900980
+    starRating: 1
+    comment: "This is the worst game I have ever played every time I go init I press the app  and I go in but it kicks me out."
+    commentId: "gp:AOqpTOFK3R1Mqih11x6GamWt-KqhD7hH83wzVyvTBIK5UARmhiTzOYb5_S36-4lmpFPvATJ3YAlJzaHq8sPPZvQ"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1434171982620
+    starRating: 5
+    title: "Omg so fun"
+    comment: "I love ninja go and this game is fun I\'ve had it before and loved it soo much this is a must play for kids :D"
+    commentId: "gp:AOqpTOHYNl7YutIY4unWqBmQvBeon-jodgTZiZzi9JxR-uxWLsoYzeNZLpBIN6AwiCEFVzFEYzbMZV8uUT_Gpes"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1433451117316
+    starRating: 5
+    title: "Aaron here"
+    comment: "How do you fight in this"
+    commentId: "gp:AOqpTOGUu2GJL0AxHAT6xD_4qFlztkqwLrzM3P2l1wLTfMA33w1b-4pVOPXI2vrlzVaYJVg8FcgELpRpLhi3UG8"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1432928301399
+    starRating: 5
+    title: "LOVE IT SO MUCH"
+    comment: "You should add golden ninja though,NINJA NEVER QUIT"
+    commentId: "gp:AOqpTOFA18atn8ZymRSP-GDF-bWg2cmPHORuOIzTSH5v4dO5nVLvG4UWZBBL3A_7yXXbx-lKS4fpjmh94Z7k7Qg"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1434277376982
+    starRating: 5
+    title: "Epic game"
+    comment: "I love this game so much but I want there to be a green & gold ninja"
+    commentId: "gp:AOqpTOF-ErpWwFbLrtNk71Rqyh7eMPOzI8nYn92GaL-6bsFpgRQsaprAKj7GJ70GKcfx3pmjNQmGYP5mjbuKHko"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1432679723844
+    starRating: 5
+    title: "Ninjaaaaaaago"
+    comment: "My friends and I love it I\'m Kai they are Jay Zane and Cole"
+    commentId: "gp:AOqpTOH_Hte0YgrSO7Vs9x-QwVtVvBPmEuc4H6pXaXP0y5J2YdF55dS2e_Ai72IXwOpYD1ej3OD0J9xnRJwXdSc"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1433078055731
+    starRating: 1
+    comment: "Very buggy, not been able to play for more than 30 secs before crashing."
+    commentId: "gp:AOqpTOFSNroZCzy7B11ONR3aqjtloEl_mv4UKzPp6AUPSRmLfoVc4Phnr1FgnEqH2_flfS2I3DNLCMJHW25YipY"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1433828525238
+    starRating: 3
+    comment: "lt\'s a good game, but Lego Ninjago is halting in between."
+    commentId: "gp:AOqpTOHgn5Fzjs2Xcm4XGZUy36KTSdMG-UU0f1RoD7gzDvGIix6G2MrONCig5WPBl1Qt3jmIKCs04qIWRVcWJ5k"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1432771889866
+    starRating: 5
+    title: "Great"
+    comment: "The only downside is that there needs to be more levels on the story mode"
+    commentId: "gp:AOqpTOFLr6vWIbiGOML0arzfBjoUbh97U4qRGRGm1KaJ6BM42v09Y-j4rqLfxjRKYwSI_d3vr4hlFDlo1QX-qd4"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1432868064280
+    starRating: 4
+    comment: "is fun but can you add more levels and add green and golden ninja"
+    commentId: "gp:AOqpTOEtAXnkZjzeaqbjlvC1U8K9Y1wL1seZysSjxQrP6qv7xG-0g50rb4BCWW3gPfzRDubYMSgdPYK1CR18UEk"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1434822836757
+    starRating: 1
+    comment: "I not really into it because there\'s not that much fighting bad guys"
+    commentId: "gp:AOqpTOGHkMz625aEjfkf9SAywmvDb7CsMWdE-RIjyXlpiMeUmr2nIUEgoBiM_2i2BGbNiQqsU9T7gDRDgxDvrwA"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1434921345782
+    starRating: 1
+    title: "Can\'t play"
+    comment: "When ever I jump over a sign it crashes. Please fix."
+    commentId: "gp:AOqpTOEeZiFB3VnjmnonTjhtwk-EQtoXWq-BWrQpU8LgEM53RkPAbMo9khyV8r43CUvdkm9Ur4488CSsKWp2UMU"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1434721439478
+    starRating: 1
+    title: "Shited game"
+    comment: "Every time I play it the computer somehow moves its self"
+    commentId: "gp:AOqpTOEIebffFuVfygY4vkT1GxuPXk7jFb6KY8zmJB-TKpT8mMLKvkv_S0TEShubIti9ysIFtX0IfE0EH8mEN2M"
+  }
+  review {
+    documentVersion: "1.4.0"
+    timestampMsec: 1433363868958
+    starRating: 5
+    title: "Or any attachments is may not be in the other day and then I am going to see you are you can you can you can you can you can be able to see you"
+    comment: "Cool"
+    commentId: "gp:AOqpTOF-uFYrMp_YGBAMXLz1eZGB0BnPkTSqNzX_4Xsy1lbBuqQXUAgCG4r4Hil4Mzs6XY_TY6RiFRxPJmC9yIk"
+  }
+}
+nextPageUrl: "rev?doc=com.lego.ninjago.rebooted&n=20&o=20"

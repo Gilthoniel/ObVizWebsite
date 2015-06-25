@@ -1,0 +1,166 @@
+getResponse {
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434530655748
+    starRating: 5
+    title: "Multiplayer"
+    comment: "This is a great game, but come on add multiplayer people would want to level up try to beat their friends or siblings youth would get more player and more money!"
+    commentId: "gp:AOqpTOHqw8ewE5UeRHj0MWDGEW1u1rDYGt2o0xkBWmNZsiTJcqnskeFx5IkbbGbL8D7TzGGX4YIiN73TFm-gCQ"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434472405183
+    starRating: 1
+    title: "Not working"
+    comment: "Cannot opening after updating lollipop in my galaxy s4 getting error while downloading some 927 error something. I downloaded from third party app installed eventhough not working. Help me"
+    commentId: "gp:AOqpTOHuEFQZTptbpPvQWiNRHZ7Vs-KuNa6N7LhmGIuzuKV9l8rBp0ZVmV2j_ii9ZUnZUlOOKaE2d__YX2tYqA"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434137045009
+    starRating: 4
+    title: "Cool game"
+    comment: "Not sure why it takes so long to unlock weapons, and that sucks other then that the games pretty legit."
+    commentId: "gp:AOqpTOErCJkSeHNoCIJLYfB4fgqIikvi3NVT3B2TksYwVG0tVJKg1kJpKmp28m-1gDDQK6obMN8ieIzhS5i3Wg"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434853735605
+    starRating: 4
+    title: "Cool. But"
+    comment: "I can\'t buy anything at the store it sayed \"There was a problem purchasing blah blah blah\" and i can\'t buy when I buyer 2,500 gems its just sayed There was a problem purchasing please help nekki :-(... Reply to me please I need to buy Composite Sword :-(  I\'ll rate 5 if you\'ll make it fixed again... Thank you :-)"
+    commentId: "gp:AOqpTOFsewh6QX9hbWBVTYxKuEDen5inAOxbL-kjUh6F5Q6o5U9Smh8cJajNMkrh8TbEqqq2xiNodWC5DIN5nA"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434237435368
+    starRating: 1
+    title: "Crash City but nice game"
+    comment: "Game crashes on startup if wifi is On. So I turn it on once game is started. Next to Keep progressing you need Gems to level up magic. But it crashes after every ad to get free Gems yet Some how work when they randomly put an ad up after a fight. Sent many crash reports and an e-mail or two and no rresponse."
+    commentId: "gp:AOqpTOH01jZT18D2MURXnszzfs7VNMnMP7tK_X6SiHSk9S1aMzw_zn_g1uA0e4WexySNjVX3PDxKXjM5qoxBlw"
+    replyText: "\nEmail us at support.nekki.ru"
+    replyTimestampMsec: 1434314753890
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434453940986
+    starRating: 2
+    title: "Elegant graphics and quite interesting story, BUT..."
+    comment: "I love your game and the story line in it ... your only problem that you take very long time to release these new chapters which is boring ... Im waiting for the next update over 3 monthes I think which is looong time. UPDATE: after waiting for the update all this time, I\'m very disappointed ... the update contains one extra mission and some weapons only !!! So thats it !!! Where is chapter 3 ... where is the rest of the story guys?!!!"
+    commentId: "gp:AOqpTOFDZMkEx0UzTd4EjonsnPJ4mKvQMHNYtNarSEeAYsvIDaj4QPUUITcelZLIs4rQvqgxOiNoD69dFFRwRA"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434699678275
+    starRating: 5
+    title: "Problem"
+    comment: "The game is really nice it my favorite but idk every time I open the game it crashed and scared that download it again gonna make me lose what I build on it"
+    commentId: "gp:AOqpTOGtCieuRdtDU3Rn198_2CMN7Wa845vCtAH6vGbu38njLug-I8DEJWo38T42GIeJllk5IhprNS2tJrUI7Q"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434984882765
+    starRating: 4
+    title: "Good"
+    comment: "I will admit it\'s a really good game but the bosses r just shitsticks who enjoy cheating!!!"
+    commentId: "gp:AOqpTOFamXtY717dKganKQn-7RtMw9JWdLxdDH7z7waJGdN-W2T8doZfkl4qhs_lgtMc3igC5eGklqqPKkmK5g"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434916272398
+    starRating: 2
+    title: "Level 10 to a level 1"
+    comment: "Before I factory reset my phone I was a level 10 after I factory reset my phone I was a level 1 please fix I was pretty far"
+    commentId: "gp:AOqpTOFe94reYk2hHrG41ppnrj6-cfuRY9pbkm7_V-BfdLT-cRxW7d4q-DSrkKH4kKpz8VUa8Jl3P5jlXPwXKQ"
+    replyText: "\nEmail us at support.nekki.ru"
+    replyTimestampMsec: 1435034964875
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434110352560
+    starRating: 5
+    title: "Pleased with the update"
+    comment: "Now I can enchant any weapon I like with tempest rage,love it.All now I am doing is waiting for chapter 3.please give it fast, I can\'t wait any more.A word of advice,give a fixed date for release of the update after announcing the update.That would be very useful.and just give SMALLER updates, they occupy so much of space in my device."
+    commentId: "gp:AOqpTOFSZjle83e5DjWIVvogPLENMSaRx-yjykFXuFa007Hkdgpl_6pMj39dZfhlNI9EDeOl-VLsPOJ5QIP3Pw"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434162915334
+    starRating: 1
+    title: "Lagging on LG G3 n full of bugs"
+    comment: "It\'s very good game with full of bugs... I defeated to wasp n updated the game...  Now I m unable to download the extra  content of 23mb... I m downloading it with WiFi but still it says no Internet connection plz try again later...."
+    commentId: "gp:AOqpTOFdHoyU1l2WvMzr8v3OWwtZlD0md6Jf3bZUcUnJZUA8Gra5UtkNI_MLBsgSw3v0hiKAMQSy0Pk_XJVSbQ"
+    replyText: "\nWe recommend you to follow these steps to optimize your device performance:\n1. Turn off power-saving mode, in case it\'s on.\n2. Close all background processes.\n3. Clear up your RAM.\n4. Reboot your device."
+    replyTimestampMsec: 1430043168372
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434059560050
+    starRating: 5
+    title: "thanx"
+    comment: "i have made a sugetion and sent to nikki support and in 1 week they did what i asked thats amazing thank you nikki keep up"
+    commentId: "gp:AOqpTOGKP6LkEOUT3uEJbgF7PojREqbUSQIBcRfO5IQ8xeA55nDH3NNL1jR7JtN30F76JO13EJWVgil_A5Ra8A"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434626945331
+    starRating: 5
+    title: "Best game I\'ve played in awhile"
+    comment: "It has a few bugs, no game is perfect,  and c\'mon,  add multiplayer already, I recommend this game to any fan of mortal kombat,  etc. loved the game btw"
+    commentId: "gp:AOqpTOFTDubF7V_8nU9AGVAMk9RCkpZr-o-4DMxvkZMXjt2___vW9-uUzeKohjCXE8kV4r7Q6CZWloqueHQPag"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434414662945
+    starRating: 4
+    comment: "The reward I\'m getting is different from the description in the stages of \"Night\" Challenge and Tournament in the last episode. I only get 1000 green orb and 200 red orb EVERY stage but the rewards said otherwise for increasing stages. Please fix this issue."
+    commentId: "gp:AOqpTOEZ_HceQz-9p16rHKY7CIm2S9r3Fwq-zEyUofhmVorPZqrcQDniLXAcc39Bxe5pY72lBFibITmim762lg"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434570794237
+    starRating: 3
+    comment: "Lovely game. However, i am afraid of making in app purchases since it takes my money and doesn\'t give me value for it. On the 15th of June 2015, i purchased gold for $1.92 and the money was taken from my account. 2 days later, i still don\'t have value for my money. No gold. You may wish to give me value or a refund. sort it out and this gets 5 stars. My game user ID is 46 503 451.  Again, I will not make any further purchase until this is sorted."
+    commentId: "gp:AOqpTOFD-_biZoKRz6c6X0js0Sj2lIeWwX5OGGN_r5-4UvdwNILZDJrFDv-osy75rXhbypz4Occ41jP63_2AqQ"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434381676575
+    starRating: 4
+    title: "Great game"
+    comment: "Good graphics and very engaging gameplay. It\'s not perfect, there are a few problems like the free gem offers, but overall very good."
+    commentId: "gp:AOqpTOEU1CXUWea3yCTlAUw6tIystNOzykt363Z0pkIDmGdXcDb9gX9P86WkeoqPriGUqPIPY88RJXvlj8rhXw"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434582199138
+    starRating: 5
+    title: "One of the best games ever"
+    comment: "A must play games for those who love action games . A well crafted background gives the game an intense feel. Just loved it , but still waiting for the TITAN update in India."
+    commentId: "gp:AOqpTOF1XJzruq7nK733kLBJ_1xoNC-UTkVtPTkrVsYFXwPGJjxGouB-xFxCQca49Um9oMIPn3244KaSMjyEIQ"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434616469637
+    starRating: 5
+    comment: "L love shadow fight 2 but titan update chapter 3 so slow and update a not l wait for so long"
+    commentId: "gp:AOqpTOF2dQ79gCkSW8hrscq_EuZAt8sj5EQ3uL4X4r_CzomKpcarTtm4avjQHn0wyfGzwpEUVr7C1-jLRY9chg"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434836816083
+    starRating: 3
+    title: "Nice game and  I have ended the game but hell its a loop"
+    comment: "I have given it a 3 star becoz this is a nice game but now I am very disappointed . I have spent 3.5 months on this game to defeat all bodyguards , completed all challenges, all bosses but after all this what I got,  a repeat to the start itself . It shows as if I hadn\'t done anything in the game and now I am again at the start . I don\'t believe if I play the game again , it will get completed or it will again get in the loop. Sorry I am uninstalling it. Nice game but its over now."
+    commentId: "gp:AOqpTOGxR-pe9pQCd1f_7G8OZgRU9qJoLn_OJhw6OsT2xjlbVRR0ucNOwuVYNZZ8HadUVGA_iRtW75v7sx7B-Q"
+  }
+  review {
+    documentVersion: "1.9.10"
+    timestampMsec: 1434878032799
+    starRating: 3
+    title: "Glitch"
+    comment: "The game crashes and go to menu screen of my device after 2 to 3 fights . At loading time this happens plz fix this .and In App  Purchases doesn\'t work please fix this one also  it\'s a great game and I love it . And please make an update soon for chapter 3 to defeat titan."
+    commentId: "gp:AOqpTOEogkPIS85Ka7A-4yppp703bMvCXE3FXcRjKa-_0i34Ng5psUh165h9rOPZlsBbSHuZuujGfPO8Kkai5Q"
+  }
+}
+nextPageUrl: "rev?doc=com.nekki.shadowfight&n=20&o=20"

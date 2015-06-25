@@ -1,0 +1,162 @@
+getResponse {
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434825840617
+    starRating: 3
+    comment: "What the hell is up with the swiming level? How do ypu swim if there is multiple beach balls in each lane with no opening to zig zag through. It has done this almost everytime and I lose automatically.  What is the game designed to cheat you out of you energy. Scoring is unrealistic & almost impossible.  Really A isn\'t good enough there has to be extreme S level to unlock the skinny levels. Why not make it where you have beginner (C),  intermediate (B), advanced (A), & expert (S) so player can work through"
+    commentId: "gp:AOqpTOH-0kQrgEDnYTgTnoyKDCF4ln_qoSqxf2ov3zst3VHotgFmYVlH38pjMsNNxCj_hggwzOoZDSIy4ThUbs4"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434840564480
+    starRating: 2
+    title: "Good app, too many ads"
+    comment: "LOOOOL the funniest app you will download, but it has too many ads and its getting anoying. Also it needs an update for earning more coin. If you have so many ads why im going to pay for coins? Make something that if someone buys coins it will get the a \"ad-free\" version or something like that."
+    commentId: "gp:AOqpTOFKTjM591EZA4DW3b9L0Le1Ni9JXyHWUQntOev2wchnM6tWmow4BWv_quRZYEBPhtdtxrWEbOLhH6xp1gY"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434993494379
+    starRating: 4
+    comment: "how do u pass the swimming level if u can\'t get no where \360\237\230\220 this game will be nice if y\'all fix the swimming thing"
+    commentId: "gp:AOqpTOG09efxT4v-uyjiJIMMVBvUMtXLhHUgFtPIfhi2HvkKu-GVYr_qIzEqajAamzLO6p7RqZDwVaw8pOkjiUw"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434959509498
+    starRating: 1
+    title: "No"
+    comment: "It\'s not even fun for people with anger problems...it gets super annoying and I haven\'t had it that long so...if u think about getting this game well think again you need to waist your time and effort into something else because this was a poorly made game and it\'s boring who wants to sit forever for lives than just waist them by failing it will make u feel like a complete lose people might say it\'s great but it\'s only when there good at it...so don\'t get the game\360\237\230\240\360\237\230\262"
+    commentId: "gp:AOqpTOHTM7ATmKBZAxmj-RijYIYv29Y_rva8maFKMSN28z_2fY7094l4ZsnrUNhha5FelbjkCynGTKOdfiZaVtc"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434869732825
+    starRating: 3
+    title: "Hard touch its not okay with me"
+    comment: "Ilike it but when im in the level step test the buttons are hard touch and i cant reach the score goal i wish you fix it and i give 5 star as well thanks\360\237\230\212"
+    commentId: "gp:AOqpTOEAGogc38HECr7vgGuIZUB3EC88lEgjgujaemltQPUtpvr5vH6y7yFkKoXaITbAZVMaOIJuq8apew3lqC8"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1435031948142
+    starRating: 5
+    title: "I am not sure if you have any questions or concerns please feel free to contact me with any questions or concerns please feel like I have to be able and Woodbury NY times a"
+    comment: "If the user to be in touch and I am going on in the morning and I have been in a while ago and I will be in the morning and I will be in the morning and I will be in the morning and will not be a good day and time for"
+    commentId: "gp:AOqpTOGhMgi_vj9aCHVAsrzoqvx6NuSHkpYqDICEgiVI_H8GQ3S3K-lW4XBhY-ec8czmUX7HRshDSD1Z8hzfOvk"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434825312196
+    starRating: 4
+    title: "I like it but..."
+    comment: "Everything is a little on the challenging side and like many have said, the requirements should be lowered to get a good grade."
+    commentId: "gp:AOqpTOFbaJ4rukGQ2xD9XZjavFOONqtxnPcncvdyyUVptOvuZexpgLwOYvmwgT5MUx-Nr7h09ollpSJQ--h2NHI"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434863363139
+    starRating: 1
+    title: "Hard"
+    comment: "This game is to hard by the second game you want to quit my highest score is 86 and I still did not pass on to the next level  please make level 2 easier oh and I think there should be  a whole lot of power upps please fix then I\'ll give 2 or 3stars..."
+    commentId: "gp:AOqpTOH1S58IvOnRRFYb-ppZDNO8W0rfw_az9JPwfh3kFnkO1jM9rbVPZ2jsMWG8d5m4NQsYqe4J-q90sMO8HSM"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434947605218
+    starRating: 2
+    title: "hmmmm"
+    comment: "u can only spend like 5 minets doing stuff and u can\'t pass the first level because she is to fat and she keeps falling over"
+    commentId: "gp:AOqpTOHppfY_2NdzkvwHKorAa9Lfz1y6SvQZAHoWTyMPl2XZZ_upTT7DjzzWhsfzrSwsipUU3Rx3fj2Ewgg1v-4"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1435005267045
+    starRating: 4
+    title: "It\'s pretty good"
+    comment: "I like this game it\'s really fun but level 2 was hard and so was the swimming pool one on the swimming pool the highest I got was a B and I did well but apart from that it\'s a really good game I recommend it to u \360\237\230\204\360\237\230\200"
+    commentId: "gp:AOqpTOEAXSDW7w49mRBEAwl4JFObRkiEUukzXOTMaRocRcAWJP4YaAiejyYWqNJ-3InT9bXQfC6d3z67roW52N8"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434857348414
+    starRating: 4
+    title: "Challenging"
+    comment: "I can\'t get past level 2! What the heck. I feel like you should start with some power ups because this is just unreal! My fingers started to cramp.from all the stepping and I still didn\'t get an A!!! Make the game easier and you can have 5 stars."
+    commentId: "gp:AOqpTOF0UDSDTyBLxBAuC2GM9sHoueNK13o5M-oNHlVB9OroYmeBdwbgljJy8qpr_1qlHXE4SjU1U1dzDooz5II"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434949030356
+    starRating: 1
+    title: "Ok game. Lvl 2 is hard"
+    comment: "Ive been on lvl 2 for two days and it is getting very frustrating. I am ready to uninstall but I am trying to give them a chance to update the game to make it a little more easier. I also think the game should start with some power ups and trainers"
+    commentId: "gp:AOqpTOGcLvZkt1OtVqmu5SYvyVFQG4ikCOleg7lZNNlGS6eP0Y0DI4_6QUTP0086hoBbK1_kGizMOCI3kiZHTX0"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1435055512889
+    starRating: 3
+    title: "Ok"
+    comment: "This is an amazing game however on the first level should have buttons to press instead of fingers"
+    commentId: "gp:AOqpTOHfkOU4sliB-XAD3sc8nXJXvdYuMrg2zxztm-amr8U-EQ2M98QjnJP7nqCs4OZES4-YyexcdpqTGDzkQDA"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434814837558
+    starRating: 3
+    title: "This game..."
+    comment: "Level 5 is incredibly difficult to beat. Please lower the requirement to get an S to 90. Also it\'s very very stupid to lower the requirements to get a level 3 or 4 or 5 if you won\'t lower them all. It just doesn\'t make any sense"
+    commentId: "gp:AOqpTOENuK805mZxrAf8hfZIQPFGEJJfqF7ETK3baHRc50d82QbHEwkxxeKEGmM2FAZFA13ffGlnRJGyIZXHH9A"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434891399354
+    starRating: 3
+    title: "Its a good game"
+    comment: "But level 2 is imposible because I cant reach higher than 43.plz plz plz plz fix it"
+    commentId: "gp:AOqpTOE45gC1P4EO7SerzszvLqhYK9frgpm09tdothen37aUPQfYFwFm9JnLTG5asmQLOTAfaBOHVgL5v1-iGyk"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434845765057
+    starRating: 4
+    title: "Joyce smith"
+    comment: "It was okey my daughter\'s liked it way more than me!! \360\237\230\201"
+    commentId: "gp:AOqpTOHSNsg8tGU8qlKOVdGqr-hP4RJN8iwcY874E-QXI6VBvC7BcbpNrP8HoOpDQbAuHroio8Jk62IEicr2dJE"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1435013053308
+    starRating: 5
+    title: "Lmfaoo This Game Funny Asf"
+    comment: "I can\'t pass the first level this game so stupid that its funny"
+    commentId: "gp:AOqpTOFN_s3N1pzbvdAcbocS-0olam6BCMCVvA-5TL3VZuezzEf7mVcQvUVdzgFq8xgxdeSwvCslyybP_sNPCzw"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434948153114
+    starRating: 1
+    title: "I cant even open the game?!"
+    comment: "When the game opens and she sees tht lady on tv with the comic stirp thing, i dont know what to do. I mean i tapped repeatedly, tryed to slide the screen over, but i just dont know what to do since they dont work. Plz help me or fix"
+    commentId: "gp:AOqpTOEX8ha5jSVTwkeqnmCetvvs2D0ZDhNT_C-vDHXvTs4nn0iTmbg_f26a8dEvBA8F7F5_fZB8sq9n2BMnN-w"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434808743541
+    starRating: 1
+    title: "Hard"
+    comment: "It is soo hard I cant get past level 2 I spent like 3 hours on it!!!"
+    commentId: "gp:AOqpTOGftYQ_EnKCllhtj5xVdatqgZsb8AaFQhSCPL45r1i5KkoRWPSo5d6kSg3RkhawbRitZH-6O2vxeKJP4b4"
+  }
+  review {
+    documentVersion: "1.5"
+    timestampMsec: 1434920517927
+    starRating: 3
+    title: "Lose weight"
+    comment: "I will give this game three stars because when I go to it I play it and then it just goes out and makes me start all over again please fix bug"
+    commentId: "gp:AOqpTOGCe061I33KJzqStBSrKJ67kLSqQ_37mZHIqiGe1wRbWuXdEqBBYvdyVcUT3BqiGq55U5j906Ew1CqP-VU"
+  }
+}
+nextPageUrl: "rev?doc=com.ssc.fitfat&n=20&o=20"

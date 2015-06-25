@@ -1,0 +1,162 @@
+getResponse {
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433092157789
+    starRating: 2
+    title: "Please don\'t make me play that again"
+    comment: "This game is just plain boring. It loaded quickly and ran well on my HTC One M9, will no lag spikes or stutters. My biggest problem is the controls; the punching and kicking animation takes so long that it\'s nearly impossible to kill someone unless they\'re standing still, if you can even find an NPC! I managed to find two; one police officer that I killed with no consequences, and one civilian who bolted away from me. This game needs some serious polishing."
+    commentId: "gp:AOqpTOGp3c2nxruMGcXXJMh4tMYYEiBQTKjp8Fo5kk-J0A_WNumEelcdOSPratpACK6UlbSEF3K1hum5ieOKE6I"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433160115111
+    starRating: 1
+    title: "Worst game  ever"
+    comment: "This has to be the best worst game of all time . controlling the character and the vehicles is so glitchy ,the developer\'s need to be shot for wasting bandwith . Dont bother downloading its a crap gta wannabe with commodore 64 graphics."
+    commentId: "gp:AOqpTOE5jCffJahSJtPdkH2Xo6w-zF-MILF4k0VEMvrFXe1j3d9vxxucMvil7h6nURJcQg4-59sQPFtKVbBj1Eg"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1434083059495
+    starRating: 1
+    title: "**Lags and Crashes**"
+    comment: "This game lags terribly, it lags so bad that you can\'t control him walking let alone driving! After 1 or 2 minutes the game crashes then it tries to reload it self and crashes over and over. The idea of this game (from the small part that I was able to play) is awesome! I would love to play this game! I think this could be a great game / app. Please fix the lagging and the continual crashes, and I will be able to give this app a better rating and recommend this game to other friends and family."
+    commentId: "gp:AOqpTOF6q6qv2TVjHSeUv9WIFhjyP2w24oXmxHP6Z2RvbtZsf5Ohk7D91hTNS-wQKm4L5zIBPqdWci7vZyi2qAM"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1434385520333
+    starRating: 1
+    title: "Sucks"
+    comment: "Controls are terrible, the graphics were awful, attacks were idiotic, driving the cars was awful, I tried to ram the car in a police officer and all that did just pushed him in the building and he just kept shooting at me and I couldn\'t even get to him! Another is why do they have health bars? Why do we not get any guns to begin with or at least find? Where the hell is the people? Why are there these idiotic levels? WHY DOES A CAR THAT RAMS A GUY GET A SMALL AMOUNT OF DAMAGE WHILE A KICK CAUSES A LOT OF HEA"
+    commentId: "gp:AOqpTOH-pDzlSuS251xi9dTNWM9nNVnBo_JjE2iqurSc9W33rwGeR1-igUdedxueFb6pHTspkvbHT81sHIvFiPQ"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1434130921723
+    starRating: 1
+    title: "Terrible."
+    comment: "This terrible game with a terrible gameplay and terrible graphics, terrible AI, terrible handling, terrible textures, terrible visuals and aesthetics, from a terrible company is just a no-no game. Generally, it has no redeemable qualities."
+    commentId: "gp:AOqpTOGrSVMzVoBjI8OssZf9Gq6W-vWbUJHNMzOQFZ6m_1m00bn5iOl3200w-cRgC-flsyP003wODp8c3qiqmes"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1432904708204
+    starRating: 4
+    comment: "What are you all even say ing its not bad or boring it\'s actually fun"
+    commentId: "gp:AOqpTOHVDZp-PE2ERJDJj9qCcuH-6hE7_NOtuKhJo-9E34pX7nw0WKVQ3ybQlX8KB4NvGCz3TcOBvClNxOT7aqs"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1434546254013
+    starRating: 1
+    title: "Incapable frusted game"
+    comment: "This game is not be able to get the best regards to the people for your time and we are not sure if we can be with this. So don\'t play this stooge game even first read the reviews then download games.          By Ana Handa"
+    commentId: "gp:AOqpTOGqupEDtTtifnERJ_iaVhMiPfyIC42AQ0THHEVoo88Y8oVI1K2u_cQmlGubmaepCq_j7OZWseEcr1Z4-x4"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1434893501848
+    starRating: 4
+    title: "Get over yourselves, it\'s free"
+    comment: "No one made you play it to begin with. This is why no one likes whiny kids and adults. The game is free. Sure it lacks functions and features you might expect from popular titles but for a game that\'s less than 50mb and didn\'t put a dent in my cell plan\'s bandwidth, I can\'t complain. I found several npc with light searching as well as a bike and a car. The handling is very basic and you can flip the sports car but you shouldn\'t be expecting a $7 race game. The police do retaliate btw."
+    commentId: "gp:AOqpTOGINbG9dTdPRQ0ugr_EWvuSEkq3ffpTx9Al8QuEkVOdNUyEFWu0C52cruuzjivzvhLpsH9jDkdpTXvdbf0"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433203683391
+    starRating: 1
+    title: "Stinks"
+    comment: "If I could I would rate this zero stars since its just a wanna be grand theft auto it has a stupid to point and I cant do anything or kill random people it just sucks!! We already have enough dumb stupid games we don\'t need anymore! It won\'t even load once I beat the first level all you people who rated it more than three stars you must be stupid to like this!!!!!"
+    commentId: "gp:AOqpTOHSac4rqkp03UNtDAFvIfJob-nKYIwfzqsFQNTlfy6Hxt1XyIdMYas-R2YN7r434eo-9Mh91WNH8g2RKO8"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1432988054164
+    starRating: 1
+    title: "Needs lots of fix"
+    comment: "Would rate the game better if my car doesn\'t run away from me after I get off and flip over after few turns, needs better control, punching n kicking can\'t really kill unless they just stands still and police shoots u out of nowhere"
+    commentId: "gp:AOqpTOG6aA2HryM4lf6yUpKIiCF7RSm1gCNckthm6alLi9Bgftd1hAldnOZUsayRwyMuk4iO02efiWlnOVLz9vg"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433024379858
+    starRating: 4
+    title: "Ha ha ha funny"
+    comment: "A some game but it lgs just a little bit. I would like to hear that you fixed that but other than that best game ever.                                                               Samsung galaxy s 4"
+    commentId: "gp:AOqpTOE6DwVLReAjfnrvCIkYn4CEkrLjtkMDW1KFGvVknKUcyUtgVuvNTM5JApNOQKdrPvHcoDKygaf0l6vXh2c"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433172417852
+    starRating: 1
+    title: "Sucks"
+    comment: "It keeps saying loading and it won\'t load plz fix and I give 5 stars"
+    commentId: "gp:AOqpTOHJnfay9242RO8F-ZmNPCl2-4FwzitRryiHwcKDnx5xsRS0aE5khGd-p-JAkkKkWnm_iQ6AVKePlK6lmy0"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433665047570
+    starRating: 2
+    title: "Super glitchy"
+    comment: "Locks onto targets and makes you run at them even if youre trying to escape from them. Running into a target can cause them to phase through walls. Targets can run through fences and brick walls. \"levels\" are boring. Come up with better mission goals. Good platform, poor implementation."
+    commentId: "gp:AOqpTOGX9yBY6zYRNuHiicG7a1Pxgf1UI4u-Hhm9ws0K6OzqjO92HHjfmJUtKvMfcOhiux1zuY-nAD1Qv2XZdJA"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1434681757770
+    starRating: 1
+    title: "OMG my little cosin is crying because is a motorcycel"
+    comment: "His craying because he thinks is motorcycle race my mom said why he is gcraying because the picture s hi ow the motorcycel"
+    commentId: "gp:AOqpTOEf_j1QTX9KNci4Uwq3R_O8aJt30VQ8EB-87NzaWiE4Hh_zfjgdOZKpleAiL0jhyyq_XO8Gp0B8YF7wGYc"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433086652756
+    starRating: 1
+    title: "WORST GAME"
+    comment: "This game wont even load every time i try to do a mission it goes black and goes to the loading screen this game sucks"
+    commentId: "gp:AOqpTOEV0Bz93eNJzx1kFDd8TttK98GhJEHJp2lL6XViAx3Zjxcq2Ggp00G72ll44Yekw3qC_vdKq4qqkugnS6o"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433527889650
+    starRating: 1
+    title: "Stupid"
+    comment: "When I buy a gun it doesn\'t  let me use it Don\'t get this app and don\'t get any games from this stupid company"
+    commentId: "gp:AOqpTOGnx8aN_2OD1JIaWTtG4cAXNHXn0RrdQu1zHz4_H0fxoksRumutRf_41MrMqhTsYUMTxTqIZD-5vLvIkKs"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433243928536
+    starRating: 1
+    comment: "Played it for 10 minutes and still didn\'t unlock a gun. It\'s a really, really boring game. Can\'t believe someone out there acually made money on this."
+    commentId: "gp:AOqpTOHk7sYyx6sxlWu-8u88MHBo6KMGtS65_LM_GCuBXhZPiOMZrInRlnI_MDN7H3UDHaU-WOj2Y8gZBAGyd_8"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1432946520217
+    starRating: 2
+    title: "Ok"
+    comment: "This game could use more npcs, also, I had a hard time with keeping cars\\motorcycles not upside down, cops just shoot you for no apparent reason, and barely anything a person looking for an open world GTA styled game would want."
+    commentId: "gp:AOqpTOGBcr7IAivIf4Nn1bk9Y5yJfmbCq5i_L4Co7I8aTT0ha8pg_N7US55Ix_jLaPW9YzqxiObXbHN6PvSnMbo"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1433032885353
+    starRating: 2
+    title: "Needs a bit of work"
+    comment: "Interface is edgy and the NPC spawn rate is too low for the missions. Some minor bugs when firing weapons, the aim jerks left or right. Other then that, its pretty much an accurate portrayal of the black guy white guy foot race haha. Cars flip in any 90\302\260 turn or more, handling isn\'t much better. Just needs some work guys. Sand box it on source forge, you\'ll be surprised at the feedback and other programmers that will help."
+    commentId: "gp:AOqpTOEy0GJTkFGPtOShFcKdU2cow2ziaBqP1KEeUtQ6rxReYQqbT3K6TOjfO07CVrT187jD6UhPVpA-LG9oAxQ"
+  }
+  review {
+    documentVersion: "1.11"
+    timestampMsec: 1432913619021
+    starRating: 1
+    title: "Should be called the walking simulator"
+    comment: "Spent the 12 minutes I played this game for walking on the sidewalk trying to find any source of life, to no avail.  Needless to say the game was promptly uninstalled"
+    commentId: "gp:AOqpTOFLJci7QElq0Xxs98cz-f4IAEKAAfrQQBv1PHHmP-L-KiJel7YIUZ4LpUSQC-IiunYW9VjSfEcvs693cwE"
+  }
+}
+nextPageUrl: "rev?doc=com.mgc.miami.crime.simulator&n=20&o=20"

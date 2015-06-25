@@ -1,0 +1,162 @@
+getResponse {
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1432491149637
+    starRating: 3
+    comment: "I like this game but it\'s soo buggy on my phone. Everytime I run I just keep running straight and I get no obstacles no coins, nothing but then after I get a certain number of points the monster attacks me without me even running into anything"
+    commentId: "gp:AOqpTOG1CZ9a-gdZVIxhoUikj7JcY7ph_LZlMoYrKldMX5qT4FfAONOoZjk-thBl8O4aiRW_wM15rjLQY63m"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1431774212623
+    starRating: 4
+    title: "Give you 5 stars for one condition"
+    comment: "Can you add some characters for Manny Pacquiao and Floyd Mayweather? Bcoz Mayweather sometimes he run while in the boxing ring vs Pacquiao just like temple run"
+    commentId: "gp:AOqpTOFrxs5ukTiEOuQkIjO9As2t79LNzV6S7DsYMWVUr1G6SdiroHM8x7B_-FVFW2lvvRVWuR19At5uz5DS"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1434135932637
+    starRating: 3
+    title: "Add things"
+    comment: "The original characters should be free of charge and the limited edition characters should cost like 2500 and not some extravagant price that the players can\'t buy because by the time they have enough money to buy it the limited time is up                                       another thing is the achievements should not be by level the should be on a list and every time we achieve one we get rewards for them"
+    commentId: "gp:AOqpTOH7iIMhWUrnvjmO43exHwd1ZVPs4QaZ_H_EpXObFW4S7n_nNAJZivP355F5G_jI3R3zScmU3zLqIlRY"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1432728163236
+    starRating: 5
+    title: "An idea...."
+    comment: "I am thinking something that can convert coins to gem or viseversa.. also wondering if you can add feature to record /replay the RUN.. still 5 stars.:-)"
+    commentId: "gp:AOqpTOEb5aaIs-C8tz9az_OZMIQVIbB8_7lW3RgCObEepA5Ay-eYx4SAonC27H2dEEpHAWJJYbXHmdQsbXLl"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1429594179946
+    starRating: 5
+    title: "Only thing its not available  for free in my previous  countries"
+    comment: "While  am traveling  looking  for the game i got the massage the game not support  for this kind of phones  and it was not free but when  i travel  another  country  i got the game  free on the same  phone  just wondering !! But the game in general  amazing  thank you for all your  effort  to get us enjoy  :)"
+    commentId: "gp:AOqpTOGcceIsc3Pp1DpPBqhTM5vJnDn3bSmBIQg9NbeRBz7-2NIWo2ZK0Upded0isDWNwwzEctOen3RwN5hD"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1433075021073
+    starRating: 4
+    title: "Addictive"
+    comment: "I love this game. I haven\'t been playing long but so far I haven\'t noticed any glitches or bugs. It seems to work great on my Galaxy s5."
+    commentId: "gp:AOqpTOFFCN7FUpQXNsQVr4MbevA7-VTCBEFaScm13razD0XNblyF2-SZXbmI0eNhVXY0lyNPsZip7unXBsKr"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1432480287774
+    starRating: 5
+    comment: "Not downloading This awesome game is not downloading on my samsung galaxy tab it keeps displaying the error 498. It is on my s2. Can someone help me."
+    commentId: "gp:AOqpTOFgNruN7Nx3HYFaf0b-mIcMxHMW-6A_eIwrHTziT90nacdahB4eDyftqzTErQtC5x65UFVEi60sPAMC"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1434847245823
+    starRating: 4
+    title: "4 stars"
+    comment: "This game USED to not let me tilt. I found out it wasn\'t my tablet because i can tilt. So right know i like this game"
+    commentId: "gp:AOqpTOEiCq9ZJ8esrMRJ-H9FlTd9mdZUeVtii60rKmXLN7TFN1gXzQdnEfsH76f8XJYqSY2lVjXnjQFYyVEj"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1431990397722
+    starRating: 2
+    title: "Booooooooooooooooo"
+    comment: "This game stinks every time I try to get a nother life it  gives me lifes until I have no geams left"
+    commentId: "gp:AOqpTOGmHUBIJVHrcZ6GRnKSENs7FOwAkFm_vQsXbqb4K6MpbCvNr4SwWgPD3dRR2Fb6JuwiCOAS4PoQcrD3"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1434092807757
+    starRating: 5
+    title: "Awesome!"
+    comment: "I love this game! I\'m a little addicted to it! I just wish there were more characters to choose from. Some new free ones!"
+    commentId: "gp:AOqpTOGxPP_ckH23BdnIMz2_swrvmzGCWYsdtgoOtDMjVpL1A93qBEK8QQyGQyEAaNBYDvOifbnDkNZKV9fo"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1432563906989
+    starRating: 2
+    title: "LG g3"
+    comment: "I have the new LG g3, with the new lollipop 5.0 update. Temple run 2 is extremely glitchy, no obstacles pop up, leaving the character to run without dying. Then the character will spontaneously die, spawning me to 63,000 yards, in the water. Please fix. I really enjoyed this app on my old phone."
+    commentId: "gp:AOqpTOEofz9-4PiZ9cZLvImNK2Tu9JMSbDURFm8Z9E6e-XcLl5OhyQbvtKm4UcFMJwKcYIR-XijXtP4YV2Ks"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1434357366498
+    starRating: 4
+    title: "Beyond Level 10"
+    comment: "A very nice and splendid game app. The only challenge I have with it is that I am stuck right after Level TEN. I thought after finishing all the tasks up to the 10th level, the next level, Eleven, would initialize with its own tasks. Unfortunately, Level 11 is up but its tray is empty of tasks. Is this a general phenomenon? Is this everybody\'s experience??"
+    commentId: "gp:AOqpTOFksAD5yvswdG73iZGErOaJCxUDaoVAWgtyydT8YR4Joj4c4Wls3NDqVEeGlK2VTgDVucQy5PbcnxAO"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1433081718758
+    starRating: 2
+    title: "Gem and coins gone"
+    comment: "I re-installed the game since i need to reset my phone, all achievements, skills, artifacts collected etc. Evrything is there except my coins and gems, please give it back, been a hard time collecting them :\'("
+    commentId: "gp:AOqpTOGS13BCFn-R2htfw2LEi05ebV3x8UB6cmTFIx0h9BRUYn--zBWkpgmRWLCiuinUXe0Z0s2_B1GQx9HT"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1434821538147
+    starRating: 4
+    comment: "I want to know why I lost ALL my progress. I updated, logged out then back in and restarted my phone. Still in the beginning levels. What\'s up with that? I really like this game but now I am back at the begining."
+    commentId: "gp:AOqpTOF-txdSFyZVOAixwnnVHrPa9Ex-NIhMhy_D4PWfhYkxfr1Dd53s4Dp8o1P3R9kt14ad0eCjNe1LDb5g"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1433979704900
+    starRating: 5
+    comment: "Its awesome because scarlet fox is FREE! ;-) I hate that the monster attacks you without you running into anything like what the heck is that? Is it a glitch or is it part of the game? #what ever:-)"
+    commentId: "gp:AOqpTOGqidlxDjDNmw3IWpUDgWPTaHaVxCfO1lm5qjr4BZvuQy6kJJ0WSvYgsvlPQrEUG1CbU2ZHa2ILeFPf"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1430146201044
+    starRating: 5
+    title: "Needs to be harder"
+    comment: "Although I agree with there being a bug after you reach about 75,000,000 the game starts lagging like crazy on S5. I also think you should make the game harder and stop giving things once earned away for free. Also more abilities and upgrades.  I\'ve unlocked all artifacts, power ups, chactors, and abilities. Have Coins with no use besides head starts."
+    commentId: "gp:AOqpTOFk3AiC4TDzYqujUw0EoFOMXu-89bEZGQl0r-WyVMvIaPMpp7n6LaOWtBV3Z27ulFUk5o0WVplj5K56"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1433316259878
+    starRating: 3
+    title: "This is actually my first time playing this game i might not be good at it"
+    comment: "I. Had played but in a long time ago let just say am new its okkkk\360\237\230\212\360\237\230\200"
+    commentId: "gp:AOqpTOHNYuhxkWI-IUhqs_7R_dLmqkUyGRpPZqFQc_UieHMvPoores_jYr09n4FJcET7bagGkvwC3hLABl0C"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1433438252411
+    starRating: 4
+    title: "Addicted"
+    comment: "Love this game. And if it glitches or starts to be dumb just turn your phone off then back on and wait a second to play it again."
+    commentId: "gp:AOqpTOFvmqw6t9DJuR9Ph9WYfaLfsUlNmW1YNV1LMiCZ1z6y53ZWa3Y5gWvSLe-Pyoz9zK1FTNVvOxr_U5Ft"
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1432914707967
+    starRating: 2
+    title: "It reset"
+    comment: "I went to play the game on my phone and it had reset. I had zero coins. Zero gems. I was back to level one. No characters were unlocked. None of the powers were upgraded. I went from level 9 with 300 something gems and 37,000 coins and almost everything upgraded and a 60day streak in daily challenges to nothing."
+    commentId: "gp:AOqpTOGkZGv0zNJ0Yj1Hqw5JW2BlV3nHkIEpMsCofHIEmBapgbJZmE2Hxe7stoCufd7fyUtOre31o_mVS3lR"
+    replyText: "Please contact support@imangistudios.com so we can troubleshoot the problems you are having with saved data. Thanks for playing Temple Run 2!"
+    replyTimestampMsec: 1432914445041
+  }
+  review {
+    documentVersion: "1.15.1"
+    timestampMsec: 1432337660362
+    starRating: 3
+    title: "Good game but optimization issues with my phone"
+    comment: "Its a very good and addictive game.... But has serious optimization problem with my phone lenovo a6000+..i would like that to be solved through some updates pls"
+    commentId: "gp:AOqpTOEzvCfubChla_CYwtea-_QpqvVXGNm3F2mTXp9yz0rxfJj4Py8wyBU2kgq0HFoL2SLjNwS68b3iLi72"
+  }
+}
+nextPageUrl: "rev?doc=com.imangi.templerun2&n=20&o=20"

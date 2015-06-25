@@ -1,0 +1,161 @@
+getResponse {
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434766337813
+    starRating: 1
+    title: "I rate this 10... out of 100,000"
+    comment: "Glu: lets make a game about a movie everybody hyped about and lets make it very scrappy to make everyone hate the movie.     Everybody else: glu can you make it good this time?                                                            Glu: wait you want it good? Pfft lets make it laggy and make sure to make everything overprice and put a deal on it but make it still overprice"
+    commentId: "gp:AOqpTOExcthhdFCOpbaJLi3-AmWoJ6uTLEtSMRhjcHAjB2xi8ik8CcJ1nKT1IHj1-KEW-GFCgri6nYBwA_-nvw"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434980316318
+    starRating: 3
+    title: "Nexus 10 owner"
+    comment: "Nice game but has issues. Weapons are way expensive to upgrade. Happy Hour,  brains and brawn, de-containment, and battle bridges achievements don\'t work. That\'s 15,000xp lost out on. You\'ll never get ahead in the game unless you spend money. Lastly, finishing rare challenges doesn\'t give weapon parts, maybe 1 in 6 tries. That\'s costly and very irritating \360\237\230\254 Edit: also game doesn\'t keep settings after exiting and restarting. After latest update, the only thing I noticed was the lottery gives you starter packs more often, and the free spins never give out any gold. No improvement in game play here\360\237\230\237 upgrading ammo types takes forever to download and it\'s only 1mb max?.... Really?!"
+    commentId: "gp:AOqpTOHwgDPgVYmBDIsz4INlUgUImAp76Dpik1Cvn0pLuF5R5c8ynfJc9x4gq5Xwjz-1GCnfHm-8Jvfs1vafng"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434930247716
+    starRating: 2
+    title: "Every Problem You\'d Expect"
+    comment: "Timer doesn\'t work. When you have to kill X enemies in 60 seconds, you still get the Mission Failed pop-up, even if you killed more than X. Enemies can clip through and get stuck in walls, making it impossible to progress forward. Sometimes, when you do kill an enemy, they just freeze in place instead of dying, also making it impossible to press onwards. Game basically forces you to spend money in order to play more than 10 minutes at a time, with 100 minutes between sessions. The game also likes to crash."
+    commentId: "gp:AOqpTOH73ibUbfOD6piJ5COLix4NvTtDUVEFJmOFd2yX3WTKJZ-3NC1LfEZzCxP1PDRgrxiXdRfsT-8s5sXDRg"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434730011681
+    starRating: 4
+    title: "Good game but...."
+    comment: "I hate the part where the terminators comes towards me and I have to kill it before it attacks me and at the same time there are other terminators attacking me so I can\'t focus on the one that is coming to me which is very challenging, even if I killed that one specific terminators I would have died seconds after that. So please remove the part where the terminators come towards us and attack us."
+    commentId: "gp:AOqpTOF15ZjoY12o78fdynAw6TcbkpSW8t1FhIdCmw7AqEV2hZ6pGnuaFNzmLI76EkQhNVLul0O6_eZHWw4WtQ"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434788516066
+    starRating: 2
+    title: "Really bad gameplay"
+    comment: "Seriously, a movie like terminator deserves a better game. Firing bullets takes ages, changing weapon is confusing, messages go pass quickly. No maps within the level, cannot find out my progress,weapon upgrade is confusing... I can go on and on but I guess you get the point. If there wasn\'t a movie backing this game, I would rate it minimum."
+    commentId: "gp:AOqpTOFMS6vk6OXxyhe31xp68bUIx578oWKmFFQ7BkeDZlHQtJs_KUzQ5zR2e6oxJ-StiUF0SrTu0fVjDGwc7A"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434859432348
+    starRating: 1
+    title: "Yeah right"
+    comment: "What bug fixes, couldn\'t play on my phone , got a new Polaroid tablet and can\'t play on it either, closes on start up. Would really like to play please fix"
+    commentId: "gp:AOqpTOGIvAbg5Q3_qhkfMBhoNxAokdVRsjx4-Xkw-zglu53zrFU7MfA39a2XUpc7LDglLTvxjkqxZtynrXlQFQ"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434763317407
+    starRating: 1
+    title: "Holy loading screens Batman"
+    comment: "If I could play this game without a loading screen every 5 seconds I would be happy but I\'m NOT! Stay away from this game!"
+    commentId: "gp:AOqpTOEyli6gEarD9etHexAKOY0ge_DVZVhw_TvV9X0N53b3TV2Y3v2vv6YifpuY8L5UvIaDv-hCnGcY-tzCvQ"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434934683479
+    starRating: 1
+    title: "Don\'t. Download this game he is frod"
+    comment: "Jab hum itani mb bigad k ye app download karte he to firse download karneki notice aati he bhaiyo save your mbbbbsss....AAA Tamara jakum na dhandha bandh Kari dejo ho\360\237\230\254\360\237\230\240\360\237\230\241\360\237\230\210"
+    commentId: "gp:AOqpTOEUkMnTv1v51c8fDv1DJZN91-rWUdP0irvjBpNuhK3zESyiMg0n225zEnSBXsZ6CanAfEBhVsUpCLbkoA"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434781728653
+    starRating: 5
+    title: "It was awesome so much shootin"
+    comment: "Life good with this game weak people can\'t handle this game"
+    commentId: "gp:AOqpTOESwdZpeMiKj0_mPG-_p2oKc4e5kr5PBbT5JiHqSukfx-COLMd2k6RGatl-RKSHFwaxgv5coD44N1DU_g"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434722569765
+    starRating: 5
+    title: "Issue Rectified"
+    comment: "Loving the game, devs! You got the animations&mesh for the endoskeletons just right. I am a huge fan of Terminator and this game is just a delight. Also, I never knew Captain Perry was promoted to General? Haha. Thank you for fixing the camera angles. I can now attack enemies better without cover being in the way. If I could make one small request: The plasma weapons do not fire plasma. Could you retexture the particle effect for the tracers so they are not orange? For aesthetic reasons, mostly. Up to you."
+    commentId: "gp:AOqpTOHMHbSYkIt7tsAtyEsnkOVrkulMqj4sBQG0gYpf4_T65DqDjCkgU_C5iWMDRmpi5oprb2VCGPLKQ0pqEA"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434817079956
+    starRating: 5
+    comment: "I love it this game makes me feel that I am John Connor. Please add some cool stuff like navigating the lead it would make it more real"
+    commentId: "gp:AOqpTOF8WWuiX1F9-t4_SKmELYAPrypHXyV_lCgzrDujy2wR-7blD-UV0wMl7XqYFOCzfWzewXqGavc5AC42fg"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434819754065
+    starRating: 1
+    title: "Bad!"
+    comment: "Unbelievably unplayable. The UI is sticky and laggy (even on a Tab S!), the restrictive game play is somewhat insulting and the barrage of advertisements and add ons is laughable. I tried to stick with it for 15 mins, but I just couldn\'t!"
+    commentId: "gp:AOqpTOGFaRI3UXRwiaesKSBL52hk_kXOIh8sMClB9xYRZWieK8wy5x6yWcwTTIxHwohef91wU8nRWZydazYrQg"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1435059839107
+    starRating: 4
+    title: "Ahhh worth to play it"
+    comment: "Awesome game but sometimes it will take more time to download new region"
+    commentId: "gp:AOqpTOE97cJ2Ajv69huWPvRT0dBprWqFKKZO3khWXhKaCDRnrcb4YjuLb9RjmqB-Zvasfg9M2-OXLZm33NlpIQ"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434948797482
+    starRating: 3
+    title: "Ok could b better"
+    comment: "Itsl keeps freezing up on me on main menu I gotta restart all time needs fix that"
+    commentId: "gp:AOqpTOHPfoYv_e_JhxSTeK1v2jU8nLNyVKJYIzvhb01q2gRNpsnf6f4LoxN5NOtFWsWV9tvf3eyKHnORSbFd5g"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434697078111
+    starRating: 3
+    title: "Great game but............."
+    comment: "It builds up too much data. That data needs to integrated into the SD card more. The initial move to the sd is great but after pffft. It went from 8 megs on the phone to 68 megs and I just played it once! Fix the space issue and I\'ll give it five stars."
+    commentId: "gp:AOqpTOGmdlwk2sRuYWIICNnNpQ2JDlqheBZATFWVaxNnaXOoRYndbVGB5G4m3hgUhYA3SAvtka3LyEI0TMfFBA"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1435016068594
+    starRating: 1
+    title: "Worse game ever"
+    comment: "This game is so bad because its sucks a lot please fix it becaise I play it and the screen its just black"
+    commentId: "gp:AOqpTOGDIp4JnJXI5qcw7RiVuES0CWgNb2UYJqi0ZKU_BNiZc4OsqJTY1R_N0trDeLNGtZZLjnNJ5KLSsd5Evg"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434976050799
+    starRating: 5
+    comment: "A amazing game but make it where you can switch cover .and if you can tell me how"
+    commentId: "gp:AOqpTOEbcdFyhp2vOrRdZGJs-G4Lwe8HUXy6ua0EM6FTsFmlGtVpjDFekAB5s7TNh3CWZiL5Ly_XwSpDhiqLlQ"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434788458751
+    starRating: 1
+    title: "This game sucks!"
+    comment: "I haven\'t even got a chance to play the games for two minutes!"
+    commentId: "gp:AOqpTOFSKIxUTrQ-Y-9tFXgE42lrtMrf_9sTw901Reuimb1_YsC8rjQt09TI3l8JwGJyy0qlr_wjqtda_eOv7Q"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434905838775
+    starRating: 3
+    title: "Cool game"
+    comment: "The game is awesome and the graphics and controls  are also brilliant. But the main problem is that you don\'t have enough gold, plasma to upgrade the weapons. And the there are some special ops mission which are difficult to get through and with out that you can\'t have the plasma for the upgrades."
+    commentId: "gp:AOqpTOHki8Em5Q_-QM_V9k17RXnUF_sE3qKY8I8xvXYBn8LGDvXfXFYOA77uXh-Fs2JM1ty8go8Voe6kOoQhKA"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434738933234
+    starRating: 4
+    title: "Two toes"
+    comment: "Game is good but fails to keep the player interested weapon diversity and accessibility needs to be prioritised throughout the game the player wants instant access to different weaponary when they see fit also other game modes such as weapon and vehicle crafting options would be a major bonus"
+    commentId: "gp:AOqpTOF8YKHjYUVEvC1XnxYVDHHGP-OF-EXAU2hFV2LfigHufv8R_5O6pThqrD7mihU8eIcN5U1iAkpM5HUDwg"
+  }
+}
+nextPageUrl: "rev?doc=com.glu.t5&n=20&o=20"

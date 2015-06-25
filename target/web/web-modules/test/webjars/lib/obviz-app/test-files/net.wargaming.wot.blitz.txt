@@ -1,0 +1,163 @@
+getResponse {
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434591697245
+    starRating: 2
+    title: "Not sure what the point is"
+    comment: "It\'s not like the makers read this. Anyway, lots of bugs since download. I\'ve been in battle. Then kicked out of that battle 1 min in and back to the garage. I\'ve also been in a battle where 5 of 7 players on my team couldn\'t see the enemy. Me being one of them."
+    commentId: "gp:AOqpTOHoaPDJTTrGNSvzhR_l8i5jIFOG8I2rQmOBbYUgsjquPuf1WLsh55OU_cv-E9KQ60J9KwU66hPG2U9NoGU"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434567750964
+    starRating: 1
+    title: "Latest update full of bugs"
+    comment: "In most maps it is not possible to see enemy tanks. You fire blindly and hope to hit one. As if chasing ghosts. Must be fixed urgently"
+    commentId: "gp:AOqpTOGrwiUJH-jztT0aqmHsye3IEmfxECaUBvFNnBufEeNLEslEsoHoUjdX0wIDiEZLPH6hwt9Hk-ktr5pi9Ps"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434544119664
+    starRating: 3
+    title: "Crash and force stop"
+    comment: "After latest update i can\'t play the game since it keep crash as soon as starting the battle .please fix the bug ASAP"
+    commentId: "gp:AOqpTOGw9fKFo5z_pqF73_Wbjf6oTBmifVqJ_KUf3Gp_g7mmJDqbYqY5GKUXw3j1sM_Z3osPAk-QqRU5eexM_yM"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434570603312
+    starRating: 1
+    title: "Updated and crash"
+    comment: "Can not play any games for around a week now this update needs sorting 10 seconds after a game starts it freezes and takes me back to gaurage  but does not say my tank is in battle. Iv lost a week of gaming and this needs sorting asap, also I\'m on a Samsung note 4"
+    commentId: "gp:AOqpTOGFIC-C7uNlC2SMEZVm-L31kGDZnJ-XXcqmT63T7prZ8hRjCh65JuDqa1MepIQAJr6QXwAyWIDuw-cMQcg"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434511206783
+    starRating: 1
+    title: "Updates   :("
+    comment: "I\'m giving this game a one star because I\'m not able to play the game since the last update.  I will change back to 5 stars when I can play again."
+    commentId: "gp:AOqpTOEMu5fg8k7xJ5RV8zKolzl38olQm6RAa7nrRdI6sxC4jHUuLH50FETB-CAFof57B1U3IUBswsoJfYVY_Tc"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434511333695
+    starRating: 5
+    title: "For people having trouble with game"
+    comment: "If game doesn\'t wanna update uninstall game ,re-download game ,and after it completes reboot device and should show update on playstore"
+    commentId: "gp:AOqpTOEgkYIaVrj6-VTtUV54rdwERkaliXScuHCoAXBIsJzRanmK8LT9seDKCrkP5wqKcRTOKy_ns4uJOahGgLc"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1435004220777
+    starRating: 5
+    title: "Idiots"
+    comment: "Most commenters here are idiots, everything is explained in the tutorial, why enemies can see you and you can\'t and lagging so much..  dudes, you only need strong internet connection and its done."
+    commentId: "gp:AOqpTOGS9tacMpIIjQNoF1kBUtak5YMdoy2V-NBx97ygFQ6i4MlMJwoqIFAsudEgeDCL2iA5QoZ9giz1o_1QXvU"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434600485903
+    starRating: 1
+    title: "I want my money back"
+    comment: "I made a purchase of gold without my consent I would like to refund this. I may think this as an act of breaking a law but I\'m not sooo sure hmmm?"
+    commentId: "gp:AOqpTOGVnZhs42mviZ09cTJJwkHzjf6pLJgc6JLt4MKj5099qmO8rDrcETSXxQRjAXqwrODctSJ0kyNuBiQqpx0"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434862468824
+    starRating: 5
+    title: "Motorola MotoX 2nd gen."
+    comment: "I\'m not having any issues on the update. I haven\'t seen any bugs or had any crashes. As far as invisible tanks. I hope your aware certain tanks get bonus to not being detected, especially Tank Destroyers and Scouts. And people complaining about \"not being able to hit A higher tier\" , some tanks have better armor which means you have to know where there weak spots are. This has got to be the best game on Android, the only game that come anywhere close to A PC game with really good gfx and good physics combin"
+    commentId: "gp:AOqpTOH01LOocjnrWxnm4Q2syBPHgnyc8mEOeopiIKF2xH6QE_rh4Pywjo7uGggbfNHhaojIvT4_AXbr2qoHmaA"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434877171594
+    starRating: 4
+    title: "Forse da migliorare"
+    comment: "Se aggiungete un gran numero di carri (ossia quelli francesi, giapponesi, cinesi e italiani, tipo l\'OF-40) pi\303\271 la possibilit\303\240 di scegliere la qualit\303\240 grafica per chi ha un tablet con uno schermo decente mi farebbe molto piacere."
+    commentId: "gp:AOqpTOE5YYQadI9yHPYxtX72A-Ybq3tOuP_9_VDGZMBc44W9mzaAjloXNiocbWC84QBvXN96Vd7WlI4CzsLAwu0"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434616583722
+    starRating: 2
+    title: "Players feel stuck"
+    comment: "I have M3 Lee tank with Blue star 18000, with silver coins 2.5L there is discount on Pz. III/IV still it says I can\'t buy this tank. again blue star are for individual tanks not accumulated one fig. For players experience. On total of 4 tanks its 75k points, which is worthless as don\'t have any upgrades left in the same tier. And I am unable to buy tanks from other flags with thoes blue stars. Making complex of having XP then blue stars then golden stars then silver coins and last golden coins."
+    commentId: "gp:AOqpTOFu2G6sWBqgiM1ohiHp7fbgd9bAXfF4YB-3aJzqUC04PFsFU3Z-7Vqu5vK5n4jVT18aezjhxO-VFWUS55E"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434591883386
+    starRating: 1
+    title: "Awesome game, but..."
+    comment: "Latest update full of bugs/force close, cannot even load game. FIX. The constant uneven matchups in the higher tiers takes all the fun out of it!!! Put tier 5 tanks against other 5, not 8 where I can\'t even get a fair shot in against them. This would be an easy fix. Also fix range finder."
+    commentId: "gp:AOqpTOHICgnnATmc6uOU2IIcKxHBN7sIkrORwxRW0sG0Aunwl8ruw4prQJSH_4yVsTXabJZJNKoAIaByhrsVreA"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434506523791
+    starRating: 5
+    title: "All better."
+    comment: "I must\'ve been ahead of the curve for that error msg. Back to five!"
+    commentId: "gp:AOqpTOFalTqvkxp1IOskWT3EEgOiZ7Zi5qEm3HcTbGPAmn6x4KgAqmEYnt3wVWZlVAfEPPcGXYePuong4ZkxKVE"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1435062966039
+    starRating: 4
+    title: "Nice,No, EPIC!!!"
+    comment: "You never have to pay a cent on this game unless you want to."
+    commentId: "gp:AOqpTOGIpN3taPUNSjJwQcOi6o62WIY_1HBgx7VeSVODBWBxZse-q0f6DQ-3vZSenW9_GbnJvN_LWL7KyoWXv4o"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434510600256
+    starRating: 2
+    title: "Wtf is up w/update"
+    comment: "Game drops like never even played put me in some other random game, invisible tanks!! I\'m not the only one with this problem a cording to the in game chat please fix"
+    commentId: "gp:AOqpTOERoQT28w97JwG3zBs_72qIgSbBA5pfgnEIEhdOOeUwsCFBXtlyTYIDDNSGbUekfFIiasM3YadAvHcSNfs"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434549866463
+    starRating: 4
+    title: "Glitch"
+    comment: "Since last update, It keeps force stop and froze for a second in some battle then kick me out of the battle but I can use the tank that I just use in that battle. Many of the battle we can\'t see the enemy team but they can see us or the other way around. Also sometimes both side are invisible. Fix it please."
+    commentId: "gp:AOqpTOGa3bw3d6Axkv3botSGcy0WWTlQbfHpOBEwTouJTUpZn9qCt03HHcKYNueeONIN2RTWVmvDDFkEy0wHExo"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434893646635
+    starRating: 5
+    title: "New upgrade - hence low rated"
+    comment: "Like the new map i got booted from (without even shooting at least 5 times) and the last 9 games im getting slapped by \"ghost tanks\" Its getting to the point im really wanting to snap my phone. What do i get as a sorry?? If its fixed i will up the rating. Update:- still a couple of bugs (loose control of the tank and still get booted) but on a whole im happy. Thank you"
+    commentId: "gp:AOqpTOFcbVKKKzVkpxFt8aNomp800vjQMavBDOIjk4eYU6jiIo8kmo3D-vA5i5LbTnBAT_MusDwq4LuHr4apbvU"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434658861709
+    starRating: 1
+    title: "The update was horrible"
+    comment: "The game was great until the update.  It crashes all the time and has a lot of new problems. I will come back to the game if the get it back to the way it was."
+    commentId: "gp:AOqpTOG5yrebR0nuJ_IC_7WygmD9z3uM9KF7wHXJ51fj9D6tJMsnhuXWKSKNUp7Sinhu6w-OM0_0a-gb03hFHKg"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434735368986
+    starRating: 5
+    title: "I love how people say \"Ghost Tanks\""
+    comment: "There is probably no ghost tanks. They just have a better view range than you for distances. So if your getting killed from distances, sorry guys but, it just means they ave a better tank. Btw love this game, for a free game? This is a amazeing one. Definitely 5 stars."
+    commentId: "gp:AOqpTOEUshUSQuCrlR-cgDaxYxTB0VA6wjNyZyZNUcrsUAjaP-8VuBe6ReHDJkhxLee7ehcQ3rgCBZC2oe94qzQ"
+  }
+  review {
+    documentVersion: "1.10.0.185"
+    timestampMsec: 1434589232168
+    starRating: 5
+    title: "Latest update is broken."
+    comment: "Port map doesn\'t load and crashes the game. Enemies can\'t see me. Which really sucks ah but heH fix"
+    commentId: "gp:AOqpTOFxYrZRu8ZqvORO2e9YKDKFlE23ynDhVkILzkAGQ3aZPi62DL-oYkrffIRMOWg9m3Miuwh6NzzbSM6WhkE"
+  }
+}
+nextPageUrl: "rev?doc=net.wargaming.wot.blitz&n=20&o=20"

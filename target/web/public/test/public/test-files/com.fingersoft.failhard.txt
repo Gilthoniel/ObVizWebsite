@@ -1,0 +1,160 @@
+getResponse {
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1421832298798
+    starRating: 3
+    title: "Alright"
+    comment: "Really like this game but I now play it on kendo pad and you can not see jumps and other objects in the game please fix in next update it will deserve 5 then"
+    commentId: "gp:AOqpTOGe9OGQBdb4Mt_5OxVUYu47Pzro4e_bTjCmsYVBbGDRzbADA_wK7Tu-W20oRkgzY_V-TywmXqN6cYjzhuw"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1427042836987
+    starRating: 4
+    title: "Fun time waster"
+    comment: "Haven\'t made it far into the game yet, but it\'s fairly addicting. I can see this causing problems at work which is perfect."
+    commentId: "gp:AOqpTOEKyLFKAm2OEAskvRqQzMwzy6LF4HcaW6YVkY9bz-1dCWgCZCOnPypgnGnPt6uW4bqBRW6EoEdcBbdTNtw"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1424910895305
+    starRating: 4
+    comment: "Great game it\'s simple and fun the only thing I would change is make it a bit less expensive coin wise or make some of the coins worth more.  But otherwise awesome and I\'m gonna keep playing"
+    commentId: "gp:AOqpTOHIj0B9AvveHxyURFKeYZMdIZhV1ac8D2jqXQkc3aybl14eoRaU6Bf_r3fyCMf-kdJzKxYHVhLdO1lowoY"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1427648375782
+    starRating: 5
+    comment: "Loveee the game its very fun and entertaining but I think it needs two things to be perfect REPLAYS!! and to be able to customize the character for example the clothes hair etc... I think that would be perfect.. Plz make this happen thanks"
+    commentId: "gp:AOqpTOEJU0kTkHrjoHm2rFG1gK-8uK-xMrdXA0UmisFBjkVmf0svp_ZNBq5fdTM9r6gbrxIIQbd-StZP8BFWfcU"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1424009840047
+    starRating: 5
+    comment: "Fun game. A little difficult but it keeps you coming back for more to see if you can better your score."
+    commentId: "gp:AOqpTOE2FUsEYBy2ICLIuv0khQQN8f_WR8XWeODx5aVvuHoeIxVl4rZLSLrh1LExeSLis3srXwdUMfL1C_QPMec"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1421195248338
+    starRating: 5
+    title: "Awesome, fun and addicting!"
+    comment: "I think the title says it all. I had a good time playing this game which satisfied my craves as I was looking for a nice game to play for quite a while. Great graphics and very good marketing ideas that don\'t get into my nerves but provide support to the player and the company to keep the good work up!"
+    commentId: "gp:AOqpTOEW0EO6nh1kM4dvf6vT-TNF3y8xI0EB8Sq6PVtrT2TxZNVS1NBqiHG0-2QYBvcgrxyyF8ATqxmpZrzF_r0"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1425355428147
+    starRating: 4
+    comment: "Lots of fun! Easy to open up for a few minutes of dead time, addictive enough to kill some serious time."
+    commentId: "gp:AOqpTOFGjyFfrIpLyDKwHo6oV8fe8fwnqDY33rGrDUBZKYSIrlr8xOXdITdVlyNhgmTi2ZvQZyeYAlAJR1aLSsE"
+    deviceName: "HTC One S"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1427132278864
+    starRating: 4
+    title: "Fun, challenging, entertainment"
+    comment: "This is a neat game for all ages, and is humorous to boot. The coins aren\'t too hard to gather, lots of environments to pick from. My one gripe is that on the third run of a level, the dirt bike performs VERY poorly, I am not sure why this is. Hopefully it will be fixed in future updates! Recommendation: download over WiFi, it takes a while!"
+    commentId: "gp:AOqpTOGFSS_TxQtdtaEwdUwGzCquFWeCggG1fhbv3hPBFCpAWzkw2wupcGi6XFu_71kzdBuwjf5Uq4bZdS2kSs4"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1425831739009
+    starRating: 1
+    title: "Stupid pecice of crap"
+    comment: "The levels make no scence i hate it _soo much i have a billion reasons why you should remove it"
+    commentId: "gp:AOqpTOF_9ihXMLVMPuMLXep33LsMT9cAivnoBYUqyUQXm681GZZcX0PptLd6TROb0ETX6YY_9pVgZ4wxLjunwkk"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1422979447660
+    starRating: 5
+    title: "Lots of fun"
+    comment: "Graphics are good. Love the humorous side laughs. Good variety of challenges to keep you on your game."
+    commentId: "gp:AOqpTOEbu6nucIs6uIqGGKt52r3INSJ17dk5CcYZAfebTIDDFr8YuC9AcgOZm6uVYjM_YQOMwWgKjTgMRy_ksM8"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1432988983140
+    starRating: 3
+    title: "O.K."
+    comment: "The trailer was kinda boring but when I started the game it was a bit more than I expected,it needs better graphics in the game!BUT ITS STILL A LITTLE FUN \360\237\230\216!"
+    commentId: "gp:AOqpTOE6Pyx5MpkDt3-Xnfk4B4iNT-QpYFW5IF8oN3uEJQAn3vt01_sN3N19iH4e1WdraE4aXOvUUNaCp8D0nO8"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1422397196768
+    starRating: 4
+    title: "time passer"
+    comment: "Decent little game..no need to pay any extra as coins come fairly easily. A bit more variety wouldn\'t go a miss in later levels but passes the time nicely on the bus to work."
+    commentId: "gp:AOqpTOG6wUDFGNGOd00sIYcyqra4orhhweylqgGJzF16g_GzK8ATGKBavHaX0Uh7APTdLVPjwyNEG3c0FoJebHM"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1425825222236
+    starRating: 4
+    title: "Moto g"
+    comment: "Good game. Fun to pass time playing. Get rid of the break & put front & rear spin instead. Then I\'ll give 5 stars."
+    commentId: "gp:AOqpTOF2HKiJ16QLdoKjWZpOxkK6Ni6dcew9s9eJNfd7q4I-WlA9WwXW-Dw8hMIIWjXO17whyWE6cUgwwZvWmR0"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1434402726772
+    starRating: 5
+    title: "Amazing game just wish that it was easier to get money because I\'m still stuck with the starter bike and I\'ve beat the majority of the game"
+    comment: "NEED MORE MONEY!!!"
+    commentId: "gp:AOqpTOE2Rvy5mpdACB9VvmEB805izwXTc_EePIso9WSxC-4xlj38e6QQZwWD0l7yfhkDaT2_n9I8eOXXOdGCcN4"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1424478009950
+    starRating: 5
+    title: "Epically Legendarily Hilariously Amazing"
+    comment: "Fail Hard is (in my opinion) a hilarious game starring a dumb stunt driver named Johnny. Really funny (especially the interval jokes) and addictive: I guarantee anyone will have endless fun playing this rib-tickling game :D"
+    commentId: "gp:AOqpTOHuicIN9bpBdSBuO9FDEE-xFiewCkT6gGXd85h2LugcasqEUgEdRaZXszp1_gt8qc7bq3BncMHJ5d6SIGI"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1432329660005
+    starRating: 4
+    title: "Cool"
+    comment: "I\'ve downloaded this game a few times as I have had quite a few devices. I like the game , it has good graphics and enough levels to keep playing but the only issue I have is that the controls are a little slow and bulky."
+    commentId: "gp:AOqpTOFkHPsGlsA9RRwsFJycSVCpS6ENvUuNByGNzHcCTWnT4g-yAoJkZfFqM2yymDLZ56gAJTj_C2PmjI94zvU"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1421092547545
+    starRating: 5
+    title: "Awesome"
+    comment: "This game is crazy and awesome! Cool stunts and locations, and cool graphics. Overall good game."
+    commentId: "gp:AOqpTOG1YBqCEe5iIRuVdkK1hArkF22CXyT-hsds1xJJPTjAFNHrrbPM638t_7j3ddoWHRPWPpydi-T2nrtKsKQ"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1424107971482
+    starRating: 5
+    title: "Super sweet!!"
+    comment: "I love it! In a way, games like this will make money for a company in the long run by showing the consumer how good cell phone games actually are, and that they might actually be worth real money. Keep it up. I\'m serious."
+    commentId: "gp:AOqpTOEvx3CaaXsIsQgcue6yoYXie-WFQ7G8sFY4GZOUevEZZtaFp4P1Ins0ZutAXoZuYj5OwZ609rH1G8ezyZs"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1426082822650
+    starRating: 5
+    title: "Beast gamer"
+    comment: "I believe that it is a great addictive game. The only problem I am encountering is a certain lag once so many levels in. This is the same with several games I have downloaded on my android device. In saying that, it may have nothing to do with the game, great. If so, that bug needs to be taken care of.  I enjoy this game and it is a great 3D time passer. Hope everyone enjoys it as much as I do. A must to download. Thanks for the great game and free coins."
+    commentId: "gp:AOqpTOH67e999_GXkLe23RINX26aZiCLL8ERN0-R7hl1jG2_DPAQFRZwd8p4XA0zaRiFQ387DvoB6Nr75AGlJNQ"
+  }
+  review {
+    documentVersion: "1.0.15"
+    timestampMsec: 1434610599997
+    starRating: 5
+    title: "Love it"
+    comment: "It is cool because it feels like u r doing it 2 ur self and the rockets r like awesome because they throw u far away and u land in other houses that\'s sooooooii COOL"
+    commentId: "gp:AOqpTOEP6WW16CiHzE8Cm1mqDmr3Z_vxklX4gU4eqvIxY1O0iJ7U8_sEfBYLoFjsO86WW8pkb4N6qOZjpqzhlP0"
+  }
+}
+nextPageUrl: "rev?doc=com.fingersoft.failhard&n=20&o=20"

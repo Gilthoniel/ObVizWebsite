@@ -1,0 +1,273 @@
+@()
+
+@main() {
+    @* Searchbar to find an app with name or keywords *@
+    <div class="row" id="home-searchbar">
+        @* Logo *@
+        <div class="col-xs-12 logo">
+            <img src="@routes.Assets.versioned("images/favicon.png")" alt="O" /> bviz
+        </div>
+
+        @* Search Bar *@
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for ..." />
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+
+        @* Description *@
+        <div class="col-xs-12 description">
+            <p>
+                Enter keywords or an app name of the Google Play Store.
+            </p>
+        </div>
+    </div>
+
+    @* List of applications *@
+    <div class="container-fluid" id="list-applications">
+        <h3>Popular</h3>
+        <ul class="bxslider" id="popular-app">
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
+                        <dd>Whatsapp Messenger</dd>
+                        <dd>Whatsapp Inc.</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Battery</h4>
+                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Interface</h4>
+                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
+                        <dd>iTube Pro</dd>
+                        <dd>Reverse Clocking</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Cost</h4>
+                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Sound</h4>
+                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
+                        <dd>Whatsapp Messenger</dd>
+                        <dd>Whatsapp Inc.</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Battery</h4>
+                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Interface</h4>
+                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
+                        <dd>iTube Pro</dd>
+                        <dd>Reverse Clocking</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Cost</h4>
+                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Sound</h4>
+                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <h3>New</h3>
+        <ul class="bxslider" id="new-app">
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
+                        <dd>Whatsapp Messenger</dd>
+                        <dd>Whatsapp Inc.</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Battery</h4>
+                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Interface</h4>
+                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
+                        <dd>iTube Pro</dd>
+                        <dd>Reverse Clocking</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Cost</h4>
+                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Sound</h4>
+                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
+                        <dd>Whatsapp Messenger</dd>
+                        <dd>Whatsapp Inc.</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Battery</h4>
+                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Interface</h4>
+                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="app">
+                    <dl class="header">
+                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
+                        <dd>iTube Pro</dd>
+                        <dd>Reverse Clocking</dd>
+                    </dl>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Cost</h4>
+                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Bugs</h4>
+                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
+                        </div>
+                        <div class="col-xs-4 opinion-graph">
+                            <h4>Sound</h4>
+                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".bxslider").bxSlider({
+                slideMargin: 20,
+                slideWidth: 300,
+                maxSlides: 3,
+                moveSlides: 1,
+                pager: false
+            });
+
+            var opts = {
+                lines: 12,
+                angle: 0,
+                lineWidth: 0.15,
+                pointer: {
+                    length: 0.4,
+                    strokeWidth: 0.05,
+                    color: '#000000'
+                },
+                limitMax: 'false',
+                percentColors: [[0.0, "#B93737" ], [1.0, "#47AD3C"]],
+                strokeColor: '#e0e0e0',
+                generateGradient: true
+            };
+
+            $(".app-gauge").each(function() {
+                var gauge = new Gauge($(this).get(0)).setOptions(opts);
+                gauge.maxValue = 100;
+                gauge.animationSpeed = 100;
+                gauge.set(parseInt($(this).data("value")));
+            });
+        });
+    </script>
+}

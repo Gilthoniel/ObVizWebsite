@@ -1,0 +1,162 @@
+getResponse {
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1435017659395
+    starRating: 3
+    title: "It\'s kind of okay"
+    comment: "But the unlocking bite and why not liking by is not my thing so I would like to write three stars nothing else cuz now they are going to the game"
+    commentId: "gp:AOqpTOH2cIkSFPXpDhkvPJRnWfXp5hNrLyaQCa43Gkzb2ubX5ci2A7bmVnP-RRIET-dvWh7NHAC6IE45zCh_UQ"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1433914886511
+    starRating: 5
+    title: "AMAZING! ! ! !"
+    comment: "My friend Kaleb played it and I downloaded it. It\'s cool. Just 1 problem,  I don\'t have Facebook friends so I can\'t get to desert 2."
+    commentId: "gp:AOqpTOGF2dmLGD83hZUAo6h4n7d5RLDPkHCA-We9ZO6Ap0GDlx_DYvr_hBzKt-GuXrk-PH4hVPzhn9ZyXoKL2A"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434735704926
+    starRating: 2
+    title: "Game was great until..."
+    comment: "Just went to open the app to play multi-player. The game would start and three seconds in, my bike would spin out of control to lose a life. There was no controlling that I could do. This is a constant thing now. Don\'t know what happened, but please fix. I loved the game until now."
+    commentId: "gp:AOqpTOFUVJUnaTAi4MCjRaJOSKHD65OX_tODQiv0q1t7cfUJNf-dG-eEswXO_gkbZzJRSqeAZO5K8hvX1Qun8Q"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434053436958
+    starRating: 3
+    title: "Game was great"
+    comment: "Game was great. Played it for 2 years now newest update causes it to crash every time I cross a finish line."
+    commentId: "gp:AOqpTOEdY0zXwd9-mqoUzUl64FW4kCdDP9xHsOSMwtw23--9LX5z7eUNACxT8hr-JoR00R-q-e4h2fx--zTIKQ"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434669214615
+    starRating: 5
+    comment: "For some reason it stopped counting the stars I get. I\'m suck at 144 and it won\'t count anymore that I earn. Put it on my tablet and now it\'s stuck at 72. Can\'t play any more levels. Please fix"
+    commentId: "gp:AOqpTOFWYrpsXMUs6Y2XCi9jxMVd90veWNa4sxmOh7V3ZHL8NK4FCxUQ1tG4e2DP-89OpjeDjwFXCP6CtmMidA"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434209798871
+    starRating: 5
+    title: "Best Ever"
+    comment: "I love this game. The best one yet! I play it everyday"
+    commentId: "gp:AOqpTOHS1CTvGZ5uM-Y7zVxMamzABHWWnNQxPHUlEwdUv0D2CAlGpCvL-1KOIEAtL-px0Cd_B6ZqT0ktfwjSDg"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434498257981
+    starRating: 5
+    title: "Bad update for my s6 edge and tab4"
+    comment: "This recent update is not allowing me to play multiplayer also when I leave the app without closing it the music stays playing. Please look into this thanks"
+    commentId: "gp:AOqpTOE5SmqEmUmF16PTDp1VsfTxc5bGU2823r83cr8rkF_kvA7MvzfBayLRHsdsGtksQC98lz7fb29zyc1sAA"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434451535998
+    starRating: 5
+    title: "Awesome game"
+    comment: "Guys I always read comments b4 I downloaded anything.. So.. This game is awesome... Like u hv to get all stars in first three themes to get many more cool themes...and the bikes are awesome and the multiplayer is little unfair but who cares just play the single player its much more cooler"
+    commentId: "gp:AOqpTOF8mwlD6UjpTi4mclYq-_zs1uyvjSIvxSkuM5nTsiVJv0sVQe4XWgJeXwM8Yj2XVDoE1Upl3WDFwBwo2w"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434824453708
+    starRating: 5
+    title: "Love it best game ever and I\'m very fussy on my games and this was one of the best"
+    comment: "Best game ever"
+    commentId: "gp:AOqpTOEerwm0Yn9cAG8ErGSWYuUyn1Ln_-FW0bJIWtWFCBOnUp_-rWGDsLAHcrD6qf6d9RP6NuJxJOJ2A03c4Q"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434070968214
+    starRating: 5
+    title: "I Love Love love love love love love love it"
+    comment: "Love love love love love love love love love love love love love love love love love love it"
+    commentId: "gp:AOqpTOFJSQLaSAiIf18hTYMH9NWLDHdLZC5LvnV258nXc0P4WJrP0v8LcZhQNPBmSF9IrYPxk2A5U2WyqmfkZg"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1433973867632
+    starRating: 5
+    title: "Adictive in a good way"
+    comment: "I have this app on my ipad and have now installed it on my phone I am so happy with this app. It is always adding things and evolving I have go 7 other people to play it and we battle each other to see who is best but its all good fun and much enjoyed."
+    commentId: "gp:AOqpTOEXGzV5h4A79E-jQs2hhn03Tm6sGAXTD6wT0a8f8lntsjgiKHHJZbDESBvPqwjkYSHBhJHGqlggWa2aIw"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1433955445373
+    starRating: 4
+    title: "Good"
+    comment: "This game was good but I kept on switching phones and I use the same account but I had to start all over again... But I like the games it was kind of addicting for awhile then I got bored of it .other than that it is a good game"
+    commentId: "gp:AOqpTOGKQP0IJatc34JONe4ASKPBIu7mjtoPgpbKPxJlY1NVjTM1tf3wu9VOniPBT3U6Mf-7keog2ozLksL--Q"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434902430009
+    starRating: 4
+    title: "Its good"
+    comment: "But i dont think bikes you can buy you cant race with it like a ultra bike shouldnt be able to race in multiplayer games"
+    commentId: "gp:AOqpTOEVZT4Zv30D0GwWlOf0mPSNQKfYYPwm4j1FMM3yg4U7s9Jnq4F5GUysQr3PF58ngK3uVRuxqDuNswdhKA"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434921709640
+    starRating: 4
+    title: "Great"
+    comment: "Just wish there was a way to recover info when I get a new phone besides facebook. I\'m not on social media so this is highly inconvenient."
+    commentId: "gp:AOqpTOFqbLJL3WgisSscbZ3buNKjtpXqIWkY2pX6QM3RmVH2okb8fjnLFk9VtCCaoer2ONpRMaIeVhvuKtbK1w"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434092362822
+    starRating: 4
+    title: "Great game"
+    comment: "..but plz make a different way of getting the other levels as I can\'t cuz I don\'t have Facebook plz plz apart from that the game is brilliant and I would definitely recommend it \360\237\230\203"
+    commentId: "gp:AOqpTOHB2dDpoFpx8qBcZ6BeAbHuK6RT6tWJyjvnOE6LTTzdnMDf7ILJqFqUHPG8byn8h-agB5QU3GUSIXo_Ww"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1433966452020
+    starRating: 2
+    title: "Bike Race"
+    comment: "Can you guys fix were you have to have facebook to get some bikes and maps and play and challenge people on facebook. And can you guys put more bike. I will give 5 stars."
+    commentId: "gp:AOqpTOE8qeY0DGgG8_VHfwe24FrekYY97KZOKDwI8Kq3pXvdnd0QUyPGEM54f2bF4oFrG96qRjRpJtZUNomhrA"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434402290375
+    starRating: 5
+    comment: "Amazing! I think this game is worth downloading, some might not like it, but i am recommending it! In the free version you have to work your way up the levels, in the paid version you have access too ALL levels. Either way it is a great game and for those who have a lot of time should play!"
+    commentId: "gp:AOqpTOHCeKKST2Ok_wuXpMoebhCpw7JBRTjd_I4H1fO0IcwW-9SOmg61sJkiHD63gqoAZafsuKJIPZOuYBHt6g"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434061505398
+    starRating: 5
+    title: "Bike race"
+    comment: "I think this game is amzing p.s dont judge me peace out."
+    commentId: "gp:AOqpTOFISCJK_il3Cy05f8BM2hBDf7eZ2Rw1qtnTkaRhKAEuItYUu6DilMnp6UfRSbx1u08jCM6AH1BQXWECug"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1435047741644
+    starRating: 5
+    title: "This game is awesome"
+    comment: "Its cool when you get new bikes and its not to hard or easy"
+    commentId: "gp:AOqpTOEsy1OJhdwcAI5okEVemLeZsV1Q8mCaietBylk4ZTc2-5ZzZUk-zhR0-r5HrWLB1vpULckO_Lpe3nmDWA"
+  }
+  review {
+    documentVersion: "5.5.3"
+    timestampMsec: 1434571594194
+    starRating: 4
+    title: "Cool"
+    comment: "Its cool how you can play other players but the fact of not being able to get levels unlocked just because you don\'t have a stupid Facebook account is dumb. So until that\'s changed I\'m giving it 4 stars."
+    commentId: "gp:AOqpTOHq-KqEX4cTAH2ZVrsojQVRsvF1tmM2fPziW3BLUo4MGtsENpJMc_glkiA2cqzjNmx1X1JC_cHcXhW77Q"
+  }
+}
+nextPageUrl: "rev?doc=com.topfreegames.bikeracefreeworld&n=20&o=20"

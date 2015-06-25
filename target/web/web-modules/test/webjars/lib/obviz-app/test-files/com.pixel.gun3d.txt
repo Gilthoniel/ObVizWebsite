@@ -1,0 +1,163 @@
+getResponse {
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435007159075
+    starRating: 5
+    title: "Great game but..."
+    comment: "I bought the anti gravity blaster and it took away my coins and didnt give me the gun plzzzz fix."
+    commentId: "gp:AOqpTOG9wmgGSWrL_GFpEmHlFbmsN072_UVfNQuhjwcIpAwLCrEclrS2Ru8z-vrycJKVNBb7LZdIepq0HB2ccfE"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434975884002
+    starRating: 5
+    title: "Need a big change"
+    comment: "The game need a big change I\'m sorry to say but I think ya don\'t care what people say you just update the game and make it must worse. I recommend changing a lot of things from pixel gun, the survival earning system, all files being given from game like the skins files and etc, the gems being switch to only coins, magic weapons being infinite and the report system. If you want to make this game better than bring back some stuff stop making it worse for players to play.  They gonna stop playing at some point"
+    commentId: "gp:AOqpTOFpWKH8Fh9-fEpb2a3Y_Vl8bwz0gqyMGodQzvn9wVGPGZIBLFdYr8pgZvDVcXeJhAnFROBF0b39PDSh6a0"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434933783272
+    starRating: 2
+    title: "What\'s with the end of campaign"
+    comment: "Rilisoft I used to like u but this in campaign is just too hard I reached the end but I keep dying over and over again I bet you rilisoft people can\'t even beat this its just too much and I almost broke my tablet when I died to much Rilisoft plz make the end of campaign easier cuz I don\'t even know anymore it\'s like Bloodborne right the campaign man fix it now PLZ RILISOFT but..... seriously it\'s like Bloodborne now so make it easier"
+    commentId: "gp:AOqpTOEOwvt6RAaHms7SqAzzeUBUEyvs2ObQ8iA-O0gtM33eWvN3NGehJ6k124Zgl0zeObiFjLPkyBgZi8NTtFE"
+    deviceName: "Asus Nexus 7"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435013575998
+    starRating: 4
+    title: "Things need improving"
+    comment: "This game actually is pretty awesome, for a free game it plays very close to a console version of a shooter , the only problem I have with it is the coins you earn. You literally earn a coin per match and you don\'t even get coins if your team loses so that blows ( guns are range from 80-300 coins so your gonna be playing a lot until your next upgrade) change this and I will never uninstall lol if not changed I might find a different game to play that is more balanced"
+    commentId: "gp:AOqpTOFG7UusRWWHLE6YeHNhHZG6PyoUmqT33ETKpmwSlkiA6ZEYNnv5qcArCPUbER2FvtEVEBbftDZ-rxyR33s"
+    deviceName: "Samsung Galaxy Nexus"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435058449613
+    starRating: 3
+    title: "Game won\'t load"
+    comment: "I was excited to play the new update but then  when I opened up the app, it just stayed there on the black \"Rilisoft\" screen. Every time I open the app it does this."
+    commentId: "gp:AOqpTOFL0fbE2rV1a2RQ9cTWannq7dPf0kU6wlB3HZ6eLAyCkiHwreuGOON0tf53N2MpqN4lDuxaKCQ91u_zQsY"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435011859006
+    starRating: 3
+    comment: "New campaign -_-"
+    commentId: "gp:AOqpTOELbB5OwwVNajAO2BwgpNB9irQXyJK8GRLhh3jXbl0RZC357tAS4vNik9mndsGxVtSDebHUEPiejhfLHHw"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435029053967
+    starRating: 5
+    comment: "People seem to be complaining about things that are their own fault/problem. Example: People are complaining about what other people are saying in chat. In the settings there is a button you can press to turn off chat. Also, some people complain about the campaign mode being too hard. If they are bad at the game that\'s not RiliSoft\'s fault. People nowadays are just so lazy that they can\'t spend a little while working for what they want. Oh, and I have no idea why it is rated Teen."
+    commentId: "gp:AOqpTOFdCfTK_A8TDcB2J1BGf6f6peRxLUfFrl_O6DtyhsMEEjciIjfbHSQAeUr--1d5G9lL0o-PtfydLt-3yb4"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434987152138
+    starRating: 4
+    title: "Fun but hard"
+    comment: "I was doing campaign I got to megaapoils its super hard why do some guys get an armgedon there way to strong also can you add in you can switch coins for gems 10 coins for one gem and  gem for 10 coins"
+    commentId: "gp:AOqpTOELcm55qkP0b3WPCkUxBvcbYk3SFCDUY7R4xhnurjLHeiWeMDybyUj5MxXOOBhnz8W2qIVyZ0BlLrZz5Rw"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434975689499
+    starRating: 5
+    title: "BEST GAME!!!"
+    comment: "GUYS I DIDNT DIE INNTHE NEW CAMPAINGE BEVOUSE I WAS SO EXCItED THAT WAT HAOOEN WHEN IM EXCITED ANFPD FOCUS LOL THE FINAL MAO IS SO EASY THE CODE THING INJUST GO TO TALLEST TREE AND SHOOT THEM THISNGAME IS OFFICALLY MYBBEST GAME EVER!!!"
+    commentId: "gp:AOqpTOG071GZg28RF7cqDr7Bo2pKC8hj76lNMngwl6d6tNo3WKehgW_6hcMfumcm7QvgCUmsGkYSlXTUh0OPuhw"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434948740128
+    starRating: 1
+    title: "What is THIS!?"
+    comment: "I beat the campaign, and it said it would give me a stack of coins and gems. Well... it gave me coins. Guess what was missing? The only thing i wanted!!!"
+    commentId: "gp:AOqpTOEbe0rfVdzoZEKnoVsFrejToaQaUY3TxF5w684N3aXzPFQ1NUly4ZTsevshWXHhSsDtu7CLoem5NlAylKY"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434982129160
+    starRating: 5
+    title: "Stopped"
+    comment: "When I come to the game its say its stopped Plzz fix!! I will give u 5 stars plz!!"
+    commentId: "gp:AOqpTOErKx4g_4H8BLqfKLQ-sonNAZ8GDPnfyC_yq6z_FkH6X6Y4M0f5tQhMxnJLm2wFqAH-nm3tANfKvMayEEw"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435018006152
+    starRating: 3
+    title: "I love the update but i hate this"
+    comment: "Fix the glitch on this game when i try go to the next round it glitches fix it or i will never play this again"
+    commentId: "gp:AOqpTOEkBsCCN5YxPeX78mqzVFGq2V268FUc2kn56Yat5b8ClL4eVxdQhx2lR52lvSq0iFTSYJQ0a07xloDMv6k"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434994839106
+    starRating: 4
+    title: "Hate it deez nuts I like it"
+    comment: "Awesome I came to pay  way better then the miz so cool like hornswoggl if you don\'t like it I will rock bodm you you you"
+    commentId: "gp:AOqpTOG0YLpmdrqM9MSF_0Ye1tTZyBdBBgpnsKRvDjhWl6DNrDXTsM9adPzgBgUOu2b_jy0zww9O7H82lAL_mk4"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434979765797
+    starRating: 5
+    title: "You should a new thing"
+    comment: "Because  all the things are to much you should make it less?!."
+    commentId: "gp:AOqpTOGr7ZDScwjcWOZ1mB6bzs_pau63ZbHk66mjIfYWUt_CQQ7wPZxAmogEecJ97cXweUq16FTdepTdWakGoa8"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434941465257
+    starRating: 1
+    title: "Fix this"
+    comment: "Rilisoft pls fix the 3rd chapter cause I started playing lv 1 the loading takes alot of hours pls fix it and ill rate you five stars"
+    commentId: "gp:AOqpTOFLyJCFL35JIOfZ5QI5zOXaEDa9UEEfw0Ew6_HydgvjMXC6YkUsZqnj843nrMb0OrVWc6YXf3VfW1NVoKw"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1434996038907
+    starRating: 4
+    title: "Rilisoft I have an idea"
+    comment: "Many players think about earning gems faster. So, I think you should add achievements that give you a small amount of gems for each completion. Such as this one for example: \"Let\'s not lose our heads\" Headshot 20 players from a long distance, reward: 3 gem\'s.I think this would cause more people to play which would give a point to playing the game. I hope you consider this. Thanks for listening"
+    commentId: "gp:AOqpTOFueTcz90oQzdKuVkrxcXj3wIidOUpdzJeTnXpHWjPch7looqPcOw-iPcCHETxLQsLQJO-skHKLl19zG3g"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435002876489
+    starRating: 3
+    title: "Fix"
+    comment: "I love the new campaign but the difficulty spike is way to hard. I had a fun time at swamp and castle. Space was so confusing, but what takes the cake is mega block city. The enemy\'s spawn is so random and they rack up to much damage too quickly, especially when you have to reload. There is not enough ammo, armor, health, and the whole level just feels like it was quickly slapped together."
+    commentId: "gp:AOqpTOFQ-xuDUHCv1BPDbIy7Nr81Rj_X7tgJUEV-AzUZox3E9T5GJJHDWt31nN8fCT_cSqXNU_kN-r7FeGALU_Q"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435061189148
+    starRating: 2
+    title: "My god.... I didnt think it could get any worse.."
+    comment: "WAOH! Are you serious? Nobody can afford these prices. If they can, they are hacking! (i know that cus my friends hack) the storm hammer...EVEN with the sale it costs 700 coins! WHO has that much money to spare! And thx to all the hackers out there buying the new over powered weapons, multiplayer is impossible to win. Thanks alot rilisoft, you ruined your game."
+    commentId: "gp:AOqpTOFR__1bF3HO28A7YYie0z8ou_Q3IJhavBCy8mJEvKjbKeLt7RGezYOjBpKThLmer5JoT4ckifdFe2d0ImI"
+    deviceName: "Sony Tablet S"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435006821510
+    starRating: 2
+    comment: "I give it a.two cuz the update just isn\'t good be cuz I keep going for a.match but nobody in it I mean it says great number of players and in custom game it would all ways disconnect me with internet"
+    commentId: "gp:AOqpTOF0mcqBS6Geq15v4EBzb-daT_DgJRALhlVYUib3TJ_o_6rlJ46Fw4Au3FVMBf95mQAM8q1EuN5jmlUOoYI"
+  }
+  review {
+    documentVersion: "10.0.1"
+    timestampMsec: 1435025895460
+    starRating: 5
+    title: "**** THIS!!"
+    comment: "This new update (lets call it the, PREMIUM update) lets a lot of hackers, and jerks be WWAAYY!! too overpowered, i go into a game, LOW AND BEHOLD, PEOPLE ARE O.P. AS ****!! FIX THIS PLEASE!! people will just waste google cash or whatever, and buy jems from the vault, and buy the guns, and I always end up leaving the map through rage, and, the mining camp glitches and doesn\'t let you play because it always goes into dead heat, please fix this!"
+    commentId: "gp:AOqpTOEkoayXqRyQqPL3BtQXPJNGltQt0uMjiCLh21F3SUdSf7WGVfxP8XAMSAoD6auflvhPH8YlGyfMjHhBgHc"
+  }
+}
+nextPageUrl: "rev?doc=com.pixel.gun3d&n=20&o=20"

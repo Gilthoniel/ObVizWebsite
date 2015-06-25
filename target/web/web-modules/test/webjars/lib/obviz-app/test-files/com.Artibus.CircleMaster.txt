@@ -1,0 +1,160 @@
+getResponse {
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434574615878
+    starRating: 4
+    title: "Awesome"
+    comment: "Really good game but when i played online it lagged like crazy. (I don\'t know if it was my internet)But other than that really great game you should get it"
+    commentId: "gp:AOqpTOHNTz3VopJFwWAFBoVLNVSA8w2JL-FQ1zPzzm9VApaT3vt2QUeWLcZm4hYxggZ5TE1Ah-MJee60nllnIUg"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434599547580
+    starRating: 3
+    title: "Cool game but too much ads."
+    comment: "I know that free games need advertisements, but it stops you from playing every 3 matches to see full screen ads."
+    commentId: "gp:AOqpTOGYzfWYwzFoGy06pqLzG1q7jNxLhqPf-ks3GrWKB8GhE4_YmG6qmeHSfgWREfCixEZVN0o7nk2-637PrdU"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434737679889
+    starRating: 1
+    title: "It wont load"
+    comment: "I try to play on it and it just goes to a black screen and then after about 2 minutes it will make my phone freeze"
+    commentId: "gp:AOqpTOHDlb-YrGeSN2ka-bNKKvRSKhKw6oUKjPOcQcbLdlQyBArRPytK_rmoNZRZIwv-RzDfRRg8e3iw3Q9FmmA"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434585671344
+    starRating: 5
+    title: "Addicting"
+    comment: "This type of game will appeal to certain people and when they find this they love it, its super fun and entertaining"
+    commentId: "gp:AOqpTOG1RnxGx3Rp9lbD75xjSrGJgiIpvsAy36LPnChwPSKgHNk9Y92kOlVcPPUJ9RWO36RmtdvPH5q_T3LECow"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434638746114
+    starRating: 5
+    comment: "I love it! Super addicting, and a little challenging.  I don\'t even mind the adds every few games."
+    commentId: "gp:AOqpTOGiL_lZqxE6QX8OTni1olRhQPDHg0t9xeps6dPin0dFFxoLhO6u3I5oox1_kzlvL-M01unBEqSDRUVTrHU"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434559905123
+    starRating: 1
+    title: "Horrible"
+    comment: "Barely even fun. The ads are ridiculous. Have to sign in to google everytime"
+    commentId: "gp:AOqpTOFGIKIKD0HK2vdiQ9YlVctppskvOY3WDY7R2M9VVlLl3NQ68TSiYju8iCQorcMWhfLTh3br5hbVHA8yah8"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434815749889
+    starRating: 3
+    title: "Shame."
+    comment: "Can\'t play the game accurately due to continually  loading  ads, making the  game  jump  like crazy. Might work  better  on a more  recent tablet, but for  me  it\'s  bye."
+    commentId: "gp:AOqpTOHzYfmwuR1lnFDixuCAiwyIrTRdlUucKxI2Ex2ei1KY9Bn7HLiNtW9E1ClTLGJJRrpHVKri-k5hKwALusU"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434947866342
+    starRating: 1
+    title: "Doesnt work for my S6"
+    comment: "Doesnt load and wont even open. As soon as i click it, it pulls up then closes right away..."
+    commentId: "gp:AOqpTOEA26WW5kGGfjK9Qtrr2ibvCDd37PIPDRgdRHSjaxAAj27PtWaYdD_25CscABCZaKUhh8jVtLhd8i2KkQY"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434854468713
+    starRating: 1
+    title: "Great game! You fucked it!"
+    comment: "Despite the game, its decent for what it is, I\'m uninstalling it because it feels like I\'m spending more time closing the ads! Can\'t get through 3 games without an ad and when they don\'t show, they lag the game and make me lose because its at the footer of the game as well! Uninstalled"
+    commentId: "gp:AOqpTOHn5_xDW6I8TCt8TrWTPYartwl4gC8kRXrXRTrEelNPLgCF_CQapDEuid16KI6wJ3FCnEDxIBxMz6pc_ac"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434785136317
+    starRating: 4
+    title: "Addicting"
+    comment: "Very fun and addicting, it takes a while to stop playing!"
+    commentId: "gp:AOqpTOEdC5QE-Z3tPckbzaBPi42ZD7e8PpOx-laPMGhXGNRpsp5bcn44BwOG_r4gaINoIfoEJL8wRfGNxvs2mWA"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434765595600
+    starRating: 1
+    title: "What?"
+    comment: "Every time I go to play it it just goes to a black screen and takes me back to my home screen in 2 seconds"
+    commentId: "gp:AOqpTOGhwvVrjj0QxHaTKec8HHGXZwqC6zP3OzybiVHUOgP67jjZIlD-3qUDuTFBJKGCaIEcACdaMut8Tehz6p4"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434579959016
+    starRating: 1
+    comment: "Doesn\'t work with Note2 stylus, too many ads"
+    commentId: "gp:AOqpTOGzgByhyIA94L35dEiGM2Hs7MB1-UOnK0qoSl5UXt2Xvrvo7P-FJAvxd_IhjLYlV6s5aLpkwN4-xZCIumI"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434834020459
+    starRating: 3
+    title: "Okay, but far too many ads"
+    comment: "The game is fun and challenging, but the ads that pop up after every second match are incredibly annoying. Otherwise, it would be a great game."
+    commentId: "gp:AOqpTOHsMOLe88--elk86nyHrywhHGeU0JQTI2p8h9JGMFzmQjPV7Ln_4vC1uTV_d5lamjmFXn9v_MSwc4jKs88"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434910727120
+    starRating: 4
+    title: "Arrrrhhhhh"
+    comment: "I like it, well done. Great concept, easy controls lol considering all you have to do is tap. Gives me something to do at work instead of working hahahaha."
+    commentId: "gp:AOqpTOFhV4eXSk0w7D7UQL-WayuYoQTBElMXHrmKDbykDh7EBEY5edxcPXl8CqMguu42ToY5xHGhqcQUhx-KyQo"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434873952667
+    starRating: 4
+    title: "Great game few errors"
+    comment: "The game is good I like it. Good to pass time but the pop up adds Kill it because it eventually causes the game to stop and cause a black screen"
+    commentId: "gp:AOqpTOHM6iavB3bIzvWFBNQV2yCEuZmkrmln2muECREIu_MUWFyIWDIUoKUG48wi01nstCNiz5500o5Zc6g7GWc"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434628372900
+    starRating: 2
+    title: "Needs more ads (sarcasm)"
+    comment: "There\'s so many ads popping up in this game its ridiculous.  You spend the same amount of time watching ads as you do playing."
+    commentId: "gp:AOqpTOHV00VA_LGxZYKqrsiXMf_OuPQkbGjzHXktichcxQ2Wfc7dNUzpX8ioe4A7m_IkGw209FBBr_i8LEyBk0Q"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434946233298
+    starRating: 5
+    title: "Cool"
+    comment: "Fun game"
+    commentId: "gp:AOqpTOFUgY8s1yAf1cOWB_ejCKs7jU02tjK6zNwKjY2ROOPjKbSC6VYhjUeEr1sGMKY96jifCSDSlLbC6UJhxbM"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434719523969
+    starRating: 2
+    title: "Not ok"
+    comment: "I thought they were lying about the adds .. no"
+    commentId: "gp:AOqpTOE09LF69I_q_dhiZqiqAO5X85GahQ9zWhJ-Hphus5lDNT9JHRk8MLB_V_hqqYAPPqKl7HusRtT3oM7JR30"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434691268258
+    starRating: 4
+    comment: "Great time killer, but too many ads"
+    commentId: "gp:AOqpTOEIVR3GUXYq3yhJbwYGCi6y2pZg1NYBDZACR5U_V7BFxqx4Wi1mKOvFnueEXGjk0vLslJjaZT4a-3urVdM"
+  }
+  review {
+    documentVersion: "1.0.1"
+    timestampMsec: 1434728790565
+    starRating: 3
+    title: "Good"
+    comment: "Nice time waster"
+    commentId: "gp:AOqpTOE3B_aQhANFLDzqCpVIvmXMqtSIgXEnh9TXpaamnnH3rUh6h_OBOFLUHqDXcMVmb-83DG438VGLrg-86vM"
+  }
+}
+nextPageUrl: "rev?doc=com.Artibus.CircleMaster&n=20&o=20"

@@ -1,0 +1,162 @@
+getResponse {
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434003313705
+    starRating: 3
+    title: "Really with the energy \342\232\241?"
+    comment: "Isn\'t the purpose of developing a game to get people to play it? It was getting ridiculous with the energy stuff and all the paid 2 unlocks. Pls remove some of these things to get 5 stars."
+    commentId: "gp:AOqpTOG7g3ZROcNmchRFM8uDULvvg8a06T78m4M408gMbMYPEN_AQDfzPYTsaVun_8R-fiKxUOwfW29kmesnVlQ"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434418571040
+    starRating: 4
+    title: "Awesome game, but forces you to wait for energy to keep playing, or OFCOURSE you can buy more time."
+    comment: "Awesome game, but just about to uninstall because of the pointless energy bars they make you buy if you want to keep playing. There\'s no reason to force us to buy crap when you already have pop-up ads...."
+    commentId: "gp:AOqpTOE8bL-M_C_WjbOyax_e1_RAIPpI8ABFGPQ8akZgjZhGwTHZgZuVIkya-cZVUGiIvNWN6qzQhqzeuKYybqI"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434045274032
+    starRating: 1
+    title: "Wont work"
+    comment: "Its stuck on signing into google and it never does its just stuck... Plz fix this because i relly want to play this game. Galaxy s5"
+    commentId: "gp:AOqpTOEAhrc9CQKcdUjSjAbwvOpHhsKFz5paddonMd2Lj5XfCQq1S2T7Lx_Ceyve7mUQhLFWne5pc9pXH5TbJU0"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434322257152
+    starRating: 4
+    title: "Great game"
+    comment: "Would be 5 stars if it didn\'t crash so much. Super fun and addicting though. Everyone is complaining of the energy bar but I don\'t see it as a big deal. Already 3 stars on every level. Can\'t wait for the next update!"
+    commentId: "gp:AOqpTOEnFeGEcuSHIJPnBqFCrIzu4D_oGQSF4u8PEyGQU7jjJwcmDBs45bq9idrC1jaz9FuIQDCChNgspgwzAIs"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434167713725
+    starRating: 3
+    title: "Great but not."
+    comment: "I loved the game until I made it to level 49. I CANNOT make the bowling ball go up to the height it is supposed to. I\'ve tried angling it in ever possible way, I\'ve even used the guideline power-up to assist me and it still won\'t go in the wooden box."
+    commentId: "gp:AOqpTOEusCxIBm29_sGC6njbbCuE0AbAK583hEh245kUV4eau1S671rziwbYFD43frRZW2x1_z4JOpVO0OpyRfE"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434791573358
+    starRating: 5
+    title: "Awesome game"
+    comment: "Can\'t wait for level 100 and up. It a really cool game. If I could make an adjustment I would let the energy bars hold longer and let you build your own challenging levels to play against yourself."
+    commentId: "gp:AOqpTOHdCP5ifTctBsnNIabNTaSPIITR-ZnyHdLYJLv51rQM0wlsZil_OdZCev1fRYE5v1myeAX-u26r_lg2g0o"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434364696261
+    starRating: 4
+    title: "Great game !!!!!"
+    comment: "People bish about energy the game is Free pay for it and u can have all u want  and does crash every once and a while but what game don\'t...   I cant complain when its free love it!!!!"
+    commentId: "gp:AOqpTOGK8dJIqQFbXZi98c2zrJmMvR_PCnnspEdNyZFE3cZ6BroVMUCKsRGQkU3C4mwq_Um98jThFtWKUxthow0"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1433975541263
+    starRating: 5
+    title: "LOVE IT"
+    comment: "I was waiting for their game to be free and now it is. I love all the levels and power ups you can use. My favorite one is the air strike!"
+    commentId: "gp:AOqpTOGSsT6liO9MfIEI_A6s6CNZax87BVD5ShMK-7zy1OzbixwwY9g2EYA0cm38t2uN8gFhe--ap7KjVIiLXq0"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1435037466313
+    starRating: 5
+    title: "Awesome game!"
+    comment: "Very addictive. But too difficult to get 3 stars for 90% of the levels. Would be nice if we can unlock further levels with lesser stars."
+    commentId: "gp:AOqpTOHfJh4ehNBy0yhBYcFt_pi4fbFZS5Fr7MJnK9a0_UW9sqqwyKkR-uqqFiRkN3zVpvMnG-meYSrBFIfLBs4"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1433998128222
+    starRating: 3
+    title: "Please"
+    comment: "Can u guys make it so that u have no energy so that we can have  unlimited game time. Then I will give 5 stars"
+    commentId: "gp:AOqpTOEVESmxeepHpmKzpyjcm9DHNTA1xfVc4jzmL4c-wF4tqaEGLpPuQ268IHwQ0RGMfb6rizwlXYyQBs23iGw"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434575135478
+    starRating: 1
+    title: "Good Game But Hangs a Lot"
+    comment: "It hangs a lot and it is very irritating at times. I am using Nexus 5. Reducing the star from 5 to 3 to 0."
+    commentId: "gp:AOqpTOHICpNS3MI-Rv3kVrx-wZygZ-DN8V0BffnMmL1O8r32EVnd7TSYTlmjUnn7vyfyxTkqgbJeKoSI3oi31cI"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434491809257
+    starRating: 5
+    comment: "Crashes fixed, love this game, much fun"
+    commentId: "gp:AOqpTOHueHEHOp125R8B_RDBMJGTqQwMEy5HNigDdkGd_1Oxq3LKW1m-OHKrjBGVY6qeTD8qE_z3PHc8CAUCabU"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434510408014
+    starRating: 2
+    comment: "Played it a little  bit  then got off to do somthing now won\'t even load black screen plz fix it"
+    commentId: "gp:AOqpTOFIqQ2ZEOZA7CcmgSY9fI-JXUNebQgeD-nEjEGf8LrZcJmiVErcnWPYlxlcLhun9FSZJXhYgIDFIspn-jU"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434133364390
+    starRating: 2
+    title: "It\'s ok"
+    comment: "The app is playable but it is nothing compared to the other app they have made... it takes too long to go to \"map\" to \"map\" and I don\'t like how you aim up your shot then you have to repush the basketball button for it to shoot... I personally liked the other way where you would aim it up and then as soon as you let go it shot the ball."
+    commentId: "gp:AOqpTOFhDPIfy5ATjQdQ3yAUa-dwF9UILSHa6nY8A5GsyqXUvBPsJa4bCE711roInGFSRpbIIk0M9wQpJVqHS1s"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1435013732430
+    starRating: 4
+    comment: "Like this game but seriously energy and stars to unlock areas you have to wait for it to give you energy can buy unlimited energy for 8.00\360\237\230\233"
+    commentId: "gp:AOqpTOFmwmuXJJBYwKYbUKLyn58qoqH_tVNHVJ3CmXs6H9o_ZiwdpeYlSAYsMJ62aou5KTC0V6jo9lO0OEal1gU"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434332169448
+    starRating: 4
+    title: "ENERGY???"
+    comment: "Why does every game put a limit on how much you can play it? Does this make sense to anyone? The game is so much fun, but the limited energy problem is what is stopping me from rating it 5 stars. So, please (maker of this game), get rid of the stupid energy bars. I doubt anyone would pay the full $9 for unlimited energy."
+    commentId: "gp:AOqpTOE__pNLXW60jOXpRzw1wfiFYfz0qVyKzNTOK_S5nvjltPke7wBdmNw8u4wBUFxVg2Y7TE96Re40LJH77a4"
+    deviceName: "Samsung Galaxy S3"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434982769959
+    starRating: 5
+    title: "Awesome game but one suggestion"
+    comment: "I like the game and have watched ur guys video like 5 time but instead have shoot basketball have some thing different too like basketball, football, baseball, golf and other sports so the game will even more fun but other then that the game is awesome"
+    commentId: "gp:AOqpTOFjpB68apYC5tps_N_2Ht3sait4quDQkZmq3T-dn0ygeJ-08k3Q7EfHIFKItrI9OkKYS35GZIIaHHyiiSE"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434977045747
+    starRating: 4
+    title: "Great game but..."
+    comment: "This is a very cool game but I don\'t like the fact that you have to get so many stars to unlock the next group. I\'m not a big gamer so having to try over and over to get to the next group after I\'ve made it thru a group sucks."
+    commentId: "gp:AOqpTOHXjbsoHPhzpI8hLds5ugm0KhdkilOroK994kJ6HuIeIMKUc9Wik0yoYJ1OY1BDRqCCWWhUrQpOZ3ffWdA"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434029410879
+    starRating: 5
+    title: "The best"
+    comment: "My son loves this beast game . It is so good . I watch him play it all the time"
+    commentId: "gp:AOqpTOF0WQmiy9ccsjDJzFoQjDmwA-T5aO5aJmls8YwVeElv672CzhqRVyhpD6H59kMvOPwVcnCbEV_681sc0cc"
+  }
+  review {
+    documentVersion: "1.0.3"
+    timestampMsec: 1434665352742
+    starRating: 3
+    title: "This game gets HARDER"
+    comment: "Im on level 34 and then I don\'t even get how to get to the court I cracked the ice but the barrel was too heavy and it made it fall into the hole so whoever passed level 34 please reply this so it can help me please \360\237\230\224\360\237\230\223"
+    commentId: "gp:AOqpTOEZkPKVZjKCcQhiceEPHudp0FNw7IH0XnBxqTM-NQnX0pTy8rDiRAWZvKSCQcLmpWg3oqRRiA6PSCq4iI8"
+  }
+}
+nextPageUrl: "rev?doc=com.miniclip.dudeperfect&n=20&o=20"

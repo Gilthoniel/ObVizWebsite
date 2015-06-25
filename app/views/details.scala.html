@@ -1,0 +1,165 @@
+@(id: String)
+
+@main() {
+    <div class="row" id="details-header">
+        <div class="col-xs-12 col-md-6">
+            <table class="logo">
+                <tr>
+                    <td>
+                        <img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" />
+                    </td>
+                    <td>
+                        Whatsapp<br />
+                        Whatsapp Inc.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" id="details-gauge">
+        <div class="col-xs-12 col-md-3 active">
+            <canvas width="220" height="100" data-value="30" class="gauge"></canvas>
+            <h4>Battery</h4>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <canvas width="220" height="100" data-value="90" class="gauge"></canvas>
+            <h4>Performance</h4>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <canvas width="220" height="100" data-value="50" class="gauge"></canvas>
+            <h4>Design</h4>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <canvas width="220" height="100" data-value="60" class="gauge"></canvas>
+            <h4>S.T.</h4>
+        </div>
+    </div>
+
+    <div class="row" id="details-opinions">
+
+        <div class="col-xs-3">
+            <div class="graph-opinions negative">
+                <div class="opinion">
+                    <span class="title">Low</span>
+                    <span class="value" style="width: 100px;"></span>
+                </div>
+                <div class="opinion">
+                    <span class="title">Heat</span>
+                    <span class="value" style="width: 70px;"></span>
+                </div>
+                <div class="opinion">
+                    <span class="title">Heat</span>
+                    <span class="value" style="width: 70px;"></span>
+                </div>
+                <div class="opinion">
+                    <span class="title">Heat</span>
+                    <span class="value" style="width: 40px;"></span>
+                </div>
+                <div class="opinion">
+                    <span class="title">Heat</span>
+                    <span class="value" style="width: 20px;"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="graph-opinions positive">
+                <div class="opinion">
+                    <span class="value" style="width: 100px;"></span>
+                    <span class="title">Low</span>
+                </div>
+                <div class="opinion">
+                    <span class="value" style="width: 70px;"></span>
+                    <span class="title">Heat</span>
+                </div>
+                <div class="opinion">
+                    <span class="value" style="width: 60px;"></span>
+                    <span class="title">Heat</span>
+                </div>
+                <div class="opinion">
+                    <span class="value" style="width: 60px;"></span>
+                    <span class="title">Heat</span>
+                </div>
+                <div class="opinion">
+                    <span class="value" style="width: 40px;"></span>
+                    <span class="title">Heat</span>
+                </div>
+                <div class="opinion">
+                    <span class="value" style="width: 10px;"></span>
+                    <span class="title">Heat</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <ul class="bxslider">
+                <li>
+                    <div class="app-box">
+                        <dl>
+                            <dt><img src="https://lh5.ggpht.com/0VYAvZLR9YhosF-thqm8xl8EWsCfrEY_uk2og2f59K8IOx5TfPsXjFVwxaHVnUbuEjc=w300" alt="" /></dt>
+                            <dd>Messenger</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="app-box">
+                        <dl>
+                            <dt><img src="https://lh5.ggpht.com/1CxNUEdzrREikWZoaHIU5J63x2gOxTb7R-ZIbJd51uPBFt0jUj8AX2bMOhKiIBcuAqtH=w300" alt="" /></dt>
+                            <dd>Skype</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="app-box">
+                        <dl>
+                            <dt><img src="https://lh5.ggpht.com/jWKeAZUzPtUqgZdcLDSa7vd3iwdan8QX4nlYlHBMkJHcxwr-uZU40vDmrMKczCmiCBRf=w300" alt="" /></dt>
+                            <dd>Viber</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="app-box">
+                        <dl>
+                            <dt><img src="https://lh6.ggpht.com/sRWS6JpaUYQPxdSPv7BLUWOsA9L7IRcvQOjT6GD5x2QMsaM5N2Glk88o7BjA2tWEMaRG=w300" alt="" /></dt>
+                            <dd>Kik</dd>
+                        </dl>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".bxslider").bxSlider({
+                slideMargin: 20,
+                slideWidth: 200,
+                maxSlides: 5,
+                moveSlides: 1,
+                pager: false
+            });
+
+            var opts = {
+                lines: 12,
+                angle: 0,
+                lineWidth: 0.15,
+                pointer: {
+                    length: 0.4,
+                    strokeWidth: 0.05,
+                    color: '#000000'
+                },
+                limitMax: 'false',
+                percentColors: [[0.0, "#cf1414" ], [0.5, "#aeaeae"], [1.0, "#1c8e17"]],
+                strokeColor: '#e0e0e0',
+                generateGradient: true
+            };
+
+            $(".gauge").each(function() {
+                var gauge = new Gauge($(this).get(0)).setOptions(opts);
+                gauge.maxValue = 100;
+                gauge.animationSpeed = 300;
+                gauge.set(parseInt($(this).data("value")));
+            });
+        })
+    </script>
+}
