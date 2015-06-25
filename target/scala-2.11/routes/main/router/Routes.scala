@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/gaylor/Developpement/ObViz/obviz-app/conf/routes
-// @DATE:Thu Jun 25 08:15:53 CEST 2015
+// @SOURCE:/home/gaylor/Developpement/ObViz/app-site/conf/routes
+// @DATE:Thu Jun 25 10:53:34 CEST 2015
 
 package router
 

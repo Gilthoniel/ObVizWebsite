@@ -34,7 +34,7 @@
                 <div class="app">
                     <dl class="header">
                         <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
-                        <dd>Whatsapp Messenger</dd>
+                        <dd><a href="@routes.Application.details("com.whatsapp")">Whatsapp Messenger</a></dd>
                         <dd>Whatsapp Inc.</dd>
                     </dl>
 
@@ -257,7 +257,7 @@
                     color: '#000000'
                 },
                 limitMax: 'false',
-                percentColors: [[0.0, "#B93737" ], [1.0, "#47AD3C"]],
+                percentColors: [[0.0, "#cf1414" ], [0.5, "#aeaeae"], [1.0, "#1c8e17"]],
                 strokeColor: '#e0e0e0',
                 generateGradient: true
             };
@@ -265,7 +265,7 @@
             $(".app-gauge").each(function() {
                 var gauge = new Gauge($(this).get(0)).setOptions(opts);
                 gauge.maxValue = 100;
-                gauge.animationSpeed = 100;
+                gauge.animationSpeed = 1;
                 gauge.set(parseInt($(this).data("value")));
             });
         });

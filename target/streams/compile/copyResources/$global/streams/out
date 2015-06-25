@@ -1,4 +1,4 @@
 [debug] Copy resource mappings: 
-[debug] 	(/home/gaylor/Developpement/ObViz/obviz-app/conf/routes,/home/gaylor/Developpement/ObViz/obviz-app/target/scala-2.11/classes/routes)
-[debug] 	(/home/gaylor/Developpement/ObViz/obviz-app/conf/application.conf,/home/gaylor/Developpement/ObViz/obviz-app/target/scala-2.11/classes/application.conf)
-[debug] 	(/home/gaylor/Developpement/ObViz/obviz-app/conf/logback.xml,/home/gaylor/Developpement/ObViz/obviz-app/target/scala-2.11/classes/logback.xml)
+[debug] 	(/home/gaylor/Developpement/ObViz/app-site/conf/routes,/home/gaylor/Developpement/ObViz/app-site/target/scala-2.11/classes/routes)
+[debug] 	(/home/gaylor/Developpement/ObViz/app-site/conf/application.conf,/home/gaylor/Developpement/ObViz/app-site/target/scala-2.11/classes/application.conf)
+[debug] 	(/home/gaylor/Developpement/ObViz/app-site/conf/logback.xml,/home/gaylor/Developpement/ObViz/app-site/target/scala-2.11/classes/logback.xml)

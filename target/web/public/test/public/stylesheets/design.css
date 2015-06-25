@@ -6594,4 +6594,79 @@ button.close {
   font-size: 1.1em;
   font-weight: bold;
 }
+#details-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #EAEAEA;
+}
+#details-header .logo td {
+  vertical-align: bottom;
+  padding: 20px;
+}
+#details-header .logo td:first-child {
+  width: 20%;
+  padding: 0;
+}
+#details-header .logo td:first-child img {
+  width: 100%;
+}
+#details-gauge {
+  margin: 20px 0;
+  text-align: center;
+}
+#details-gauge > div:hover,
+#details-gauge .active {
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+#details-opinions {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+#details-opinions .graph-opinions .opinion {
+  width: 100%;
+}
+#details-opinions .graph-opinions .opinion .value {
+  display: inline-block;
+  height: 10px;
+}
+#details-opinions .graph-opinions .opinion:hover {
+  cursor: pointer;
+}
+#details-opinions .graph-opinions .opinion:hover .title {
+  font-weight: bold;
+}
+#details-opinions .graph-opinions.negative {
+  text-align: right;
+}
+#details-opinions .graph-opinions.negative .value {
+  background-color: red;
+}
+#details-opinions .graph-opinions.positive {
+  text-align: left;
+}
+#details-opinions .graph-opinions.positive .value {
+  background-color: green;
+}
+#details-opinions .bxslider .app-box dl dt,
+#details-opinions .bxslider .app-box dl dd {
+  display: inline-block;
+}
+#details-opinions .bxslider .app-box dl dt {
+  width: 20%;
+}
+#details-opinions .bxslider .app-box dl dd {
+  width: 70%;
+}
+#details-opinions .bx-wrapper .bx-viewport {
+  border: none;
+  box-shadow: none;
+  padding-bottom: 10px;
+}
+#details-opinions .bx-wrapper .bx-controls .bx-prev {
+  left: -50px;
+}
+#details-opinions .bx-wrapper .bx-controls .bx-next {
+  right: -50px;
+}
 /*# sourceMappingURL=design.css.map */
