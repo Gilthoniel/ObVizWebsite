@@ -1,11 +1,14 @@
-@()
+@(apps: List[PlayApp])
 
 @main() {
     @* Searchbar to find an app with name or keywords *@
     <div class="row" id="home-searchbar">
-        @* Logo *@
-        <div class="col-xs-12 logo">
-            <img src="@routes.Assets.versioned("images/favicon.png")" alt="O" /> bviz
+
+        @* Description *@
+        <div class="col-xs-12 description">
+            <p>
+                Enter keywords or an app name of the Google Play Store.
+            </p>
         </div>
 
         @* Search Bar *@
@@ -17,234 +20,101 @@
                 </span>
             </div>
         </div>
-
-        @* Description *@
-        <div class="col-xs-12 description">
-            <p>
-                Enter keywords or an app name of the Google Play Store.
-            </p>
-        </div>
     </div>
 
     @* List of applications *@
-    <div class="container-fluid" id="list-applications">
+    <div id="list-applications">
         <h3>Popular</h3>
-        <ul class="bxslider" id="popular-app">
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
-                        <dd><a href="@routes.Application.details("com.whatsapp")">Whatsapp Messenger</a></dd>
-                        <dd>Whatsapp Inc.</dd>
-                    </dl>
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Battery</h4>
-                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Interface</h4>
-                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
-                        </div>
+        <div id="popular-app">
+            <div class="app-slider">
+                @for(app <- apps) {
+                    <div>
+                        @templates.play_app(app)
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
-                        <dd>iTube Pro</dd>
-                        <dd>Reverse Clocking</dd>
-                    </dl>
+                }
+            </div>
+        </div>
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Cost</h4>
-                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Sound</h4>
-                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
-                        </div>
-                    </div>
+        <h3>Newest</h3>
+        <div id="popular-app">
+            <div class="app-slider">
+            @for(app <- apps) {
+                <div>
+                @templates.play_app(app)
                 </div>
-            </li>
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
-                        <dd>Whatsapp Messenger</dd>
-                        <dd>Whatsapp Inc.</dd>
-                    </dl>
+            }
+            </div>
+        </div>
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Battery</h4>
-                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Interface</h4>
-                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
-                        </div>
-                    </div>
+        <h3>Newest</h3>
+        <div id="popular-app">
+            <div class="app-slider">
+            @for(app <- apps) {
+                <div>
+                @templates.play_app(app)
                 </div>
-            </li>
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
-                        <dd>iTube Pro</dd>
-                        <dd>Reverse Clocking</dd>
-                    </dl>
+            }
+            </div>
+        </div>
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Cost</h4>
-                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Sound</h4>
-                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
-                        </div>
-                    </div>
+        <h3>Newest</h3>
+        <div id="popular-app">
+            <div class="app-slider">
+            @for(app <- apps) {
+                <div>
+                @templates.play_app(app)
                 </div>
-            </li>
-        </ul>
-
-        <h3>New</h3>
-        <ul class="bxslider" id="new-app">
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
-                        <dd>Whatsapp Messenger</dd>
-                        <dd>Whatsapp Inc.</dd>
-                    </dl>
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Battery</h4>
-                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Interface</h4>
-                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
-                        <dd>iTube Pro</dd>
-                        <dd>Reverse Clocking</dd>
-                    </dl>
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Cost</h4>
-                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Sound</h4>
-                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" /></dt>
-                        <dd>Whatsapp Messenger</dd>
-                        <dd>Whatsapp Inc.</dd>
-                    </dl>
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Battery</h4>
-                            <canvas class="app-gauge" data-value="80" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="30" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Interface</h4>
-                            <canvas class="app-gauge" data-value="50" height="30" width="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="app">
-                    <dl class="header">
-                        <dt><img src="https://lh3.googleusercontent.com/VU9JzTveNMwVZsFj4qJkrPmmmmmtYfWrxEkpYabPJKFFFFs-dOxsZAVjE7ghqfQOIA=w300" alt="Logo" /></dt>
-                        <dd>iTube Pro</dd>
-                        <dd>Reverse Clocking</dd>
-                    </dl>
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Cost</h4>
-                            <canvas class="app-gauge" data-value="20" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Bugs</h4>
-                            <canvas class="app-gauge" data-value="90" height="30" width="70"></canvas>
-                        </div>
-                        <div class="col-xs-4 opinion-graph">
-                            <h4>Sound</h4>
-                            <canvas class="app-gauge" data-value="60" height="30" width="70"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
+            }
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $(".bxslider").bxSlider({
-                slideMargin: 20,
-                slideWidth: 300,
-                maxSlides: 3,
-                moveSlides: 1,
-                pager: false
+            $(".app-slider").slick({
+                mobileFirst: true,
+                slidesToShow: 1,
+                infinite: false,
+                swipeToSlide: true,
+                respondTo: 'slider',
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 8
+                        }
+                    },
+                    {
+                        breakpoint: 1000,
+                        settings: {
+                            slidesToShow: 6
+                        }
+                    },
+                    {
+                        breakpoint: 800,
+                        settings: {
+                            slidesToShow: 5
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    },
+                    {
+                        breakpoint: 400,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 250,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
             });
 
             var opts = {

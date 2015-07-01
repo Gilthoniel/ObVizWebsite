@@ -1,0 +1,19 @@
+@(app: PlayApp)
+
+<div class="body-app">
+    <dl class="information">
+        <dt style="background-image: url('@app.getImage')"></dt>
+        <dd class="name">@app.getName</dd>
+        <dd class="category category-@app.getCategory.getName()">
+            @views.html.icons.icons(app.getCategory)
+        </dd>
+        <dd>
+            @for(i <- 1 to app.getScore) {
+                <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
+            }
+        </dd>
+    </dl>
+    <div class="opinion-gauge">
+        <canvas class="app-gauge" data-value="70" width="120" height="60"></canvas>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+@(category: models.PlayApp.Category)
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+width="25" height="25">
+
+    @category.getName match {
+        case "games" => {
+            @views.html.icons.games())
+        }
+        case "social" => {
+            @views.html.icons.social()
+        }
+        case "communication" => {
+            @views.html.icons.communication()
+        }
+        case _ => {
+            @views.html.icons.games()
+        }
+    }
+
+</svg>

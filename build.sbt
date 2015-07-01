@@ -10,8 +10,8 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
-  "org.webjars" % "bootstrap" % "3.3.4",
-  "org.webjars" % "jquery" % "2.1.4"
+  "org.webjars" % "jquery" % "2.1.4",
+  "com.google.code.gson" % "gson" % "2.3.1"
 )
 
 // LESS files

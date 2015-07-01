@@ -1,4 +1,122 @@
 
 html, body {
+  width: 100%;
+  height: 100%;
 
+  font-family: 'Open Sans Condensed', sans-serif;
+  background-color: #F8F8F8;
+}
+
+/* Navigation */
+@navbarHeight: 50px;
+@leftMenuWidth: 250px;
+
+#left-menu {
+  position: fixed;
+  z-index: 1000;
+  height: 100%;
+  padding: @navbarHeight 0 0 0;
+
+  background: #393939;
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    color: white;
+    fill: white;
+    font-size: 2em;
+
+    li {
+      display: block;
+      padding: 5px;
+      cursor: pointer;
+
+      span {
+        display: inline-block;
+        width: 25px;
+        height: 35px;
+        margin-right: 10px;
+
+        vertical-align: middle;
+      }
+    }
+
+    li:hover,
+    li.active {
+      background-color: #515151;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs-max) {
+  #left-menu {
+    position: fixed;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Body */
+#body-content {
+  padding: @navbarHeight 0 0 0;
+}
+
+@media screen and (max-width: @screen-xs-max) {
+  #body-content {
+    padding: 0;
+  }
+}
+
+/* Box for application in sliders */
+.body-app {
+  @logoSize: 80px;
+  @imageMargin: 0px;
+
+  margin: 10px;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+
+  .information {
+    min-height: @logoSize + 2 * @imageMargin;
+
+    dt {
+      width: 100%;
+      height: @logoSize;
+
+      background: no-repeat center center;
+      background-size: cover;
+    }
+
+    dd {
+      display: inline-block;
+    }
+
+    .name {
+      width: 100%;
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+
+    .category {
+      width: 20px;
+      height: 20px;
+      float: right;
+      margin-right: 10px;
+
+      img { width: 100%; height: 100%; }
+    }
+
+    .category-games { fill: #7785a4; }
+    .category-communication { fill: #aba079; }
+    .category-social { fill: #9ab79b; }
+  }
+
+  .opinion-gauge {
+    text-align: center;
+  }
+
+  img {
+    display: inline;
+  }
 }
