@@ -13,8 +13,9 @@ public class Constants {
     public static final String baseURL = "http://vps40100.vps.ovh.ca/ObVizServiceAdmin";
 
     /* Command builder */
-    public enum WEIGHT {LIGHT, MEDIUM, FULL}
+    public enum Weight {LIGHT, MEDIUM, FULL}
 
     public static final String GET_APP_IDS = "Get_App_IDs";
     public static final String GET_APP = "Get_App";
+    public static final String GET_TOPIC_TITLES = "Get_App_Topics";
 }

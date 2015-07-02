@@ -1,6 +1,6 @@
 
 #details-header {
-  padding-bottom: 20px;
+  padding: 20px 0;
   border-bottom: 1px solid #EAEAEA;
 
   .logo {
@@ -19,85 +19,60 @@
 }
 
 #details-gauge {
-  margin: 20px 0;
+  margin: 20px 60px;
 
-  text-align: center;
+  .opinion-box {
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+  }
 
-  > div:hover,
-  .active {
+  .opinion-box:hover {
     cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .opinion-box.active,
+  .opinion-box:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #eaeaea;
   }
 }
 
-#details-opinions {
-  margin-top: 50px;
-  margin-bottom: 20px;
+#details-related {
 
-  .graph-opinions {
+  background: #e6e0d0;
 
-    .opinion {
-      width: 100%;
+  ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
 
-      .value {
-        display: inline-block;
-        height: 10px;
-      }
-    }
+    li {
+      display: inline-block;
 
-    .opinion:hover {
-      cursor: pointer;
-      .title {
-        font-weight: bold;
-      }
+      img { width: 70px; margin: 10px; }
     }
   }
+}
 
-  .graph-opinions.negative {
-    text-align: right;
-    .value { background-color: red; }
-  }
-  .graph-opinions.positive {
-    text-align: left;
-    .value { background-color: green; }
-  }
+#details-reviews {
+  padding: 10px;
 
-  .bxslider {
-    .app-box {
-      dl {
-        dt, dd {
-          display: inline-block;
-        }
+  .topic-container {
 
-        dt {
-          width: 20%;
-        }
+    .review {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px;
+      max-width: 400px;
+      vertical-align: top;
+      border: 1px solid #eaeaea;
 
-        dd {
-          width: 70%;
-        }
-      }
-    }
-  }
+      font-size: 1.2em;
 
-  .bx-wrapper {
-
-    .bx-viewport {
-      border: none;
-      box-shadow: none;
-
-      padding-bottom: 10px;
-    }
-
-    .bx-controls {
-      .bx-prev {
-        left: -50px;
-      }
-
-      .bx-next {
-        right: -50px;
-      }
+      .clause-positive { color: green; }
+      .clause-negative { color: red; }
     }
   }
 }

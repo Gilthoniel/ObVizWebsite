@@ -1,5 +1,6 @@
 package webservice;
 
+import models.Initiatable;
 import org.apache.http.NameValuePair;
 import play.Logger;
 import play.libs.F;

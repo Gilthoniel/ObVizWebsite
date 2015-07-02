@@ -1,4 +1,6 @@
-@(id: String)
+@(app: PlayApp, titles: Map[Integer, List[String]], related: List[PlayApp])
+
+@import models.OpinionValue
 
 @main() {
     <div class="row" id="details-header">
@@ -6,137 +8,119 @@
             <table class="logo">
                 <tr>
                     <td>
-                        <img src="https://lh6.ggpht.com/mp86vbELnqLi2FzvhiKdPX31_oiTRLNyeK8x4IIrbF5eD1D5RdnVwjQP0hwMNR_JdA=w300" alt="Logo" />
+                        <img src="@app.getImage" alt="Logo" />
                     </td>
                     <td>
-                        Whatsapp<br />
-                        Whatsapp Inc.
+                        @app.getName
                     </td>
                 </tr>
             </table>
         </div>
     </div>
 
-    <div class="row" id="details-gauge">
-        <div class="col-xs-12 col-md-3 active">
-            <canvas width="220" height="100" data-value="30" class="gauge"></canvas>
-            <h4>Battery</h4>
-        </div>
-        <div class="col-xs-12 col-md-3">
-            <canvas width="220" height="100" data-value="90" class="gauge"></canvas>
-            <h4>Performance</h4>
-        </div>
-        <div class="col-xs-12 col-md-3">
-            <canvas width="220" height="100" data-value="50" class="gauge"></canvas>
-            <h4>Design</h4>
-        </div>
-        <div class="col-xs-12 col-md-3">
-            <canvas width="220" height="100" data-value="60" class="gauge"></canvas>
-            <h4>S.T.</h4>
+    <div id="details-gauge">
+        <div class="opinion-slider">
+            @for((id, opinionValue) <- app.getMappedOpinions) {
+                <div>
+                    <div class="opinion-box" data-topic="@id">
+                        <canvas width="220" height="100" data-value="@opinionValue.percentage" class="gauge"></canvas>
+                        <h4>@titles.get(id).head</h4>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 
-    <div class="row" id="details-opinions">
-
-        <div class="col-xs-3">
-            <div class="graph-opinions negative">
-                <div class="opinion">
-                    <span class="title">Low</span>
-                    <span class="value" style="width: 100px;"></span>
-                </div>
-                <div class="opinion">
-                    <span class="title">Heat</span>
-                    <span class="value" style="width: 70px;"></span>
-                </div>
-                <div class="opinion">
-                    <span class="title">Heat</span>
-                    <span class="value" style="width: 70px;"></span>
-                </div>
-                <div class="opinion">
-                    <span class="title">Heat</span>
-                    <span class="value" style="width: 40px;"></span>
-                </div>
-                <div class="opinion">
-                    <span class="title">Heat</span>
-                    <span class="value" style="width: 20px;"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3">
-            <div class="graph-opinions positive">
-                <div class="opinion">
-                    <span class="value" style="width: 100px;"></span>
-                    <span class="title">Low</span>
-                </div>
-                <div class="opinion">
-                    <span class="value" style="width: 70px;"></span>
-                    <span class="title">Heat</span>
-                </div>
-                <div class="opinion">
-                    <span class="value" style="width: 60px;"></span>
-                    <span class="title">Heat</span>
-                </div>
-                <div class="opinion">
-                    <span class="value" style="width: 60px;"></span>
-                    <span class="title">Heat</span>
-                </div>
-                <div class="opinion">
-                    <span class="value" style="width: 40px;"></span>
-                    <span class="title">Heat</span>
-                </div>
-                <div class="opinion">
-                    <span class="value" style="width: 10px;"></span>
-                    <span class="title">Heat</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-6">
-            <ul class="bxslider">
-                <li>
-                    <div class="app-box">
-                        <dl>
-                            <dt><img src="https://lh5.ggpht.com/0VYAvZLR9YhosF-thqm8xl8EWsCfrEY_uk2og2f59K8IOx5TfPsXjFVwxaHVnUbuEjc=w300" alt="" /></dt>
-                            <dd>Messenger</dd>
-                        </dl>
-                    </div>
-                </li>
-                <li>
-                    <div class="app-box">
-                        <dl>
-                            <dt><img src="https://lh5.ggpht.com/1CxNUEdzrREikWZoaHIU5J63x2gOxTb7R-ZIbJd51uPBFt0jUj8AX2bMOhKiIBcuAqtH=w300" alt="" /></dt>
-                            <dd>Skype</dd>
-                        </dl>
-                    </div>
-                </li>
-                <li>
-                    <div class="app-box">
-                        <dl>
-                            <dt><img src="https://lh5.ggpht.com/jWKeAZUzPtUqgZdcLDSa7vd3iwdan8QX4nlYlHBMkJHcxwr-uZU40vDmrMKczCmiCBRf=w300" alt="" /></dt>
-                            <dd>Viber</dd>
-                        </dl>
-                    </div>
-                </li>
-                <li>
-                    <div class="app-box">
-                        <dl>
-                            <dt><img src="https://lh6.ggpht.com/sRWS6JpaUYQPxdSPv7BLUWOsA9L7IRcvQOjT6GD5x2QMsaM5N2Glk88o7BjA2tWEMaRG=w300" alt="" /></dt>
-                            <dd>Kik</dd>
-                        </dl>
-                    </div>
-                </li>
+    <div class="row">
+        <div class="col-xs-12 col-md-2" id="details-related">
+            <h3>Related Apps</h3>
+            <ul>
+                @for(app <- related) {
+                    <li>
+                        <a href="@routes.Application.details(app.getAppID)">
+                            <img src="@app.getImage" alt="@app.getName" />
+                        </a>
+                    </li>
+                }
             </ul>
+        </div>
+        <div class="col-xs-12 col-md-10" id="details-reviews">
+        @for((id, reviews) <- app.getMappedReviews) {
+            <div id="topic-@id" class="topic-container" style="display: none;">
+            @for(review <- reviews) {
+                <div class="review">
+                    @Html(review.getParsedBody(id))
+                </div>
+            }
+            </div>
+        }
         </div>
     </div>
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $(".bxslider").bxSlider({
-                slideMargin: 20,
-                slideWidth: 200,
-                maxSlides: 5,
-                moveSlides: 1,
-                pager: false
+            var containers = $(".topic-container");
+            var opinionBoxes = $(".opinion-box");
+
+            $(".opinion-slider").on('init', function() {
+                console.log("fireddd");
+                opinionBoxes.click(function() {
+
+                    // Add active class
+                    opinionBoxes.removeClass("active");
+                    $(this).addClass("active");
+
+                    // Show the reviews of the opinion
+                    var id = $(this).data("topic");
+
+                    containers.hide();
+                    $("#topic-"+id).fadeIn(500);
+                });
+            }).slick({
+                mobileFirst: true,
+                slidesToShow: 1,
+                infinite: false,
+                swipeToSlide: true,
+                dots: true,
+                respondTo: 'slider',
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 6
+                        }
+                    },
+                    {
+                        breakpoint: 1000,
+                        settings: {
+                            slidesToShow: 5
+                        }
+                    },
+                    {
+                        breakpoint: 800,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 400,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 250,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
             });
 
             var opts = {

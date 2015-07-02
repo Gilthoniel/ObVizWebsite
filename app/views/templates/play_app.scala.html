@@ -3,8 +3,8 @@
 <div class="body-app">
     <dl class="information">
         <dt style="background-image: url('@app.getImage')"></dt>
-        <dd class="name">@app.getName</dd>
-        <dd class="category category-@app.getCategory.getName()">
+        <dd class="name"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></dd>
+        <dd class="category category-@app.getCategory.getName">
             @views.html.icons.icons(app.getCategory)
         </dd>
         <dd>
