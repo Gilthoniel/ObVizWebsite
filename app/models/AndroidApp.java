@@ -1,67 +1,17 @@
 package models;
 
+import constants.Constants;
+
 import java.util.*;
 
 /**
  * Created by gaylor on 29.06.15.
  * Represent a Google Play Application for Android device
  */
-public class PlayApp implements Initiatable {
-
-    public enum Category {
-        SOCIAL("social"),
-        GAME_ADVENTURE("games"),
-        GAME_SPORTS("games"),
-        GAME_STRATEGY("games"),
-        GAME_ACTION("games"),
-        GAME_PUZZLE("games"),
-        GAME_ARCADE("games"),
-        GAME_CARD("games"),
-        GAME_CASUAL("games"),
-        GAME_CASINO("games"),
-        GAME_TRIVIA("games"),
-        GAME_SIMULATION("games"),
-        GAME_RACING("games"),
-        GAME_ROLE_PLAYING("games"),
-        GAME_WORD("games"),
-        GAME_BOARD("games"),
-        GAME_EDUCATIONAL("games"),
-        GAME_MUSIC("games"),
-        COMMUNICATION("communication"),
-        MUSIC_AND_AUDIO("audio"),
-        ENTERTAINMENT("entertainment"),
-        TOOLS("tools"),
-        BOOKS_AND_REFERENCE("books"),
-        PERSONALIZATION("personalization"),
-        PRODUCTIVITY("productivity"),
-        WEATHER("weather"),
-        SHOPPING("shopping"),
-        TRANSPORTATION("transportation"),
-        LIFESTYLE("lifestyle"),
-        TRAVEL_AND_LOCAL("travel"),
-        PHOTOGRAPHY("photo"),
-        BUSINESS("business"),
-        HEALTH_AND_FITNESS("health"),
-        FINANCE("finance"),
-        SPORTS("sports"),
-        EDUCATION("education"),
-        NEWS_AND_MAGAZINES("news"),
-        MEDICAL("medical"),
-        COMICS("comics"),
-        DEFAULT("default");
-
-        private final String name;
-        Category(String value) {
-            name = value;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
+public class AndroidApp implements Initiatable {
 
     private String appID;
-    private Category category;
+    private Constants.Category category;
     private String coverImgURL;
     private String currentVersion;
     private String description;
@@ -124,11 +74,11 @@ public class PlayApp implements Initiatable {
      * Category of the application
      * @return String
      */
-    public Category getCategory() {
+    public Constants.Category getCategory() {
         if (category != null) {
             return category;
         } else {
-            return Category.DEFAULT;
+            return Constants.Category.DEFAULT;
         }
     }
 

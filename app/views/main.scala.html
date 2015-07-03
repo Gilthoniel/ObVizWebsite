@@ -1,4 +1,5 @@
-@()(content: Html)
+@import constants.Constants
+@(webpage: WebPage)(content: Html)
 
 <!DOCTYPE html>
 
@@ -15,8 +16,8 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
 
         @* Stylesheets *@
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("bootstrap/less/bootstrap.css")">
+        <link href='http://fonts.googleapis.com/css?family=Dosis:500,700,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("bootstrap/css/bootstrap.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("slick/slick.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("slick/slick-theme.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/design.css")">
@@ -48,6 +49,14 @@
                         <img style="height: 100%;" src="@routes.Assets.versioned("images/favicon.png")" alt="" />
                     </a>
                 </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        @for(path <- webpage.getBreadcrumb) {
+                            <li><a href="@path.getPath">@path.getTitle</a></li>
+                        }
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -56,13 +65,13 @@
                 <div class="col-sm-3 col-lg-2" id="left-menu">
                     <ul>
                         <li>
-                            <span>@views.html.icons.icons(PlayApp.Category.GAME_ADVENTURE)</span> Games
+                            <span>@views.html.icons.icons(Constants.Category.GAME_ADVENTURE)</span> Games
                         </li>
                         <li>
-                            <span>@views.html.icons.icons(PlayApp.Category.COMMUNICATION)</span> Communication
+                            <span>@views.html.icons.icons(Constants.Category.COMMUNICATION)</span> Communication
                         </li>
                         <li>
-                            <span>@views.html.icons.icons(PlayApp.Category.SOCIAL)</span> Social
+                            <span>@views.html.icons.icons(Constants.Category.SOCIAL)</span> Social
                         </li>
                     </ul>
                 </div>

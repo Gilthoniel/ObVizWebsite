@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
 )
 
 // LESS files
-includeFilter in (Assets, LessKeys.less) := "design.less" | "bootstrap.less"
+includeFilter in (Assets, LessKeys.less) := "design.less"
 
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.

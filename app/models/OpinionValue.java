@@ -20,6 +20,16 @@ public class OpinionValue {
     }
 
     public int percentage() {
-        return Math.round(numberPositive * 100 / (numberNegative + numberPositive));
+        int percent = Math.round(numberPositive * 100 / (numberNegative + numberPositive));
+
+        if (percent == 0) {
+            return 1;
+        } else {
+            return percent;
+        }
+    }
+
+    public int getTotal() {
+        return numberNegative + numberPositive;
     }
 }

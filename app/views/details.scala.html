@@ -1,17 +1,22 @@
-@(app: PlayApp, titles: Map[Integer, List[String]], related: List[PlayApp])
+@(webpage: WebPage, app: AndroidApp, titles: Map[Integer, List[String]], related: List[AndroidApp])
 
-@import models.OpinionValue
-
-@main() {
+@main(webpage) {
     <div class="row" id="details-header">
-        <div class="col-xs-12 col-md-6">
-            <table class="logo">
+        <div class="col-xs-12 col-md-12">
+            <table class="information">
                 <tr>
-                    <td>
+                    <td rowspan="2" class="logo">
                         <img src="@app.getImage" alt="Logo" />
                     </td>
-                    <td>
+                    <td class="name">
                         @app.getName
+                    </td>
+                </tr>
+                <tr>
+                    <td class="rating">
+                        @for(i <- 1 to app.getScore) {
+                            <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
+                        }
                     </td>
                 </tr>
             </table>
@@ -23,33 +28,42 @@
             @for((id, opinionValue) <- app.getMappedOpinions) {
                 <div>
                     <div class="opinion-box" data-topic="@id">
-                        <canvas width="220" height="100" data-value="@opinionValue.percentage" class="gauge"></canvas>
-                        <h4>@titles.get(id).head</h4>
+                        <canvas width="180" height="100" data-value="@opinionValue.percentage" class="gauge"></canvas>
+                        <h4>@titles.get(id).head (@opinionValue.getTotal)</h4>
                     </div>
                 </div>
             }
         </div>
+        <div class="indicator-slider"><div></div></div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12 col-md-2" id="details-related">
+    <div class="row" style="position: relative;">
+        @* List of relative applications *@
+        <div class="col-xs-12 col-sm-4 col-md-3" id="details-related">
             <h3>Related Apps</h3>
             <ul>
                 @for(app <- related) {
-                    <li>
-                        <a href="@routes.Application.details(app.getAppID)">
-                            <img src="@app.getImage" alt="@app.getName" />
-                        </a>
+                    <li class="related-app">
+                        <img src="@app.getImage" alt="@app.getName" />
+                        <span>@app.getName</span>
                     </li>
                 }
             </ul>
         </div>
-        <div class="col-xs-12 col-md-10" id="details-reviews">
+        @* Box to compare the applications *@
+        <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-2 col-md-10" id="details-comparison">
+            <button id="close-comparison"><span class="glyphicon glyphicon-remove-circle"></span></button>
+        </div>
+
+        @* List of the reviews of the application *@
+        <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9" id="details-reviews">
         @for((id, reviews) <- app.getMappedReviews) {
             <div id="topic-@id" class="topic-container" style="display: none;">
             @for(review <- reviews) {
-                <div class="review">
-                    @Html(review.getParsedBody(id))
+                <div class="col-xs-12 col-lg-4">
+                    <div class="review">
+                        @Html(review.getParsedBody(id))
+                    </div>
                 </div>
             }
             </div>
@@ -57,93 +71,5 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var containers = $(".topic-container");
-            var opinionBoxes = $(".opinion-box");
-
-            $(".opinion-slider").on('init', function() {
-                console.log("fireddd");
-                opinionBoxes.click(function() {
-
-                    // Add active class
-                    opinionBoxes.removeClass("active");
-                    $(this).addClass("active");
-
-                    // Show the reviews of the opinion
-                    var id = $(this).data("topic");
-
-                    containers.hide();
-                    $("#topic-"+id).fadeIn(500);
-                });
-            }).slick({
-                mobileFirst: true,
-                slidesToShow: 1,
-                infinite: false,
-                swipeToSlide: true,
-                dots: true,
-                respondTo: 'slider',
-                responsive: [
-                    {
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 6
-                        }
-                    },
-                    {
-                        breakpoint: 1000,
-                        settings: {
-                            slidesToShow: 5
-                        }
-                    },
-                    {
-                        breakpoint: 800,
-                        settings: {
-                            slidesToShow: 4
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 3
-                        }
-                    },
-                    {
-                        breakpoint: 400,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 250,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-
-            var opts = {
-                lines: 12,
-                angle: 0,
-                lineWidth: 0.15,
-                pointer: {
-                    length: 0.4,
-                    strokeWidth: 0.05,
-                    color: '#000000'
-                },
-                limitMax: 'false',
-                percentColors: [[0.0, "#cf1414" ], [0.5, "#aeaeae"], [1.0, "#1c8e17"]],
-                strokeColor: '#e0e0e0',
-                generateGradient: true
-            };
-
-            $(".gauge").each(function() {
-                var gauge = new Gauge($(this).get(0)).setOptions(opts);
-                gauge.maxValue = 100;
-                gauge.animationSpeed = 300;
-                gauge.set(parseInt($(this).data("value")));
-            });
-        })
-    </script>
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/details.js")"></script>
 }

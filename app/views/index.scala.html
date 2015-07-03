@@ -1,6 +1,6 @@
-@(apps: List[PlayApp])
+@(webpage: WebPage, apps: List[AndroidApp])
 
-@main() {
+@main(webpage) {
     @* Searchbar to find an app with name or keywords *@
     <div class="row" id="home-searchbar">
 
