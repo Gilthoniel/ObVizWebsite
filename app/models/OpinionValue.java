@@ -32,4 +32,21 @@ public class OpinionValue {
     public int getTotal() {
         return numberNegative + numberPositive;
     }
+
+    public int getNumberPositive() {
+        return numberPositive;
+    }
+
+    public int getNumberNegative() {
+        return numberNegative;
+    }
+
+    /**
+     * Get the relative font size in em
+     * @param max the maximum number of opinions for the entire topics
+     * @return
+     */
+    public int getFontSize(int max) {
+        return Math.round(1 + 2 * getTotal() / (float) max);
+    }
 }

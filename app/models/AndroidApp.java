@@ -27,6 +27,7 @@ public class AndroidApp implements Initiatable {
 
     private Map<Integer, Set<Review>> mappedReviews;
     private Map<Integer, OpinionValue> mappedOpinions;
+    private int maxNumberOpinions;
 
     @Override
     public void init() {
@@ -50,16 +51,22 @@ public class AndroidApp implements Initiatable {
                         mappedOpinions.put(opinion.getTopicID(), new OpinionValue());
                     }
 
+                    OpinionValue opinionValue = mappedOpinions.get(opinion.getTopicID());
                     for (Opinion.OpinionChild child : opinion.getChildren()) {
                         if (child.getPolarity() == Opinion.Polarity.POSITIVE) {
-                            mappedOpinions.get(opinion.getTopicID()).addPositives(1);
+                            opinionValue.addPositives(1);
                         } else {
-                            mappedOpinions.get(opinion.getTopicID()).addNegatives(1);
+                            opinionValue.addNegatives(1);
                         }
                     }
                 }
             }
         }
+
+        maxNumberOpinions = 0;
+        mappedOpinions.values().stream().filter(value -> value.getTotal() > maxNumberOpinions).forEach(value -> {
+            maxNumberOpinions = value.getTotal();
+        });
     }
 
     /**
@@ -184,5 +191,9 @@ public class AndroidApp implements Initiatable {
     public Map<Integer, OpinionValue> getMappedOpinions() {
 
         return mappedOpinions;
+    }
+
+    public int getMaxNumberOpinions() {
+        return maxNumberOpinions;
     }
 }

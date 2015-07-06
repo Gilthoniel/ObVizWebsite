@@ -1,7 +1,29 @@
 
 @screen-sm-min: 768px;
 @screen-xs-max: (@screen-sm-min - 1px);
+@backgroundReview: #f8f8f8;
 
+.topGradient(@color) {
+  background: -moz-linear-gradient(top, fade(@color, 100%) 0%, fade(@color, 0%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,fade(@color, 100%)), color-stop(100%,fade(@color, 0%))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, fade(@color, 100%) 0%,fade(@color, 0%) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, fade(@color, 100%) 0%,fade(@color, 0%) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, fade(@color, 100%) 0%,fade(@color, 0%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, fade(@color, 100%) 0%,fade(@color, 0%) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#00f8f8f8',GradientType=0 ); /* IE6-9 */
+}
+
+.bottomGradient(@color) {
+  background: -moz-linear-gradient(top, fade(@color, 0%) 0%, fade(@color, 100%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,fade(@color, 0%)), color-stop(100%,fade(@color, 100%))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, fade(@color, 0%) 0%,fade(@color, 100%) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, fade(@color, 0%) 0%,fade(@color, 100%) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, fade(@color, 0%) 0%,fade(@color, 100%) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, fade(@color, 0%) 0%,fade(@color, 100%) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00f8f8f8', endColorstr='#fff8f8f8',GradientType=0 ); /* IE6-9 */
+}
+
+/* Logo, Name, .. */
 #details-header {
   padding: 20px 0;
   border-bottom: 1px solid #EAEAEA;
@@ -36,6 +58,7 @@
   }
 }
 
+/* Indicator for the side of the opinions */
 #details-gauge {
   margin: 20px 60px;
 
@@ -74,6 +97,25 @@
   }
 }
 
+/* List of opinions for the app */
+#details-opinions {
+  padding: 10px;
+
+  span {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  span:hover {
+    background-color: #3e7bc0;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+/* List of related apps */
 #details-related {
 
   position: absolute;
@@ -121,6 +163,7 @@
   }
 }
 
+/* Body to show the related apps reviews */
 #details-comparison {
   position: relative;
   display: none;
@@ -144,25 +187,85 @@
   }
 }
 
+/* List of reviews of the spec app */
 #details-reviews {
   padding: 10px;
+  min-height: 534px;
 
   .topic-container {
 
     .review {
+      width: 100%;
       display: inline-block;
       margin: 10px;
-      padding: 10px;
       vertical-align: top;
-      border: 1px solid #eaeaea;
 
       font-size: 1.2em;
 
-      .clause-positive { color: green; }
-      .clause-negative { color: red; }
+      .clause-positive { color: #57b05e; }
+      .clause-negative { color: #cc6b6b; }
+
+      .header {
+        padding: 5px;
+        background-color: #eaeaea;
+        border-radius: 5px;
+
+        table {
+          width: 100%;
+
+          td:first-child {
+            font-weight: normal;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 0;
+          }
+
+          td:last-child {
+            width: 100px;
+            text-align: right;
+          }
+        }
+      }
+
+      .body {
+        position: relative;
+        background-color: @backgroundReview;
+        cursor: pointer;
+
+        .content {
+          position: relative;
+          height: 100px;
+          overflow: hidden;
+          padding: 5px;
+          margin: 0;
+
+          span { position: relative; }
+        }
+
+        .top-gradient, .bottom-gradient {
+          width: 100%;
+          height: 50px;
+          position: absolute;
+          z-index: 1;
+        }
+
+        .top-gradient { .topGradient(@backgroundReview); }
+        .bottom-gradient { .bottomGradient(@backgroundReview); bottom: 0; }
+      }
+
+      .footer {
+        padding: 0 5px;
+        font-size: 0.8em;
+        font-weight: normal;
+        text-align: right;
+      }
     }
   }
 }
+
+
+/**********************************************/
+/* Small screen fixes *************************/
 
 @media screen and (max-width: @screen-xs-max) {
   #details-related {

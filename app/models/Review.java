@@ -2,6 +2,7 @@ package models;
 
 import play.Logger;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,26 @@ public class Review {
 
     public String getReviewBody() {
         return reviewBody;
+    }
+
+    public String getTitle() {
+        return reviewTitle;
+    }
+
+    public int getScore() {
+        return starRatings;
+    }
+
+    public String getDate() {
+        return reviewDate.toString();
+    }
+
+    public String getUrl() {
+        return permalink;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     public String getParsedBody(int topicID) {

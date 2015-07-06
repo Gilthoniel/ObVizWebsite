@@ -13,13 +13,15 @@ OBVIZ.carousel = {
     step: 0,
 
     init: function() {
-        var slick = OBVIZ.carousel.slider;
-        slick.slick({
+        var $slick = OBVIZ.carousel.slider;
+        $slick.slick({
             mobileFirst: true,
             slidesToShow: 1,
             infinite: false,
             swipeToSlide: true,
             dots: false,
+            centerMode: true,
+            centerPadding: '0px',
             respondTo: 'slider',
             responsive: [
                 {
@@ -43,24 +45,27 @@ OBVIZ.carousel = {
                 {
                     breakpoint: 600,
                     settings: {
-                        slidesToShow: 3
+                        slidesToShow: 3,
+                        centerPadding: '0px'
                     }
                 },
                 {
                     breakpoint: 400,
                     settings: {
-                        slidesToShow: 2
+                        slidesToShow: 1,
+                        centerPadding: '100px'
                     }
                 },
                 {
                     breakpoint: 250,
                     settings: {
-                        slidesToShow: 1
+                        slidesToShow: 1,
+                        centerPadding: '0px'
                     }
                 }
             ]
         });
-        slick.on('init', function() {
+        $slick.on('init', function() {
             // Display the reviews on a user click
             OBVIZ.carousel.opinionBoxes.click(function() {
 
@@ -72,29 +77,41 @@ OBVIZ.carousel = {
                 var id = $(this).data("topic");
 
                 OBVIZ.carousel.containers.hide();
-                $("#topic-"+id).fadeIn(500);
+                var container = $("#topic-"+id);
+                container.fadeIn(500, function() {
+                    // Scroll the opinions after the elements are displayed
+                    container.find('.review').each(function() {
+                        var $body = $(this).find('.content');
+                        var position = $body.find(".clause-negative, .clause-positive").position();
+                        $body.scrollTop(position.top - 20);
+
+                        // hide the gradient if the opinion is at the top or the text is too small
+                        if ($body.find(".inner").outerHeight() <= 100) {
+                            $body.siblings(".top-gradient, .bottom-gradient").hide();
+                        } else if ($body.scrollTop() <= 10) {
+                            $body.siblings(".top-gradient").hide();
+                        }
+                    });
+                });
             });
 
             // Initialize the indicator of position
-            var instance = slick.slick('getSlick');
-            console.log(instance);
+            var instance = $slick.slick('getSlick');
             var nbSlides = instance.$slides.length;
-            var activeBreakpoint = instance.activeBreakpoint;
-            var nbSlidesDisplayed = instance.breakpointSettings[activeBreakpoint].slidesToShow;
 
-            if (typeof nbSlidesDisplayed !== 'undefined') {
-                console.log(nbSlidesDisplayed);
-                var percent = 100.0 / (nbSlides - nbSlidesDisplayed + 1);
-                OBVIZ.carousel.indicator.find("div").css("width", Math.round(percent)+"%");
-                OBVIZ.carousel.step = percent;
-            }
+            var percent = 100.0 / nbSlides;
+            OBVIZ.carousel.indicator.find("div").css("width", Math.round(percent)+"%");
+            OBVIZ.carousel.step = percent;
         });
-        slick.on('beforeChange', function(event, slick, current, next) {
+        $slick.on('beforeChange', function(event, slick, current, next) {
             OBVIZ.carousel.indicator.find("div").animate({
                 left: Math.round(OBVIZ.carousel.step * next)+"%"
             });
         });
-        slick.trigger('init'); // The first init is fired before the bind
+        // The first init is fired before the bind
+        $slick.trigger('init');
+        // Click on the first item by default
+        OBVIZ.carousel.opinionBoxes.first().click();
     }
 };
 
@@ -126,6 +143,32 @@ OBVIZ.gauges = {
     }
 };
 
+/**
+ * Set the height of a review body to its initial height when the user click on it
+ * @param element the review body
+ */
+OBVIZ.expand = function(element) {
+    var $gradients = element.find(".top-gradient, .bottom-gradient");
+    $gradients.hide();
+
+    var $p = element.find(".inner");
+    $p.parent().animate({
+        height: ($p.outerHeight() + 10)+"px"
+    }, 500, function() {
+        $p.parent().height("auto");
+    });
+};
+
+OBVIZ.goTo = function(id) {
+
+    $(".opinion-box").each(function(i) {
+        if ($(this).data("topic") == id) {
+            OBVIZ.carousel.slider.slick('slickGoTo', i, false);
+            $(this).click();
+        }
+    });
+};
+
 $(document).ready(function() {
 
     OBVIZ.gauges.init();
@@ -148,5 +191,5 @@ $(document).ready(function() {
         $("#details-comparison").fadeOut(200, function() {
             $("#details-reviews").fadeIn(200);
         });
-    })
+    });
 });
