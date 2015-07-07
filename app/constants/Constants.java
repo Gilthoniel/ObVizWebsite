@@ -78,4 +78,9 @@ public class Constants {
             return title;
         }
     }
+
+    /* Exception */
+
+    public static final String NO_APP_EXCEPTION = "NO_APP";
+    public static final String SERVER_OVERLOADED_EXCEPTION = "SERVER_OVERLOADED";
 }

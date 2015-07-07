@@ -1,0 +1,12 @@
+@(webpage: WebPage, message: String)
+
+@main(webpage) {
+    <div id="error-page">
+        <table>
+            <tr>
+                <td><img src="@routes.Assets.versioned("images/error.jpg")" alt="Error image" /></td>
+                <td>@message</td>
+            </tr>
+        </table>
+    </div>
+}

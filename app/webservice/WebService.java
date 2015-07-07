@@ -5,6 +5,8 @@ import constants.Constants;
 import models.Initiatable;
 import models.AndroidApp;
 import models.TopicTitles;
+import models.errors.NoAppFoundException;
+import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.libs.F;
@@ -39,8 +41,11 @@ public class WebService {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_APP_IDS));
 
-        Type type = new TypeToken<List<String>>(){}.getType();
-        return ConnectionService.get(Constants.baseURL, params, type);
+        Type type = new TypeToken<List<String>>() {}.getType();
+        return ConnectionService.<List<String>>get(Constants.baseURL, params, type).recover(throwable -> {
+
+            throw new ServerOverloadedException();
+        });
     }
 
     /**
@@ -56,10 +61,13 @@ public class WebService {
         params.add(new BasicNameValuePair("id", id));
         params.add(new BasicNameValuePair("weight", weight.toString()));
 
+        F.Promise<AndroidApp> promise = ConnectionService.get(Constants.baseURL, params, AndroidApp.class,
+                new ServerOverloadedException(), new NoAppFoundException());
+
         if (weight == Constants.Weight.FULL) {
-            return initPromise(ConnectionService.get(Constants.baseURL, params, AndroidApp.class));
+            return initPromise(promise);
         } else {
-            return ConnectionService.get(Constants.baseURL, params, AndroidApp.class);
+            return promise;
         }
     }
 
@@ -73,11 +81,11 @@ public class WebService {
 
         List<F.Promise<AndroidApp>> promises = new LinkedList<>();
         for (String id : ids) {
-            promises.add(getAppDetails(id, weight));
+            promises.add(getAppDetails(id, weight).recover(throwable -> null));
         }
 
-        return F.Promise.sequence(promises).map(androidApps -> {
-            List<AndroidApp> apps = new LinkedList<>(androidApps);
+        return F.Promise.sequence(promises).map(result -> {
+            List<AndroidApp> apps = new ArrayList<>(result);
             Iterator<AndroidApp> it = apps.iterator();
             while (it.hasNext()) {
                 if (it.next() == null) {
@@ -98,7 +106,7 @@ public class WebService {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_TOPIC_TITLES));
 
-        Type type = new TypeToken<List<TopicTitles>>(){}.getType();
+        Type type = new TypeToken<List<TopicTitles>>() {}.getType();
         // Return the list of topics in mapped form for easiest uses
         return ConnectionService.<List<TopicTitles>>get(Constants.baseURL, params, type).map(titles -> {
             Map<Integer, List<String>> mappedTitles = new TreeMap<>();

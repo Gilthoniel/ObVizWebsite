@@ -76,23 +76,18 @@ OBVIZ.carousel = {
                 // Show the reviews of the opinion
                 var id = $(this).data("topic");
 
-                OBVIZ.carousel.containers.hide();
-                var container = $("#topic-"+id);
-                container.fadeIn(500, function() {
-                    // Scroll the opinions after the elements are displayed
-                    container.find('.review').each(function() {
-                        var $body = $(this).find('.content');
-                        var position = $body.find(".clause-negative, .clause-positive").position();
-                        $body.scrollTop(position.top - 20);
+                if (OBVIZ.comparison.$reviews.is(":visible")) {
+                    OBVIZ.carousel.containers.hide();
 
-                        // hide the gradient if the opinion is at the top or the text is too small
-                        if ($body.find(".inner").outerHeight() <= 100) {
-                            $body.siblings(".top-gradient, .bottom-gradient").hide();
-                        } else if ($body.scrollTop() <= 10) {
-                            $body.siblings(".top-gradient").hide();
-                        }
+                    var container = $("#topic-"+id);
+                    container.fadeIn(500, function() {
+                        OBVIZ.carousel.refreshScroll(container);
                     });
-                });
+                } else {
+
+                    // If there is an active element, we trigger click to refresh the data
+                    OBVIZ.comparison.$relatedAppsItem.filter(".active").click();
+                }
             });
 
             // Initialize the indicator of position
@@ -112,33 +107,108 @@ OBVIZ.carousel = {
         $slick.trigger('init');
         // Click on the first item by default
         OBVIZ.carousel.opinionBoxes.first().click();
+    },
+
+    /**
+     * Get the topic ID of the active slide
+     * @returns {*} String of the ID
+     */
+    getActiveID: function() {
+        // Get the active slide
+        var slide = OBVIZ.carousel.opinionBoxes.filter(".active");
+
+        return slide.data("topic");
+    },
+
+    refreshScroll: function(container) {
+        // Scroll the opinions after the elements are displayed
+        container.find('.review').each(function() {
+            var $body = $(this).find('.content');
+            var position = $body.find(".clause-negative, .clause-positive").position();
+            // Move the opinion in the displayed area
+            $body.animate({
+                scrollTop: position.top - 20
+            });
+
+            // hide the gradient if the opinion is at the top or the text is too small
+            if ($body.find(".inner").innerHeight() <= 100) {
+                $body.siblings(".top-gradient, .bottom-gradient").hide();
+            } else if ($body.scrollTop() <= 10) {
+                $body.siblings(".top-gradient").hide();
+            }
+        });
     }
 };
 
 OBVIZ.gauges = {
     elements: $(".gauge"),
+    options: {
+        lines: 12,
+        angle: 0.15,
+        lineWidth: 0.4,
+        pointer: {
+            length: 0.5,
+            strokeWidth: 0.05,
+            color: '#000000'
+        },
+        limitMax: 'false',
+        percentColors: [[0.0, "#cf1414" ], [0.5, "#aeaeae"], [1.0, "#1c8e17"]],
+        strokeColor: '#e0e0e0',
+        generateGradient: true
+    },
 
     init: function() {
-        var opts = {
-            lines: 12,
-            angle: 0.0,
-            lineWidth: 0.15,
-            pointer: {
-                length: 0.4,
-                strokeWidth: 0.05,
-                color: '#000000'
-            },
-            limitMax: 'false',
-            percentColors: [[0.0, "#cf1414" ], [0.5, "#aeaeae"], [1.0, "#1c8e17"]],
-            strokeColor: '#e0e0e0',
-            generateGradient: true
-        };
-
         $(".gauge").each(function() {
-            var gauge = new Gauge($(this).get(0)).setOptions(opts);
+            var gauge = new Gauge($(this).get(0)).setOptions(OBVIZ.gauges.options);
             gauge.maxValue = 100;
             gauge.animationSpeed = 300;
             gauge.set(parseInt($(this).data("value")));
+        });
+    }
+};
+
+OBVIZ.comparison = {
+    $content: $("#details-comparison"),
+    $relatedApps: $(".related-app"),
+    $reviews: $("#details-reviews"),
+
+    init: function() {
+
+        // Init the gauge
+        OBVIZ.comparison.gauge = new Gauge(this.$content.find("#gauge-comparison").get(0))
+            .setOptions(OBVIZ.gauges.options);
+
+        this.gauge.maxValue = 100;
+        this.gauge.animationSpeed = 100;
+        this.gauge.set(50);
+
+        // Open the comparison box when the user click on a related application
+        this.$relatedAppsItem = this.$relatedApps.find("li");
+        this.$relatedApps.on("click", "li", function() {
+            OBVIZ.comparison.$relatedAppsItem.removeClass("active");
+            $(this).addClass("active");
+
+            // Get the active topic id
+            var id = OBVIZ.carousel.getActiveID();
+            // Display the opinion value in the gauge object
+            var value = $(this).find(".data").find("span[data-id='"+id+"']").data("value");
+            if ($.isNumeric(value)) {
+                OBVIZ.comparison.gauge.set(Number(value));
+            } else {
+                OBVIZ.comparison.gauge.set(1);
+            }
+
+            $("#details-reviews").fadeOut(200, function() {
+                $("#details-comparison").fadeIn(200);
+            });
+        });
+
+        // Button to close the comparison box
+        $("#close-comparison").click(function() {
+            OBVIZ.comparison.$relatedAppsItem.removeClass("active");
+            $("#details-comparison").fadeOut(200, function() {
+                $("#details-reviews").fadeIn(200);
+            });
         });
     }
 };
@@ -173,23 +243,5 @@ $(document).ready(function() {
 
     OBVIZ.gauges.init();
     OBVIZ.carousel.init();
-
-    // Open the comparison box when the user click on a related application
-    var $relatedApps = $(".related-app");
-    $relatedApps.click(function() {
-        $relatedApps.removeClass("active");
-        $(this).addClass("active");
-
-        $("#details-reviews").fadeOut(200, function() {
-            $("#details-comparison").fadeIn(200);
-        });
-    });
-
-    // Button to close the comparison box
-    $("#close-comparison").click(function() {
-        $relatedApps.removeClass("active");
-        $("#details-comparison").fadeOut(200, function() {
-            $("#details-reviews").fadeIn(200);
-        });
-    });
+    OBVIZ.comparison.init();
 });

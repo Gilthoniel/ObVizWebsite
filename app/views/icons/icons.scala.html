@@ -1,7 +1,7 @@
-@(category: constants.Constants.Category)
+@(category: constants.Constants.Category, size: Integer = 25)
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-width="25" height="25">
+<svg class="category-@category.getName" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+width="@size" height="@size">
 
     @category.getName match {
         case "games" => {

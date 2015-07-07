@@ -29,31 +29,40 @@
   border-bottom: 1px solid #EAEAEA;
 
   .information {
-    td {
-      vertical-align: bottom;
-      padding: 0 5px;
+    margin: 0;
+
+    dt, dd {
+      display: inline-block;
+      float: left;
+      height: 100px;
+      margin-right: 20px;
+
+      img { height: 100%; }
     }
 
-    td.logo {
-      width: 100px;
+    ul {
       padding: 0;
+      list-style: none;
+      font-weight: normal;
 
-      img { width: 100%; }
-    }
-
-    td.name {
-      font-size: 2em;
-      font-weight: bold;
-    }
-
-    td.rating {
-      height: 20px;
-      padding-bottom: 10px;
-
-      img {
-        display: inline-block;
-        width: 20px;
+      .name {
+        font-size: 2em;
+        font-weight: bold;
       }
+
+      .developer {
+        font-size: 1.0em;
+        font-style: italic;
+      }
+
+      svg {
+        vertical-align: middle;
+      }
+    }
+
+    .details {
+      padding-left: 10px;
+      border-left: 1px solid #d7d7d7;
     }
   }
 }
@@ -131,7 +140,7 @@
     background: #e6e0d0;
   }
 
-  ul {
+  ul.related-app {
     list-style: none;
     padding: 0;
     font-weight: normal;
@@ -167,8 +176,9 @@
 #details-comparison {
   position: relative;
   display: none;
+  min-height: 534px;
+  padding-top: 15px;
   background: #ddd3bb;
-  min-height: 500px; // TODO
 
   #close-comparison {
     position: absolute;
@@ -240,6 +250,10 @@
           margin: 0;
 
           span { position: relative; }
+
+          .inner {
+            position: relative;
+          }
         }
 
         .top-gradient, .bottom-gradient {
@@ -274,10 +288,13 @@
 
     h3 {
       display: inline-block;
+      font-size: 1em;
+      font-weight: bold;
     }
 
-    ul {
+    ul.related-app {
       display: inline-block;
+      margin: 0;
 
       li {
         display: inline-block;

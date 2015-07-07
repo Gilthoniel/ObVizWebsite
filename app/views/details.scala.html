@@ -1,25 +1,38 @@
-@(webpage: WebPage, app: AndroidApp, titles: Map[Integer, List[String]], related: List[AndroidApp])
+@(webpage: WebPage, app: AndroidApp, titles: java.util.Map[Integer, java.util.List[String]],
+        related: java.util.List[AndroidApp])
 
 @main(webpage) {
     <div class="row" id="details-header">
         <div class="col-xs-12 col-md-12">
-            <table class="information">
-                <tr>
-                    <td rowspan="2" class="logo">
-                        <img src="@app.getImage" alt="Logo" />
-                    </td>
-                    <td class="name">
-                        @app.getName
-                    </td>
-                </tr>
-                <tr>
-                    <td class="rating">
-                        @for(i <- 1 to app.getScore) {
-                            <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
+            <dl class="information">
+                <dt><img src="@app.getImage" alt="Logo" /></dt>
+                <dd>
+                    <ul>
+                        <li class="name">@app.getName</li>
+                        <li class="developer">@app.getDeveloper</li>
+                        <li class="rating">
+                            @for(i <- 1 to app.getScore) {
+                                <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
+                            }
+                        </li>
+                    </ul>
+                </dd>
+                <dd>
+                    <ul class="details">
+                        <li>@app.getInstallations installations</li>
+                        <li>Minimum version required: <strong>@app.getMinOS</strong></li>
+                        <li>Publication date: <strong>@app.getPublicationDate.toString</strong></li>
+                        <li>Category: @app.getCategory.getTitle @views.html.icons.icons(app.getCategory, 15)</li>
+                        <li>
+                        @if(app.isFree) {
+                            <strong>Free</strong>
+                        } else {
+                            @app.getPrice
                         }
-                    </td>
-                </tr>
-            </table>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
         </div>
     </div>
 
@@ -54,18 +67,31 @@
         @* List of relative applications *@
         <div class="col-xs-12 col-sm-4 col-md-3" id="details-related">
             <h3>Related Applications</h3>
-            <ul>
+            <ul class="related-app">
                 @for(app <- related) {
-                    <li class="related-app">
+                    <li data-id="@app.getAppID">
                         <img src="@app.getImage" alt="@app.getName" />
-                        <span>@app.getName</span>
+                        <span class="hidden-xs">@app.getName</span>
+                        <div class="data">
+                            <span data-id="1" data-value="10" ></span>
+                            <span data-id="2" data-value="20" ></span>
+                            <span data-id="3" data-value="30" ></span>
+                            <span data-id="4" data-value="40" ></span>
+                            <span data-id="5" data-value="50" ></span>
+                            <span data-id="6" data-value="10" ></span>
+                        </div>
                     </li>
                 }
             </ul>
         </div>
         @* Box to compare the applications *@
-        <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-2 col-md-10" id="details-comparison">
+        <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9" id="details-comparison">
             <button id="close-comparison"><span class="glyphicon glyphicon-remove-circle"></span></button>
+
+            @* Opinion value *@
+            <div class="col-xs-12 col-md-6">
+                <canvas width="180" height="100" data-value="1" id="gauge-comparison"></canvas>
+            </div>
         </div>
 
         @* List of the reviews of the application *@

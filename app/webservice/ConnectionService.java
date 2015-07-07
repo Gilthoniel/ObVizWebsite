@@ -1,12 +1,12 @@
 package webservice;
 
+import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import play.Logger;
 import play.libs.F;
 import play.libs.ws.WS;
 import play.libs.ws.WSRequest;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -20,9 +20,14 @@ public class ConnectionService {
      * HTTP GET request
      * @param url String of the url
      * @param params list of the query parameters
+     * @param type class of the object
+     * @param networkException exception thrown if a network error occurred
+     * @param nullException exception thrown if a null result occurred
      * @return WSResponse
      */
-    public static <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type) {
+    public static <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type,
+                                       Throwable networkException, Throwable nullException)
+    {
 
         // Populate the client object
         WSRequest client = WS.url(url).setFollowRedirects(true);
@@ -43,26 +48,26 @@ public class ConnectionService {
                 if (response.getStatus() != 200 || response.getBody().equals("null")) {
 
                     Logger.warn("Bad status code (" + response.getStatus() + ") for GET request [" + url + "] with queries " + params + " !");
-                    throw new IOException();
+                    throw networkException;
                 }
 
                 T result = MessageParser.<T>fromJson(response.getBody(), type);
                 if (result != null) {
-                    CustomCache.put(cacheKey, result);
-                } else {
 
-                    throw new IOException();
+                    CustomCache.put(cacheKey, result);
+
+                    return result;
                 }
 
-                return result;
-            })
-            .recover(throwable -> {
-
-                Logger.error("Error on GET request [" + url + "] with queries " + params);
-                Logger.error("Message : "+throwable.getMessage());
-
-                return null;
+                throw nullException;
             });
+    }
+
+    public static <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type) {
+
+        Throwable error = new ServerOverloadedException();
+
+        return ConnectionService.<T>get(url, params, type, error, error);
     }
 
     /**

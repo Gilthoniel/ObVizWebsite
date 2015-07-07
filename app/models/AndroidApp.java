@@ -15,11 +15,13 @@ public class AndroidApp implements Initiatable {
     private String coverImgURL;
     private String currentVersion;
     private String description;
+    private String developer;
     private String installations;
     private boolean isFree;
+    private String price;
     private String minimumOSVersion;
     private String name;
-    //private Date publicationDate;
+    private Date publicationDate;
     private List<String> screenshots;
     private Score score;
     private List<Review> reviews;
@@ -113,6 +115,10 @@ public class AndroidApp implements Initiatable {
         return description;
     }
 
+    public String getDeveloper() {
+        return developer;
+    }
+
     /**
      * Return the number of installations of the application
      * @return String format
@@ -127,6 +133,10 @@ public class AndroidApp implements Initiatable {
      */
     public boolean isFree() {
         return isFree;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     /**
@@ -148,15 +158,11 @@ public class AndroidApp implements Initiatable {
     /**
      * Date of the release of the app
      * @return Long timestamp format
-     *
-    public long getPublicationDate() {
+     */
+    public Date getPublicationDate() {
 
-        if (publicationDate != null) {
-            return publicationDate.getValue();
-        } else {
-            return 0;
-        }
-    }*/
+        return publicationDate;
+    }
 
     /**
      * Return the list of URLs of the screenshots
