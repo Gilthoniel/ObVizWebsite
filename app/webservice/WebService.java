@@ -111,8 +111,12 @@ public class WebService {
         return ConnectionService.<List<TopicTitles>>get(Constants.baseURL, params, type).map(titles -> {
             Map<Integer, List<String>> mappedTitles = new TreeMap<>();
             for (TopicTitles title : titles) {
+                List<String> upper = new ArrayList<>();
+                for (String opinion : title.getTitles()) {
+                    upper.add(opinion.substring(0, 1).toUpperCase() + opinion.substring(1));
+                }
 
-                mappedTitles.put(title.getID(), title.getTitles());
+                mappedTitles.put(title.getID(), upper);
             }
 
             return mappedTitles;

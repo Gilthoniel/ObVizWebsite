@@ -27,43 +27,47 @@
 #details-header {
   padding: 20px 0;
   border-bottom: 1px solid #EAEAEA;
+}
 
-  .information {
-    margin: 0;
+.app-information {
+  margin: 0;
 
-    dt, dd {
-      display: inline-block;
-      float: left;
-      height: 100px;
-      margin-right: 20px;
+  dt {
+    height: 100px;
+  }
 
-      img { height: 100%; }
+  dt, dd {
+    display: inline-block;
+    min-height: 100px;
+    float: left;
+    margin-right: 20px;
+
+    img { height: 100%; }
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+    font-weight: normal;
+
+    .name {
+      font-size: 2em;
+      font-weight: bold;
     }
 
-    ul {
-      padding: 0;
-      list-style: none;
-      font-weight: normal;
-
-      .name {
-        font-size: 2em;
-        font-weight: bold;
-      }
-
-      .developer {
-        font-size: 1.0em;
-        font-style: italic;
-      }
-
-      svg {
-        vertical-align: middle;
-      }
+    .developer {
+      font-size: 1.0em;
+      font-style: italic;
     }
 
-    .details {
-      padding-left: 10px;
-      border-left: 1px solid #d7d7d7;
+    svg {
+      vertical-align: middle;
     }
+  }
+
+  .details {
+    padding-left: 10px;
+    border-left: 1px solid #d7d7d7;
   }
 }
 
@@ -195,6 +199,32 @@
   #close-comparison:hover {
     color: #7e2f2f;
   }
+
+  .information-container {
+    border-bottom: 1px solid #cfc4ab;
+
+    .app-information {
+
+      .name {
+        max-width: 250px;
+        font-weight: normal;
+        font-size: 1.5em;
+      }
+
+      .details {
+        border-left-color: #cfc4ab;
+      }
+    }
+  }
+
+  canvas {
+    vertical-align: middle;
+  }
+
+  #current-opinion {
+    font-size: 2em;
+    font-weight: normal;
+  }
 }
 
 /* List of reviews of the spec app */
@@ -280,6 +310,26 @@
 
 /**********************************************/
 /* Small screen fixes *************************/
+
+@media screen and (max-width: 1200px) {
+  #details-comparison {
+    .app-information {
+      .details {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #details-comparison {
+    .app-information {
+      dt {
+        display: none;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: @screen-xs-max) {
   #details-related {

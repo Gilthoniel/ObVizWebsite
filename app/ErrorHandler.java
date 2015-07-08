@@ -14,8 +14,10 @@ import play.mvc.Results;
 public class ErrorHandler implements HttpErrorHandler {
     @Override
     public F.Promise<Result> onClientError(Http.RequestHeader request, int statusCode, String message) {
+        final WebPage webpage = new WebPage();
+
         return F.Promise.<Result>pure(
-                Results.status(statusCode, "A client error occurred: " + message)
+                Results.status(statusCode, (play.twirl.api.Html) views.html.error.render(webpage, message))
         );
     }
 
@@ -30,17 +32,19 @@ public class ErrorHandler implements HttpErrorHandler {
         switch (exception.getMessage()) {
             case Constants.NO_APP_EXCEPTION:
                 message = "Sorry, we can't find this app. Did you use the search bar ?";
-                break;
+                return F.Promise.pure(
+                        Results.notFound((play.twirl.api.Html) views.html.error.render(webpage, message))
+                );
             case Constants.SERVER_OVERLOADED_EXCEPTION:
                 message = "Server is currently overloaded. Please come back later.";
-                break;
+                return F.Promise.pure(
+                        Results.internalServerError((play.twirl.api.Html) views.html.error.render(webpage, message))
+                );
             default:
                 message = "Internal server error. Please contact an administrator if it persists";
-                break;
+                return F.Promise.pure(
+                        Results.internalServerError((play.twirl.api.Html) views.html.error.render(webpage, message))
+                );
         }
-
-        return F.Promise.pure(
-                Results.ok((play.twirl.api.Html) views.html.error.render(webpage, message))
-        );
     }
 }

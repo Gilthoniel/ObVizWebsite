@@ -73,9 +73,11 @@ OBVIZ.carousel = {
                 OBVIZ.carousel.opinionBoxes.removeClass("active");
                 $(this).addClass("active");
 
+                // Update the field in the comparison box
+                OBVIZ.comparison.$currentOpinion.html($(this).data("value"));
+
                 // Show the reviews of the opinion
                 var id = $(this).data("topic");
-
                 if (OBVIZ.comparison.$reviews.is(":visible")) {
                     OBVIZ.carousel.containers.hide();
 
@@ -171,6 +173,7 @@ OBVIZ.comparison = {
     $content: $("#details-comparison"),
     $relatedApps: $(".related-app"),
     $reviews: $("#details-reviews"),
+    $currentOpinion: $("#current-opinion"),
 
     init: function() {
 
@@ -198,16 +201,24 @@ OBVIZ.comparison = {
                 OBVIZ.comparison.gauge.set(1);
             }
 
-            $("#details-reviews").fadeOut(200, function() {
-                $("#details-comparison").fadeIn(200);
+            var info = $(this).find(".data").find("dl").clone();
+            OBVIZ.comparison.$reviews.fadeOut(200, function() {
+
+                // Update the information before show it
+                OBVIZ.comparison.$content.find(".information-container").html(info);
+
+                OBVIZ.comparison.$content.fadeIn(200);
             });
         });
 
         // Button to close the comparison box
         $("#close-comparison").click(function() {
+
+            // Hide the content
             OBVIZ.comparison.$relatedAppsItem.removeClass("active");
-            $("#details-comparison").fadeOut(200, function() {
-                $("#details-reviews").fadeIn(200);
+            OBVIZ.comparison.$content.fadeOut(200, function() {
+
+                OBVIZ.comparison.$reviews.fadeIn(200);
             });
         });
     }

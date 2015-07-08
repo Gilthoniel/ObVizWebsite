@@ -2,47 +2,22 @@
         related: java.util.List[AndroidApp])
 
 @main(webpage) {
+
+    @* Information about the application *@
     <div class="row" id="details-header">
         <div class="col-xs-12 col-md-12">
-            <dl class="information">
-                <dt><img src="@app.getImage" alt="Logo" /></dt>
-                <dd>
-                    <ul>
-                        <li class="name">@app.getName</li>
-                        <li class="developer">@app.getDeveloper</li>
-                        <li class="rating">
-                            @for(i <- 1 to app.getScore) {
-                                <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
-                            }
-                        </li>
-                    </ul>
-                </dd>
-                <dd>
-                    <ul class="details">
-                        <li>@app.getInstallations installations</li>
-                        <li>Minimum version required: <strong>@app.getMinOS</strong></li>
-                        <li>Publication date: <strong>@app.getPublicationDate.toString</strong></li>
-                        <li>Category: @app.getCategory.getTitle @views.html.icons.icons(app.getCategory, 15)</li>
-                        <li>
-                        @if(app.isFree) {
-                            <strong>Free</strong>
-                        } else {
-                            @app.getPrice
-                        }
-                        </li>
-                    </ul>
-                </dd>
-            </dl>
+            @views.html.templates.app_description(app)
         </div>
     </div>
 
     <div class="row">
+        @* List of gauges to display the opinions value *@
         <div class="col-xs-12 col-md-6">
             <div id="details-gauge">
                 <div class="opinion-slider">
                 @for((id, opinionValue) <- app.getMappedOpinions) {
                     <div>
-                        <div class="opinion-box" data-topic="@id">
+                        <div class="opinion-box" data-topic="@id" data-value="@titles.get(id).head">
                             <canvas width="180" height="100" data-value="@opinionValue.percentage" class="gauge"></canvas>
                             <h4>@titles.get(id).head</h4>
                         </div>
@@ -53,6 +28,7 @@
             </div>
         </div>
 
+        @* List of opinions with size related to the number *@
         <div class="col-xs-12 col-md-6">
             <div id="details-opinions">
                 @for((id, opinionValue) <- app.getMappedOpinions) {
@@ -79,6 +55,8 @@
                             <span data-id="4" data-value="40" ></span>
                             <span data-id="5" data-value="50" ></span>
                             <span data-id="6" data-value="10" ></span>
+
+                            @views.html.templates.app_description(app)
                         </div>
                     </li>
                 }
@@ -88,9 +66,16 @@
         <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9" id="details-comparison">
             <button id="close-comparison"><span class="glyphicon glyphicon-remove-circle"></span></button>
 
+            @* Information about the related application *@
+            <div class="col-xs-12 col-lg-12 information-container">
+
+            </div>
+
             @* Opinion value *@
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-lg-12">
                 <canvas width="180" height="100" data-value="1" id="gauge-comparison"></canvas>
+
+                <span id="current-opinion"></span>
             </div>
         </div>
 
