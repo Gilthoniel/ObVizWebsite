@@ -1,70 +1,39 @@
 @(webpage: WebPage, apps: java.util.List[AndroidApp])
 
 @main(webpage) {
-    @* Searchbar to find an app with name or keywords *@
-    <div class="row" id="home-searchbar">
+    <div class="container">
+        @* Searchbar to find an app with name or keywords *@
+        <div class="row" id="home-searchbar">
 
-        @* Description *@
-        <div class="col-xs-12 description">
-            <p>
-                Enter keywords or an app name of the Google Play Store.
-            </p>
-        </div>
-
-        @* Search Bar *@
-        <div class="col-xs-12 col-md-6 col-md-offset-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for ..." />
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">Go!</button>
-                </span>
+            @* Description *@
+            <div class="col-xs-12 description">
+                <p>
+                    Enter keywords or an app name of the Google Play Store.
+                </p>
             </div>
-        </div>
-    </div>
 
-    @* List of applications *@
-    <div id="list-applications">
-        <h3>Popular</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-                @for(app <- apps) {
-                    <div>
-                        @templates.play_app(app)
-                    </div>
-                }
-            </div>
-        </div>
-
-        <h3>Newest</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-            @for(app <- apps) {
-                <div>
-                @templates.play_app(app)
+            @* Search Bar *@
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for ..." />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button">Go!</button>
+                    </span>
                 </div>
-            }
             </div>
         </div>
 
-        <h3>Newest</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-            @for(app <- apps) {
-                <div>
-                @templates.play_app(app)
+        @* List of applications *@
+        <div id="list-applications">
+            <h3>Popular</h3>
+            <div id="popular-app">
+                <div class="app-slider">
+                    @for(app <- apps) {
+                        <div>
+                            @templates.play_app(app)
+                        </div>
+                    }
                 </div>
-            }
-            </div>
-        </div>
-
-        <h3>Newest</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-            @for(app <- apps) {
-                <div>
-                @templates.play_app(app)
-                </div>
-            }
             </div>
         </div>
     </div>
