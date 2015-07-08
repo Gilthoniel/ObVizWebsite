@@ -1,31 +1,36 @@
 @(app: AndroidApp)
-
-<dl class="app-information">
-    <dt><img src="@app.getImage" alt="Logo" /></dt>
-    <dd>
-        <ul>
-            <li class="name"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></li>
-            <li class="developer">@app.getDeveloper</li>
-            <li class="rating">
-            @for(i <- 1 to app.getScore) {
-                <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
-            }
-            </li>
-        </ul>
-    </dd>
-    <dd>
-        <ul class="details">
-            <li>@app.getInstallations installations</li>
-            <li>Minimum version required: <strong>@app.getMinOS</strong></li>
-            <li>Publication date: <strong>@app.getPublicationDate.toString</strong></li>
-            <li>Category: @app.getCategory.getTitle @views.html.icons.icons(app.getCategory, 15)</li>
-            <li>
-            @if(app.isFree) {
-                <strong>Free</strong>
-            } else {
-                @app.getPrice
-            }
-            </li>
-        </ul>
-    </dd>
-</dl>
+<table class="app-information">
+    <tr>
+        <td class="logo" rowspan="2="><img src="@app.getImage" alt="Logo" /></td>
+        <td class="name" colspan="2"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li class="developer">@app.getDeveloper</li>
+                <li class="rating">
+                @for(i <- 1 to app.getScore) {
+                    <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
+                }
+                </li>
+                <li style="margin-top: 5px;">
+                    <a href="https://play.google.com/store/apps/details?id=@app.getAppID" class="btn btn-success">Install</a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul class="details">
+                <li>@app.getInstallations installations</li>
+                <li>Minimum version required: <strong>@app.getMinOS</strong></li>
+                <li>Publication date: <strong>@app.getPublicationDate.toString</strong></li>
+                <li>
+                @if(app.isFree) {
+                    <strong>Free</strong>
+                } else {
+                    @app.getPrice
+                }
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>

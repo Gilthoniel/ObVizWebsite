@@ -3,7 +3,5 @@
  * Javascripts for all the pages
  */
 $(document).ready(function() {
-    $(".navbar-toggle").click(function() {
-        $("#left-menu").slideToggle();
-    });
+
 });

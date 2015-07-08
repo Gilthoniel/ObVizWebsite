@@ -13,11 +13,8 @@ html, body {
   background-color: #F8F8F8;
 
   > .container-fluid {
-    height: 100%;
-
-    > .row {
-      height: 100%;
-    }
+    position: relative;
+    min-height: 100%;
   }
 }
 
@@ -43,64 +40,12 @@ html, body {
       content: "<";
       display: inline-block;
       padding: 10px 0;
+      color: black;
     }
 
     li:first-child:before {
       content: none;
     }
-  }
-}
-
-#left-menu {
-  position: fixed;
-  z-index: 1000;
-  height: 100%;
-  padding: @navbarHeight 0 0 0;
-
-  background: #393939;
-
-  ul {
-    list-style: none;
-    padding: 0;
-
-    color: white;
-    fill: white;
-    font-size: 2em;
-
-    li {
-      display: block;
-      padding: 10px;
-      cursor: pointer;
-
-      span {
-        display: inline-block;
-        width: 25px;
-        height: 35px;
-        margin-right: 10px;
-
-        vertical-align: middle;
-      }
-    }
-
-    li:hover,
-    li.active {
-      background-color: #515151;
-    }
-  }
-}
-
-@media screen and (min-width: @screen-sm-min) {
-  #left-menu {
-    display: block !important; // Force to display the menu if the screen was resizing
-  }
-}
-
-@media screen and (max-width: @screen-xs-max) {
-  #left-menu {
-    display: none; // Hide the menu by default for the small screen
-    position: fixed;
-    width: 100%;
-    height: auto;
   }
 }
 
@@ -178,6 +123,7 @@ html, body {
 .category-social { fill: #349665; }
 .category-audio { fill: #b35959; }
 .category-default { fill: #8cb2cb; }
+.header-default { background-color: #8cb2cb; }
 .category-entertainment { fill: #87b687; }
 .category-tools { fill: #7d4d17; }
 
