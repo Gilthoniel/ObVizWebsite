@@ -18,7 +18,7 @@ OBVIZ.carousel = {
             swipeToSlide: true,
             dots: true,
             arrows: false,
-            variableWidth: true
+            slidesToShow: 8
         });
         $slick.on('click', '.slick-slide', OBVIZ.comparison.start);
         $slick.fadeIn();
@@ -27,6 +27,7 @@ OBVIZ.carousel = {
 
 OBVIZ.comparison = {
     $resumes: $("#related-resumes"),
+    $header: $("#details-header"),
 
     init: function() {
         // Button to stop
@@ -52,6 +53,7 @@ OBVIZ.comparison = {
         OBVIZ.carousel.$carousel.fadeOut(300, function() {
             OBVIZ.comparison.$resumes.fadeIn(300);
         });
+        OBVIZ.comparison.$header.find("#img-comparison").addClass("versus");
     },
 
     stop: function() {
@@ -61,6 +63,9 @@ OBVIZ.comparison = {
         OBVIZ.comparison.$resumes.fadeOut(500, function() {
             OBVIZ.carousel.$carousel.fadeIn();
         });
+
+        // Hide the versus image
+        OBVIZ.comparison.$header.find("#img-comparison").removeClass("versus").css("opacity", 0);
     }
 };
 
@@ -73,7 +78,7 @@ OBVIZ.gauges = {
         pointer: {
             length: 0.4,
             strokeWidth: 0.08,
-            color: '#000000'
+            color: '#505050'
         },
         limitMax: 'false',
         percentColors: [[0.0, "#cf1414" ], [0.5, "#aeaeae"], [1.0, "#1c8e17"]],
@@ -92,8 +97,8 @@ OBVIZ.gauges = {
 
     initMini: function() {
         var opts = OBVIZ.gauges.options;
-        opts.pointer.color = '#506A98';
         opts.lineWidth = 0.3;
+        opts.pointer.color = "#337AB7";
 
         $(".mini-gauge").each(function() {
             var value = $(this).data("value");

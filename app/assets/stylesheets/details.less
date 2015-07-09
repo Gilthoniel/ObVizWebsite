@@ -23,16 +23,45 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00f8f8f8', endColorstr='#fff8f8f8',GradientType=0 ); /* IE6-9 */
 }
 
+.scaling(@value) {
+  -ms-transform: scale(@value, @value); /* IE 9 */
+  -webkit-transform: scale(@value, @value); /* Chrome, Safari, Opera */
+  transform: scale(@value, @value);
+}
+
+@keyframes versus {
+  0% {
+    .scaling(6);
+    opacity: 0;
+  }
+
+  100% {
+    .scaling(1);
+    opacity: 1;
+  }
+}
+
+.versus {
+  animation: versus 400ms ease-in 0s 1 forwards;
+}
+
 /* Logo, Name, .. */
 #details-header {
+  position: relative;
   padding: 0;
   margin-bottom: 20px;
+
+  background: #ececec;
+  border-bottom: 1px solid rgb(185, 183, 183);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 
   h3 {
     margin-top: 10px;
   }
 
   .slider-apps {
+    position: relative;
+    z-index: 75;
 
     .related-app {
       margin: 0 10px;
@@ -49,23 +78,40 @@
 
     .btn-remove {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
+      top: 10px;
+      right: 10px;
 
       background: none;
       border: none;
-      color: #e6e6e6;
+      color: #333333;
       font-size: 20px;
     }
 
     .btn-remove:hover {
-      color: #d2d2d2;
+      color: #585858;
     }
+
+    .app-information .name a {
+      color: #337AB7;
+    }
+
+    .app-information .name a:hover {
+      color: #3c9fe5;
+    }
+  }
+
+  #img-comparison {
+    position: absolute;
+    z-index: 25;
+    top: 30%;
+    left: 50%;
+    margin-left: -50px;
+    opacity: 0;
   }
 }
 
 .app-information {
-  margin: 0;
+  margin: 0 auto;
 
   td {
     padding: 5px;
@@ -83,7 +129,8 @@
     vertical-align: bottom;
 
     a, a:link, a:focus {
-      color: #e6e6e6;
+      color: #505050;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
     }
 
     a:hover {
@@ -115,6 +162,7 @@
     ul {
       list-style: none;
       padding: 0;
+      text-align: center;
 
       li {
         display: inline-block;
@@ -278,3 +326,13 @@
 /**********************************************/
 /* Small screen fixes *************************/
 
+@media screen and (max-width: @screen-xs-max) {
+
+  #details-header {
+
+    #img-comparison {
+      left: auto;
+      right: 10px;
+    }
+  }
+}

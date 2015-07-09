@@ -15,6 +15,51 @@
     text-align: center;
     font-size: 2em;
   }
+
+  .search-bar {
+    margin-bottom: 30px;
+  }
+}
+
+#select-categories {
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    font-weight: normal;
+
+    li {
+      display: inline-block;
+      width: 200px;
+      margin: 5px;
+
+      .item-category {
+        width: 200px;
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+
+        > div {
+          display: inline-block;
+          vertical-align: middle;
+          padding: 0 5px;
+        }
+
+        .button {
+          background: #e6e6e6;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+
+          input {
+            width: 20px;
+            vertical-align: middle;
+          }
+        }
+
+        svg { vertical-align: middle; }
+      }
+    }
+  }
 }
 
 #list-applications {

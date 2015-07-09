@@ -4,7 +4,12 @@
 @main(webpage) {
 
     @* Information about the application *@
-    <div class="row header-@app.getCategory.getName" id="details-header">
+    <div class="row" id="details-header">
+        @* Versus image for the comparison *@
+        <div id="img-comparison">
+            <img width="50" height="50" src="@routes.Assets.versioned("images/versus_2.png")" alt="Versus" />
+        </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-6">
