@@ -12,38 +12,28 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    @views.html.templates.app_description(app)
+                @* Information about the current application *@
+                <div class="col-xs-12 col-md-6" id="app-data">
+                    @views.html.templates.app_description(app, titles)
                 </div>
 
+                @* Information about the related application *@
                 <div class="col-xs-12 col-md-6">
                     <div id="header-carousel">
                         <h3>Related applications</h3>
+                        @* Carousel to display the related apps *@
                         <div class="slider-apps" style="display: none;">
                         @for(app <- related) {
                             <div class="related-app">
                                 <img src="@app.getImage" alt="@app.getName" />
 
-                                <div class="data">
-                                    <span data-topic="0" data-value="20"></span>
-                                    <span data-topic="1" data-value="90"></span>
-                                    <span data-topic="2" data-value="10"></span>
-                                    <span data-topic="3" data-value="50"></span>
-                                    <span data-topic="4" data-value="70"></span>
-                                    <span data-topic="5" data-value="30"></span>
-                                    <span data-topic="6" data-value="20"></span>
-                                    <span data-topic="7" data-value="90"></span>
-                                    <span data-topic="8" data-value="10"></span>
-                                    <span data-topic="9" data-value="50"></span>
-                                    <span data-topic="10" data-value="70"></span>
-                                    <span data-topic="11" data-value="30"></span>
-
-                                    @views.html.templates.app_description(app)
-                                </div>
+                                @views.html.templates.app_description(app, titles)
                             </div>
                         }
                         </div>
                     </div>
+
+                    @* When comparison enabled, display the app information *@
                     <div id="related-resumes" style="display: none;">
                         <button class="btn-remove"><span class="glyphicon glyphicon-remove-circle"></span></button>
                         <div class="box">
@@ -57,14 +47,15 @@
 
     <div id="details-block1" class="container">
         <div class="row" id="details-aspects">
+
+            @* List of all the topics *@
             <div class="col-xs-12 col-md-12 list-aspects">
                 <h2>Opinions of the crowd ...</h2>
                 <ul>
                 @for((id, opinionValue) <- app.getMappedOpinions) {
                     <li>
-                        <div class="opinion-box" data-topic="@id" data-value="@titles.get(id).head">
-                            <canvas width="180" height="100" data-value="@opinionValue.percentage" class="gauge"></canvas>
-                            <h4>@titles.get(id).head</h4>
+                        <div class="opinion-box" data-topic="@id">
+                            <div id="gauge-@id" data-title="@titles.get(id).head" data-value="@opinionValue.percentage" class="chart-gauge"></div>
                         </div>
                     </li>
                 }
@@ -75,21 +66,14 @@
 
     <div id="details-block2" class="container" style="display: none;">
         <div class="row">
-            @* List of gauges to display the opinions value *@
+            @* Gauge to display the opinions value *@
             <div class="col-xs-12 col-md-6">
                 <svg class="btn-back" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="30" height="30">
                     @views.html.icons.back()
                 </svg>
 
-                <div id="details-gauge">
-                    @for((id, opinionValue) <- app.getMappedOpinions) {
-                        <div class="opinion-box" data-topic="@id" data-value="@titles.get(id).head" style="display: none;">
-                            <canvas width="180" height="100" data-value="@opinionValue.percentage" class="gauge"></canvas>
-                            <h4>@titles.get(id).head</h4>
-                        </div>
-                    }
-                </div>
+                <div id="details-gauge" class="chart-gauge" data-title="Unknown" data-value="0"></div>
             </div>
 
             @* List of opinions with size related to the number *@
@@ -106,40 +90,10 @@
         <div class="row" style="position: relative;">
 
             @* List of the reviews of the application *@
-            <div class="col-xs-12" id="details-reviews">
-            @for((id, reviews) <- app.getMappedReviews) {
+            <div class="col-xs-12" id="details-reviews" data-url="@controllers.routes.AJAX.getReviews(app.getAppID)">
+            @for(id <- titles.keySet()) {
                 <div class="topic-container" data-topic="@id" style="display: none;">
-                @for(review <- reviews.take(50)) {
 
-                    <div class="col-xs-12 col-md-6 col-lg-4">
-                        <div class="review">
-                            <div class="header">
-                                <table>
-                                    <tr>
-                                        <td>@review.getTitle</td>
-                                        <td>
-                                        @for(i <- 1 to review.getScore) {
-                                            <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
-                                        }
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="body" onclick="OBVIZ.expand($(this));">
-                                <div class="top-gradient"></div>
-                                <div class="bottom-gradient"></div>
-                                <div class="content">
-                                    <p class="inner">
-                                    @Html(review.getParsedBody(id))
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="footer">
-                                @review.getAuthorName, @review.getDate
-                            </div>
-                        </div>
-                    </div>
-                }
                 </div>
             }
             </div>
@@ -147,4 +101,7 @@
     </div>
 
     <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/details.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("amcharts/amcharts.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("amcharts/gauge.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("amcharts/themes/light.js")"></script>
 }

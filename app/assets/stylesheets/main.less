@@ -25,7 +25,7 @@ html, body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   .navbar-brand {
-    padding: 10px 0;
+    padding: 10px 15px;
   }
 
   .nav {
@@ -75,7 +75,7 @@ html, body {
       height: @logoSize;
 
       background: no-repeat center center;
-      background-size: cover;
+      background-size: contain;
     }
 
     dd {
@@ -86,6 +86,8 @@ html, body {
       width: 100%;
       margin-top: 10px;
       font-size: 1.2em;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .category {
@@ -174,4 +176,16 @@ html, body {
 /** Hide elements used to store some data **/
 .data {
   display: none;
+}
+
+/** Gauges **/
+.chart-gauge {
+
+  tspan {
+    font-weight: normal !important;
+  }
+
+  a {
+    display: none !important;
+  }
 }

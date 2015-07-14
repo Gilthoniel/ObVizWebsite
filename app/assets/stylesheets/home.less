@@ -31,18 +31,18 @@
 
     li {
       display: inline-block;
-      width: 200px;
       margin: 5px;
 
       .item-category {
         width: 200px;
         border: 1px solid #e6e6e6;
         border-radius: 5px;
+        cursor: pointer;
 
         > div {
           display: inline-block;
           vertical-align: middle;
-          padding: 0 5px;
+          padding: 5px 5px;
         }
 
         .button {
@@ -52,13 +52,35 @@
 
           input {
             width: 20px;
+            height: 20px;
             vertical-align: middle;
           }
         }
-
-        svg { vertical-align: middle; }
       }
+
+      svg { vertical-align: middle; }
     }
+  }
+}
+
+#search-results {
+
+  display: none;
+
+  .icon-loader {
+    font-size: 1.5em;
+    font-weight: normal;
+  }
+
+  .error-message {
+    display: none;
+    margin-top: 20px;
+  }
+
+  .body-app {
+    position: relative;
+    display: inline-block;
+    width: 180px;
   }
 }
 
@@ -77,3 +99,6 @@
     padding: 0 50px;
   }
 }
+
+/** ANIMATIONS **/
+

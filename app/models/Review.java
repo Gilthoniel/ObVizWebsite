@@ -16,7 +16,6 @@ public class Review {
 
     private ID _id;
     private String permalink;
-    private Date timestamp;
     private String reviewBody;
     private int starRatings;
     private Date reviewDate;

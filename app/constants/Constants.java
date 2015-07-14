@@ -10,14 +10,16 @@ public class Constants {
     public static int TIME_CACHE_EXPIRED = 300; // 5min
 
     /* WebService parameters */
-    public static final String baseURL = "http://vps40100.vps.ovh.ca/ObVizServiceAdmin";
+    public static final String baseURL = "http://vps40100.vps.ovh.ca/ObVizService";
+    public static final long TIMEOUT = 10000; // in millisecond
 
     /* Command builder */
     public enum Weight {LIGHT, MEDIUM, FULL}
 
-    public static final String GET_APP_IDS = "Get_App_IDs";
     public static final String GET_APP = "Get_App";
     public static final String GET_TOPIC_TITLES = "Get_App_Topics";
+    public static final String GET_REVIEWS = "Get_Reviews";
+    public static final String SEARCH_APPS = "Search_Apps";
 
     /* Category */
 

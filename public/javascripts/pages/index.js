@@ -70,4 +70,123 @@ $(document).ready(function() {
         gauge.animationSpeed = 1;
         gauge.set(parseInt($(this).data("value")));
     });
+
+    /** CHECKBOXES **/
+    var $checkboxAll = $("#checkbox-all");
+    var $checkboxCategory = $(".checkbox-category");
+
+    $checkboxAll.on('change', function() {
+        $checkboxCategory.add(OBVIZ.$checkboxes).prop("checked", $(this).prop("checked"));
+    });
+
+    $checkboxCategory.on('change', function() {
+        $(this).closest(".container-categories")
+            .find("input[type='checkbox'][name='category']")
+            .prop("checked", $(this).prop("checked"));
+    });
+
+    $("#select-categories").on('change', "input[type='checkbox'][name='category']", function() {
+        var parent = $(this).closest(".container-categories");
+        var mustBeChecked = parent.find("input[type='checkbox'][name='category']").not(":checked").size() == 0;
+
+        parent.find(".checkbox-category").prop("checked", Boolean(mustBeChecked));
+
+        var allMustBeChecked = OBVIZ.$checkboxes.not(":checked").size() == 0;
+        $checkboxAll.prop("checked", Boolean(allMustBeChecked));
+    });
+
+    $checkboxAll.prop("checked", true).change();
+
+    /** Searching **/
+    OBVIZ.search.init();
 });
+
+OBVIZ.$homeSearchbar = $("#home-searchbar");
+OBVIZ.$searchbar = $(".search-bar").find("input[type='text']");
+OBVIZ.$searchResults = $("#search-results");
+OBVIZ.$checkboxes = $("input[type='checkbox'][name='category']");
+OBVIZ.$selectCategories = $("#select-categories");
+OBVIZ.$listApp = $("#list-applications");
+
+OBVIZ.search = {
+
+    init: function() {
+        $("#search-button").click(OBVIZ.search.get);
+
+        OBVIZ.$searchResults.find(".back-button button").click(function() {
+            OBVIZ.$searchResults.fadeOut(500, function() {
+                OBVIZ.$selectCategories.fadeIn(300);
+                OBVIZ.$listApp.fadeIn(300);
+            });
+        });
+
+        $(document).keydown(function(event) {
+
+            if ((event.which || event.keyCode) == 13) {
+                $("#search-button").click();
+            }
+        });
+    },
+
+    get: function() {
+
+        // Hide elements
+        OBVIZ.$selectCategories.fadeOut(300, function() {
+            // Show a loading icon
+            OBVIZ.$searchResults.show();
+            OBVIZ.$searchResults.find(".icon-loader").fadeIn();
+        });
+        OBVIZ.$listApp.fadeOut(300);
+
+        var query = OBVIZ.$searchbar.val();
+        var url = OBVIZ.$homeSearchbar.data("url");
+
+        // Get the categories
+        var categories = [];
+        if (OBVIZ.$checkboxes.not(":checked").size() > 0) {
+            OBVIZ.$checkboxes.filter(":checked").each(function() {
+                categories.push($(this).val());
+            });
+        }
+
+        // Cancel the previous request
+        if (typeof OBVIZ.request !== 'undefined') {
+            OBVIZ.request.abort();
+        }
+
+        OBVIZ.request = $.get(url, { name: query, categories: categories.join(",") })
+            .done(function(data) {
+                var $container = OBVIZ.$searchResults.find(".results-container");
+                $container.hide();
+
+                // Clean the container
+                $container.html("");
+                // Add the items
+                $.each(data, function(i, item) {
+                    $container.append(item);
+                });
+
+                // Hide the elements before display the block
+                var $items = $container.find(".body-app")
+                    .css("opacity", 0)
+                    .css("top", 100);
+                $container.show();
+                OBVIZ.$searchResults.find(".icon-loader").fadeOut();
+
+                // Animate to show the items
+                $items.each(function(i) {
+                    $(this).delay(i*100).animate({
+                        opacity: 1,
+                        top: 0
+                    });
+                });
+            })
+            .fail(function(xhr, status) {
+
+                if (status != 'abort') {
+                    OBVIZ.$searchResults.find(".icon-loader").fadeOut();
+                    OBVIZ.$searchResults.find(".error-message").fadeIn();
+                }
+            });
+    }
+};

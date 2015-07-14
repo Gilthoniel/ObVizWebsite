@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+file0="target/universal/stage/RUNNING_PID"
+
+if [ -e "$file0" ]
+then
+    # Get the PID of the process
+    pid=$(cat "$file0")
+    
+    # Kill the process
+    kill $pid
+
+    echo "Old process killed."
+else
+    echo "Server is currently not running."
+fi

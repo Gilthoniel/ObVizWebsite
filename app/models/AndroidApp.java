@@ -10,6 +10,8 @@ import java.util.*;
  */
 public class AndroidApp implements Initiatable {
 
+    private static Random random = new Random();
+
     private String appID;
     private Constants.Category category;
     private String coverImgURL;
@@ -35,6 +37,10 @@ public class AndroidApp implements Initiatable {
     public void init() {
         mappedReviews = new TreeMap<>();
         mappedOpinions = new TreeMap<>();
+
+        if (reviews == null) {
+            return;
+        }
 
         for (Review review : reviews) {
 
@@ -191,10 +197,28 @@ public class AndroidApp implements Initiatable {
 
     public Map<Integer, Set<Review>> getMappedReviews() {
 
+        if (mappedReviews == null) {
+            throw new UnsupportedOperationException("Should be initialize");
+        }
+
         return mappedReviews;
     }
 
     public Map<Integer, OpinionValue> getMappedOpinions() {
+
+        if (mappedOpinions == null) {
+            throw new UnsupportedOperationException("Should be initialize");
+        } else if (mappedOpinions.isEmpty()) { // TODO : remove
+
+            for (int i = 1; i <= 10; i++) {
+
+                OpinionValue opinion = new OpinionValue();
+                opinion.setNegative(random.nextInt(300));
+                opinion.setPositive(random.nextInt(300));
+
+                mappedOpinions.put(i, opinion);
+            }
+        }
 
         return mappedOpinions;
     }
