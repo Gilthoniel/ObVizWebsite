@@ -130,6 +130,8 @@ OBVIZ.search = {
 
     get: function() {
 
+        // Hide the error message
+        OBVIZ.$searchResults.find(".error-message").hide();
         // Hide elements
         OBVIZ.$selectCategories.fadeOut(300, function() {
             // Show a loading icon
