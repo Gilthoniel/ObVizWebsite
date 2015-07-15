@@ -38,7 +38,7 @@
     </table>
 
     @* Values and title of the different topics for the application *@
-    <div class="data">
+    <div class="data" data-url="@controllers.routes.AJAX.getReviews(app.getAppID)">
         @for((id, value) <- app.getMappedOpinions) {
             <span data-topic="@id" data-title="@titles.get(id).head" data-value="@value.percentage"></span>
         }

@@ -2,16 +2,7 @@
 
 <div class="review">
     <div class="header">
-        <table>
-            <tr>
-                <td>@review.getTitle</td>
-                <td>
-                @for(i <- 1 to review.getScore) {
-                    <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
-                }
-                </td>
-            </tr>
-        </table>
+        @review.getTitle
     </div>
     <div class="body" onclick="OBVIZ.expand($(this));">
         <div class="top-gradient"></div>
@@ -23,6 +14,10 @@
         </div>
     </div>
     <div class="footer">
-        @review.getAuthorName, @review.getDate
+        @for(i <- 1 to review.getScore) {
+            <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
+        }
+
+        <span>@review.getAuthorName, @review.getDate</span>
     </div>
 </div>

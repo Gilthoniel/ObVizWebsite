@@ -5,11 +5,6 @@
 
     @* Information about the application *@
     <div class="row" id="details-header">
-        @* Versus image for the comparison *@
-        <div id="img-comparison">
-            <img width="50" height="50" src="@routes.Assets.versioned("images/versus_2.png")" alt="Versus" />
-        </div>
-
         <div class="container">
             <div class="row">
                 @* Information about the current application *@
@@ -20,7 +15,7 @@
                 @* Information about the related application *@
                 <div class="col-xs-12 col-md-6">
                     <div id="header-carousel">
-                        <h3>Related applications</h3>
+                        <h3>Compare with</h3>
                         @* Carousel to display the related apps *@
                         <div class="slider-apps" style="display: none;">
                         @for(app <- related) {
@@ -42,6 +37,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="col-xs-12 comparison-bg">
+            <div class="col-xs-6 current"></div>
+            <div class="col-xs-6 compared"></div>
         </div>
     </div>
 
@@ -90,12 +90,31 @@
         <div class="row" style="position: relative;">
 
             @* List of the reviews of the application *@
-            <div class="col-xs-12" id="details-reviews" data-url="@controllers.routes.AJAX.getReviews(app.getAppID)">
-            @for(id <- titles.keySet()) {
-                <div class="topic-container" data-topic="@id" style="display: none;">
+            <div class="col-xs-12" id="details-reviews">
+                <div id="base-container">
+                    @for(id <- titles.keySet()) {
+                        <div class="topic-container" data-topic="@id" style="display: none;">
 
+                        </div>
+                    }
                 </div>
-            }
+
+                <div id="comparison-container" style="display: none;">
+                    <div class="col-xs-6 current">
+                        @for(id <- titles.keySet()) {
+                            <div class="topic-container" data-topic="@id" style="display: none;">
+
+                            </div>
+                        }
+                    </div>
+                    <div class="col-xs-6 compared">
+                        @for(id <- titles.keySet()) {
+                            <div class="topic-container" data-topic="@id" style="display: none;">
+
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>

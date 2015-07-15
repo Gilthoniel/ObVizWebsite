@@ -128,6 +128,8 @@ public class WebService {
             params.add(new BasicNameValuePair("categories", MessageParser.toJson(categories)));
         }
 
+        Logger.info(Constants.baseURL + params.toString());
+
         Type type = new TypeToken<List<AndroidApp>>() {}.getType();
         return ConnectionService.get(Constants.baseURL, params, type);
     }

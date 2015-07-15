@@ -132,11 +132,11 @@ OBVIZ.search = {
 
         // Hide the error message
         OBVIZ.$searchResults.find(".error-message").hide();
+        OBVIZ.$searchResults.find(".icon-loader").show();
         // Hide elements
         OBVIZ.$selectCategories.fadeOut(300, function() {
             // Show a loading icon
             OBVIZ.$searchResults.show();
-            OBVIZ.$searchResults.find(".icon-loader").fadeIn();
         });
         OBVIZ.$listApp.fadeOut(300);
 
@@ -173,7 +173,7 @@ OBVIZ.search = {
                     .css("opacity", 0)
                     .css("top", 100);
                 $container.show();
-                OBVIZ.$searchResults.find(".icon-loader").fadeOut();
+                OBVIZ.$searchResults.find(".icon-loader").stop().fadeOut();
 
                 // Animate to show the items
                 $items.each(function(i) {
@@ -186,8 +186,8 @@ OBVIZ.search = {
             .fail(function(xhr, status) {
 
                 if (status != 'abort') {
-                    OBVIZ.$searchResults.find(".icon-loader").fadeOut();
-                    OBVIZ.$searchResults.find(".error-message").fadeIn();
+                    OBVIZ.$searchResults.find(".icon-loader").stop().fadeOut();
+                    OBVIZ.$searchResults.find(".error-message").stop().fadeIn();
                 }
             });
     }

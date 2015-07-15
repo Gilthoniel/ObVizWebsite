@@ -10,7 +10,7 @@ public class Constants {
     public static int TIME_CACHE_EXPIRED = 300; // 5min
 
     /* WebService parameters */
-    public static final String baseURL = "http://vps40100.vps.ovh.ca/ObVizService";
+    public static final String baseURL = "http://vps186042.ovh.net/ObVizService";
     public static final long TIMEOUT = 10000; // in millisecond
 
     /* Command builder */

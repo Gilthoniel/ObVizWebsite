@@ -1,19 +1,24 @@
 @(app: AndroidApp)
 
-<div class="body-app">
-    <dl class="information">
-        <dt style="background-image: url('@app.getImage')"></dt>
-        <dd class="name"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></dd>
-        <dd class="category category-@app.getCategory.getName">
+<div class="body-app col-xs-12 col-md-4">
+
+    <div class="media">
+        <div class="media-left">
+            <a href="">
+                <img width="100" src="@app.getImage" alt="Logo" />
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></h4>
+
             @views.html.icons.icons(app.getCategory)
-        </dd>
-        <dd>
             @for(i <- 1 to app.getScore) {
                 <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
             }
-        </dd>
-    </dl>
-    <div class="opinion-gauge">
-        <canvas class="app-gauge" data-value="70" width="120" height="60"></canvas>
+
+            <hr />
+            @if(app.isFree) {<strong>Free</strong>} else {Payante} &bull; version <strong>@app.getMinOS</strong> <br />
+            Installations: @app.getInstallations
+        </div>
     </div>
 </div>

@@ -15,8 +15,11 @@ OBVIZ.$gauges = $(".chart-gauge");
 OBVIZ.$block1 = $("#details-block1");
 OBVIZ.$block2 = $("#details-block2");
 OBVIZ.$reviews = $("#details-reviews");
+OBVIZ.$baseContainer = $("#base-container");
+OBVIZ.$comparedContainer = $("#comparison-container");
 OBVIZ.$data = $("#app-data").find(".data");
 OBVIZ.$detailsGauge = $("#details-gauge");
+OBVIZ.$comparisonBG = $(".comparison-bg");
 
 OBVIZ.carousel = {
 
@@ -51,6 +54,11 @@ OBVIZ.comparison = {
             return;
         }
 
+        // Display the comparison reviews block
+        OBVIZ.$baseContainer.fadeOut(300, function() {
+            OBVIZ.$comparedContainer.fadeIn();
+        });
+
         // Move the information of the chosen app
         OBVIZ.$resumes.find(".box").html($slide.find(".app-information").clone());
 
@@ -83,8 +91,19 @@ OBVIZ.comparison = {
         // Display the information of the app
         OBVIZ.$headerCarousel.fadeOut(300, function() {
             OBVIZ.$resumes.fadeIn(300);
+
+            OBVIZ.$comparisonBG.find(".current").animate({
+                left: 0
+            });
+            OBVIZ.$comparisonBG.find(".compared").animate({
+                right: 0
+            });
         });
-        OBVIZ.$header.find("#img-comparison").addClass("versus");
+
+        // Get the reviews if we are in this mode
+        if (typeof OBVIZ.$detailsGauge.data("current") !== 'undefined') {
+            OBVIZ.goTo(OBVIZ.$detailsGauge.data("current"));
+        }
     },
 
     stop: function() {
@@ -95,12 +114,22 @@ OBVIZ.comparison = {
         });
 
         // Display the carousel of related apps
+        OBVIZ.$comparisonBG.find(".current").animate({
+            left: "-100%"
+        });
+        OBVIZ.$comparisonBG.find(".compared").animate({
+            right: "-100%"
+        });
         OBVIZ.$resumes.fadeOut(500, function() {
             OBVIZ.$headerCarousel.fadeIn();
+
+            // Clear the header information
+            OBVIZ.$resumes.find(".box");
         });
 
-        // Hide the versus image
-        OBVIZ.$header.find("#img-comparison").removeClass("versus").css("opacity", 0);
+        OBVIZ.$comparedContainer.fadeOut(300, function() {
+            OBVIZ.$baseContainer.fadeIn();
+        });
     }
 };
 
@@ -137,9 +166,10 @@ OBVIZ.gauges = {
             "arrows": [ {
                 "value": Number(element.data("value")),
                 "color": "#505050",
-                "startWidth": 8,
-                "radius": "70%",
-                "innerRadius": "5%"
+                "startWidth": 6,
+                "radius": "100%",
+                "innerRadius": "40%",
+                "borderAlpha": 1
             } ],
             "export": {
                 "enabled": true
@@ -148,7 +178,7 @@ OBVIZ.gauges = {
     },
 
     addArrow: function(gauge, value, color) {
-        color = typeof color !== 'undefined' ? color : "#337AB7";
+        color = typeof color !== 'undefined' ? color : "#ffcc00";
         var chart = gauge.data("gauge");
 
         if (typeof chart !== 'undefined') {
@@ -159,8 +189,10 @@ OBVIZ.gauges = {
                 "value": Number(value),
                 "color": color,
                 "startWidth": 6,
-                "radius": "60%",
-                "innerRadius": "15%"
+                "radius": "100%",
+                "innerRadius": "40%",
+                "borderAlpha": 1,
+                "borderColor": "#000000"
             });
 
             chart.validateNow();
@@ -189,28 +221,31 @@ OBVIZ.switch = {
         OBVIZ.$containerReviews = OBVIZ.$reviews.find(".topic-container");
 
         OBVIZ.$block1.find(".opinion-box").click(function() {
+            var topicID = $(this).data("topic");
 
-            // Set the good value to the gauge
-            var elemData = OBVIZ.$data.find("span[data-topic='"+$(this).data("topic")+"']");
-            OBVIZ.switch.changeGaugeValue(elemData);
-
-            // Set the current topic for the block2 gauge
-            OBVIZ.$detailsGauge.data("current", $(this).data("topic"));
+            // Store the current topicID in the gauge element of the block2
+            OBVIZ.$detailsGauge.data("current", topicID);
 
             // Show the reviews
             var $reviews = OBVIZ.$containerReviews
                 .hide()
-                .filter("[data-topic='"+($(this).data("topic"))+"']");
+                .filter("[data-topic='"+(topicID)+"']");
             $reviews.show();
+            // Load them
+            OBVIZ.goTo(topicID);
 
             // Show / hide blocks
             OBVIZ.$block1.slideUp();
             OBVIZ.$block2.slideDown(500, function() {
+
                 OBVIZ.refreshScroll($reviews);
             });
         });
 
         OBVIZ.$block2.find(".btn-back").click(function() {
+            // Reset the current topicID store in the gauge element
+            OBVIZ.$detailsGauge.data("current", undefined);
+
             OBVIZ.$block2.slideUp(500);
             OBVIZ.$block1.slideDown(500);
         });
@@ -234,20 +269,42 @@ OBVIZ.switch = {
 
 OBVIZ.reviews = {
 
-    get: function() {
-        var url = OBVIZ.$reviews.data("url");
+    get: function(url, mode, topicID) {
+        var $containers;
+
+        if (mode == 'current') {
+            $containers = OBVIZ.$baseContainer.add(OBVIZ.$comparedContainer.find(".current")).find("div[data-topic='"+topicID+"']");
+        } else {
+            $containers = OBVIZ.$comparedContainer.find(".compared").find("div[data-topic='"+topicID+"']");
+        }
+
+        // Check if the reviews didn't have already loaded
+        if ($containers.children().size() > 0) {
+            OBVIZ.refreshScroll($containers);
+            return;
+        } else {
+            $containers.html('<img src="/assets/images/loading.png" alt="Loading..." />');
+        }
 
         $.get(url).done(function(data) {
 
-            $.each(data, function(key, value) {
-                var elem = OBVIZ.$reviews.find(".topic-container[data-topic='"+key+"']").first();
+            $containers.html(""); // Clear the loading icon
 
-                if (elem.size() > 0) {
-                    $.each(value, function(i, review) {
-                        elem.append('<div class="col-xs-12 col-lg-4">'+review+'</div>');
+            if (typeof data[topicID] !== 'undefined') {
+
+                $.each(data[topicID], function(i, review) {
+                    $containers.each(function() {
+                        var columns = "col-xs-12";
+                        if ($(this).parent().is("#base-container")) {
+                            columns += " col-lg-4";
+                        }
+
+                        $(this).append('<div class="'+columns+'">'+review+'</div>');
                     });
-                }
-            })
+                });
+
+                OBVIZ.refreshScroll($containers);
+            }
 
         }).fail(function() {
 
@@ -305,10 +362,18 @@ OBVIZ.goTo = function(id) {
     OBVIZ.switch.changeGaugeValue(data);
 
     // Change the reviews
-    OBVIZ.$containerReviews.filter(":visible").fadeOut(400, function() {
-        var container = OBVIZ.$containerReviews.filter("[data-topic='"+id+"']").fadeIn(400, function() {
-            OBVIZ.refreshScroll(container);
+    $.when(OBVIZ.$containerReviews.filter(":visible").fadeOut(400, function() {
+            OBVIZ.$containerReviews.filter("[data-topic='"+id+"']").fadeIn(400);
         })
+    ).then(function() {
+        // Reviews for the current app
+        var currentURL = OBVIZ.$data.data("url");
+        OBVIZ.reviews.get(currentURL, 'current', id);
+        // and for the compared app if activated
+        if (OBVIZ.$resumes.find(".data").size() > 0) {
+            var comparedURL = OBVIZ.$resumes.find(".data").data("url");
+            OBVIZ.reviews.get(comparedURL, 'compared', id);
+        }
     });
 };
 
@@ -345,6 +410,4 @@ $(document).ready(function() {
     OBVIZ.carousel.init();
     OBVIZ.comparison.init();
     OBVIZ.switch.init();
-
-    OBVIZ.reviews.get();
 });
