@@ -7,6 +7,8 @@
             @for(machine <- logs.keySet()) {
                 <li role="presentation"><a href="#@machine" aria-controls="@machine" role="tab" data-toggle="pill">@machine</a></li>
             }
+
+            <li class="pull-right">Last refresh: <span id="last-refresh"></span></li>
         </ul>
 
         <!-- Tab panes -->
@@ -23,16 +25,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @for(log <- values) {
-                            <tr>
-                                <td>@log.getAppID()</td>
-                                <td class="text-center">@log.getTstamp().getWithMinutes()</td>
-                                <td class="text-center @if(log.getStatus != 0){danger} else {success}">
-                                    @log.getStatus()
-                                </td>
-                                <td class="text-center">@log.getRevNo()</td>
-                            </tr>
-                        }
                         </tbody>
                     </table>
                 </div>
@@ -44,18 +36,28 @@
         $(document).ready(function() {
             var $container = $("#logs-container");
             $container.find("a[role='tab']").first().click();
+            var $refresh = $("#last-refresh");
 
             var url = $container.data("url");
 
-            setTimeout(function() {
+            refresh();
 
+            function refresh() {
                 $.get(url).done(function(data) {
                     $container.find(".tab-pane").each(function() {
                         $(this).find("tbody").html(data[$(this).attr("id")]);
                     });
-                });
 
-            }, 10000);
+                    var time = new Date();
+
+                    $refresh.html(time.getHours()+":"+time.getMinutes()+":"+time.getSeconds());
+
+                    setTimeout(refresh, 30000);
+                }).fail(function() {
+
+                    $refresh.html("<strong>Error - refresh stopped</strong>");
+                });
+            }
         });
     </script>
 }
