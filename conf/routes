@@ -16,3 +16,5 @@ GET        /admin                   @controllers.Administration.admin()
 # AJAX
 GET        /ajax/reviews/:id        @controllers.AJAX.getReviews(id)
 GET        /ajax/search             @controllers.AJAX.search()
+
+GET        /ajax/admin/logs         @controllers.Administration.loadLogs()

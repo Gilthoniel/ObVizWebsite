@@ -26,7 +26,7 @@ public class ConnectionService {
      * @param nullException exception thrown if a null result occurred
      * @return WSResponse
      */
-    public static <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type,
+    public static <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, Boolean withCache,
                                        Throwable networkException, Throwable nullException)
     {
 
@@ -38,7 +38,7 @@ public class ConnectionService {
 
         // If the request is in the cache, we get it
         String cacheKey = client.toString();
-        if (CustomCache.contains(cacheKey)) {
+        if (withCache && CustomCache.contains(cacheKey)) {
             return F.Promise.pure(CustomCache.<T>take(cacheKey));
         }
 
@@ -68,7 +68,13 @@ public class ConnectionService {
 
         Throwable error = new ServerOverloadedException();
 
-        return ConnectionService.<T>get(url, params, type, error, error);
+        return ConnectionService.<T>get(url, params, type, true, error, error);
+    }
+
+    public static <T> F.Promise<T> getNoCache(final String url, final List<NameValuePair> params, Type type) {
+        Throwable error = new ServerOverloadedException();
+
+        return ConnectionService.<T>get(url, params, type, false, error, error);
     }
 
     /**

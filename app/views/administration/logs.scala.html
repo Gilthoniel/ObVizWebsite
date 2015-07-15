@@ -1,0 +1,12 @@
+@(logs: java.util.List[models.admin.Log])
+
+@for(log <- logs) {
+    <tr>
+        <td>@log.getAppID</td>
+        <td class="text-center">@log.getTstamp.getWithMinutes</td>
+        <td class="text-center @if(log.getStatus != 0){danger} else {success}">
+        @log.getStatus
+        </td>
+        <td class="text-center">@log.getRevNo</td>
+    </tr>
+}

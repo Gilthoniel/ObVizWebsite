@@ -1,7 +1,7 @@
 @(logs: java.util.Map[String, java.util.List[models.admin.Log]])
 
 @views.html.administration.admin_main() {
-    <div class="container" id="logs-container">
+    <div class="container" id="logs-container" data-url="@controllers.routes.Administration.loadLogs()">
         <!-- Nav tabs -->
         <ul class="nav nav-pills" role="tablist">
             @for(machine <- logs.keySet()) {
@@ -19,7 +19,7 @@
                                 <th>Application ID</th>
                                 <th>Date</th>
                                 <th>Status</th>
-                                <th>Revision N°</th>
+                                <th>Reviews' Number</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,7 +42,20 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#logs-container").find("a[role='tab']").first().click();
+            var $container = $("#logs-container");
+            $container.find("a[role='tab']").first().click();
+
+            var url = $container.data("url");
+
+            setTimeout(function() {
+
+                $.get(url).done(function(data) {
+                    $container.find(".tab-pane").each(function() {
+                        $(this).find("tbody").html(data[$(this).attr("id")]);
+                    });
+                });
+
+            }, 10000);
         });
     </script>
 }

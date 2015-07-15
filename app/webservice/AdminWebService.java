@@ -6,6 +6,7 @@ import models.admin.Log;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.libs.F;
+import play.mvc.Result;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -32,6 +33,6 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("nb_logs", String.valueOf(50)));
         
         Type type = new TypeToken<List<Log>>() {}.getType();
-        return ConnectionService.get(Constants.adminURL, params, type);
+        return ConnectionService.getNoCache(Constants.adminURL, params, type);
     }
 }

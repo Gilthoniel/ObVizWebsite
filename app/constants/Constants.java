@@ -26,7 +26,7 @@ public class Constants {
 
     /* Machines */
     public static final String[] MACHINES = new String[] {
-        "claudiu", "liapc4", "liapc13", "liapc55"
+            "liapc3", "claudiu", "liapc4", "liapc13", "liapc55"
     };
 
     /* Category */

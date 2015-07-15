@@ -31,6 +31,7 @@ OBVIZ.carousel = {
             dots: true,
             arrows: false,
             slidesToShow: 8,
+            mobileFirst: true,
             respondTo: 'slider',
             responsive: [
                 {

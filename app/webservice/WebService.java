@@ -47,7 +47,7 @@ public class WebService {
         params.add(new BasicNameValuePair("id", id));
         params.add(new BasicNameValuePair("weight", weight.toString()));
 
-        F.Promise<AndroidApp> promise = ConnectionService.get(Constants.baseURL, params, AndroidApp.class,
+        F.Promise<AndroidApp> promise = ConnectionService.get(Constants.baseURL, params, AndroidApp.class, true,
                 new ServerOverloadedException(), new NoAppFoundException());
 
         return initPromise(promise);
@@ -104,7 +104,7 @@ public class WebService {
         }
 
         Type type = new TypeToken<List<Review>>(){}.getType();
-        return ConnectionService.get(Constants.baseURL, params, type,
+        return ConnectionService.get(Constants.baseURL, params, type, true,
                 new ServerOverloadedException(), new NoAppFoundException());
     }
 
@@ -127,8 +127,6 @@ public class WebService {
         if (categories.size() > 0) {
             params.add(new BasicNameValuePair("categories", MessageParser.toJson(categories)));
         }
-
-        Logger.info(Constants.baseURL + params.toString());
 
         Type type = new TypeToken<List<AndroidApp>>() {}.getType();
         return ConnectionService.get(Constants.baseURL, params, type);

@@ -1,6 +1,7 @@
 package models;
 
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 /**
  * Created by gaylor on 29.06.15.
@@ -17,6 +18,7 @@ public class Date {
 
     public String getWithMinutes() {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss, dd MMMM YYYY");
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT+2"));
 
         return formatter.format(new java.util.Date($date));
     }
