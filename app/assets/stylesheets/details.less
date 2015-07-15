@@ -161,7 +161,7 @@
         display: inline-block;
         width: 150px;
         height: 130px;
-        margin: 10px;
+        margin: 10px 0;
 
         text-align: center;
 
@@ -300,11 +300,24 @@
 
 @media screen and (max-width: @screen-xs-max) {
 
-  #details-header {
+  #details-reviews {
+    padding: 0;
 
-    #img-comparison {
-      left: auto;
-      right: 10px;
+    #comparison-container,
+    #base-container {
+      > div {
+        padding: 0;
+
+        > div > div,
+        > div {
+          padding: 0;
+        }
+
+        .review {
+          margin: 10px 0;
+          font-size: 0.9em;
+        }
+      }
     }
   }
 }

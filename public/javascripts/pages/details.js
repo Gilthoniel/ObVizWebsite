@@ -26,12 +26,33 @@ OBVIZ.carousel = {
     init: function() {
         var $slick = OBVIZ.$slider;
         $slick.slick({
-            mobileFirst: true,
             infinite: false,
             swipeToSlide: true,
             dots: true,
             arrows: false,
-            slidesToShow: 8
+            slidesToShow: 8,
+            respondTo: 'slider',
+            responsive: [
+                {
+                    breakpoint: 500,
+                    settings: {
+                        slidesToShow: 6
+                    }
+                },
+                {
+                    breakpoint: 300,
+                    settings: {
+                        slidesToShow: 6
+                    }
+                },
+                {
+                    breakpoint: 200,
+                    settings: {
+                        slidesToShow: 4,
+                        dots: false
+                    }
+                }
+            ]
         });
         $slick.on('click', '.slick-slide', OBVIZ.comparison.start);
         $slick.fadeIn();
@@ -173,7 +194,8 @@ OBVIZ.gauges = {
             } ],
             "export": {
                 "enabled": true
-            }
+            },
+            "panEventsEnabled": false
         }));
     },
 

@@ -11,6 +11,7 @@ public class Constants {
 
     /* WebService parameters */
     public static final String baseURL = "http://vps186042.ovh.net/ObVizService";
+    public static final String adminURL = "http://vps186042.ovh.net/ObVizServiceAdmin";
     public static final long TIMEOUT = 10000; // in millisecond
 
     /* Command builder */
@@ -20,6 +21,13 @@ public class Constants {
     public static final String GET_TOPIC_TITLES = "Get_App_Topics";
     public static final String GET_REVIEWS = "Get_Reviews";
     public static final String SEARCH_APPS = "Search_Apps";
+
+    public static final String GET_APPS_CRAWLER_LOGS = "Get_Apps_Crawler_Logs";
+
+    /* Machines */
+    public static final String[] MACHINES = new String[] {
+        "claudiu", "liapc4", "liapc13", "liapc55"
+    };
 
     /* Category */
 

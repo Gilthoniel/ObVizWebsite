@@ -10,6 +10,9 @@ GET        /assets/*file            controllers.Assets.versioned(path="/public",
 
 GET        /details/:id             @controllers.Application.details(id)
 
+# Administration
+GET        /admin                   @controllers.Administration.admin()
+
 # AJAX
 GET        /ajax/reviews/:id        @controllers.AJAX.getReviews(id)
 GET        /ajax/search             @controllers.AJAX.search()

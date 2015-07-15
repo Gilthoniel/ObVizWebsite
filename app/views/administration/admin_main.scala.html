@@ -1,0 +1,58 @@
+@()(content: Html)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>ObViz</title>
+
+        <meta charset="utf-8" />
+        <meta name="description" content="Administration panel of ObViz" />
+        <meta name="author" content="ObViz" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        @* Favicon *@
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+
+        @* Stylesheets *@
+        <link href='http://fonts.googleapis.com/css?family=Dosis:500,700,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("bootstrap/css/bootstrap.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/admin.css")">
+
+        @* Javascript libraries *@
+        <script type="text/javascript" src="@routes.Assets.versioned("lib/jquery/jquery.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+
+            <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#admin-navbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Administration</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="admin-navbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Crawler logs</a></li>
+                        <li><a href="@controllers.routes.Application.index()">Back to website</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div id="body-content" class="container-fluid">
+            @content
+        </div>
+    </body>
+</html>
