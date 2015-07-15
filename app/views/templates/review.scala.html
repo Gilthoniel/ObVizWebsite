@@ -1,0 +1,23 @@
+@(review: Review, id: Integer)
+
+<div class="review">
+    <div class="header">
+        @review.getTitle
+    </div>
+    <div class="body" onclick="OBVIZ.expand($(this));">
+        <div class="top-gradient"></div>
+        <div class="bottom-gradient"></div>
+        <div class="content">
+            <p class="inner">
+            @Html(review.getParsedBody(id))
+            </p>
+        </div>
+    </div>
+    <div class="footer">
+        @for(i <- 1 to review.getScore) {
+            <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
+        }
+
+        <span>@review.getAuthorName, @review.getDate</span>
+    </div>
+</div>

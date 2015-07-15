@@ -1,5 +1,6 @@
 package webservice;
 
+import constants.Constants;
 import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import play.Logger;
@@ -30,7 +31,7 @@ public class ConnectionService {
     {
 
         // Populate the client object
-        WSRequest client = WS.url(url).setFollowRedirects(true);
+        WSRequest client = WS.url(url).setFollowRedirects(true).setRequestTimeout(Constants.TIMEOUT);
         for (NameValuePair param : params) {
             client.setQueryParameter(param.getName(), param.getValue());
         }
@@ -45,7 +46,7 @@ public class ConnectionService {
             .map(response -> {
 
                 // HTTP success code is 200
-                if (response.getStatus() != 200 || response.getBody().equals("null")) {
+                if (response.getStatus() != 200) {
 
                     Logger.warn("Bad status code (" + response.getStatus() + ") for GET request [" + url + "] with queries " + params + " !");
                     throw networkException;

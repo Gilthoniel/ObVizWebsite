@@ -1,70 +1,96 @@
-@(webpage: WebPage, apps: java.util.List[AndroidApp])
+@(webpage: WebPage, categories: Array[constants.Constants.Category],
+        games: Array[constants.Constants.Category])
 
 @main(webpage) {
-    @* Searchbar to find an app with name or keywords *@
-    <div class="row" id="home-searchbar">
+    <div class="container">
+        @* Searchbar to find an app with name or keywords *@
+        <div class="row" id="home-searchbar" data-url="@controllers.routes.AJAX.search()">
 
-        @* Description *@
-        <div class="col-xs-12 description">
-            <p>
-                Enter keywords or an app name of the Google Play Store.
-            </p>
-        </div>
-
-        @* Search Bar *@
-        <div class="col-xs-12 col-md-6 col-md-offset-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for ..." />
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">Go!</button>
-                </span>
+            @* Description *@
+            <div class="col-xs-12 description">
+                <p>
+                    Enter keywords or an app name of the Google Play Store.
+                </p>
             </div>
-        </div>
-    </div>
 
-    @* List of applications *@
-    <div id="list-applications">
-        <h3>Popular</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-                @for(app <- apps) {
-                    <div>
-                        @templates.play_app(app)
-                    </div>
-                }
-            </div>
-        </div>
-
-        <h3>Newest</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-            @for(app <- apps) {
-                <div>
-                @templates.play_app(app)
+            @* Search Bar *@
+            <div class="col-xs-12 col-md-6 col-md-offset-3 search-bar">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for ..." />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" id="search-button">Go!</button>
+                    </span>
                 </div>
-            }
+            </div>
+
+            @* Selection of categories *@
+            <div class="col-xs-12" id="select-categories">
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkbox-all" /> All
+                    </label>
+                </div>
+
+                <div class="container-categories" id="categories-application">
+                    <h3>Application <small><input type="checkbox" class="checkbox-category" /> select all</small></h3>
+                    <ul>
+                    @for(category <- categories) {
+                        <li>
+                            <div class="item-category">
+                                <div class="button">
+                                    <input type="checkbox" name="category" class="form-control" value="@category.toString" />
+                                </div>
+                                <div class="icon">
+                                @views.html.icons.icons(category, 20)
+                                </div>
+                                <div class="title">
+                                @category.getTitle
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    </ul>
+                </div>
+
+                <div class="container-categories" id="categories-games">
+                    <h3>Games <small><input type="checkbox" class="checkbox-category" /> select all</small></h3>
+                    <ul>
+                    @for(category <- games) {
+                        <li>
+                            <div class="item-category">
+                                <div class="button">
+                                    <input type="checkbox" name="category" class="form-control" value="@category.toString" />
+                                </div>
+                                <div class="title">
+                                @category.getTitle
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <h3>Newest</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-            @for(app <- apps) {
-                <div>
-                @templates.play_app(app)
-                </div>
-            }
+        <div id="search-results" class="row">
+            @* Button to go back in the categories *@
+            <div class="col-xs-3 back-button">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Select categories</button>
             </div>
-        </div>
-
-        <h3>Newest</h3>
-        <div id="popular-app">
-            <div class="app-slider">
-            @for(app <- apps) {
-                <div>
-                @templates.play_app(app)
+            @* Loading icon *@
+            <div class="col-xs-9 icon-loader">
+                <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
+            </div>
+            @* Error message to display when an error occurred *@
+            <div class="col-xs-12 error-message">
+                <div class="alert alert-info">
+                    An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
                 </div>
-            }
+            </div>
+            @* Storage for the results *@
+            <div class="col-xs-12 results-container">
+
             </div>
         </div>
     </div>

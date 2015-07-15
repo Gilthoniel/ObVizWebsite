@@ -15,8 +15,16 @@ public class OpinionValue {
         numberPositive += value;
     }
 
+    public void setPositive(int value) {
+        numberPositive = value;
+    }
+
     public void addNegatives(int value) {
         numberNegative += value;
+    }
+
+    public void setNegative(int value) {
+        numberNegative = value;
     }
 
     public int percentage() {

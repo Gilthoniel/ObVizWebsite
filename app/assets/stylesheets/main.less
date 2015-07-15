@@ -13,11 +13,8 @@ html, body {
   background-color: #F8F8F8;
 
   > .container-fluid {
-    height: 100%;
-
-    > .row {
-      height: 100%;
-    }
+    position: relative;
+    min-height: 100%;
   }
 }
 
@@ -25,9 +22,10 @@ html, body {
 @navbarHeight: 50px;
 
 .navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   .navbar-brand {
-    padding: 5px;
+    padding: 10px 15px;
   }
 
   .nav {
@@ -37,70 +35,19 @@ html, body {
 
     > li > a {
       display: inline-block;
+      padding: 15px 10px;
     }
 
     li:before {
       content: "<";
       display: inline-block;
       padding: 10px 0;
+      color: black;
     }
 
     li:first-child:before {
       content: none;
     }
-  }
-}
-
-#left-menu {
-  position: fixed;
-  z-index: 1000;
-  height: 100%;
-  padding: @navbarHeight 0 0 0;
-
-  background: #393939;
-
-  ul {
-    list-style: none;
-    padding: 0;
-
-    color: white;
-    fill: white;
-    font-size: 2em;
-
-    li {
-      display: block;
-      padding: 10px;
-      cursor: pointer;
-
-      span {
-        display: inline-block;
-        width: 25px;
-        height: 35px;
-        margin-right: 10px;
-
-        vertical-align: middle;
-      }
-    }
-
-    li:hover,
-    li.active {
-      background-color: #515151;
-    }
-  }
-}
-
-@media screen and (min-width: @screen-sm-min) {
-  #left-menu {
-    display: block !important; // Force to display the menu if the screen was resizing
-  }
-}
-
-@media screen and (max-width: @screen-xs-max) {
-  #left-menu {
-    display: none; // Hide the menu by default for the small screen
-    position: fixed;
-    width: 100%;
-    height: auto;
   }
 }
 
@@ -111,54 +58,7 @@ html, body {
   padding: @navbarHeight 0 @footerHeight 0;
 }
 
-/* Box for application in sliders */
-.body-app {
-  @logoSize: 80px;
-  @imageMargin: 0px;
-
-  margin: 10px;
-  padding: 5px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-
-  .information {
-    min-height: @logoSize + 2 * @imageMargin;
-
-    dt {
-      width: 100%;
-      height: @logoSize;
-
-      background: no-repeat center center;
-      background-size: cover;
-    }
-
-    dd {
-      display: inline-block;
-    }
-
-    .name {
-      width: 100%;
-      margin-top: 10px;
-      font-size: 1.2em;
-    }
-
-    .category {
-      width: 20px;
-      height: 20px;
-      float: right;
-      margin-right: 10px;
-
-      img { width: 100%; height: 100%; }
-    }
-  }
-
-  .opinion-gauge {
-    text-align: center;
-  }
-
-  img {
-    display: inline;
-  }
-}
+/* Footer */
 
 #footer {
   width: 100%;
@@ -174,14 +74,69 @@ html, body {
 
 /** Colors of the category icons **/
 .category-games { fill: #6686cc; }
-.category-communication { fill: #dd9830; }
-.category-social { fill: #349665; }
-.category-audio { fill: #b35959; }
+.header-games { background: #6686cc; }
+
+.category-communication { fill: #348BCB; }
+.header-communication { background: #348BCB; }
+
+.category-social { fill: #348BCB; }
+.header-social { background: #348BCB; }
+
+.category-audio { fill: #89C074; }
+.header-audio { background: #89C074; }
+
 .category-default { fill: #8cb2cb; }
-.category-entertainment { fill: #87b687; }
-.category-tools { fill: #7d4d17; }
+.header-default { background-color: #8cb2cb; }
+
+.category-entertainment { fill: #89C074; }
+.header-entertainment { background: #89C074; }
+
+.category-tools { fill: #D89358; }
+.header-tools { background: #D89358; }
+
+.category-books { fill: #89C074; }
+
+.category-business { fill: #D6DD6E; }
+
+.category-comics { fill: #89C074; }
+
+.category-education { fill: #D6DD6E; }
+
+.category-finance { fill: #D5C50D; }
+
+.category-health { fill: #BC2F2F; }
+
+.category-medical { fill: #BC2F2F; }
+
+.category-personalization { fill: #D89358; }
+
+.category-photo { fill: #89C074; }
+
+.category-productivity { fill: #D6DD6E; }
+
+.category-shopping { fill: #89C074; }
+
+.category-sports { fill: #BC2F2F; }
+
+.category-transportation { fill: #D6DD6E; }
+
+.category-travel { fill: #D6DD6E; }
+
+.category-weather { fill: black; }
 
 /** Hide elements used to store some data **/
 .data {
   display: none;
+}
+
+/** Gauges **/
+.chart-gauge {
+
+  tspan {
+    font-weight: normal !important;
+  }
+
+  a {
+    display: none !important;
+  }
 }

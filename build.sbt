@@ -11,11 +11,12 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "org.webjars" % "jquery" % "2.1.4",
-  "com.google.code.gson" % "gson" % "2.3.1"
+  "com.google.code.gson" % "gson" % "2.3.1",
+  "be.objectify" %% "deadbolt-java" % "2.4.0"
 )
 
 // LESS files
-includeFilter in (Assets, LessKeys.less) := "design.less"
+includeFilter in (Assets, LessKeys.less) := "design.less" | "admin.less"
 
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.

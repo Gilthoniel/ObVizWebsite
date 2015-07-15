@@ -7,6 +7,8 @@ import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Results;
 
+import java.util.Arrays;
+
 /**
  * Created by gaylor on 07.07.15.
  * Dispatch errors
@@ -27,6 +29,17 @@ public class ErrorHandler implements HttpErrorHandler {
         Logger.error("Error page occurred with message : " + exception.getMessage());
 
         final WebPage webpage = new WebPage();
+
+        if (exception.getMessage() == null) {
+            for (StackTraceElement trace : exception.getStackTrace()) {
+                Logger.error(trace.toString());
+            }
+
+            String message = "Server is currently overloaded. Please come back later.";
+            return F.Promise.pure(
+                    Results.internalServerError((play.twirl.api.Html) views.html.error.render(webpage, message))
+            );
+        }
 
         String message;
         switch (exception.getMessage()) {

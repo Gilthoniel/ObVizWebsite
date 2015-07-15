@@ -15,6 +15,12 @@ public class Date {
         return $date;
     }
 
+    public String getWithMinutes() {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss, dd MMMM YYYY");
+
+        return formatter.format(new java.util.Date($date));
+    }
+
     public String toString() {
 
         return formatter.format(new java.util.Date($date));

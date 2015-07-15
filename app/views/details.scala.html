@@ -5,119 +5,122 @@
 
     @* Information about the application *@
     <div class="row" id="details-header">
-        <div class="col-xs-12 col-md-12">
-            @views.html.templates.app_description(app)
-        </div>
-    </div>
+        <div class="container">
+            <div class="row">
+                @* Information about the current application *@
+                <div class="col-xs-12 col-md-6" id="app-data">
+                    @views.html.templates.app_description(app, titles)
+                </div>
 
-    <div class="row">
-        @* List of gauges to display the opinions value *@
-        <div class="col-xs-12 col-md-6">
-            <div id="details-gauge">
-                <div class="opinion-slider">
-                @for((id, opinionValue) <- app.getMappedOpinions) {
-                    <div>
-                        <div class="opinion-box" data-topic="@id" data-value="@titles.get(id).head">
-                            <canvas width="180" height="100" data-value="@opinionValue.percentage" class="gauge"></canvas>
-                            <h4>@titles.get(id).head</h4>
+                @* Information about the related application *@
+                <div class="col-xs-12 col-md-6">
+                    <div id="header-carousel">
+                        <h3>Compare with</h3>
+                        @* Carousel to display the related apps *@
+                        <div class="slider-apps" style="display: none;">
+                        @for(app <- related.take(15)) {
+                            <div class="related-app">
+                                <img src="@app.getImage" alt="@app.getName" />
+
+                                @views.html.templates.app_description(app, titles)
+                            </div>
+                        }
                         </div>
                     </div>
-                }
+
+                    @* When comparison enabled, display the app information *@
+                    <div id="related-resumes" style="display: none;">
+                        <button class="btn-remove"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                        <div class="box">
+
+                        </div>
+                    </div>
                 </div>
-                <div class="indicator-slider"><div></div></div>
             </div>
         </div>
 
-        @* List of opinions with size related to the number *@
-        <div class="col-xs-12 col-md-6">
-            <div id="details-opinions">
-                @for((id, opinionValue) <- app.getMappedOpinions) {
-                    <span onclick="OBVIZ.goTo(@id)"
-                            style="font-size: @opinionValue.getFontSize(app.getMaxNumberOpinions)em">@titles.get(id).head</span>
-                }
-            </div>
+        <div class="col-xs-12 comparison-bg">
+            <div class="col-xs-6 current"></div>
+            <div class="col-xs-6 compared"></div>
         </div>
     </div>
 
-    <div class="row" style="position: relative;">
-        @* List of relative applications *@
-        <div class="col-xs-12 col-sm-4 col-md-3" id="details-related">
-            <h3>Related Applications</h3>
-            <ul class="related-app">
-                @for(app <- related) {
-                    <li data-id="@app.getAppID">
-                        <img src="@app.getImage" alt="@app.getName" />
-                        <span class="hidden-xs">@app.getName</span>
-                        <div class="data">
-                            <span data-id="1" data-value="10" ></span>
-                            <span data-id="2" data-value="20" ></span>
-                            <span data-id="3" data-value="30" ></span>
-                            <span data-id="4" data-value="40" ></span>
-                            <span data-id="5" data-value="50" ></span>
-                            <span data-id="6" data-value="10" ></span>
+    <div id="details-block1" class="container">
+        <div class="row" id="details-aspects">
 
-                            @views.html.templates.app_description(app)
+            @* List of all the topics *@
+            <div class="col-xs-12 col-md-12 list-aspects">
+                <h2>Opinions of the crowd ...</h2>
+                <ul>
+                @for((id, opinionValue) <- app.getMappedOpinions) {
+                    <li>
+                        <div class="opinion-box" data-topic="@id">
+                            <div id="gauge-@id" data-title="@titles.get(id).head" data-value="@opinionValue.percentage" class="chart-gauge"></div>
                         </div>
                     </li>
                 }
-            </ul>
-        </div>
-        @* Box to compare the applications *@
-        <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9" id="details-comparison">
-            <button id="close-comparison"><span class="glyphicon glyphicon-remove-circle"></span></button>
-
-            @* Information about the related application *@
-            <div class="col-xs-12 col-lg-12 information-container">
-
-            </div>
-
-            @* Opinion value *@
-            <div class="col-xs-12 col-lg-12">
-                <canvas width="180" height="100" data-value="1" id="gauge-comparison"></canvas>
-
-                <span id="current-opinion"></span>
+                </ul>
             </div>
         </div>
+    </div>
 
-        @* List of the reviews of the application *@
-        <div class="col-xs-12 col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9" id="details-reviews">
-        @for((id, reviews) <- app.getMappedReviews) {
-            <div id="topic-@id" class="topic-container" style="display: none;">
-            @for(review <- reviews.take(50)) {
+    <div id="details-block2" class="container" style="display: none;">
+        <div class="row">
+            @* Gauge to display the opinions value *@
+            <div class="col-xs-12 col-md-6">
+                <svg class="btn-back" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="30" height="30">
+                    @views.html.icons.back()
+                </svg>
 
-                <div class="col-xs-12 col-md-6 col-lg-4">
-                    <div class="review">
-                        <div class="header">
-                            <table>
-                                <tr>
-                                    <td>@review.getTitle</td>
-                                    <td>
-                                        @for(i <- 1 to review.getScore) {
-                                            <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
-                                        }
-                                    </td>
-                                </tr>
-                            </table>
+                <div id="details-gauge" class="chart-gauge" data-title="Unknown" data-value="0"></div>
+            </div>
+
+            @* List of opinions with size related to the number *@
+            <div class="col-xs-12 col-md-6 hidden-xs">
+                <div id="details-opinions">
+                @for((id, opinionValue) <- app.getMappedOpinions) {
+                    <span onclick="OBVIZ.goTo(@id)"
+                    style="font-size: @opinionValue.getFontSize(app.getMaxNumberOpinions)em">@titles.get(id).head</span>
+                }
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="position: relative;">
+
+            @* List of the reviews of the application *@
+            <div class="col-xs-12" id="details-reviews">
+                <div id="base-container">
+                    @for(id <- titles.keySet()) {
+                        <div class="topic-container" data-topic="@id" style="display: none;">
+
                         </div>
-                        <div class="body" onclick="OBVIZ.expand($(this));">
-                            <div class="top-gradient"></div>
-                            <div class="bottom-gradient"></div>
-                            <div class="content">
-                                <p class="inner">
-                                    @Html(review.getParsedBody(id))
-                                </p>
+                    }
+                </div>
+
+                <div id="comparison-container" style="display: none;">
+                    <div class="col-xs-6 current">
+                        @for(id <- titles.keySet()) {
+                            <div class="topic-container" data-topic="@id" style="display: none;">
+
                             </div>
-                        </div>
-                        <div class="footer">
-                            @review.getAuthorName, @review.getDate
-                        </div>
+                        }
+                    </div>
+                    <div class="col-xs-6 compared">
+                        @for(id <- titles.keySet()) {
+                            <div class="topic-container" data-topic="@id" style="display: none;">
+
+                            </div>
+                        }
                     </div>
                 </div>
-            }
             </div>
-        }
         </div>
     </div>
 
     <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/details.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("amcharts/amcharts.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("amcharts/gauge.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("amcharts/themes/light.js")"></script>
 }

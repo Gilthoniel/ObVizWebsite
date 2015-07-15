@@ -36,8 +36,8 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed">
                         <span class="sr-only">Toggle navigation</span>
@@ -61,35 +61,20 @@
         </nav>
 
         <div class="container-fluid">
-            <div class="row">
-                @* Navigation menu *@
-                <div class="col-sm-3 col-lg-2" id="left-menu">
-                    <ul>
-                        <li>
-                            <span>@views.html.icons.icons(Constants.Category.GAME_ADVENTURE)</span> Games
-                        </li>
-                        <li>
-                            <span>@views.html.icons.icons(Constants.Category.COMMUNICATION)</span> Communication
-                        </li>
-                        <li>
-                            <span>@views.html.icons.icons(Constants.Category.SOCIAL)</span> Social
-                        </li>
-                    </ul>
-                </div>
+            <div id="body-content">
+                @content
+            </div>
 
-                @* Content of the page *@
-                <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2" id="body-content">
-                    <div class="container-fluid">
-                        @content
-                    </div>
-
-                    @* Footer *@
-                    <div id="footer">
-                        Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
-                        from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> are licensed by
-                        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-                    </div>
-                </div>
+            @* Footer *@
+            <div id="footer">
+                <p>
+                    Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
+                    from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> are licensed by
+                    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+                </p>
+                <p>
+                    Gauge Chart made with <a href="http://www.amcharts.com/">AmCharts</a>
+                </p>
             </div>
         </div>
     </body>

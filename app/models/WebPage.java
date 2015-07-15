@@ -16,7 +16,7 @@ public class WebPage {
 
     public WebPage() {
         breadcrumb = new LinkedList<>();
-        addPath(routes.Application.index(), "Obviz");
+        addPath(routes.Application.index(), "Home");
     }
 
     /**

@@ -25,24 +25,111 @@
 
 /* Logo, Name, .. */
 #details-header {
-  padding: 20px 0;
-  border-bottom: 1px solid #EAEAEA;
+  position: relative;
+  padding: 0;
+  margin-bottom: 20px;
+
+  background: #ececec;
+  border-bottom: 1px solid rgb(185, 183, 183);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
+  h3 {
+    margin-top: 10px;
+  }
+
+  .slider-apps {
+    position: relative;
+    z-index: 75;
+
+    .related-app {
+      margin: 0 10px;
+      cursor: pointer;
+
+      .app-information { display: none; }
+    }
+
+    img {
+      height: 50px;
+    }
+  }
+
+  #related-resumes {
+    position: relative;
+
+    .btn-remove {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      background: none;
+      border: none;
+      color: #333333;
+      font-size: 20px;
+    }
+
+    .btn-remove:hover {
+      color: #585858;
+    }
+
+    .app-information .name a {
+      color: #ffcc00;
+    }
+
+    .app-information .name a:hover {
+      color: #3c9fe5;
+    }
+  }
+
+  /** footer of the header to show the starting comparison **/
+  .comparison-bg {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0;
+
+    div {
+      position: relative;
+      height: 10px;
+      padding: 0;
+    }
+
+    .current {
+      background: #505050;
+      left: -100%;
+    }
+    .compared {
+      background: #F8CF41;
+      right: -100%;
+    }
+  }
 }
 
 .app-information {
-  margin: 0;
+  margin: 0 auto;
 
-  dt {
-    height: 100px;
+  td {
+    padding: 5px;
+    vertical-align: top;
   }
 
-  dt, dd {
-    display: inline-block;
-    min-height: 100px;
-    float: left;
-    margin-right: 20px;
+  .logo {
+    width: 100px;
+    img { width: 100%; }
+  }
 
-    img { height: 100%; }
+  .name {
+    font-size: 2em;
+    font-weight: bold;
+    vertical-align: bottom;
+
+    a, a:link, a:focus {
+      color: #505050;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    a:hover {
+      color: #c8c8c8;
+      text-decoration: none;
+    }
   }
 
   ul {
@@ -50,64 +137,71 @@
     list-style: none;
     font-weight: normal;
 
-    .name {
-      font-size: 2em;
-      font-weight: bold;
-    }
-
     .developer {
       font-size: 1.0em;
       font-style: italic;
-    }
-
-    svg {
-      vertical-align: middle;
     }
   }
 
   .details {
     padding-left: 10px;
-    border-left: 1px solid #d7d7d7;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+#details-aspects {
+
+  .list-aspects {
+    ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        width: 150px;
+        height: 130px;
+        margin: 10px 0;
+
+        text-align: center;
+
+        .opinion-box {
+          .chart-gauge {
+            width: 150px;
+            height: 130px;
+          }
+        }
+
+        .opinion-box:hover {
+          cursor: pointer;
+          box-shadow: 0 0 5px rgba(0,0,0,0.2);
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+#details-block2 {
+  position: relative;
+
+  .btn-back {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    cursor: pointer;
+  }
+
+  .btn-back:hover {
+    fill: grey;
   }
 }
 
 /* Indicator for the side of the opinions */
 #details-gauge {
-  margin: 20px 60px;
-
-  .opinion-box {
-    margin: 5px;
-    padding: 5px;
-    text-align: center;
-  }
-
-  .opinion-box:hover {
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-
-  .opinion-box.active,
-  .opinion-box:focus {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    background: #eaeaea;
-  }
-
-  .indicator-slider {
-    position: relative;
-    width: 80%;
-    max-width: 500px;
-    margin: auto;
-    height: 2px;
-    background: #ededed;
-
-    div {
-      position: relative;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: rgb(203, 203, 203);
-    }
-  }
+  width: 150px;
+  height: 130px;
+  margin: 20px auto;
 }
 
 /* List of opinions for the app */
@@ -128,181 +222,74 @@
   }
 }
 
-/* List of related apps */
-#details-related {
-
-  position: absolute;
-  z-index: 100;
-  height: 100%;
-  padding: 0;
-
-  background: #e6e0d0;
-
-  h3 {
-    padding: 0 10px 10px 10px;
-    margin-bottom: 0;
-    background: #e6e0d0;
-  }
-
-  ul.related-app {
-    list-style: none;
-    padding: 0;
-    font-weight: normal;
-    font-size: 1.2em;
-    background: #e6e0d0;
-
-    li {
-      display: block;
-      padding: 10px;
-
-      img {
-        display: inline-block;
-        width: 20%
-      }
-
-      span {
-        display: inline-block;
-        width: 75%;
-        padding-left: 10px;
-        vertical-align: middle;
-      }
-    }
-
-    li:hover,
-    li.active {
-      background: #ddd3bb;
-      cursor: pointer;
-    }
-  }
-}
-
-/* Body to show the related apps reviews */
-#details-comparison {
-  position: relative;
-  display: none;
-  min-height: 534px;
-  padding-top: 15px;
-  background: #ddd3bb;
-
-  #close-comparison {
-    position: absolute;
-    z-index: 50;
-    top: 10px;
-    right: 10px;
-
-    border: none;
-    background: none;
-    color: #bf5959;
-    font-size: 2em;
-  }
-
-  #close-comparison:hover {
-    color: #7e2f2f;
-  }
-
-  .information-container {
-    border-bottom: 1px solid #cfc4ab;
-
-    .app-information {
-
-      .name {
-        max-width: 250px;
-        font-weight: normal;
-        font-size: 1.5em;
-      }
-
-      .details {
-        border-left-color: #cfc4ab;
-      }
-    }
-  }
-
-  canvas {
-    vertical-align: middle;
-  }
-
-  #current-opinion {
-    font-size: 2em;
-    font-weight: normal;
-  }
-}
-
 /* List of reviews of the spec app */
 #details-reviews {
   padding: 10px;
-  min-height: 534px;
 
-  .topic-container {
+  .review {
+    width: 100%;
+    display: inline-block;
+    margin: 10px;
+    vertical-align: top;
+    font-size: 1.2em;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
-    .review {
-      width: 100%;
-      display: inline-block;
-      margin: 10px;
-      vertical-align: top;
+    .clause-positive { color: #57b05e; }
+    .clause-negative { color: #cc6b6b; }
 
-      font-size: 1.2em;
+    .header {
+      height: 35px;
+      max-width: 100%;
+      padding: 5px;
+      background-color: #eaeaea;
 
-      .clause-positive { color: #57b05e; }
-      .clause-negative { color: #cc6b6b; }
+      font-weight: normal;
+      white-space: nowrap;
+      overflow: hidden;
+    }
 
-      .header {
-        padding: 5px;
-        background-color: #eaeaea;
-        border-radius: 5px;
+    .body {
+      position: relative;
+      background-color: @backgroundReview;
+      cursor: pointer;
 
-        table {
-          width: 100%;
-
-          td:first-child {
-            font-weight: normal;
-            white-space: nowrap;
-            overflow: hidden;
-            max-width: 0;
-          }
-
-          td:last-child {
-            width: 100px;
-            text-align: right;
-          }
-        }
-      }
-
-      .body {
+      .content {
         position: relative;
-        background-color: @backgroundReview;
-        cursor: pointer;
+        height: 100px;
+        overflow: hidden;
+        padding: 5px;
+        margin: 0;
 
-        .content {
+        span { position: relative; }
+
+        .inner {
           position: relative;
-          height: 100px;
-          overflow: hidden;
-          padding: 5px;
-          margin: 0;
-
-          span { position: relative; }
-
-          .inner {
-            position: relative;
-          }
         }
-
-        .top-gradient, .bottom-gradient {
-          width: 100%;
-          height: 50px;
-          position: absolute;
-          z-index: 1;
-        }
-
-        .top-gradient { .topGradient(@backgroundReview); }
-        .bottom-gradient { .bottomGradient(@backgroundReview); bottom: 0; }
       }
 
-      .footer {
-        padding: 0 5px;
-        font-size: 0.8em;
-        font-weight: normal;
-        text-align: right;
+      .top-gradient, .bottom-gradient {
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        z-index: 1;
       }
+
+      .top-gradient { .topGradient(@backgroundReview); }
+      .bottom-gradient { .bottomGradient(@backgroundReview); bottom: 0; }
+    }
+
+    .footer {
+      padding: 5px;
+      font-size: 0.8em;
+      font-weight: normal;
+
+      span { float: right; }
+    }
+  }
+
+  .compared {
+    .header {
+      background-color: #FFEFAE;
     }
   }
 }
@@ -311,47 +298,25 @@
 /**********************************************/
 /* Small screen fixes *************************/
 
-@media screen and (max-width: 1200px) {
-  #details-comparison {
-    .app-information {
-      .details {
-        display: none;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  #details-comparison {
-    .app-information {
-      dt {
-        display: none;
-      }
-    }
-  }
-}
-
 @media screen and (max-width: @screen-xs-max) {
-  #details-related {
-    position: relative;
-    height: auto;
 
-    h3 {
-      display: inline-block;
-      font-size: 1em;
-      font-weight: bold;
-    }
+  #details-reviews {
+    padding: 0;
 
-    ul.related-app {
-      display: inline-block;
-      margin: 0;
+    #comparison-container,
+    #base-container {
+      > div {
+        padding: 0;
 
-      li {
-        display: inline-block;
-        width: 50px;
+        > div > div,
+        > div {
+          padding: 0;
+        }
 
-        img { width: 100%; }
-        span { display: none; }
+        .review {
+          margin: 10px 0;
+          font-size: 0.9em;
+        }
       }
     }
   }

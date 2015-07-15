@@ -4,11 +4,13 @@ import com.google.gson.reflect.TypeToken;
 import constants.Constants;
 import models.Initiatable;
 import models.AndroidApp;
+import models.Review;
 import models.TopicTitles;
 import models.errors.NoAppFoundException;
 import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import play.Logger;
 import play.libs.F;
 
 import java.lang.reflect.Type;
@@ -33,22 +35,6 @@ public class WebService {
     }
 
     /**
-     * Return all the IDs of the Play Applications
-     * @return a list
-     */
-    public F.Promise<List<String>> getAppIDs() {
-
-        List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("cmd", Constants.GET_APP_IDS));
-
-        Type type = new TypeToken<List<String>>() {}.getType();
-        return ConnectionService.<List<String>>get(Constants.baseURL, params, type).recover(throwable -> {
-
-            throw new ServerOverloadedException();
-        });
-    }
-
-    /**
      * Get the information about one application
      * @param id of the application
      * @param weight LIGHT or FULL
@@ -64,11 +50,7 @@ public class WebService {
         F.Promise<AndroidApp> promise = ConnectionService.get(Constants.baseURL, params, AndroidApp.class,
                 new ServerOverloadedException(), new NoAppFoundException());
 
-        if (weight == Constants.Weight.FULL) {
-            return initPromise(promise);
-        } else {
-            return promise;
-        }
+        return initPromise(promise);
     }
 
     /**
@@ -81,7 +63,11 @@ public class WebService {
 
         List<F.Promise<AndroidApp>> promises = new LinkedList<>();
         for (String id : ids) {
-            promises.add(getAppDetails(id, weight).recover(throwable -> null));
+            promises.add(initPromise(getAppDetails(id, weight).recover(throwable -> {
+                Logger.error("Fail when attempt to get information for an app: "+id);
+
+                return null;
+            })));
         }
 
         return F.Promise.sequence(promises).map(result -> {
@@ -95,6 +81,57 @@ public class WebService {
 
             return apps;
         });
+    }
+
+    /**
+     * Return the list of reviews for a specific application
+     * @param id of the application
+     * @param pageNumber number of the page
+     * @param size number of reviews per page
+     * @return list of reviews
+     */
+    public F.Promise<List<Review>> getReviews(String id, int pageNumber, int size) {
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_REVIEWS));
+        params.add(new BasicNameValuePair("id", id));
+        if (pageNumber >= 0) {
+            params.add(new BasicNameValuePair("page_nr", String.valueOf(pageNumber)));
+        }
+
+        if (size > 0) {
+            params.add(new BasicNameValuePair("nb_per_page", String.valueOf(size)));
+        }
+
+        Type type = new TypeToken<List<Review>>(){}.getType();
+        return ConnectionService.get(Constants.baseURL, params, type,
+                new ServerOverloadedException(), new NoAppFoundException());
+    }
+
+    public F.Promise<List<Review>> getReviews(String id) {
+
+        return getReviews(id, -1, -1);
+    }
+
+    /**
+     * Search an app with his name
+     * @param name query of the search
+     * @param categories list of categories where we have to search
+     * @return the result
+     */
+    public F.Promise<List<AndroidApp>> search(String name, List<String> categories) {
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.SEARCH_APPS));
+        params.add(new BasicNameValuePair("name", name));
+        if (categories.size() > 0) {
+            params.add(new BasicNameValuePair("categories", MessageParser.toJson(categories)));
+        }
+
+        Logger.info(Constants.baseURL + params.toString());
+
+        Type type = new TypeToken<List<AndroidApp>>() {}.getType();
+        return ConnectionService.get(Constants.baseURL, params, type);
     }
 
     /**

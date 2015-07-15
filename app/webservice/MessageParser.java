@@ -32,6 +32,16 @@ public class MessageParser {
     }
 
     /**
+     * Convert a Java object into a json format
+     * @param object the object
+     * @return String of the parsing
+     */
+    public static String toJson(Object object) {
+
+        return gson.toJson(object);
+    }
+
+    /**
      * Convert a string into a integer if the string is correct
      * @param number The integer under String format
      * @return the number or -1

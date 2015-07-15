@@ -1,0 +1,48 @@
+@(logs: java.util.Map[String, java.util.List[models.admin.Log]])
+
+@views.html.administration.admin_main() {
+    <div class="container" id="logs-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills" role="tablist">
+            @for(machine <- logs.keySet()) {
+                <li role="presentation"><a href="#@machine" aria-controls="@machine" role="tab" data-toggle="pill">@machine</a></li>
+            }
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            @for((key, values) <- logs) {
+                <div role="tabpanel" class="tab-pane" id="@key">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Application ID</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Revision N°</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for(log <- values) {
+                            <tr>
+                                <td>@log.getAppID()</td>
+                                <td class="text-center">@log.getTstamp().getWithMinutes()</td>
+                                <td class="text-center @if(log.getStatus != 0){danger} else {success}">
+                                    @log.getStatus()
+                                </td>
+                                <td class="text-center">@log.getRevNo()</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#logs-container").find("a[role='tab']").first().click();
+        });
+    </script>
+}
