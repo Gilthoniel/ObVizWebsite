@@ -18,7 +18,6 @@ public class Date {
 
     public String getWithMinutes() {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss, dd MMMM YYYY");
-        formatter.setTimeZone(TimeZone.getTimeZone("GMT+2"));
 
         return formatter.format(new java.util.Date($date));
     }

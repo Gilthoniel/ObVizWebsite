@@ -92,6 +92,11 @@
             @* List of the reviews of the application *@
             <div class="col-xs-12" id="details-reviews">
                 <div id="base-container">
+                    <div class="loading-message">
+                        <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
+                        reviews are loading ...
+                    </div>
+
                     @for(id <- titles.keySet()) {
                         <div class="topic-container" data-topic="@id" style="display: none;">
 
@@ -101,6 +106,11 @@
 
                 <div id="comparison-container" style="display: none;">
                     <div class="col-xs-6 current">
+                        <div class="loading-message">
+                            <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
+                            reviews are loading ...
+                        </div>
+
                         @for(id <- titles.keySet()) {
                             <div class="topic-container" data-topic="@id" style="display: none;">
 
@@ -108,6 +118,11 @@
                         }
                     </div>
                     <div class="col-xs-6 compared">
+                        <div class="loading-message">
+                            <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
+                            reviews are loading ...
+                        </div>
+
                         @for(id <- titles.keySet()) {
                             <div class="topic-container" data-topic="@id" style="display: none;">
 

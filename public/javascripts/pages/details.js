@@ -306,12 +306,13 @@ OBVIZ.reviews = {
             OBVIZ.refreshScroll($containers);
             return;
         } else {
-            $containers.html('<img src="/assets/images/loading.png" alt="Loading..." />');
+            // Show the loading image
+            $containers.parent().find(".loading-message").fadeIn();
         }
 
         $.get(url).done(function(data) {
 
-            $containers.html(""); // Clear the loading icon
+            $containers.parent().find(".loading-message").hide(); // Hide the loading icon
 
             if (typeof data[topicID] !== 'undefined') {
 
