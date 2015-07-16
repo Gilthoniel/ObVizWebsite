@@ -38,7 +38,7 @@ public class Administration extends Controller {
 
     public F.Promise<Result> admin() {
         WebPage webpage = new WebPage(session(), paths);
-        if (webpage.getUser().right != BaseUserService.Rights.ADMIN) {
+        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
             return F.Promise.pure(redirect(routes.Application.index()));
         }
 
@@ -63,7 +63,7 @@ public class Administration extends Controller {
 
     public Result users() {
         WebPage webpage = new WebPage(session(), paths);
-        if (webpage.getUser().right != BaseUserService.Rights.ADMIN) {
+        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
             return redirect(routes.Application.index());
         }
 
@@ -78,7 +78,7 @@ public class Administration extends Controller {
     public F.Promise<Result> loadLogs() {
 
         final BaseUser user = Login.getLocalUser(session());
-        if (user.right != BaseUserService.Rights.ADMIN) {
+        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
             return F.Promise.pure(badRequest("Not authorized"));
         }
 
@@ -104,7 +104,7 @@ public class Administration extends Controller {
     public Result setUserRight() {
 
         final BaseUser user = Login.getLocalUser(session());
-        if (user.right != BaseUserService.Rights.ADMIN) {
+        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
             return badRequest("Not authorized");
         }
 
