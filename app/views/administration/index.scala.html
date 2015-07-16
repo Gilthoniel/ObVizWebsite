@@ -1,6 +1,6 @@
-@(logs: java.util.Map[String, java.util.List[models.admin.Log]])
+@(webpage: WebPage, logs: java.util.Map[String, java.util.List[models.admin.Log]])
 
-@views.html.administration.admin_main() {
+@views.html.administration.admin_main(webpage) {
     <div class="container" id="logs-container" data-url="@controllers.routes.Administration.loadLogs()">
         <!-- Nav tabs -->
         <ul class="nav nav-pills" role="tablist">

@@ -3,6 +3,7 @@ import models.WebPage;
 import play.Logger;
 import play.http.HttpErrorHandler;
 import play.libs.F;
+import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Results;
@@ -13,10 +14,10 @@ import java.util.Arrays;
  * Created by gaylor on 07.07.15.
  * Dispatch errors
  */
-public class ErrorHandler implements HttpErrorHandler {
+public class ErrorHandler extends Controller implements HttpErrorHandler {
     @Override
     public F.Promise<Result> onClientError(Http.RequestHeader request, int statusCode, String message) {
-        final WebPage webpage = new WebPage();
+        final WebPage webpage = new WebPage(session());
 
         return F.Promise.<Result>pure(
                 Results.status(statusCode, (play.twirl.api.Html) views.html.error.render(webpage, message))
@@ -28,7 +29,7 @@ public class ErrorHandler implements HttpErrorHandler {
 
         Logger.error("Error page occurred with message : " + exception.getMessage());
 
-        final WebPage webpage = new WebPage();
+        final WebPage webpage = new WebPage(session());
 
         if (exception.getMessage() == null) {
             for (StackTraceElement trace : exception.getStackTrace()) {

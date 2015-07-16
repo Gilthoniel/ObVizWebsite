@@ -1,4 +1,4 @@
-@()(content: Html)
+@(webpage: WebPage)(content: Html)
 
 <!DOCTYPE html>
 
@@ -44,8 +44,11 @@
 
                 <div class="collapse navbar-collapse" id="admin-navbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Crawler logs</a></li>
-                        <li><a href="@controllers.routes.Application.index()">Back to website</a></li>
+                        @for(path <- webpage.getBreadcrumb) {
+                            <li @if(path.isActive){class="active"}>
+                                <a href="@path.getPath">@path.getTitle</a>
+                            </li>
+                        }
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
