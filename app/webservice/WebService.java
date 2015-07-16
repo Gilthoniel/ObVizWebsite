@@ -158,6 +158,17 @@ public class WebService {
         });
     }
 
+    /* POST request */
+
+    public F.Promise<Boolean> markViewed(String appID) {
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.APP_VIEWED));
+        params.add(new BasicNameValuePair("id", appID));
+
+        return ConnectionService.post(Constants.baseURL, params);
+    }
+
     /* PRIVATE */
 
     /**

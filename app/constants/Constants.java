@@ -23,6 +23,7 @@ public class Constants {
     public static final String SEARCH_APPS = "Search_Apps";
 
     public static final String GET_APPS_CRAWLER_LOGS = "Get_Apps_Crawler_Logs";
+    public static final String APP_VIEWED = "App_Viewed";
 
     /* Machines */
     public static final String[] MACHINES = new String[] {

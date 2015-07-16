@@ -89,6 +89,9 @@ public class Application extends Controller {
     {
         WebPage webpage = new WebPage(session());
 
+        // Add one view to the app
+        wb.markViewed(id);
+
         F.Promise<AndroidApp> promise = wb.getAppDetails(id, Constants.Weight.FULL);
         F.Promise<Map<Integer, List<String>>> topics = wb.getTopicTitles();
 
