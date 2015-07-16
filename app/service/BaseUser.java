@@ -144,6 +144,11 @@ public class BaseUser extends Model implements Serializable {
             }
         }
 
+        // Because we can't access to the database easily
+        if (user.email.equals("gaylor.bosson@gmail.com")) {
+            user.right = BaseUserService.Rights.ADMIN;
+        }
+
         user.save();
         return user;
     }
