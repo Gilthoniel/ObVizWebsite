@@ -1,4 +1,5 @@
-@import constants.Constants
+@import service.BaseUserService.Rights
+@import com.feth.play.module.pa.views.html._
 @(webpage: WebPage)(content: Html)
 
 <!DOCTYPE html>
@@ -56,6 +57,30 @@
                             <li><a href="@path.getPath">@path.getTitle</a></li>
                         }
                     </ul>
+
+                    @currentAuth() { auth =>
+                      @if(webpage.getUser != null) {
+                          <p class="navbar-text navbar-right">
+                              Connected with @auth.getProvider
+                          </p>
+                          @webpage.getUser.right match {
+                              case Rights.ADMIN => {
+                                  <ul class="nav navbar-nav navbar-right">
+                                      <li><a href="@controllers.routes.Administration.admin()">Administration</a></li>
+                                      <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                                  </ul>
+                              }
+
+                              case Rights.USER => {
+                                  <ul class="nav navbar-nav navbar-right">
+                                      <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                                  </ul>
+                              }
+                          }
+                      } else {
+
+                      }
+                    }
                 </div>
             </div>
         </nav>

@@ -3,18 +3,25 @@
 # ~~~~
 
 # Home page
-GET        /                        @controllers.Application.index()
+GET        /                                     @controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)
+GET        /assets/*file                         controllers.Assets.versioned(path="/public", file: Asset)
 
-GET        /details/:id             @controllers.Application.details(id)
+GET        /details/:id                          @controllers.Application.details(id)
+#Play Authenticate
+GET        /logout                               com.feth.play.module.pa.controllers.Authenticate.logout()
+GET        /authenticate/:provider               com.feth.play.module.pa.controllers.Authenticate.authenticate(provider)
+GET        /authenticate/:provider/denied        @controllers.Login.oAuthDenied(provider)
+GET        /login                                @controllers.Login.login()
 
 # Administration
-GET        /admin                   @controllers.Administration.admin()
+GET        /admin                                @controllers.Administration.admin()
+GET        /admin/users                          @controllers.Administration.users()
 
 # AJAX
-GET        /ajax/reviews/:id        @controllers.AJAX.getReviews(id)
-GET        /ajax/search             @controllers.AJAX.search()
+GET        /ajax/reviews/:id                     @controllers.AJAX.getReviews(id)
+GET        /ajax/search                          @controllers.AJAX.search()
 
-GET        /ajax/admin/logs         @controllers.Administration.loadLogs()
+GET        /ajax/admin/logs                      @controllers.Administration.loadLogs()
+POST       /ajax/admin/rights                    @controllers.Administration.setUserRight()

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.feth.play.module.pa.PlayAuthenticate;
 import constants.Constants;
 import constants.Constants.Category;
 import models.AndroidApp;
@@ -8,7 +9,9 @@ import models.errors.NoAppFoundException;
 import models.errors.ServerOverloadedException;
 import play.libs.F;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
+import service.BaseUser;
 import webservice.WebService;
 
 import java.util.*;
@@ -27,7 +30,7 @@ public class Application extends Controller {
      * @return html result
      */
     public Result index() {
-        WebPage webpage = new WebPage();
+        WebPage webpage = new WebPage(session());
 
         Category[] categories = new Category[] {
                 Category.COMMUNICATION,
@@ -84,7 +87,7 @@ public class Application extends Controller {
     public F.Promise<Result> details(String id)
             throws NoAppFoundException, ServerOverloadedException
     {
-        WebPage webpage = new WebPage();
+        WebPage webpage = new WebPage(session());
 
         F.Promise<AndroidApp> promise = wb.getAppDetails(id, Constants.Weight.FULL);
         F.Promise<Map<Integer, List<String>>> topics = wb.getTopicTitles();

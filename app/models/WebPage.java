@@ -1,7 +1,10 @@
 package models;
 
+import controllers.Login;
 import controllers.routes;
 import play.mvc.Call;
+import play.mvc.Http;
+import service.BaseUser;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,10 +16,18 @@ import java.util.List;
 public class WebPage {
 
     private List<WebPath> breadcrumb;
+    private BaseUser user;
 
-    public WebPage() {
+    public WebPage(Http.Session session) {
         breadcrumb = new LinkedList<>();
         addPath(routes.Application.index(), "Home");
+
+        user = Login.getLocalUser(session);
+    }
+
+    public WebPage(Http.Session session, List<WebPath> paths) {
+        user = Login.getLocalUser(session);
+        breadcrumb = paths;
     }
 
     /**
@@ -36,18 +47,29 @@ public class WebPage {
         return breadcrumb;
     }
 
+    public BaseUser getUser() {
+        return user;
+    }
+
     /* PRIVATE */
 
     /**
      * Represent a path with a title for the breadcrumb in the top of the page
      */
-    public class WebPath {
+    public static class WebPath {
         private Call path;
         private String title;
+        private boolean isActive;
 
         public WebPath(Call path, String title) {
             this.path = path;
             this.title = title;
+            isActive = false;
+        }
+
+        public WebPath(Call call, String title, boolean active) {
+            this(call, title);
+            isActive = active;
         }
 
         public Call getPath() {
@@ -56,6 +78,14 @@ public class WebPage {
 
         public String getTitle() {
             return title;
+        }
+
+        public boolean isActive() {
+            return isActive;
+        }
+
+        public void activate() {
+            isActive = true;
         }
     }
 }

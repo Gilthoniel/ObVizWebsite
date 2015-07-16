@@ -1,0 +1,54 @@
+@import service.BaseUser
+@import service.BaseUserService.Rights
+@(webpage: WebPage, users: java.util.List[BaseUser])
+
+@views.html.administration.admin_main(webpage) {
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Provider</th>
+                <th>Right</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(user <- users) {
+                <tr>
+                    <td>@user.email</td>
+                    <td>@user.name</td>
+                    <td>@user.getProviders.toString</td>
+                    <td>@user.right</td>
+                    <td>
+                        @user.right match {
+                            case Rights.ADMIN => {
+                                <button data-email="@user.email" class="btn btn-primary" onclick="changeRights($(this), 'user');">Lower right</button>
+                            }
+
+                            case Rights.USER => {
+                                <button data-email="@user.email" class="btn btn-warning" onclick="changeRights($(this), 'admin')">Bigger right</button>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="data" data-url="@routes.Administration.setUserRight()"></div>
+    <script type="text/javascript">
+        function changeRights(button, right) {
+            var url = $("#data").data("url");
+
+            $.post(url, { email: button.data("email"), right: right})
+                .done(function() {
+                    alert("Success!");
+                    location.reload();
+                })
+                .fail(function() {
+                    alert("Error occurred");
+                });
+        }
+    </script>
+}

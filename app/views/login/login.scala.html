@@ -1,0 +1,27 @@
+@(webpage: WebPage)
+
+@import com.feth.play.module.pa.providers.AuthProvider.Registry;
+
+@main(webpage) {
+    <div class="container">
+
+        <div id="providers-box" class="row">
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                <div class="alert alert-info">
+                    An <strong>account</strong> with enough rights is <strong>required</strong> to continue
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Social Connect</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="@Registry.get("google").getUrl"><img src="@routes.Assets.versioned("images/google.png")" alt="" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
