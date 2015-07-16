@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   javaWs,
   "org.webjars" % "jquery" % "2.1.4",
   "com.google.code.gson" % "gson" % "2.3.1",
-  "be.objectify" %% "deadbolt-java" % "2.4.0"
+  "com.feth" %% "play-authenticate" % "0.7.0"
 )
 
 // LESS files
