@@ -1,15 +1,20 @@
 package models;
 
-import play.Logger;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 /**
  * Created by gaylor on 02.07.15.
  * Separate positive and negative opinions
  */
-public class OpinionValue {
+public class OpinionValue implements Comparable<OpinionValue> {
 
     private int numberPositive;
     private int numberNegative;
+    private int topicID;
+
+    public OpinionValue(int id) {
+        topicID = id;
+    }
 
     public void addPositives(int value) {
         numberPositive += value;
@@ -49,12 +54,22 @@ public class OpinionValue {
         return numberNegative;
     }
 
+    public int getTopicID() {
+         return topicID;
+    }
+
     /**
      * Get the relative font size in em
      * @param max the maximum number of opinions for the entire topics
-     * @return
+     * @return size of the font
      */
-    public int getFontSize(int max) {
-        return Math.round(1 + 2 * getTotal() / (float) max);
+    public float getFontSize(int max) {
+        return 1 + getTotal() / (float) max;
+    }
+
+    @Override
+    public int compareTo(@NonNull OpinionValue other) {
+
+        return Integer.compare(other.getTotal(), numberNegative + numberPositive);
     }
 }

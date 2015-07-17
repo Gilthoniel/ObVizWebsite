@@ -1,6 +1,7 @@
 package models;
 
 import constants.Constants;
+import play.Logger;
 
 import java.util.*;
 
@@ -32,6 +33,8 @@ public class AndroidApp implements Initiatable {
     private Map<Integer, Set<Review>> mappedReviews;
     private Map<Integer, OpinionValue> mappedOpinions;
     private int maxNumberOpinions;
+    private int totalPositive;
+    private int totalNegative;
 
     @Override
     public void init() {
@@ -56,7 +59,7 @@ public class AndroidApp implements Initiatable {
 
                     // Update the number of opinions
                     if (!mappedOpinions.containsKey(opinion.getTopicID())) {
-                        mappedOpinions.put(opinion.getTopicID(), new OpinionValue());
+                        mappedOpinions.put(opinion.getTopicID(), new OpinionValue(opinion.getTopicID()));
                     }
 
                     OpinionValue opinionValue = mappedOpinions.get(opinion.getTopicID());
@@ -72,8 +75,14 @@ public class AndroidApp implements Initiatable {
         }
 
         maxNumberOpinions = 0;
-        mappedOpinions.values().stream().filter(value -> value.getTotal() > maxNumberOpinions).forEach(value -> {
-            maxNumberOpinions = value.getTotal();
+        mappedOpinions.values().stream().forEach(opinionValue -> {
+
+            if (opinionValue.getTotal() > maxNumberOpinions) {
+                maxNumberOpinions = opinionValue.getTotal();
+            }
+
+            totalPositive += opinionValue.getNumberPositive();
+            totalNegative += opinionValue.getNumberNegative();
         });
     }
 
@@ -212,7 +221,7 @@ public class AndroidApp implements Initiatable {
 
             for (int i = 1; i <= 10; i++) {
 
-                OpinionValue opinion = new OpinionValue();
+                OpinionValue opinion = new OpinionValue(i);
                 opinion.setNegative(random.nextInt(300));
                 opinion.setPositive(random.nextInt(300));
 
@@ -223,7 +232,24 @@ public class AndroidApp implements Initiatable {
         return mappedOpinions;
     }
 
+    public List<OpinionValue> getMostImportantTopics() {
+
+        List<OpinionValue> opinions = new ArrayList<>(mappedOpinions.values());
+        Collections.sort(opinions);
+
+        return opinions;
+    }
+
     public int getMaxNumberOpinions() {
         return maxNumberOpinions;
+    }
+
+    public int getGlobalOpinion() {
+
+        if (totalPositive > 0 && totalNegative > 0) {
+            return Math.round(totalPositive * 100 / (totalNegative + totalPositive));
+        } else {
+            return 0;
+        }
     }
 }

@@ -31,6 +31,7 @@ alter table linked_account add constraint fk_linked_account_baseUser_1 foreign k
 create index ix_linked_account_baseUser_1 on linked_account (base_user_id);
 
 
+
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;

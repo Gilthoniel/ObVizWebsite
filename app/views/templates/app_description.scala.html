@@ -1,10 +1,13 @@
-@(app: AndroidApp, titles: Map[Integer, List[String]])
+@(app: AndroidApp, titles: java.util.Map[Integer, java.util.List[String]])
 
 <div class="app-information" data-id="@app.getAppID">
     <table>
         <tr>
             <td class="logo" rowspan="2="><img src="@app.getImage" alt="Logo" /></td>
-            <td class="name" colspan="2"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></td>
+            <td class="name" colspan="2">
+                <a href="@routes.Application.details(app.getAppID)">@app.getName</a>
+                <span class="bullet"></span>
+            </td>
         </tr>
         <tr>
             <td>
@@ -39,6 +42,7 @@
 
     @* Values and title of the different topics for the application *@
     <div class="data" data-url="@controllers.routes.AJAX.getReviews(app.getAppID)">
+        <span data-topic="0" data-title="Global" data-value="@app.getGlobalOpinion"></span>
         @for((id, value) <- app.getMappedOpinions) {
             <span data-topic="@id" data-title="@titles.get(id).head" data-value="@value.percentage"></span>
         }

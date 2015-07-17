@@ -3,6 +3,11 @@
 @screen-xs-max: (@screen-sm-min - 1px);
 @backgroundReview: #f8f8f8;
 
+@comparedBar: rgb(79, 187, 222);
+@comparedBG: rgb(207, 231, 239);
+@comparedArrow: rgb(79, 187, 222);
+@currentBar: #505050;
+
 .topGradient(@color) {
   background: -moz-linear-gradient(top, fade(@color, 100%) 0%, fade(@color, 0%) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,fade(@color, 100%)), color-stop(100%,fade(@color, 0%))); /* Chrome,Safari4+ */
@@ -70,14 +75,6 @@
     .btn-remove:hover {
       color: #bc5555;
     }
-
-    .app-information .name a {
-      color: #ffcc00;
-    }
-
-    .app-information .name a:hover {
-      color: #3c9fe5;
-    }
   }
 
   /** footer of the header to show the starting comparison **/
@@ -93,11 +90,11 @@
     }
 
     .current {
-      background: #505050;
+      background: @currentBar;
       left: -100%;
     }
     .compared {
-      background: #F8CF41;
+      background: @comparedBar;
       right: -100%;
     }
   }
@@ -122,13 +119,21 @@
     vertical-align: bottom;
 
     a, a:link, a:focus {
-      color: #505050;
+      color: #1c1c1c;
       text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
     }
 
     a:hover {
       color: #c8c8c8;
       text-decoration: none;
+    }
+
+    .bullet {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      background: transparent;
     }
   }
 
@@ -148,37 +153,32 @@
     border-left: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
+// Color of bullets
+#app-data { .bullet { background-color: @currentBar; }}
+#related-resumes { .bullet { background-color: @comparedBar; }}
 
 #details-aspects {
 
   .list-aspects {
-    ul {
-      list-style: none;
-      padding: 0;
-      text-align: center;
 
-      li {
-        display: inline-block;
-        width: 150px;
-        height: 130px;
-        margin: 10px 0;
-
-        text-align: center;
-
-        .opinion-box {
-          .chart-gauge {
-            width: 150px;
-            height: 130px;
-          }
-        }
-
-        .opinion-box:hover {
-          cursor: pointer;
-          box-shadow: 0 0 5px rgba(0,0,0,0.2);
-          border-radius: 5px;
-        }
+    .opinion-box {
+      .chart-gauge {
+        width: 100%;
+        margin: auto;
       }
     }
+
+    .opinion-box:hover {
+      cursor: pointer;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      border-radius: 5px;
+    }
+  }
+
+  #global-gauge {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
   }
 }
 
@@ -188,7 +188,7 @@
   .btn-back {
     position: absolute;
     top: 10px;
-    left: 40px;
+    right: 0;
     cursor: pointer;
   }
 
@@ -206,7 +206,7 @@
 
 /* List of opinions for the app */
 #details-opinions {
-  padding: 10px;
+  padding: 0;
 
   span {
     display: inline-block;
@@ -289,7 +289,7 @@
 
   .compared {
     .header {
-      background-color: #FFEFAE;
+      background-color: @comparedBG;
     }
   }
 
@@ -328,4 +328,24 @@
       }
     }
   }
+}
+
+/**********************************************/
+
+.amcharts-gauge-arrow path {
+  transform-origin: 0 0;
+}
+
+@keyframes arrow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.arrow-rotate {
+  animation: arrow 2s infinite;
 }

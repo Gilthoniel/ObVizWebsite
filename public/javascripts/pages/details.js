@@ -83,6 +83,7 @@ OBVIZ.comparison = {
 
         // Move the information of the chosen app
         OBVIZ.$resumes.find(".box").html($slide.find(".app-information").clone());
+        OBVIZ.$resumes.find(".app-information").hover(OBVIZ.gauges.hoverIn, function() {});
 
         // Add the second arrow to each gauge
         OBVIZ.$gauges.each(function() {
@@ -92,13 +93,15 @@ OBVIZ.comparison = {
 
                 // This is a gauge of the current app
                 id = $(this).parent().data("topic");
-            } else {
+            } else if ($(this).is("#details-gauge")) {
 
-                // This is a gauge of the compared app so we need the current topic
+                // Global or for the comparison
                 id = OBVIZ.$detailsGauge.data("current");
                 if (typeof id === 'undefined') {
                     id = "1";
                 }
+            } else {
+                id = "0";
             }
 
             var value = OBVIZ.$resumes.find("span[data-topic='"+id+"']").data("value");
@@ -162,12 +165,24 @@ OBVIZ.gauges = {
         // Init the gauges element and add store the object in the field gauge of the data
         OBVIZ.$gauges.each(function() {
             OBVIZ.gauges.makeGauge($(this));
-        })
+        });
+
+        // Put the height as the same than the width for the canvas
+        $(window).resize(function() {
+            OBVIZ.$gauges.each(function() {
+                var width = $(this).width();
+                $(this).height(width + 20); // Fix for the text
+            });
+        });
+        $(window).resize();
+
+        $("#app-data").find(".app-information").hover(this.hoverIn, function() {});
     },
 
     makeGauge: function(element) {
         var chartID = element.attr("id");
         element.data("gauge", AmCharts.makeChart(chartID, {
+            "addClassNames": true,
             "type": "gauge",
             "theme": "light",
             "color": "#000000",
@@ -188,10 +203,11 @@ OBVIZ.gauges = {
             "arrows": [ {
                 "value": Number(element.data("value")),
                 "color": "#505050",
-                "startWidth": 6,
+                "startWidth": 10,
                 "radius": "100%",
                 "innerRadius": "40%",
-                "borderAlpha": 1
+                "borderAlpha": 1,
+                "id": "0"
             } ],
             "export": {
                 "enabled": true
@@ -201,7 +217,7 @@ OBVIZ.gauges = {
     },
 
     addArrow: function(gauge, value, color) {
-        color = typeof color !== 'undefined' ? color : "#ffcc00";
+        color = typeof color !== 'undefined' ? color : "rgb(79, 187, 222)";
         var chart = gauge.data("gauge");
 
         if (typeof chart !== 'undefined') {
@@ -211,11 +227,12 @@ OBVIZ.gauges = {
             chart.addArrow({
                 "value": Number(value),
                 "color": color,
-                "startWidth": 6,
+                "startWidth": 10,
                 "radius": "100%",
                 "innerRadius": "40%",
                 "borderAlpha": 1,
-                "borderColor": "#000000"
+                "borderColor": "#000000",
+                "id": "1"
             });
 
             chart.validateNow();
@@ -234,6 +251,25 @@ OBVIZ.gauges = {
 
             chart.validateNow();
         }
+    },
+
+    hoverIn: function() {
+        var $element = $(this);
+
+        var index = 1;
+        if ($element.parent().is("#app-data")) {
+            index = 0;
+        }
+
+        OBVIZ.$gauges.each(function() {
+
+            var $svg = $(this).find("svg");
+            var cx = $svg.width() / 2;
+            var cy = $svg.height() / 2;
+
+            var $elems = $(this).find(".amcharts-gauge-arrow-"+index+" path");
+            OBVIZ.rotate($elems, 5, cx, cy);
+        });
     }
 };
 
@@ -258,10 +294,10 @@ OBVIZ.switch = {
             OBVIZ.goTo(topicID);
 
             // Show / hide blocks
-            OBVIZ.$block1.slideUp();
-            OBVIZ.$block2.slideDown(500, function() {
-
-                OBVIZ.refreshScroll($reviews);
+            OBVIZ.$block1.fadeOut(300, function() {
+                OBVIZ.$block2.fadeIn(300, function() {
+                    OBVIZ.refreshScroll($reviews);
+                })
             });
         });
 
@@ -269,8 +305,9 @@ OBVIZ.switch = {
             // Reset the current topicID store in the gauge element
             OBVIZ.$detailsGauge.data("current", undefined);
 
-            OBVIZ.$block2.slideUp(500);
-            OBVIZ.$block1.slideDown(500);
+            OBVIZ.$block2.fadeOut(300, function() {
+                OBVIZ.$block1.fadeIn(300);
+            });
         });
     },
 
@@ -302,7 +339,7 @@ OBVIZ.reviews = {
         }
 
         // Check if the reviews didn't have already loaded
-        if ($containers.children().size() > 0) {
+        if ($containers.data("parsed")) {
             OBVIZ.refreshScroll($containers);
             return;
         } else {
@@ -310,9 +347,11 @@ OBVIZ.reviews = {
             $containers.parent().find(".loading-message").fadeIn();
         }
 
+        $containers.data("parsed", true);
         $.get(url).done(function(data) {
 
             $containers.parent().find(".loading-message").hide(); // Hide the loading icon
+            $containers.html("");
 
             if (typeof data[topicID] !== 'undefined') {
 
@@ -331,7 +370,7 @@ OBVIZ.reviews = {
             }
 
         }).fail(function() {
-
+            $containers.data("parsed", false);
         });
     }
 };
@@ -397,6 +436,31 @@ OBVIZ.goTo = function(id) {
         if (OBVIZ.$resumes.find(".data").size() > 0) {
             var comparedURL = OBVIZ.$resumes.find(".data").data("url");
             OBVIZ.reviews.get(comparedURL, 'compared', id);
+        }
+    });
+};
+
+OBVIZ.rotate = function($elems, offset, cx, cy) {
+    $({ deg: 0 }).animate({ deg: offset }, {
+        duration: 200,
+        step: function(now) {
+            $elems.attr('transform', 'rotate(' + now + ' '+cx+' '+cy+')');
+        },
+        done: function() {
+            $({ deg: offset }).animate({ deg: -offset }, {
+                duration: 200,
+                step: function(now) {
+                    $elems.attr('transform', 'rotate(' + now + ' '+cx+' '+cy+')');
+                },
+                done: function() {
+                    $({ deg: -offset }).animate({ deg: 0 }, {
+                        duration: 200,
+                        step: function(now) {
+                            $elems.attr('transform', 'rotate(' + now + ' '+cx+' '+cy+')');
+                        }
+                    });
+                }
+            });
         }
     });
 };

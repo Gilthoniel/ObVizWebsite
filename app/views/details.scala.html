@@ -47,43 +47,47 @@
 
     <div id="details-block1" class="container">
         <div class="row" id="details-aspects">
+            <h2>Opinions of the crowd...</h2>
+
+            @* Global gauge *@
+            <div class=" col-xs-12 col-md-4">
+                <div id="global-gauge" data-title="Global" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
+            </div>
 
             @* List of all the topics *@
-            <div class="col-xs-12 col-md-12 list-aspects">
-                <h2>Opinions of the crowd ...</h2>
-                <ul>
-                @for((id, opinionValue) <- app.getMappedOpinions) {
-                    <li>
-                        <div class="opinion-box" data-topic="@id">
-                            <div id="gauge-@id" data-title="@titles.get(id).head" data-value="@opinionValue.percentage" class="chart-gauge"></div>
+            <div class="col-xs-12 col-md-8 list-aspects">
+                @for(opinionValue <- app.getMostImportantTopics.take(8)) {
+                    <div class="col-xs-6 col-sm-4 col-md-3">
+                        <div class="opinion-box" data-topic="@opinionValue.getTopicID">
+                            <div id="gauge-@opinionValue.getTopicID" data-title="@titles.get(opinionValue.getTopicID).head"
+                                    data-value="@opinionValue.percentage()" class="chart-gauge"></div>
                         </div>
-                    </li>
+                    </div>
                 }
-                </ul>
             </div>
         </div>
     </div>
 
     <div id="details-block2" class="container" style="display: none;">
         <div class="row">
-            @* Gauge to display the opinions value *@
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12">
                 <svg class="btn-back" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="30" height="30">
                     @views.html.icons.back()
                 </svg>
 
-                <div id="details-gauge" class="chart-gauge" data-title="Unknown" data-value="0"></div>
-            </div>
-
-            @* List of opinions with size related to the number *@
-            <div class="col-xs-12 col-md-6 hidden-xs">
+                @* List of opinions with size related to the number *@
                 <div id="details-opinions">
-                @for((id, opinionValue) <- app.getMappedOpinions) {
-                    <span onclick="OBVIZ.goTo(@id)"
-                    style="font-size: @opinionValue.getFontSize(app.getMaxNumberOpinions)em">@titles.get(id).head</span>
+                @for(value <- app.getMostImportantTopics) {
+                    <span onclick="OBVIZ.goTo(@value.getTopicID)"
+                    style="font-size: @value.getFontSize(app.getMaxNumberOpinions)em">@titles.get(value.getTopicID).head</span>
                 }
                 </div>
+            </div>
+
+            @* Gauge to display the opinions value *@
+            <div class="col-xs-12">
+                <div id="details-gauge" class="chart-gauge" data-title="Unknown" data-value="0"></div>
             </div>
         </div>
 
