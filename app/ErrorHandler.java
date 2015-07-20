@@ -27,14 +27,14 @@ public class ErrorHandler extends Controller implements HttpErrorHandler {
     @Override
     public F.Promise<Result> onServerError(Http.RequestHeader request, Throwable exception) {
 
-        Logger.error("Error page occurred with message : " + exception.getMessage());
+        Logger.error("Error page occurred with message : " + exception.getClass() + " - " + exception.getMessage());
+        for (StackTraceElement trace : exception.getStackTrace()) {
+            Logger.error(trace.toString());
+        }
 
         final WebPage webpage = new WebPage(session());
 
         if (exception.getMessage() == null) {
-            for (StackTraceElement trace : exception.getStackTrace()) {
-                Logger.error(trace.toString());
-            }
 
             String message = "Server is currently overloaded. Please come back later.";
             return F.Promise.pure(

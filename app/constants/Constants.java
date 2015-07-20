@@ -1,5 +1,7 @@
 package constants;
 
+import play.api.Play;
+
 /**
  * Created by gaylor on 25.06.15.
  * List of parameter constants
@@ -12,7 +14,7 @@ public class Constants {
     /* WebService parameters */
     public static final String baseURL = "http://vps186042.ovh.net/ObVizService";
     public static final String adminURL = "http://vps186042.ovh.net/ObVizServiceAdmin";
-    public static final long TIMEOUT = 10000; // in millisecond
+    public static final long TIMEOUT = (Long) Play.current().configuration().getLong("play.ws.timeout.request").get(); // in millisecond
 
     /* Command builder */
     public enum Weight {LIGHT, MEDIUM, FULL}
@@ -34,23 +36,23 @@ public class Constants {
 
     public enum Category {
         SOCIAL("social", "Social"),
-        GAME_ADVENTURE("games", "Adventure Games"),
-        GAME_SPORTS("games", "Sport Games"),
-        GAME_STRATEGY("games", "Strategy Games"),
-        GAME_ACTION("games", "Action Games"),
-        GAME_PUZZLE("games", "Puzzle Games"),
-        GAME_ARCADE("games", "Arcade Games"),
-        GAME_CARD("games", "Card Games"),
-        GAME_CASUAL("games", "Casual Games"),
-        GAME_CASINO("games", "Casino Games"),
-        GAME_TRIVIA("games", "Trivia Games"),
-        GAME_SIMULATION("games", "Simulation Games"),
-        GAME_RACING("games", "Racing Games"),
-        GAME_ROLE_PLAYING("games", "RPG Games"),
-        GAME_WORD("games", "Word Games"),
-        GAME_BOARD("games", "Board Games"),
-        GAME_EDUCATIONAL("games", "Educational Games"),
-        GAME_MUSIC("games", "Music Games"),
+        GAME_ADVENTURE("games", "Adventure"),
+        GAME_SPORTS("games", "Sport"),
+        GAME_STRATEGY("games", "Strategy"),
+        GAME_ACTION("games", "Action"),
+        GAME_PUZZLE("games", "Puzzle"),
+        GAME_ARCADE("games", "Arcade"),
+        GAME_CARD("games", "Card"),
+        GAME_CASUAL("games", "Casual"),
+        GAME_CASINO("games", "Casino"),
+        GAME_TRIVIA("games", "Trivia"),
+        GAME_SIMULATION("games", "Simulation"),
+        GAME_RACING("games", "Racing"),
+        GAME_ROLE_PLAYING("games", "RPG"),
+        GAME_WORD("games", "Word"),
+        GAME_BOARD("games", "Board"),
+        GAME_EDUCATIONAL("games", "Educational"),
+        GAME_MUSIC("games", "Music"),
         COMMUNICATION("communication", "Communication"),
         MUSIC_AND_AUDIO("audio", "Music and Audio"),
         ENTERTAINMENT("entertainment", "Entertainment"),

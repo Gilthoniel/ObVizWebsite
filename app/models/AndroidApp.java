@@ -48,29 +48,29 @@ public class AndroidApp implements Initiatable {
         for (Review review : reviews) {
 
             if (review.getOpinions() != null) {
-                for (Opinion opinion : review.getOpinions()) {
 
+                review.getOpinions().forEach((topicID, opinions) -> {
                     // Add the review for this topic ID
-                    if (!mappedReviews.containsKey(opinion.getTopicID())) {
-                        mappedReviews.put(opinion.getTopicID(), new HashSet<>());
+                    if (!mappedReviews.containsKey(topicID)) {
+                        mappedReviews.put(topicID, new HashSet<>());
                     }
 
-                    mappedReviews.get(opinion.getTopicID()).add(review);
+                    mappedReviews.get(topicID).add(review);
 
                     // Update the number of opinions
-                    if (!mappedOpinions.containsKey(opinion.getTopicID())) {
-                        mappedOpinions.put(opinion.getTopicID(), new OpinionValue(opinion.getTopicID()));
+                    if (!mappedOpinions.containsKey(topicID)) {
+                        mappedOpinions.put(topicID, new OpinionValue(topicID));
                     }
 
-                    OpinionValue opinionValue = mappedOpinions.get(opinion.getTopicID());
-                    for (Opinion.OpinionChild child : opinion.getChildren()) {
-                        if (child.getPolarity() == Opinion.Polarity.POSITIVE) {
+                    OpinionValue opinionValue = mappedOpinions.get(topicID);
+                    for (Opinion opinion : opinions) {
+                        if (opinion.getPolarity() == Opinion.Polarity.POSITIVE) {
                             opinionValue.addPositives(1);
                         } else {
                             opinionValue.addNegatives(1);
                         }
                     }
-                }
+                });
             }
         }
 

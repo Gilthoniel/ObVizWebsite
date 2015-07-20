@@ -46,14 +46,14 @@ public class AJAX extends Controller {
             for (Review review : reviews) {
 
                 if (review.getOpinions() != null) {
-                    for (Opinion opinion : review.getOpinions()) {
+                    for (Integer topicID : review.getOpinions().keySet()) {
 
-                        String key = String.valueOf(opinion.getTopicID());
+                        String key = String.valueOf(topicID);
                         if (root.get(key) == null) {
                             root.set(key, Json.newArray());
                         }
 
-                        ((ArrayNode) root.get(key)).add(views.html.templates.review.render(review, opinion.getTopicID()).toString());
+                        ((ArrayNode) root.get(key)).add(views.html.templates.review.render(review, topicID).toString());
                     }
                 }
             }

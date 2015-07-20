@@ -1,7 +1,11 @@
 package webservice;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
+import models.Review;
+import models.adapters.ReviewDeserializer;
 import play.Logger;
 
 import java.lang.reflect.Type;
@@ -12,7 +16,15 @@ import java.lang.reflect.Type;
  */
 public class MessageParser {
 
-    private static Gson gson = new Gson();
+    public static MessageParser instance = new MessageParser();
+    private static Gson gson;
+
+    private MessageParser() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Review.class, new ReviewDeserializer());
+
+        gson = builder.create();
+    }
 
     /**
      * Convert a string json content into a Java Class
@@ -25,6 +37,16 @@ public class MessageParser {
         try {
             return gson.fromJson(json, type);
 
+        } catch (JsonSyntaxException e) {
+            Logger.error("Parsing error : " + e.getMessage());
+            return null;
+        }
+    }
+
+    public static <T> T fromJson(JsonElement json, Type type) {
+        try {
+
+            return gson.fromJson(json, type);
         } catch (JsonSyntaxException e) {
             Logger.error("Parsing error : " + e.getMessage());
             return null;

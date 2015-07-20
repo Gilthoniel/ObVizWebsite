@@ -8,36 +8,20 @@ import java.util.List;
  */
 public class Sentence {
 
-    private Children sentenceClauses;
+    private List<Clause> children;
+    private boolean isSpecialSentence;
+    private boolean isHidden;
+    private int id;
 
-    public List<Clause> getClauses() {
-        return sentenceClauses.getChildren();
+    public List<Clause> getChildren() {
+        return children;
     }
 
     public boolean isHidden() {
-        return sentenceClauses.isHidden();
+        return isHidden;
     }
 
     public int getID() {
-        return sentenceClauses.getID();
-    }
-
-    public class Children {
-        private List<Clause> children;
-        private boolean isSpecialSentence;
-        private boolean isHidden;
-        private int id;
-
-        public List<Clause> getChildren() {
-            return children;
-        }
-
-        public boolean isHidden() {
-            return isHidden;
-        }
-
-        public int getID() {
             return id;
         }
-    }
 }

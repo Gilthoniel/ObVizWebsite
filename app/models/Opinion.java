@@ -17,53 +17,39 @@ public class Opinion {
         POSITIVE
     }
 
-    private int topicID;
-    private List<OpinionChild> opinions;
+    private int id;
+    private Polarity polarity;
+    private boolean negation;
+    private String polarityWord;
+    private String aspect;
+    private int polWordPosition;
+    private int aspectPosition;
+    private String phrase;
+    private int sentenceId;
+    private int polarityWordClauseId;
+    private int aspectClauseId;
 
-    public int getTopicID() {
-        return topicID;
+    public Polarity getPolarity() {
+        return polarity;
     }
 
-    public List<OpinionChild> getChildren() {
-        return opinions;
+    public int getAspectID() {
+        return aspectClauseId;
     }
 
-    public class OpinionChild {
+    public int getPolarityID() {
+        return polarityWordClauseId;
+    }
 
-        private int id;
-        private Polarity polarity;
-        private boolean negation;
-        private String polarityWord;
-        private String aspect;
-        private int polWordPosition;
-        private int aspectPosition;
-        private String phrase;
-        private int sentenceId;
-        private int polarityWordClauseId;
-        private int aspectClauseId;
+    public int getSentenceID() {
+        return sentenceId;
+    }
 
-        public Polarity getPolarity() {
-            return polarity;
-        }
+    public String getWord() {
+        return polarityWord;
+    }
 
-        public int getAspectID() {
-            return aspectClauseId;
-        }
-
-        public int getPolarityID() {
-            return polarityWordClauseId;
-        }
-
-        public int getSentenceID() {
-            return sentenceId;
-        }
-
-        public String getWord() {
-            return polarityWord;
-        }
-
-        public String getAspect() {
+    public String getAspect() {
             return aspect;
         }
-    }
 }

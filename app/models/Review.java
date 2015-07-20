@@ -1,12 +1,6 @@
 package models;
 
-import play.Logger;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by Gaylor on 24.06.15.
@@ -23,64 +17,97 @@ public class Review {
     private String authorUrl;
     private String reviewTitle;
     private List<Sentence> parsed;
-    private List<Opinion> opinions;
+    private List<Sentence> parsedBody;
+    private List<Sentence> parsedTitle;
+    private Map<Integer, List<Opinion>> opinions;
 
-    @Override
-    public boolean equals(Object object) {
+    public Review() {
 
-        return object.getClass() == Review.class && ((Review) object).getID().equals(_id.getValue());
-    }
-
-    @Override
-    public int hashCode() {
-
-        return getID().hashCode();
     }
 
     public String getID() {
         return _id.getValue();
     }
 
-    public List<Opinion> getOpinions() {
-        return opinions;
-    }
-
-    public String getReviewBody() {
-        return reviewBody;
-    }
-
-    public String getTitle() {
-        return reviewTitle;
-    }
-
-    public int getScore() {
-        return starRatings;
-    }
-
-    public String getDate() {
-        return reviewDate.toString();
+    public void setID(ID value) {
+        _id = value;
     }
 
     public String getUrl() {
         return permalink;
     }
 
+    public void setPermalink(String value) {
+        permalink = value;
+    }
+
+    public String getReviewBody() {
+        return reviewBody;
+    }
+
+    public void setReviewBody(String value) {
+        reviewBody = value;
+    }
+
+    public String getTitle() {
+        return reviewTitle;
+    }
+
+    public void setTitle(String value) {
+        reviewTitle = value;
+    }
+
+    public int getScore() {
+        return starRatings;
+    }
+
+    public void setScore(int value) {
+        starRatings = value;
+    }
+
+    public String getDate() {
+        return reviewDate.toString();
+    }
+
+    public void setDate(Date value) {
+        reviewDate = value;
+    }
+
     public String getAuthorName() {
         return authorName;
     }
 
-    public String getParsedBody(int topicID) {
-        Opinion opinion = null;
-        for (Opinion op : opinions) {
-            if (op.getTopicID() == topicID) {
-                opinion = op;
-            }
-        }
+    public void setAuthorName(String value) {
+        authorName = value;
+    }
 
-        if (opinion != null) {
+    public Map<Integer, List<Opinion>> getOpinions() {
+        return opinions;
+    }
 
-            Map<Integer, List<Opinion.OpinionChild>> children = new TreeMap<>();
-            for (Opinion.OpinionChild child : opinion.getChildren()) {
+    public void setOpinions(Map<Integer, List<Opinion>> value) {
+        opinions = value;
+    }
+
+    public void setParsed(List<Sentence> value) {
+        parsed = value;
+    }
+
+    public void setParsedBody(List<Sentence> value) {
+        parsedBody = value;
+    }
+
+    public void setParsedTitle(List<Sentence> value) {
+        parsedTitle = value;
+    }
+
+    public String getBody(int topicID) {
+
+        List<Opinion> opinions = this.opinions.get(topicID);
+        if (opinions != null) {
+
+            Map<Integer, List<Opinion>> children = new TreeMap<>();
+            for (Opinion child : opinions) {
                 if (!children.containsKey(child.getSentenceID())) {
                     children.put(child.getSentenceID(), new ArrayList<>());
                 }
@@ -89,10 +116,10 @@ public class Review {
             }
 
             StringBuilder builder = new StringBuilder();
-            for (Sentence sentence : parsed) {
+            for (Sentence sentence : parsed != null ? parsed : parsedBody) {
                 boolean hasOpinions = children.containsKey(sentence.getID());
 
-                for (Clause clause : sentence.getClauses()) {
+                for (Clause clause : sentence.getChildren()) {
 
                     if (clause.getType() == Clause.ClauseType.PARAGRAPH) {
 
@@ -102,7 +129,7 @@ public class Review {
                         if (hasOpinions) {
                             String polarity = "neutral";
                             String text = clause.getText();
-                            for (Opinion.OpinionChild child : children.get(sentence.getID())) {
+                            for (Opinion child : children.get(sentence.getID())) {
                                 if (child.getAspectID() == clause.getID() || child.getPolarityID() == clause.getID()) {
                                     polarity = child.getPolarity().toString().toLowerCase();
                                     text = text.replaceAll("("+child.getAspect()+"|"+child.getWord()+")", "<strong>$1</strong>");
@@ -125,5 +152,17 @@ public class Review {
         } else {
             return getReviewBody();
         }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        return object.getClass() == Review.class && ((Review) object).getID().equals(_id.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return getID().hashCode();
     }
 }
