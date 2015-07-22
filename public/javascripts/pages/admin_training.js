@@ -53,7 +53,7 @@ $(document).ready(function() {
     var clauseSide = "positive";
     $reviewsContainer.on('click', '.clause', function() {
         var opposite = clauseSide == 'positive' ? 'negative' : 'positive';
-        $(this).add($(this).siblings()).removeClass("clause-" + opposite);
+        $(this).closest(".review").find(".clause").removeClass("clause-" + opposite);
 
         if ($(this).hasClass("clause-" + clauseSide)) {
             $(this).removeClass("clause-" + clauseSide);
