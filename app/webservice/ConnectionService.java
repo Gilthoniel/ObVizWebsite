@@ -8,7 +8,9 @@ import play.libs.F;
 import play.libs.ws.WS;
 import play.libs.ws.WSRequest;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ public class ConnectionService {
     {
 
         // Populate the client object
-        WSRequest client = WS.url(url).setFollowRedirects(true).setRequestTimeout(Constants.TIMEOUT);
+        WSRequest client = WS.url(url).setFollowRedirects(true);
         for (NameValuePair param : params) {
             client.setQueryParameter(param.getName(), param.getValue());
         }
@@ -90,9 +92,9 @@ public class ConnectionService {
         for(NameValuePair value : params) {
             uri.append(value.getName()).append("=").append(value.getValue()).append("&");
         }
+
         WSRequest client = WS.url(url)
             .setContentType("application/x-www-form-urlencoded")
-            .setFollowRedirects(true)
             .setMethod("POST")
             .setBody(uri.toString());
 

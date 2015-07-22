@@ -11,3 +11,119 @@ html, body {
     margin-top: 30px;
   }
 }
+
+/** TRAINING **/
+#search-results {
+ width: 100%;
+ list-style: none;
+ padding: 0;
+
+ li {
+   display: inline-block;
+   margin: 0;
+   padding: 5px;
+   width: 49%;
+   cursor: pointer;
+   border-radius: 5px;
+
+   .android-app {
+     div {
+       display: inline-block;
+     }
+
+     .logo {
+       width: 15%;
+
+       img { width: 100%; }
+     }
+
+     .name {
+       width: 80%;
+       vertical-align: middle;
+     }
+   }
+ }
+
+  li:hover,
+  li.active {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  }
+}
+
+#reviews-container {
+  .review {
+    margin: 10px;
+    padding: 10px;
+    background: #F5F5F5;
+    word-wrap: break-word;
+
+    .body, .title {
+      font-weight: normal;
+
+      .clause {
+        cursor: pointer;
+      }
+
+      .clause-clause:hover {
+        background: #a5a5a5;
+      }
+
+      .clause-punctuation:hover {
+        background: #3a7cff;
+      }
+
+      .clause-connector:hover {
+        background: #a70e0f;
+      }
+
+      .clause-positive { color: #57b05e; }
+      .clause-negative { color: #cc6b6b; }
+    }
+
+    .title {
+      font-weight: bold;
+    }
+
+    .date {
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+
+    .actions {
+      text-align: right;
+      padding: 5px;
+      background: #D9E3E9;
+      border-radius: 5px;
+
+      form { display: inline-block; }
+
+      img { display: none; }
+    }
+  }
+}
+
+#side-indicator {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 10%;
+  height: 10%;
+  max-width: 300px;
+  max-height: 100px;
+  cursor: pointer;
+
+  background: #57b05e;
+  border-radius: 5px;
+}
+
+#result-indicator {
+  display: none;
+  position: fixed;
+  top: 70px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+
+  background: #436DAD;
+  color: white;
+}

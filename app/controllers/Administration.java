@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonObject;
 import constants.Constants;
 import models.WebPage;
 import models.WebPage.WebPath;
@@ -33,9 +34,14 @@ public class Administration extends Controller {
         paths = new LinkedList<>();
         paths.add(new WebPath(routes.Administration.admin(), "Crawler logs"));
         paths.add(new WebPath(routes.Administration.users(), "Users' rights"));
+        paths.add(new WebPath(routes.Administration.training(), "Training"));
         paths.add(new WebPath(routes.Application.index(), "Back to website"));
     }
 
+    /**
+     * Logs of the crawlers
+     * @return
+     */
     public F.Promise<Result> admin() {
         WebPage webpage = new WebPage(session(), paths);
         if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
@@ -61,6 +67,10 @@ public class Administration extends Controller {
         });
     }
 
+    /**
+     * Change users rights
+     * @return
+     */
     public Result users() {
         WebPage webpage = new WebPage(session(), paths);
         if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
@@ -71,6 +81,19 @@ public class Administration extends Controller {
 
         webpage.getBreadcrumb().get(1).activate();
         return ok((play.twirl.api.Html) views.html.administration.users.render(webpage, users));
+    }
+
+    /**
+     * Page to entrain the AI model
+     * @return
+     */
+    public Result training() {
+        WebPage webpage = new WebPage(session(), paths);
+        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
+            return redirect(routes.Application.index());
+        }
+
+        return ok((play.twirl.api.Html) views.html.administration.training.render(webpage));
     }
 
     /** AJAX **/
@@ -125,5 +148,20 @@ public class Administration extends Controller {
         }
 
         return ok(root);
+    }
+
+    public F.Promise<Result> proposeArgument() {
+
+        DynamicForm form = Form.form().bindFromRequest();
+        String json = form.get("json");
+
+        return wb.proposeArgument(json).map(result -> {
+
+            if (result != null && result) {
+                return ok();
+            } else {
+                return badRequest();
+            }
+        });
     }
 }

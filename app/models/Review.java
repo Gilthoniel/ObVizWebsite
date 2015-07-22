@@ -41,6 +41,10 @@ public class Review {
         permalink = value;
     }
 
+    public String getPermalink() {
+        return permalink;
+    }
+
     public String getReviewBody() {
         return reviewBody;
     }
@@ -99,6 +103,24 @@ public class Review {
 
     public void setParsedTitle(List<Sentence> value) {
         parsedTitle = value;
+    }
+
+    public List<Sentence> getBodySentences() {
+        if (parsedBody != null) {
+            return parsedBody;
+        } else if (parsed != null) {
+            return parsed;
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Sentence> getTitleSentences() {
+        if (parsedTitle != null) {
+            return parsedTitle;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public String getBody(int topicID) {

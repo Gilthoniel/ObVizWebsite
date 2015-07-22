@@ -1,0 +1,34 @@
+@(webpage: WebPage)
+
+@views.html.administration.admin_main(webpage) {
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-xs-12 col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for an application..." />
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" id="search-button"
+                        data-url="@routes.AJAX.search()">Go!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            Press 'W' to change side selection
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <ul id="search-results">
+
+            </ul>
+        </div>
+        <div class="col-xs-12 col-md-8" id="reviews-container">
+
+        </div>
+    </div>
+
+    <div id="side-indicator" data-url="@routes.Administration.proposeArgument()"></div>
+    <div id="result-indicator">Success!</div>
+
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/admin_training.js")"></script>
+}

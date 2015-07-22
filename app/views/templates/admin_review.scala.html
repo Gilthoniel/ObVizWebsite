@@ -1,0 +1,51 @@
+@(review: Review)
+
+<div class="col-xs-12 col-md-6">
+    <div class="review">
+        <div class="title">
+            @for(sentence <- review.getTitleSentences) {
+                @for(clause <- sentence.getChildren) {
+                    <span class="clause clause-@clause.getType.toString.toLowerCase"
+                        data-sentence="@sentence.getID"
+                        data-clause="@clause.getID"
+                        data-in-title="true">@clause.getText</span>
+                }
+            }
+        </div>
+        <div class="body">
+        @for(sentence <- review.getBodySentences) {
+            @for(clause <- sentence.getChildren) {
+                <span class="clause clause-@clause.getType.toString.toLowerCase"
+                    data-sentence="@sentence.getID"
+                    data-clause="@clause.getID"
+                    data-in-title="false">@clause.getText</span>
+            }
+        }
+        </div>
+        <div class="date">
+            @review.getDate
+        </div>
+        <div class="actions">
+            <img width="20" src="@routes.Assets.versioned("images/loading.png")" alt="" />
+            <form class="form-inline">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="type" value="0" /> Past
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="type" value="1" checked="checked"/> Present
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="type" value="2" /> Future
+                    </label>
+                </div>
+            </form>
+            <button type="button" class="btn btn-default btn-send"
+                data-permalink="@review.getPermalink" data-id="@review.getID">Send</button>
+        </div>
+    </div>
+</div>

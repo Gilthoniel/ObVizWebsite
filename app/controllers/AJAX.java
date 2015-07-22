@@ -41,24 +41,36 @@ public class AJAX extends Controller {
         F.Promise<List<Review>> promise = wb.getReviews(appID);
         return promise.map(reviews -> {
 
-            ObjectNode root = Json.newObject();
+            if (request().getQueryString("admin") != null) {
+                ObjectNode root = Json.newObject();
 
-            for (Review review : reviews) {
+                for (Review review : reviews) {
 
-                if (review.getOpinions() != null) {
-                    for (Integer topicID : review.getOpinions().keySet()) {
+                    if (review.getOpinions() != null) {
+                        for (Integer topicID : review.getOpinions().keySet()) {
 
-                        String key = String.valueOf(topicID);
-                        if (root.get(key) == null) {
-                            root.set(key, Json.newArray());
+                            String key = String.valueOf(topicID);
+                            if (root.get(key) == null) {
+                                root.set(key, Json.newArray());
+                            }
+
+                            ((ArrayNode) root.get(key)).add(views.html.templates.review.render(review, topicID).toString());
                         }
-
-                        ((ArrayNode) root.get(key)).add(views.html.templates.review.render(review, topicID).toString());
                     }
                 }
-            }
 
-            return ok(root);
+                return ok(root);
+            } else {
+                ArrayNode root = Json.newArray();
+
+                for (Review review : reviews) {
+                    if (review.getBodySentences().size() > 0) {
+                        root.add(views.html.templates.admin_review.render(review).toString());
+                    }
+                }
+
+                return ok(root);
+            }
         });
     }
 
@@ -81,8 +93,14 @@ public class AJAX extends Controller {
         return promise.map(applications -> {
 
             ArrayNode root = Json.newArray();
-            for (AndroidApp app : applications) {
-                root.add(views.html.templates.play_app.render(app).toString());
+            if (request().getQueryString("admin") == null) {
+                for (AndroidApp app : applications) {
+                    root.add(views.html.templates.play_app.render(app).toString());
+                }
+            } else {
+                for (AndroidApp app : applications) {
+                    root.add(views.html.templates.admin_play_app.render(app).toString());
+                }
             }
 
             return ok(root);
