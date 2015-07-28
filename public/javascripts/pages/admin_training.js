@@ -33,7 +33,7 @@ $(document).ready(function() {
         var url = $(this).data("url");
         $reviewsContainer.html("Loading...");
 
-        $.get(url)
+        $.get(url, { admin: true })
             .done(function(data) {
                 $reviewsContainer.html("");
 

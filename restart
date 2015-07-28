@@ -13,6 +13,7 @@ then
     
     # Kill the process
     kill $pid
+    rm "$file0"
 
     echo "Old process killed."
 else

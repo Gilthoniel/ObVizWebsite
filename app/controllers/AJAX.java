@@ -41,7 +41,9 @@ public class AJAX extends Controller {
         F.Promise<List<Review>> promise = wb.getReviews(appID);
         return promise.map(reviews -> {
 
-            if (request().getQueryString("admin") != null) {
+            Logger.info(request().getQueryString("admin"));
+
+            if (request().getQueryString("admin") == null) {
                 ObjectNode root = Json.newObject();
 
                 for (Review review : reviews) {
