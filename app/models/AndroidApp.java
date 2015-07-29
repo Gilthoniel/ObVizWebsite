@@ -29,6 +29,7 @@ public class AndroidApp implements Initiatable {
     private Score score;
     private List<Review> reviews;
     private List<String> relatedUrls;
+    private int nbParsedReviews;
 
     private Map<Integer, Set<Review>> mappedReviews;
     private Map<Integer, OpinionValue> mappedOpinions;
@@ -193,6 +194,10 @@ public class AndroidApp implements Initiatable {
      */
     public int getScore() {
         return (int) Math.round(score.getTotal());
+    }
+
+    public int getNbParsedReviews() {
+        return nbParsedReviews;
     }
 
     public List<String> getRelatedIDs() {
