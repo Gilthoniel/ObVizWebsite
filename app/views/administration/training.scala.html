@@ -2,14 +2,31 @@
 
 @views.html.administration.admin_main(webpage) {
     <div class="row" style="margin-bottom: 20px;">
-        <div class="col-xs-12 col-md-6">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for an application..." />
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" id="search-button"
-                        data-url="@routes.AJAX.search()">Go!</button>
-                </span>
-            </div>
+        <div class="col-xs-2 col-md-1" style="text-align: center;">
+            <span id="app-loading"><img width="30" src="@routes.Assets.versioned("images/loading.png")" alt="" /></span>
+        </div>
+        <div class="col-xs-10 col-md-5">
+            <nav>
+                <ul class="pagination" id="app-pagination" data-url="@routes.Administration.getParsedApplications()">
+                    <li class="btn-navigation" data-nav="-1">
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-number active" data-value="1">
+                        <a href="#">1</a>
+                    </li>
+                    <li class="empty-page">
+                        <a href="#">...</a>
+                    </li>
+
+                    <li class="btn-navigation" data-nav="1">
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="col-xs-12 col-md-6">
             Press 'W' to change side selection
@@ -18,6 +35,7 @@
 
     <div class="row">
         <div class="col-xs-12 col-md-4">
+
             <ul id="search-results">
 
             </ul>

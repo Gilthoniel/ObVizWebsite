@@ -1,9 +1,8 @@
-@(app: AndroidApp)
+@(app: AndroidApp, ids: java.util.Set[String])
 
 <li data-url="@routes.AJAX.getReviews(app.getAppID)" data-id="@app.getAppID">
-    <div class="android-app">
-        <div class="logo"><img src="@app.getImage" alt="" /></div>
-        <div class="name">@app.getName</div>
+    <div class="android-app @if(ids.contains(app.getAppID)) {parsed}">
+        <div class="name">@app.getAppID</div>
     </div>
 </li>
 

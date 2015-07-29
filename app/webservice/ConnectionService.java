@@ -54,7 +54,7 @@ public class ConnectionService {
                     throw networkException;
                 }
 
-                T result = MessageParser.<T>fromJson(response.getBody(), type);
+                T result = MessageParser.<T>fromJson(response.getBodyAsStream(), type);
                 if (result != null) {
 
                     CustomCache.put(cacheKey, result);

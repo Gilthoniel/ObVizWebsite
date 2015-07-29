@@ -1,33 +1,77 @@
 
 $(document).ready(function() {
-    /** Search apps **/
-    var $list = $("#search-results");
-    $("#search-button").click(function() {
 
-        var url = $(this).data("url");
-        var query = $(this).closest(".input-group").find("input[type='text']").val();
-        $list.html("<li>Loading...</li>");
+    /** Load parsed applications **/
+    var activePage = 1;
+    var $pagination = $("#app-pagination");
+    var $searchResults = $("#search-results");
+    var $appLoading = $("#app-loading");
+    $pagination.on('click', 'li', function() {
 
-        $.get(url, { name: query, admin: 'true' })
+        if ($(this).hasClass("page-number")) {
+
+            loadApplications($(this).data("value"));
+        } else if ($(this).hasClass("empty-page")) {
+
+            loadApplications(activePage + 1);
+        } else if ($(this).hasClass("btn-navigation")) {
+
+            var index = activePage + Number($(this).data("nav"));
+            if (index >= 1) {
+                loadApplications(index);
+            }
+        }
+    });
+
+    function loadApplications(pageNumber) {
+
+        $appLoading.fadeIn();
+
+        var url = $pagination.data("url");
+        $.get(url, { p: Number(pageNumber) - 1})
             .done(function(data) {
 
-                $list.html("");
+                $appLoading.fadeOut();
 
-                $.each(data, function(i, item) {
-                    $list.append(item);
-                })
-            }).fail(function() {
+                if (data.length == 0) {
 
-                $list.html("<li>Error, please retry</li>");
-            });
-    });
+                    $pagination.find(".empty-page").remove();
+
+                } else {
+                    $searchResults.html("");
+                    activePage = pageNumber;
+
+                    $pagination.find(".page-number.active").removeClass("active");
+
+                    if ($pagination.find(".page-number[data-value='" + pageNumber + "']").size() == 0) {
+
+                        $pagination.find(".empty-page")
+                            .before('<li class="page-number" data-value="' + pageNumber + '"><a href="#">' + pageNumber + '</a></li>');
+                    }
+
+                    $pagination.find(".page-number[data-value='" + pageNumber + "']").addClass("active");
+
+                    $.each(data, function(i, item) {
+                        $searchResults.append(item);
+                    });
+                }
+            })
+            .fail(function() {
+                $appLoading.fadeOut();
+
+                $searchResults.html("Error during loading");
+            })
+    }
+
+    // Load the first page
+    loadApplications(1);
 
     /** Load reviews **/
     var $reviewsContainer = $("#reviews-container");
-    $list.on('click', 'li', function() {
+    $searchResults.on('click', 'li', function() {
 
         // Active state management
-        $list.children().removeClass("active");
+        $searchResults.children().removeClass("active");
         $(this).addClass("active");
 
         var url = $(this).data("url");

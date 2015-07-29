@@ -8,6 +8,8 @@ import models.Review;
 import models.adapters.ReviewDeserializer;
 import play.Logger;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 
 /**
@@ -53,6 +55,16 @@ public class MessageParser {
         }
     }
 
+    public static <T> T fromJson(InputStream stream, Type type) {
+        try {
+
+            return gson.fromJson(new InputStreamReader(stream), type);
+        } catch (JsonSyntaxException e) {
+            Logger.error("Parsing error : " + e.getMessage());
+            return null;
+        }
+    }
+
     /**
      * Convert a Java object into a json format
      * @param object the object
@@ -69,7 +81,7 @@ public class MessageParser {
      * @return the number or -1
      */
     public static int parseInt(String number) {
-        if (number.matches("^[\\-0-9]+$")) {
+        if (number != null && number.matches("^[\\-0-9]+$")) {
             return Integer.parseInt(number);
         } else {
             return -1;

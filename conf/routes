@@ -25,5 +25,6 @@ GET         /ajax/reviews/:id                     @controllers.AJAX.getReviews(i
 GET         /ajax/search                          @controllers.AJAX.search()
 
 GET         /ajax/admin/logs                      @controllers.Administration.loadLogs()
+GET         /ajax/admin/app                       @controllers.Administration.getParsedApplications()
 POST        /ajax/admin/rights                    @controllers.Administration.setUserRight()
 POST        /ajax/admin/arg                       @controllers.Administration.proposeArgument()

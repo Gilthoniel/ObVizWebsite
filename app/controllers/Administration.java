@@ -1,11 +1,16 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import constants.Constants;
+import models.AndroidApp;
 import models.WebPage;
 import models.WebPage.WebPath;
+import models.admin.Argument;
 import models.admin.Log;
+import net.sf.ehcache.search.expression.And;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.F;
@@ -16,8 +21,10 @@ import play.mvc.Security;
 import service.BaseUser;
 import service.BaseUserService;
 import webservice.AdminWebService;
+import webservice.MessageParser;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by gaylor on 15.07.15.
@@ -162,6 +169,38 @@ public class Administration extends Controller {
             } else {
                 return badRequest();
             }
+        });
+    }
+
+    public F.Promise<Result> getParsedApplications() {
+
+        int pageNumber = MessageParser.parseInt(request().getQueryString("p"));
+        int numberPerPage = Constants.NUMBER_PARSED_APP_PER_PAGE;
+
+        F.Promise<List<AndroidApp>> promiseApps = wb.getParsedApps(pageNumber, numberPerPage);
+        F.Promise<List<Argument>> promiseArguments = wb.getArguments();
+
+        return promiseArguments.flatMap(tArguments -> {
+
+            final Set<String> appIDs = new HashSet<>();
+            if (tArguments != null) {
+                appIDs.addAll(tArguments.stream().map(Argument::getAppID).collect(Collectors.toList()));
+            }
+
+            return promiseApps.map(androidApps -> {
+
+                if (androidApps == null) {
+                    androidApps = new ArrayList<>();
+                }
+
+                ArrayNode root = Json.newArray();
+
+                for (AndroidApp app : androidApps) {
+                    root.add(views.html.templates.admin_play_app.render(app, appIDs).toString());
+                }
+
+                return ok(root);
+            });
         });
     }
 }

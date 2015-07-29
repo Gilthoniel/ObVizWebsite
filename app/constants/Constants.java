@@ -16,6 +16,8 @@ public class Constants {
     public static final String adminURL = "http://vps186042.ovh.net/ObVizServiceAdmin";
     public static final long TIMEOUT = (Long) Play.current().configuration().getLong("play.ws.timeout.request").get(); // in millisecond
 
+    public static final int NUMBER_PARSED_APP_PER_PAGE = 20;
+
     /* Command builder */
     public enum Weight {LIGHT, MEDIUM, FULL}
 
@@ -25,8 +27,10 @@ public class Constants {
     public static final String SEARCH_APPS = "Search_Apps";
     public static final String APP_VIEWED = "App_Viewed";
 
+    public static final String GET_PARSED_APP = "Get_Parsed_Apps";
     public static final String GET_APPS_CRAWLER_LOGS = "Get_Apps_Crawler_Logs";
     public static final String PROPOSE_ARGUMENT = "Propose_App_Argument";
+    public static final String GET_ARGUMENTS = "Get_App_Arguments";
 
     /* Machines */
     public static final String[] MACHINES = new String[] {

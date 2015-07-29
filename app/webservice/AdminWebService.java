@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import constants.Constants;
+import models.AndroidApp;
+import models.admin.Argument;
 import models.admin.Log;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -29,6 +31,20 @@ public class AdminWebService {
 
     static public AdminWebService getInstance() {
         return instance;
+    }
+
+    /**
+     * Get the list of parsed applications
+     * @return list of application
+     */
+    public F.Promise<List<AndroidApp>> getParsedApps(int pageNumber, int numberPerPage) {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_PARSED_APP));
+        params.add(new BasicNameValuePair("page_nr", String.valueOf(pageNumber)));
+        params.add(new BasicNameValuePair("nb_per_page", String.valueOf(numberPerPage)));
+
+        Type type = new TypeToken<List<AndroidApp>>(){}.getType();
+        return ConnectionService.get(Constants.adminURL, params, type);
     }
 
     /**
@@ -58,6 +74,18 @@ public class AdminWebService {
 
         Logger.info("JSON: " + json);
         return ConnectionService.post(Constants.adminURL, encodeValues(params));
+    }
+
+    /**
+     * Get the list of proposed arguments
+     * @return list of arguments
+     */
+    public F.Promise<List<Argument>> getArguments() {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_ARGUMENTS));
+
+        Type type = new TypeToken<List<Argument>>(){}.getType();
+        return ConnectionService.get(Constants.adminURL, params, type);
     }
 
     private List<NameValuePair> encodeValues(List<NameValuePair> params) {

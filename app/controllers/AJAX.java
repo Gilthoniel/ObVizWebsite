@@ -41,8 +41,6 @@ public class AJAX extends Controller {
         F.Promise<List<Review>> promise = wb.getReviews(appID);
         return promise.map(reviews -> {
 
-            Logger.info(request().getQueryString("admin"));
-
             if (request().getQueryString("admin") == null) {
                 ObjectNode root = Json.newObject();
 
@@ -95,14 +93,8 @@ public class AJAX extends Controller {
         return promise.map(applications -> {
 
             ArrayNode root = Json.newArray();
-            if (request().getQueryString("admin") == null) {
-                for (AndroidApp app : applications) {
-                    root.add(views.html.templates.play_app.render(app).toString());
-                }
-            } else {
-                for (AndroidApp app : applications) {
-                    root.add(views.html.templates.admin_play_app.render(app).toString());
-                }
+            for (AndroidApp app : applications) {
+                root.add(views.html.templates.play_app.render(app).toString());
             }
 
             return ok(root);
