@@ -163,7 +163,7 @@ $(document).ready(function() {
         var $button = $(this);
         var $successIndicator = $("#result-indicator");
         $.post(url, { json: JSON.stringify({
-            appID: $list.find("li.active").data("id"),
+            appID: $searchResults.find("li.active").data("id"),
             permalink: $(this).data("permalink"),
             side: side,
             type: type,
