@@ -64,7 +64,7 @@ public class AJAX extends Controller {
                 ArrayNode root = Json.newArray();
 
                 for (Review review : reviews) {
-                    if (review.getBodySentences().size() > 0) {
+                    if (review.getBodySentences().size() > 0 && review.getReviewBody().length() > 15) {
                         root.add(views.html.templates.admin_review.render(review).toString());
                     }
                 }
