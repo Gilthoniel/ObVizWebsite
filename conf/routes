@@ -23,6 +23,7 @@ GET         /admin/training                       @controllers.Administration.tr
 # AJAX
 GET         /ajax/reviews/:id                     @controllers.AJAX.getReviews(id)
 GET         /ajax/search                          @controllers.AJAX.search()
+GET         /ajax/trending                        @controllers.AJAX.getTrending()
 
 GET         /ajax/admin/logs                      @controllers.Administration.loadLogs()
 GET         /ajax/admin/app                       @controllers.Administration.getParsedApplications()

@@ -4,41 +4,42 @@
  */
 $(document).ready(function() {
 
-    /** Categories **/
-    OBVIZ.$categoriesElements = OBVIZ.$searchCategories.find("li");
-    OBVIZ.$categoriesElements
-        .click(function() {
-
-            if ($(this).is(".active")) {
-                $(this).removeClass("active");
-            } else {
-                OBVIZ.$categoriesElements.removeClass("active");
-                $(this).addClass("active");
-            }
-        })
-        .hover(function() {
-
-            OBVIZ.$categoriesDesc.find("li[data-title='"+$(this).data("title")+"']").show();
-        }, function() {
-
-            OBVIZ.$categoriesDesc.find("li").hide();
-        });
-
-    /** Searching **/
+    /* Searching */
     OBVIZ.search.init();
+
+    /* Trending applications */
+    OBVIZ.trending.init();
 });
 
 OBVIZ.$homeSearchbar = $("#home-searchbar");
 OBVIZ.$searchbar = $(".search-bar").find("input[type='text']");
 OBVIZ.$searchResults = $("#search-results");
-OBVIZ.$listApp = $("#list-applications");
-OBVIZ.$searchCategories = $("#search-categories");
-OBVIZ.$categoriesDesc = $("#categories-desc");
+OBVIZ.$trending = $("#trending");
 
+/**
+ * Functions to execute a search
+ * @type {{init: Function, get: Function}}
+ */
 OBVIZ.search = {
 
     init: function() {
-        $("#search-button").click(OBVIZ.search.get);
+        $("#search-button").click(function() {
+
+            var $categories = OBVIZ.$searchResults.find(".list-categories li");
+            $categories.removeClass("active");
+            $categories.first().addClass("active");
+
+            OBVIZ.search.get();
+        });
+
+        OBVIZ.$searchResults.find(".list-categories").on('click', 'li', function() {
+
+            var $categories = OBVIZ.$searchResults.find(".list-categories li");
+            $categories.removeClass("active");
+            $(this).addClass("active");
+
+            OBVIZ.search.get($(this).data("categories"));
+        });
 
         $(document).keydown(function(event) {
 
@@ -48,62 +49,120 @@ OBVIZ.search = {
         });
     },
 
-    get: function() {
-
-        // Hide the error message
-        OBVIZ.$searchResults.find(".error-message").hide();
-        // Show a loading icon
-        OBVIZ.$searchResults.find(".icon-loader").show();
-        OBVIZ.$searchResults.show();
-        OBVIZ.$listApp.fadeOut(300);
+    get: function(categories) {
 
         var query = OBVIZ.$searchbar.val();
         var url = OBVIZ.$homeSearchbar.data("url");
 
-        // Get the categories
-        var categories = OBVIZ.$searchCategories.find("li.active").data("categories");
         if (typeof categories === 'undefined') {
             categories = "";
         }
 
-        // Cancel the previous request
-        if (typeof OBVIZ.request !== 'undefined') {
-            OBVIZ.request.abort();
+        OBVIZ.get(OBVIZ.$searchResults, url, { query: query, categories: categories });
+    },
+
+    close: function() {
+
+        OBVIZ.toggleContainer(OBVIZ.$trending);
+    }
+};
+
+/**
+ * Functions to get the list of trending applications related to categories
+ * @type {{init: Function, get: Function}}
+ */
+OBVIZ.trending = {
+
+    init: function() {
+
+        var $categories = OBVIZ.$trending.find(".list-categories li");
+        OBVIZ.$trending.find(".list-categories").on('click', 'li', function() {
+
+            $categories.removeClass("active");
+            $(this).addClass("active");
+
+            OBVIZ.trending.get($(this).data("categories"));
+        });
+
+        $categories.first().addClass("active");
+        this.get();
+    },
+
+    get: function(categories) {
+
+        var url = OBVIZ.$trending.data("url");
+
+        if (typeof categories === 'undefined') {
+            categories = "";
         }
 
-        OBVIZ.request = $.get(url, { name: query, categories: categories })
-            .done(function(data) {
-                var $container = OBVIZ.$searchResults.find(".results-container");
-                $container.hide();
+        OBVIZ.get(OBVIZ.$trending, url, { categories: categories });
+    }
+};
 
-                // Clean the container
-                $container.html("");
-                // Add the items
-                $.each(data, function(i, item) {
-                    $container.append(item);
-                });
+OBVIZ.get = function($baseContainer, url, params) {
+    // Hide the error message
+    $baseContainer.find(".error-message").hide();
+    // Show a loading icon
+    $baseContainer.find(".icon-loader").slideDown();
 
-                // Hide the elements before display the block
-                var $items = $container.find(".body-app")
-                    .css("opacity", 0)
-                    .css("top", 100);
-                $container.show();
-                OBVIZ.$searchResults.find(".icon-loader").stop().fadeOut();
+    // Display the good container
+    OBVIZ.toggleContainer($baseContainer);
 
-                // Animate to show the items
-                $items.each(function(i) {
-                    $(this).delay(i*100).animate({
-                        opacity: 1,
-                        top: 0
-                    });
-                });
-            })
-            .fail(function(xhr, status) {
+    // Cancel the previous request
+    if (typeof OBVIZ.request !== 'undefined') {
+        OBVIZ.request.abort();
+    }
 
-                if (status != 'abort') {
-                    OBVIZ.$searchResults.find(".icon-loader").stop().fadeOut();
-                    OBVIZ.$searchResults.find(".error-message").stop().fadeIn();
-                }
+    OBVIZ.request = $.get(url, params)
+        .done(function(data) {
+            var $container = $baseContainer.find(".results-container");
+            $container.hide();
+
+            // Clean the container
+            $container.empty();
+            // Add the items
+            $.each(data, function(i, item) {
+                $container.append(item);
             });
+
+            // Hide the elements before display the block
+            var $items = $container.find(".body-app")
+                .css("opacity", 0)
+                .css("top", 100);
+            $container.show();
+            $baseContainer.find(".icon-loader").stop().slideUp();
+
+            // Animate to show the items
+            $items.each(function(i) {
+                $(this).delay(i * 50).animate({
+                    opacity: 1,
+                    top: 0
+                });
+            });
+        })
+        .fail(function(xhr, status) {
+
+            if (status != 'abort') {
+                $baseContainer.find(".icon-loader").stop().fadeOut();
+                $baseContainer.find(".error-message").stop().fadeIn();
+            }
+        });
+};
+
+OBVIZ.toggleContainer = function ($container) {
+
+    if ($container.is("#trending")) {
+
+        OBVIZ.$searchResults.fadeOut(300, function() {
+            OBVIZ.$trending.fadeIn(300);
+        });
+
+    } else {
+
+        OBVIZ.$trending.fadeOut(300, function() {
+            OBVIZ.$searchResults.show();
+        });
+
     }
 };

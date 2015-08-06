@@ -1,16 +1,14 @@
 package controllers;
 
 import constants.Constants;
-import constants.Constants.Category;
 import models.AndroidApp;
-import models.CategoryFilter;
-import models.CategorySet;
 import models.WebPage;
 import models.errors.NoAppFoundException;
 import models.errors.ServerOverloadedException;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Result;
+import service.CategoryManager;
 import webservice.WebService;
 
 import java.util.*;
@@ -18,12 +16,10 @@ import java.util.*;
 public class Application extends Controller {
 
     private WebService wb;
-    private CategoryFilter filters;
 
     public Application() {
 
         wb = WebService.getInstance();
-        filters = new CategoryFilter();
     }
 
     /**
@@ -33,7 +29,7 @@ public class Application extends Controller {
     public Result index() {
         WebPage webpage = new WebPage(session());
 
-        return ok((play.twirl.api.Html) views.html.index.render(webpage, filters.getFilters()));
+        return ok((play.twirl.api.Html) views.html.index.render(webpage, CategoryManager.instance.getCategories()));
     }
 
     /**

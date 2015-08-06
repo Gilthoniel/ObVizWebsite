@@ -1,5 +1,6 @@
 import constants.Constants;
 import models.WebPage;
+import models.errors.NoAppFoundException;
 import play.Logger;
 import play.http.HttpErrorHandler;
 import play.libs.F;

@@ -15,7 +15,7 @@ public class AndroidApp implements Initiatable {
 
     private String appID;
     private Constants.Category category;
-    private String coverImgURL;
+    private String coverImgUrl;
     private String currentVersion;
     private String description;
     private String developer;
@@ -112,7 +112,7 @@ public class AndroidApp implements Initiatable {
      * @return String
      */
     public String getImage() {
-        return coverImgURL;
+        return coverImgUrl;
     }
 
     /**

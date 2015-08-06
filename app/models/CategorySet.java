@@ -15,7 +15,6 @@ public class CategorySet {
 
     private String title;
     private Category[] categories;
-    private String description;
 
     public CategorySet(String title) {
         this.title = title;
@@ -50,10 +49,15 @@ public class CategorySet {
     public String getCategories() {
         StringBuilder builder = new StringBuilder();
 
-        for (Category category : categories) {
-            builder.append(category.toString()).append(",");
+        Iterator<Category> it = Arrays.asList(categories).iterator();
+        while (it.hasNext()) {
+            Category category = it.next();
+
+            builder.append(category.name());
+            if (it.hasNext()) {
+                builder.append(",");
+            }
         }
-        builder.delete(builder.length() - 1, builder.length());
 
         return builder.toString();
     }

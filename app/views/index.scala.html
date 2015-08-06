@@ -1,4 +1,3 @@
-@import com.feth.play.module.pa.views.html._
 @(webpage: WebPage, categories: java.util.List[CategorySet])
 
 @main(webpage) {
@@ -22,38 +21,71 @@
                     </span>
                 </div>
             </div>
-
-            @* Filters *@
-            <div class="col-xs-12" id="search-categories">
-                <h4>Filter by categories:</h4>
-                <ul>
-                    @for(category <- categories) {
-                        <li data-title="@category.getTitle" data-categories="@category.getCategories">@category.getTitle</li>
-                    }
-                </ul>
-            </div>
-            <div class="col-xs-12" id="categories-desc">
-                <ul>
-                    @for(category <- categories) {
-                        <li data-title="@category.getTitle">@category.getDescription</li>
-                    }
-                </ul>
-            </div>
         </div>
 
-        <div id="search-results" class="row">
+        <div id="trending" data-url="@routes.AJAX.getTrending">
+            <div class="page-header">
+                <h1>
+                    Trending
+
+                    <small>
+                        <ul class="list-categories">
+                        @for(category <- categories) {
+                            <li data-categories="@category.getCategories">@category.getTitle</li>
+                        }
+                        </ul>
+                    </small>
+                </h1>
+            </div>
+
             @* Loading icon *@
-            <div class="col-xs-9 icon-loader">
+            <div class="icon-loader">
                 <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
             </div>
             @* Error message to display when an error occurred *@
-            <div class="col-xs-12 error-message">
+            <div class="error-message">
                 <div class="alert alert-info">
                     An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
                 </div>
             </div>
+
+            <div class="row results-container">
+
+            </div>
+        </div>
+
+        <div id="search-results">
+            <div class="page-header">
+                <button class="pull-right btn btn-default btn-close" onclick="OBVIZ.search.close()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+
+                <h1>
+                    Results
+
+                    <small>
+                        <ul class="list-categories">
+                            @for(category <- categories) {
+                                <li data-categories="@category.getCategories">@category.getTitle</li>
+                            }
+                        </ul>
+                    </small>
+                </h1>
+            </div>
+
+            @* Loading icon *@
+            <div class="icon-loader">
+                <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
+            </div>
+            @* Error message to display when an error occurred *@
+            <div class="error-message">
+                <div class="alert alert-info">
+                    An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
+                </div>
+            </div>
+
             @* Storage for the results *@
-            <div class="col-xs-12 results-container">
+            <div class="row results-container">
 
             </div>
         </div>

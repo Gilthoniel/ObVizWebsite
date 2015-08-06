@@ -1,7 +1,5 @@
 package webservice;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import constants.Constants;
 import models.AndroidApp;
@@ -11,7 +9,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
 import play.libs.F;
-import play.mvc.Result;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -44,7 +41,7 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("nb_per_page", String.valueOf(numberPerPage)));
 
         Type type = new TypeToken<List<AndroidApp>>(){}.getType();
-        return ConnectionService.get(Constants.adminURL, params, type);
+        return ConnectionService.getNoCache(Constants.adminURL, params, type);
     }
 
     /**
@@ -85,7 +82,7 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("cmd", Constants.GET_ARGUMENTS));
 
         Type type = new TypeToken<List<Argument>>(){}.getType();
-        return ConnectionService.get(Constants.adminURL, params, type);
+        return ConnectionService.getNoCache(Constants.adminURL, params, type);
     }
 
     private List<NameValuePair> encodeValues(List<NameValuePair> params) {

@@ -2,6 +2,7 @@ package webservice;
 
 import com.google.gson.reflect.TypeToken;
 import constants.Constants;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import models.Initiatable;
 import models.AndroidApp;
 import models.Review;
@@ -47,7 +48,8 @@ public class WebService {
         params.add(new BasicNameValuePair("id", id));
         params.add(new BasicNameValuePair("weight", weight.toString()));
 
-        F.Promise<AndroidApp> promise = ConnectionService.get(Constants.baseURL, params, AndroidApp.class, true,
+        String cacheKey = "details:" + id + ":" + weight;
+        F.Promise<AndroidApp> promise = ConnectionService.get(Constants.baseURL, params, AndroidApp.class, cacheKey,
                 new ServerOverloadedException(), new NoAppFoundException());
 
         return initPromise(promise);
@@ -104,13 +106,14 @@ public class WebService {
         }
 
         Type type = new TypeToken<List<Review>>(){}.getType();
-        return ConnectionService.get(Constants.baseURL, params, type, true,
+        String cacheKey = "reviews:" + id +":" + pageNumber + ":" + size;
+        return ConnectionService.get(Constants.baseURL, params, type, cacheKey,
                 new ServerOverloadedException(), new NoAppFoundException());
     }
 
     public F.Promise<List<Review>> getReviews(String id) {
 
-        return getReviews(id, -1, -1);
+        return getReviews(id, -1, 0);
     }
 
     /**
@@ -128,8 +131,25 @@ public class WebService {
             params.add(new BasicNameValuePair("categories", MessageParser.toJson(categories)));
         }
 
-        Type type = new TypeToken<List<AndroidApp>>() {}.getType();
-        return ConnectionService.get(Constants.baseURL, params, type);
+        String cacheKey = "search:" + name + ":" + String.join(":", categories);
+        return ConnectionService.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {}.getType(), cacheKey);
+    }
+
+    /**
+     * Get the list of trending applications for a category or in general if null or empty
+     * @param categories Array of categories. Can be null or empty
+     * @return the list of AndroidApp
+     */
+    public F.Promise<List<AndroidApp>> getTrending(List<String> categories) {
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_TRENDING_APPS));
+        if (categories.size() > 0) {
+            params.add(new BasicNameValuePair("categories", MessageParser.toJson(categories)));
+        }
+
+        String cacheKey = "trending:" + String.join(":", categories);
+        return ConnectionService.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>(){}.getType(), cacheKey);
     }
 
     /**
@@ -142,8 +162,9 @@ public class WebService {
         params.add(new BasicNameValuePair("cmd", Constants.GET_TOPIC_TITLES));
 
         Type type = new TypeToken<List<TopicTitles>>() {}.getType();
+        String cacheKey = "topictitles";
         // Return the list of topics in mapped form for easiest uses
-        return ConnectionService.<List<TopicTitles>>get(Constants.baseURL, params, type).map(titles -> {
+        return ConnectionService.<List<TopicTitles>>get(Constants.baseURL, params, type, cacheKey).map(titles -> {
             Map<Integer, List<String>> mappedTitles = new TreeMap<>();
             for (TopicTitles title : titles) {
                 List<String> upper = new ArrayList<>();

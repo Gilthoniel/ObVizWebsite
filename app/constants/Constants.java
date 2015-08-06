@@ -1,7 +1,5 @@
 package constants;
 
-import play.api.Play;
-
 /**
  * Created by gaylor on 25.06.15.
  * List of parameter constants
@@ -9,14 +7,15 @@ import play.api.Play;
 public class Constants {
 
     /* Cache parameters */
-    public static int TIME_CACHE_EXPIRED = 300; // 5min
+    public static int TIME_CACHE_EXPIRED = 60 * 60; // in second
 
     /* WebService parameters */
     public static final String baseURL = "http://vps186042.ovh.net/ObVizService";
     public static final String adminURL = "http://vps186042.ovh.net/ObVizServiceAdmin";
-    public static final long TIMEOUT = (Long) Play.current().configuration().getLong("play.ws.timeout.request").get(); // in millisecond
 
     public static final int NUMBER_PARSED_APP_PER_PAGE = 20;
+
+    public static final int NUMBER_TRENDING_APPS = 21;
 
     /* Command builder */
     public enum Weight {LIGHT, MEDIUM, FULL}
@@ -26,6 +25,7 @@ public class Constants {
     public static final String GET_REVIEWS = "Get_Reviews";
     public static final String SEARCH_APPS = "Search_Apps";
     public static final String APP_VIEWED = "App_Viewed";
+    public static final String GET_TRENDING_APPS = "Get_Trending_Apps";
 
     public static final String GET_PARSED_APP = "Get_Parsed_Apps";
     public static final String GET_APPS_CRAWLER_LOGS = "Get_Apps_Crawler_Logs";
