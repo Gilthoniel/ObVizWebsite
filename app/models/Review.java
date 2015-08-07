@@ -1,13 +1,15 @@
 package models;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by Gaylor on 24.06.15.
  * A comment drops by an user for an application or something else
  */
-public class Review {
+public class Review implements Serializable {
 
+    private static final long serialVersionUID = -703878768818567597L;
     private ID _id;
     private String permalink;
     private String reviewBody;

@@ -3,14 +3,16 @@ package models;
 import constants.Constants;
 import play.Logger;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by gaylor on 29.06.15.
  * Represent a Google Play Application for Android device
  */
-public class AndroidApp implements Initiatable {
+public class AndroidApp implements Initiatable, Serializable {
 
+    private static final long serialVersionUID = 1820727929435164026L;
     private static Random random = new Random();
 
     private String appID;

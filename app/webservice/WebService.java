@@ -14,6 +14,8 @@ import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
 import play.libs.F;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -21,19 +23,11 @@ import java.util.*;
  * Created by gaylor on 25.06.15.
  * WebService to get data from the Back-End
  */
+@Singleton
 public class WebService {
 
-    private static WebService instance = new WebService();
-
-    private WebService() {}
-
-    /**
-     * Get the Singleton instance
-     * @return the instance
-     */
-    public static WebService getInstance() {
-        return instance;
-    }
+    @Inject
+    private ConnectionService service;
 
     /**
      * Get the information about one application
@@ -49,7 +43,7 @@ public class WebService {
         params.add(new BasicNameValuePair("weight", weight.toString()));
 
         String cacheKey = "details:" + id + ":" + weight;
-        F.Promise<AndroidApp> promise = ConnectionService.get(Constants.baseURL, params, AndroidApp.class, cacheKey,
+        F.Promise<AndroidApp> promise = service.get(Constants.baseURL, params, AndroidApp.class, cacheKey,
                 new ServerOverloadedException(), new NoAppFoundException());
 
         return initPromise(promise);
@@ -107,7 +101,7 @@ public class WebService {
 
         Type type = new TypeToken<List<Review>>(){}.getType();
         String cacheKey = "reviews:" + id +":" + pageNumber + ":" + size;
-        return ConnectionService.get(Constants.baseURL, params, type, cacheKey,
+        return service.get(Constants.baseURL, params, type, cacheKey,
                 new ServerOverloadedException(), new NoAppFoundException());
     }
 
@@ -132,7 +126,7 @@ public class WebService {
         }
 
         String cacheKey = "search:" + name + ":" + String.join(":", categories);
-        return ConnectionService.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {}.getType(), cacheKey);
+        return service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {}.getType(), cacheKey);
     }
 
     /**
@@ -149,7 +143,7 @@ public class WebService {
         }
 
         String cacheKey = "trending:" + String.join(":", categories);
-        return ConnectionService.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>(){}.getType(), cacheKey);
+        return service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>(){}.getType(), cacheKey);
     }
 
     /**
@@ -164,7 +158,7 @@ public class WebService {
         Type type = new TypeToken<List<TopicTitles>>() {}.getType();
         String cacheKey = "topictitles";
         // Return the list of topics in mapped form for easiest uses
-        return ConnectionService.<List<TopicTitles>>get(Constants.baseURL, params, type, cacheKey).map(titles -> {
+        return service.<List<TopicTitles>>get(Constants.baseURL, params, type, cacheKey).map(titles -> {
             Map<Integer, List<String>> mappedTitles = new TreeMap<>();
             for (TopicTitles title : titles) {
                 List<String> upper = new ArrayList<>();
@@ -187,7 +181,7 @@ public class WebService {
         params.add(new BasicNameValuePair("cmd", Constants.APP_VIEWED));
         params.add(new BasicNameValuePair("id", appID));
 
-        return ConnectionService.post(Constants.baseURL, params);
+        return service.post(Constants.baseURL, params);
     }
 
     /* PRIVATE */

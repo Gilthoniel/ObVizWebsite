@@ -3,6 +3,7 @@ package models;
 import constants.Constants.Category;
 import play.Logger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -11,8 +12,9 @@ import java.util.Iterator;
  * Created by gaylor on 20.07.15.
  * A set of categories represented by a title and a description
  */
-public class CategorySet {
+public class CategorySet implements Serializable {
 
+    private static final long serialVersionUID = 2861394878954222073L;
     private String title;
     private Category[] categories;
 

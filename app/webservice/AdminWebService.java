@@ -10,6 +10,8 @@ import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
 import play.libs.F;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
@@ -20,15 +22,11 @@ import java.util.List;
  * Created by gaylor on 15.07.15.
  * Webservice for the administration
  */
+@Singleton
 public class AdminWebService {
 
-    private static AdminWebService instance = new AdminWebService();
-
-    private AdminWebService() {}
-
-    static public AdminWebService getInstance() {
-        return instance;
-    }
+    @Inject
+    private ConnectionService service;
 
     /**
      * Get the list of parsed applications
@@ -41,7 +39,7 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("nb_per_page", String.valueOf(numberPerPage)));
 
         Type type = new TypeToken<List<AndroidApp>>(){}.getType();
-        return ConnectionService.getNoCache(Constants.adminURL, params, type);
+        return service.getNoCache(Constants.adminURL, params, type);
     }
 
     /**
@@ -56,7 +54,7 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("nb_logs", String.valueOf(50)));
         
         Type type = new TypeToken<List<Log>>() {}.getType();
-        return ConnectionService.getNoCache(Constants.adminURL, params, type);
+        return service.getNoCache(Constants.adminURL, params, type);
     }
 
     /**
@@ -70,7 +68,7 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("argument", json));
 
         Logger.info("JSON: " + json);
-        return ConnectionService.post(Constants.adminURL, encodeValues(params));
+        return service.post(Constants.adminURL, encodeValues(params));
     }
 
     /**
@@ -82,7 +80,7 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("cmd", Constants.GET_ARGUMENTS));
 
         Type type = new TypeToken<List<Argument>>(){}.getType();
-        return ConnectionService.getNoCache(Constants.adminURL, params, type);
+        return service.getNoCache(Constants.adminURL, params, type);
     }
 
     private List<NameValuePair> encodeValues(List<NameValuePair> params) {

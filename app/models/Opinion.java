@@ -2,13 +2,15 @@ package models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Created by gaylor on 02.07.15.
  * Opinion in a clause
  */
-public class Opinion {
+public class Opinion implements Serializable {
+
+    private static final long serialVersionUID = -4273595504109641382L;
 
     public enum Polarity {
         @SerializedName("negative")

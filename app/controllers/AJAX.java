@@ -18,6 +18,7 @@ import play.mvc.Result;
 import webservice.MessageParser;
 import webservice.WebService;
 
+import javax.inject.Inject;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -27,11 +28,8 @@ import java.util.*;
  */
 public class AJAX extends Controller {
 
+    @Inject
     private WebService wb;
-
-    public AJAX() {
-        wb = WebService.getInstance();
-    }
 
     /**
      * Return a JSON format of the reviews of the application

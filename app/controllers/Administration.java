@@ -23,6 +23,7 @@ import service.BaseUserService;
 import webservice.AdminWebService;
 import webservice.MessageParser;
 
+import javax.inject.Inject;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,11 +34,11 @@ import java.util.stream.Collectors;
 @Security.Authenticated(Secured.class)
 public class Administration extends Controller {
 
+    @Inject
     private AdminWebService wb;
     private List<WebPath> paths;
 
     public Administration() {
-        wb = AdminWebService.getInstance();
         paths = new LinkedList<>();
         paths.add(new WebPath(routes.Administration.admin(), "Crawler logs"));
         paths.add(new WebPath(routes.Administration.users(), "Users' rights"));

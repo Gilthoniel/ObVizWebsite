@@ -11,16 +11,13 @@ import play.mvc.Result;
 import service.CategoryManager;
 import webservice.WebService;
 
+import javax.inject.Inject;
 import java.util.*;
 
 public class Application extends Controller {
 
+    @Inject
     private WebService wb;
-
-    public Application() {
-
-        wb = WebService.getInstance();
-    }
 
     /**
      * Homepage

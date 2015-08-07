@@ -2,12 +2,15 @@ package models;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by gaylor on 02.07.15.
  * Separate positive and negative opinions
  */
-public class OpinionValue implements Comparable<OpinionValue> {
+public class OpinionValue implements Comparable<OpinionValue>, Serializable {
 
+    private static final long serialVersionUID = 5457078665521570453L;
     private int numberPositive;
     private int numberNegative;
     private int topicID;

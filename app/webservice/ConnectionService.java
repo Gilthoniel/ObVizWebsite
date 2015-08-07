@@ -1,16 +1,15 @@
 package webservice;
 
-import constants.Constants;
 import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import play.Logger;
 import play.libs.F;
 import play.libs.ws.WS;
 import play.libs.ws.WSRequest;
+import service.cache.CustomCache;
 
-import java.io.UnsupportedEncodingException;
+import javax.inject.Inject;
 import java.lang.reflect.Type;
-import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -18,6 +17,9 @@ import java.util.List;
  * Method to get or post HTTP requests
  */
 public class ConnectionService {
+
+    @Inject
+    private CustomCache mCache;
 
     /**
      * HTTP GET request
@@ -28,7 +30,7 @@ public class ConnectionService {
      * @param nullException exception thrown if a null result occurred
      * @return WSResponse
      */
-    public static <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, String cacheKey,
+    public <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, String cacheKey,
                                        Throwable networkException, Throwable nullException)
     {
 
@@ -39,8 +41,8 @@ public class ConnectionService {
         }
 
         // If the request is in the cache, we get it
-        if (cacheKey != null && CustomCache.contains(cacheKey)) {
-            return F.Promise.pure(CustomCache.<T>take(cacheKey));
+        if (cacheKey != null && mCache.contains(cacheKey)) {
+            return F.Promise.pure(mCache.get(cacheKey));
         }
 
         return client.get()
@@ -56,7 +58,7 @@ public class ConnectionService {
                 T result = MessageParser.<T>fromJson(response.getBodyAsStream(), type);
                 if (result != null) {
 
-                    CustomCache.put(cacheKey, result);
+                    mCache.set(cacheKey, result);
 
                     return result;
                 }
@@ -65,17 +67,17 @@ public class ConnectionService {
             });
     }
 
-    public static <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, String cacheKey) {
+    public <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, String cacheKey) {
 
         Throwable error = new ServerOverloadedException();
 
-        return ConnectionService.<T>get(url, params, type, cacheKey, error, error);
+        return get(url, params, type, cacheKey, error, error);
     }
 
-    public static <T> F.Promise<T> getNoCache(final String url, final List<NameValuePair> params, Type type) {
+    public <T> F.Promise<T> getNoCache(final String url, final List<NameValuePair> params, Type type) {
         Throwable error = new ServerOverloadedException();
 
-        return ConnectionService.<T>get(url, params, type, null, error, error);
+        return get(url, params, type, null, error, error);
     }
 
     /**
@@ -84,7 +86,7 @@ public class ConnectionService {
      * @param params list of the query parameters
      * @return WSResponse
      */
-    public static <T> F.Promise<T> post(final String url, final List<NameValuePair> params, Type type) {
+    public <T> F.Promise<T> post(final String url, final List<NameValuePair> params, Type type) {
 
         // Populate the client
         StringBuilder uri = new StringBuilder();
@@ -119,7 +121,7 @@ public class ConnectionService {
      * @param params query parameters of the request
      * @return true if success
      */
-    public static F.Promise<Boolean> post(final String url, final List<NameValuePair> params) {
+    public F.Promise<Boolean> post(final String url, final List<NameValuePair> params) {
         return post(url, params, Boolean.class);
     }
 }
