@@ -1,22 +1,43 @@
 <configuration>
-    
-  <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
 
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <property name="LOG_HOME" value="logs" />
+
+    <!-- File appender -->
+
+    <appender name="FILE_AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/logs.log</file>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+            </pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/archived/logs.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <timeBasedFileNamingTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Console appender -->
+
+    <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%coloredLevel - %logger - %message%n%xException</pattern>
+        <pattern>%coloredLevel - %logger - %message%n%xException</pattern>
     </encoder>
-  </appender>
+    </appender>
 
-  <!--
-    The logger name is typically the Java/Scala package name.
-    This configures the log level to log at for a package and its children packages.
-  -->
-  <logger name="play" level="INFO" />
-  <logger name="application" level="DEBUG" />
+    <logger name="net.sf.ehcache.pool.sizeof.ObjectGraphWalker" level="OFF" />
 
-  <root level="ERROR">
-    <appender-ref ref="STDOUT" />
-  </root>
+    <root level="INFO">
+        <appender-ref ref="FILE_AUDIT" />
+        <appender-ref ref="STDOUT" />
+    </root>
 
 </configuration>

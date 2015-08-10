@@ -36,7 +36,7 @@ public class Application extends Controller {
     public F.Promise<Result> details(String id)
             throws NoAppFoundException, ServerOverloadedException
     {
-        WebPage webpage = new WebPage(session());
+        final WebPage webpage = new WebPage(session());
 
         // Add one view to the app
         wb.markViewed(id);
