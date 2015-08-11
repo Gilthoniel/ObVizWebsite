@@ -114,7 +114,7 @@ public class AndroidApp implements Initiatable, Serializable {
      * @return String
      */
     public String getImage() {
-        return coverImgUrl;
+        return coverImgUrl.replaceFirst("w[0-9]{1,3}$", "w100");
     }
 
     /**
