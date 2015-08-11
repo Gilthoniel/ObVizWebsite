@@ -8,14 +8,20 @@
                 <li class="list-group-item" data-name="logs.log">Current</li>
             </ul>
 
-            <ul class="list-group list-files">
+            @if(files != null) {
+                <ul class="list-group list-files">
                 @for(file <- files) {
                     <li class="list-group-item" data-name="archived/@file.getName">
                         @file.getName
-                        <span class="badge">@{file.length() / 1024} KB</span>
+                    <span class="badge">@{
+                        file.length() / 1024
+                    } KB</span>
                     </li>
                 }
-            </ul>
+                </ul>
+            } else {
+                Log files not found.
+            }
         </div>
 
         <div class="col-md-10" id="file-content" data-url="@routes.Administration.readFile()">

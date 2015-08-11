@@ -106,6 +106,10 @@ public class Administration extends Controller {
         return ok((play.twirl.api.Html) views.html.administration.training.render(webpage));
     }
 
+    /**
+     * Get the server logs
+     * @return
+     */
     public Result logs() {
         WebPage webpage = new WebPage(session(), paths);
         if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
@@ -115,8 +119,12 @@ public class Administration extends Controller {
         File logsDirectory = application.getFile("logs/archived");
 
         File[] files = logsDirectory.listFiles();
+        List<File> list = null;
+        if (files != null) {
+            list = Arrays.asList(files);
+        }
 
-        return ok((play.twirl.api.Html) views.html.administration.app_logs.render(webpage, Arrays.asList(files)));
+        return ok((play.twirl.api.Html) views.html.administration.app_logs.render(webpage, list));
     }
 
     /** AJAX **/
