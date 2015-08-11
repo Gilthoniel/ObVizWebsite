@@ -1,0 +1,52 @@
+@(webpage: WebPage, files: java.util.List[java.io.File])
+
+@views.html.administration.admin_main(webpage) {
+
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="list-group list-files">
+                <li class="list-group-item" data-name="logs.log">Current</li>
+            </ul>
+
+            <ul class="list-group list-files">
+                @for(file <- files) {
+                    <li class="list-group-item" data-name="archived/@file.getName">
+                        @file.getName
+                        <span class="badge">@{file.length() / 1024} KB</span>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-10" id="file-content" data-url="@routes.Administration.readFile()">
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            var $fileContent = $("#file-content");
+            var url = $fileContent.data("url");
+
+            var $files = $(".list-files");
+            $files.on('click', 'li', function() {
+                $files.find("li").removeClass("active");
+                $(this).addClass("active");
+
+                $.get(url, { n: $(this).data("name") })
+                    .done(function(data) {
+
+                        $fileContent.empty();
+
+                        $.each(data, function(i, line) {
+                            $fileContent.append(line).append("<br />");
+                        })
+
+                    });
+            });
+        });
+
+    </script>
+}

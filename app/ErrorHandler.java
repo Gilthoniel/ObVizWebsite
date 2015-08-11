@@ -39,7 +39,7 @@ public class ErrorHandler extends Controller implements HttpErrorHandler {
         switch (exception.getMessage()) {
             case Constants.NO_APP_EXCEPTION:
 
-                message = "Sorry, we can't find this app. Did you use the search bar ?";
+                message = "Sorry, it seems we can't find this app.";
                 return F.Promise.pure(
                         Results.notFound((play.twirl.api.Html) views.html.error.render(webpage, message))
                 );
@@ -66,7 +66,7 @@ public class ErrorHandler extends Controller implements HttpErrorHandler {
 
     private void writeLogs(Throwable error) {
         // Write the message
-        Logger.error("Error page occurred with message : " + error.getClass() + " - " + error.getMessage() + "\n");
+        Logger.error("\nError page occurred with message : " + error.getClass() + " - " + error.getMessage() + "\n");
 
         // Write the cause
         if (error.getCause() != null) {

@@ -2,15 +2,13 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import constants.Constants;
 import models.AndroidApp;
 import models.WebPage;
 import models.WebPage.WebPath;
 import models.admin.Argument;
 import models.admin.Log;
-import net.sf.ehcache.search.expression.And;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.F;
@@ -24,6 +22,7 @@ import webservice.AdminWebService;
 import webservice.MessageParser;
 
 import javax.inject.Inject;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,6 +35,8 @@ public class Administration extends Controller {
 
     @Inject
     private AdminWebService wb;
+    @Inject
+    private play.Application application;
     private List<WebPath> paths;
 
     public Administration() {
@@ -43,12 +44,13 @@ public class Administration extends Controller {
         paths.add(new WebPath(routes.Administration.admin(), "Crawler logs"));
         paths.add(new WebPath(routes.Administration.users(), "Users' rights"));
         paths.add(new WebPath(routes.Administration.training(), "Training"));
+        paths.add(new WebPath(routes.Administration.logs(), "Logs"));
         paths.add(new WebPath(routes.Application.index(), "Back to website"));
     }
 
     /**
      * Logs of the crawlers
-     * @return
+     * @return Html
      */
     public F.Promise<Result> admin() {
         WebPage webpage = new WebPage(session(), paths);
@@ -77,7 +79,7 @@ public class Administration extends Controller {
 
     /**
      * Change users rights
-     * @return
+     * @return Html
      */
     public Result users() {
         WebPage webpage = new WebPage(session(), paths);
@@ -93,7 +95,7 @@ public class Administration extends Controller {
 
     /**
      * Page to entrain the AI model
-     * @return
+     * @return Html
      */
     public Result training() {
         WebPage webpage = new WebPage(session(), paths);
@@ -102,6 +104,19 @@ public class Administration extends Controller {
         }
 
         return ok((play.twirl.api.Html) views.html.administration.training.render(webpage));
+    }
+
+    public Result logs() {
+        WebPage webpage = new WebPage(session(), paths);
+        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
+            return redirect(routes.Application.index());
+        }
+
+        File logsDirectory = application.getFile("logs/archived");
+
+        File[] files = logsDirectory.listFiles();
+
+        return ok((play.twirl.api.Html) views.html.administration.app_logs.render(webpage, Arrays.asList(files)));
     }
 
     /** AJAX **/
@@ -203,5 +218,33 @@ public class Administration extends Controller {
                 return ok(root);
             });
         });
+    }
+
+    public Result readFile() {
+
+        String name = request().getQueryString("n");
+        if (name == null) {
+            return badRequest();
+        }
+
+        ArrayNode root = Json.newArray();
+
+        try {
+
+            File file = application.getFile("logs/" + name);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                root.add(line);
+            }
+
+        } catch (IOException e) {
+
+            Logger.error(e.getMessage());
+            return badRequest();
+        }
+
+        return ok(root);
     }
 }

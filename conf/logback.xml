@@ -9,17 +9,14 @@
 
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+                %d{yyyy-MM-dd HH:mm:ss, UTC} - %msg%n
             </pattern>
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${LOG_HOME}/archived/logs.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-
-            <timeBasedFileNamingTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingTriggeringPolicy>
+            <fileNamePattern>${LOG_HOME}/archived/logs.%d{yyyy-MM-dd, UTC}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
 
@@ -28,9 +25,9 @@
     <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-        <pattern>%coloredLevel - %logger - %message%n%xException</pattern>
-    </encoder>
+        <encoder>
+            <pattern>%coloredLevel - %logger - %message%n%xException</pattern>
+        </encoder>
     </appender>
 
     <logger name="net.sf.ehcache.pool.sizeof.ObjectGraphWalker" level="OFF" />
