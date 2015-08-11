@@ -27,30 +27,23 @@ OBVIZ.carousel = {
         var $slick = OBVIZ.$slider;
         $slick.slick({
             infinite: false,
-            swipeToSlide: true,
             dots: true,
             arrows: false,
             slidesToShow: 8,
-            mobileFirst: true,
-            respondTo: 'slider',
+            slidesToScroll: 2,
             responsive: [
                 {
-                    breakpoint: 500,
+                    breakpoint: 600,
                     settings: {
-                        slidesToShow: 6
+                        slidesToShow: 6,
+                        slidesToScroll: 6
                     }
                 },
                 {
-                    breakpoint: 300,
-                    settings: {
-                        slidesToShow: 6
-                    }
-                },
-                {
-                    breakpoint: 200,
+                    breakpoint: 400,
                     settings: {
                         slidesToShow: 4,
-                        dots: false
+                        slidesToScroll: 4
                     }
                 }
             ]
@@ -401,9 +394,11 @@ OBVIZ.refreshScroll = function(container) {
         var $body = $(this).find('.content');
         var position = $body.find(".clause-negative, .clause-positive").position();
         // Move the opinion in the displayed area
-        $body.animate({
-            scrollTop: position.top - 20
-        });
+        if (typeof position !== 'undefined') {
+            $body.animate({
+                scrollTop: position.top - 20
+            });
+        }
 
         // hide the gradient if the opinion is at the top or the text is too small
         if ($body.find(".inner").innerHeight() <= 100) {
@@ -464,33 +459,6 @@ OBVIZ.rotate = function($elems, offset, cx, cy) {
         }
     });
 };
-
-OBVIZ.bands = [ {
-    "color": "#cc4748",
-    "endValue": 20,
-    "innerRadius": "80%",
-    "startValue": 0
-}, {
-    "color": "#CF6868",
-    "endValue": 40,
-    "innerRadius": "80%",
-    "startValue": 20
-}, {
-    "color": "#e6e6e6",
-    "endValue": 60,
-    "innerRadius": "80%",
-    "startValue": 40
-}, {
-    "color": "#A5D1A5",
-    "endValue": 80,
-    "innerRadius": "80%",
-    "startValue": 60
-}, {
-    "color": "#84b761",
-    "endValue": 100,
-    "innerRadius": "80%",
-    "startValue": 80
-} ];
 
 $(document).ready(function() {
 

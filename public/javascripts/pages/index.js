@@ -133,6 +133,42 @@ OBVIZ.get = function($baseContainer, url, params) {
             $container.show();
             $baseContainer.find(".icon-loader").stop().slideUp();
 
+            // Init the gauges
+            $items.find(".chart-gauge").each(function() {
+                var $element = $(this);
+                var chartID = $element.attr("id");
+                $element.data("gauge", AmCharts.makeChart(chartID, {
+                    "addClassNames": true,
+                    "type": "gauge",
+                    "theme": "light",
+                    "axes": [ {
+                        "axisThickness": 0,
+                        "axisAlpha": 0.0,
+                        "tickAlpha": 0.0,
+                        "valueInterval": 100,
+                        "showFirstLabel": false,
+                        "showLastLabel": false,
+                        "bands": OBVIZ.bands,
+                        "bottomText": $element.data("title"),
+                        "bottomTextYOffset": 20,
+                        "endValue": 100
+                    } ],
+                    "arrows": [ {
+                        "value": Number($element.data("value")),
+                        "color": "#505050",
+                        "startWidth": 5,
+                        "radius": "100%",
+                        "innerRadius": "30%",
+                        "borderAlpha": 1,
+                        "id": "0"
+                    } ],
+                    "export": {
+                        "enabled": true
+                    },
+                    "panEventsEnabled": false
+                }));
+            });
+
             // Animate to show the items
             $items.each(function(i) {
                 $(this).delay(i * 50).animate({

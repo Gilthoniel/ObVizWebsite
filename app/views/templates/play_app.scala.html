@@ -1,6 +1,6 @@
 @(app: AndroidApp)
 
-<div class="body-app col-xs-12 col-md-4">
+<div class="body-app col-xs-12 col-md-6">
 
     <div class="media">
         <div class="media-left">
@@ -11,14 +11,19 @@
         <div class="media-body">
             <h4 class="media-heading"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></h4>
 
-            @views.html.icons.icons(app.getCategory)
-            @for(i <- 1 to app.getScore) {
-                <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
-            }
+            <div class="mid-content">
+                @views.html.icons.icons(app.getCategory, 20)
+                @for(i <- 1 to app.getScore) {
+                    <img src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
+                }
+            </div>
 
             <hr />
-            @if(app.isFree) {<strong>Free</strong>} else {Payante} &bull; version <strong>@app.getMinOS</strong> <br />
+            @if(app.isFree) {<strong>Free</strong>} else {Paid} &bull; version <strong>@app.getMinOS</strong> <br />
             Installations: @app.getInstallations
+        </div>
+        <div class="media-right">
+            <div id="gauge-@app.getAppID.hashCode" data-value="@app.getGlobalOpinion" class="chart-gauge hidden-xs"></div>
         </div>
     </div>
 </div>

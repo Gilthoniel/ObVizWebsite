@@ -40,7 +40,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-obviz">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -51,7 +51,7 @@
                     </a>
                 </div>
 
-                <div class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse" id="navbar-obviz">
                     <ul class="nav navbar-nav">
                         @for(path <- webpage.getBreadcrumb) {
                             <li><a href="@path.getPath">@path.getTitle</a></li>
