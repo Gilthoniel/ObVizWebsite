@@ -26,7 +26,7 @@ public class Application extends Controller {
     public Result index() {
         WebPage webpage = new WebPage(session());
 
-        return ok((play.twirl.api.Html) views.html.index.render(webpage, CategoryManager.instance.getCategories()));
+        return ok((play.twirl.api.Html) views.html.index.render(webpage));
     }
 
     /**
@@ -42,7 +42,7 @@ public class Application extends Controller {
         wb.markViewed(id);
 
         F.Promise<AndroidApp> promise = wb.getAppDetails(id, Constants.Weight.FULL);
-        F.Promise<Map<Integer, List<String>>> topics = wb.getTopicTitles();
+        F.Promise<Map<Integer, String>> topics = wb.getTopicTitles();
 
         return promise.flatMap(app -> {
 

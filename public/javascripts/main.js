@@ -35,4 +35,182 @@ OBVIZ.bands = [ {
 
 $(document).ready(function() {
 
+    OBVIZ.$searchbar = $("#search-bar");
+    OBVIZ.$searchResults = $("#search-results");
+    OBVIZ.$bodyContent = $("#body-content");
+
+    /* Searching */
+    OBVIZ.search.init();
+    OBVIZ.$searchbar.hover(function() {
+
+        OBVIZ.$searchbar.find(".form-group").animate({
+            width: 200
+        }, 200);
+
+        OBVIZ.$searchbar.find("input[type='text']").focus();
+
+    }, function() {
+        // Nothing happens on hover out
+    });
+    OBVIZ.$searchbar.focusout(function() {
+
+        // Close only if there's no text inside the search bar
+        if (OBVIZ.$searchbar.find("input[type='text']").val() == "") {
+            OBVIZ.$searchbar.find(".form-group").animate({
+                width: 0
+            }, 200);
+        }
+    })
 });
+
+/**
+ * Functions to execute a search
+ * @type {{init: Function, get: Function}}
+ */
+OBVIZ.search = {
+
+    init: function() {
+        OBVIZ.$searchbar.submit(function(event) {
+            event.preventDefault();
+
+            var $categories = OBVIZ.$searchResults.find(".list-categories li");
+            $categories.removeClass("active");
+            $categories.first().addClass("active");
+
+            OBVIZ.search.get();
+        });
+
+        OBVIZ.$searchResults.find(".list-categories").on('click', 'li', function() {
+
+            var $categories = OBVIZ.$searchResults.find(".list-categories li");
+            $categories.removeClass("active");
+            $(this).addClass("active");
+
+            OBVIZ.search.get($(this).data("categories"));
+        });
+    },
+
+    get: function(categories) {
+
+        var query = OBVIZ.$searchbar.find("input[type='text']").val();
+        var url = OBVIZ.$searchResults.data("url");
+
+        if (typeof categories === 'undefined') {
+            categories = "";
+        }
+
+        OBVIZ.get(OBVIZ.$searchResults, url, { query: query, categories: categories });
+    },
+
+    close: function() {
+
+        OBVIZ.toggleContainer(OBVIZ.$bodyContent);
+    }
+};
+
+OBVIZ.get = function($baseContainer, url, params) {
+    // Hide the error message
+    $baseContainer.find(".error-message").hide();
+    // Show a loading icon
+    $baseContainer.find(".icon-loader").slideDown();
+
+    // Display the good container
+    if ($baseContainer.is("#search-results")) {
+        OBVIZ.toggleContainer(OBVIZ.$searchResults);
+    } else {
+        OBVIZ.toggleContainer(OBVIZ.$bodyContent);
+    }
+
+    // Cancel the previous request
+    if (typeof OBVIZ.request !== 'undefined') {
+        OBVIZ.request.abort();
+    }
+
+    OBVIZ.request = $.get(url, params)
+        .done(function(data) {
+            var $container = $baseContainer.find(".results-container");
+            $container.hide();
+
+            // Clean the container
+            $container.empty();
+            // Add the items
+            $.each(data, function(i, item) {
+                $container.append(item);
+            });
+
+            // Hide the elements before display the block
+            var $items = $container.find(".body-app")
+                .css("opacity", 0)
+                .css("top", 100);
+            $container.show();
+            $baseContainer.find(".icon-loader").stop().slideUp();
+
+            // Init the gauges
+            $items.find(".chart-gauge").each(function() {
+                var $element = $(this);
+                var chartID = $element.attr("id");
+                $element.data("gauge", AmCharts.makeChart(chartID, {
+                    "addClassNames": true,
+                    "type": "gauge",
+                    "theme": "light",
+                    "axes": [ {
+                        "axisThickness": 0,
+                        "axisAlpha": 0.0,
+                        "tickAlpha": 0.0,
+                        "valueInterval": 100,
+                        "showFirstLabel": false,
+                        "showLastLabel": false,
+                        "bands": OBVIZ.bands,
+                        "bottomText": $element.data("title"),
+                        "bottomTextYOffset": 20,
+                        "endValue": 100
+                    } ],
+                    "arrows": [ {
+                        "value": Number($element.data("value")),
+                        "color": "#505050",
+                        "startWidth": 5,
+                        "radius": "100%",
+                        "innerRadius": "30%",
+                        "borderAlpha": 1,
+                        "id": "0"
+                    } ],
+                    "export": {
+                        "enabled": true
+                    },
+                    "panEventsEnabled": false
+                }));
+            });
+
+            // Animate to show the items
+            $items.each(function(i) {
+                $(this).delay(i * 50).animate({
+                    opacity: 1,
+                    top: 0
+                });
+            });
+        })
+        .fail(function(xhr, status) {
+
+            if (status != 'abort') {
+                $baseContainer.find(".icon-loader").stop().fadeOut();
+                $baseContainer.find(".error-message").stop().fadeIn();
+            }
+        });
+};
+
+OBVIZ.toggleContainer = function ($container) {
+
+    if ($container.is("#body-content")) {
+
+        OBVIZ.$searchResults.fadeOut(300, function() {
+            OBVIZ.$bodyContent.fadeIn(300);
+        });
+
+    } else {
+
+        OBVIZ.$bodyContent.fadeOut(300, function() {
+            OBVIZ.$searchResults.show();
+        });
+
+    }
+};

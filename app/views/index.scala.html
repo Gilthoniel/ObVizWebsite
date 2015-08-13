@@ -1,93 +1,35 @@
-@(webpage: WebPage, categories: java.util.List[CategorySet])
+@(webpage: WebPage)
 
 @main(webpage) {
-    <div class="container">
-        @* Searchbar to find an app with name or keywords *@
-        <div class="row" id="home-searchbar" data-url="@controllers.routes.AJAX.search()">
 
-            @* Description *@
-            <div class="col-xs-12 description">
-                <p>
-                    Enter keywords or an app name of the Google Play Store.
-                </p>
-            </div>
+    <div id="trending" data-url="@routes.AJAX.getTrending">
+        <div class="page-header">
+            <h1>
+                Trending
 
-            @* Search Bar *@
-            <div class="col-xs-12 col-md-6 col-md-offset-3 search-bar">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for ..." />
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" id="search-button">Go!</button>
-                    </span>
-                </div>
+                <small>
+                    <ul class="list-categories">
+                    @for(category <- webpage.getCategories) {
+                        <li data-categories="@category.getCategories">@category.getTitle</li>
+                    }
+                    </ul>
+                </small>
+            </h1>
+        </div>
+
+        @* Loading icon *@
+        <div class="icon-loader">
+            <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
+        </div>
+        @* Error message to display when an error occurred *@
+        <div class="error-message">
+            <div class="alert alert-info">
+                An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
             </div>
         </div>
 
-        <div id="trending" data-url="@routes.AJAX.getTrending">
-            <div class="page-header">
-                <h1>
-                    Trending
+        <div class="row results-container">
 
-                    <small>
-                        <ul class="list-categories">
-                        @for(category <- categories) {
-                            <li data-categories="@category.getCategories">@category.getTitle</li>
-                        }
-                        </ul>
-                    </small>
-                </h1>
-            </div>
-
-            @* Loading icon *@
-            <div class="icon-loader">
-                <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
-            </div>
-            @* Error message to display when an error occurred *@
-            <div class="error-message">
-                <div class="alert alert-info">
-                    An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
-                </div>
-            </div>
-
-            <div class="row results-container">
-
-            </div>
-        </div>
-
-        <div id="search-results">
-            <div class="page-header">
-                <button class="pull-right btn btn-default btn-close" onclick="OBVIZ.search.close()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-
-                <h1>
-                    Results
-
-                    <small>
-                        <ul class="list-categories">
-                            @for(category <- categories) {
-                                <li data-categories="@category.getCategories">@category.getTitle</li>
-                            }
-                        </ul>
-                    </small>
-                </h1>
-            </div>
-
-            @* Loading icon *@
-            <div class="icon-loader">
-                <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
-            </div>
-            @* Error message to display when an error occurred *@
-            <div class="error-message">
-                <div class="alert alert-info">
-                    An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
-                </div>
-            </div>
-
-            @* Storage for the results *@
-            <div class="row results-container">
-
-            </div>
         </div>
     </div>
 

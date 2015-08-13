@@ -5,6 +5,7 @@ import controllers.routes;
 import play.mvc.Call;
 import play.mvc.Http;
 import service.BaseUser;
+import service.CategoryManager;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +50,10 @@ public class WebPage {
 
     public BaseUser getUser() {
         return user;
+    }
+
+    public List<CategorySet> getCategories() {
+        return CategoryManager.instance.getCategories();
     }
 
     /* PRIVATE */

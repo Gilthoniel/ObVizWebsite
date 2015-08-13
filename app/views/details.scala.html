@@ -1,4 +1,4 @@
-@(webpage: WebPage, app: AndroidApp, titles: java.util.Map[Integer, java.util.List[String]],
+@(webpage: WebPage, app: AndroidApp, titles: java.util.Map[Integer, String],
         related: java.util.List[AndroidApp])
 
 @main(webpage) {
@@ -59,7 +59,7 @@
                 @for(opinionValue <- app.getMostImportantTopics.take(8)) {
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="opinion-box" data-topic="@opinionValue.getTopicID">
-                            <div id="gauge-@opinionValue.getTopicID" data-title="@titles.get(opinionValue.getTopicID).head"
+                            <div id="gauge-@opinionValue.getTopicID" data-title="@titles.get(opinionValue.getTopicID)"
                                     data-value="@opinionValue.percentage()" class="chart-gauge"></div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                 <div id="details-opinions">
                 @for(value <- app.getMostImportantTopics) {
                     <span onclick="OBVIZ.goTo(@value.getTopicID)"
-                    style="font-size: @value.getFontSize(app.getMaxNumberOpinions)em">@titles.get(value.getTopicID).head</span>
+                    style="font-size: @value.getFontSize(app.getMaxNumberOpinions)em">@titles.get(value.getTopicID)</span>
                 }
                 </div>
             </div>

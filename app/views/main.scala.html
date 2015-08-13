@@ -38,70 +38,119 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-obviz">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="@routes.Application.index()">
-                        <img style="height: 100%;" src="@routes.Assets.versioned("images/favicon.png")" alt="" />
-                    </a>
-                </div>
 
-                <div class="collapse navbar-collapse" id="navbar-obviz">
-                    <ul class="nav navbar-nav">
+        @* Header *@
+        <div id="header" class="container-fluid">
+            <nav class="navbar navbar-default" data-spy="affix" data-offset-top="20">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-obviz">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="@routes.Application.index()">
+                            <img src="@routes.Assets.versioned("images/favicon.png")" alt="" />
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbar-obviz">
+                        <ul class="nav navbar-nav">
                         @for(path <- webpage.getBreadcrumb) {
                             <li><a href="@path.getPath">@path.getTitle</a></li>
                         }
-                    </ul>
+                        </ul>
 
-                    @currentAuth() { auth =>
-                      @if(webpage.getUser != null) {
-                          <p class="navbar-text navbar-right">
-                              Connected with @auth.getProvider
-                          </p>
-                          @webpage.getUser.right match {
-                              case Rights.ADMIN => {
-                                  <ul class="nav navbar-nav navbar-right">
-                                      <li><a href="@controllers.routes.Administration.admin()">Administration</a></li>
-                                      <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
-                                  </ul>
-                              }
+                        @currentAuth() { auth =>
+                            @if(webpage.getUser != null) {
+                                @webpage.getUser.right match {
+                                    case Rights.ADMIN => {
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li><a href="@controllers.routes.Administration.admin()">Administration</a></li>
+                                            <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                                        </ul>
+                                    }
 
-                              case Rights.USER => {
-                                  <ul class="nav navbar-nav navbar-right">
-                                      <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
-                                  </ul>
-                              }
-                          }
-                      } else {
+                                    case Rights.USER => {
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                                        </ul>
+                                    }
+                                }
+                            } else {
 
-                      }
-                    }
+                            }
+                        }
+
+                        <form class="navbar-form navbar-right" role="search" id="search-bar">
+                            <button type="submit"><img height="30" src="@routes.Assets.versioned("images/search_icon.png")" alt="" /></button>
+                            <div class="form-group">
+                                <input type="text" placeholder="Search ..." />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        @* Body *@
+        <div id="body" class="container">
+            <div id="body-header"></div>
+            <div id="body-footer"></div>
+
+            <div id="body-middle">
+                <div id="body-content">
+                    @content
+                </div>
+                <div id="search-results" data-url="@controllers.routes.AJAX.search()">
+                    <div class="page-header">
+                        <button class="pull-right btn btn-default btn-close" onclick="OBVIZ.search.close()">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+
+                        <h1>
+                            Results
+
+                            <small>
+                                <ul class="list-categories">
+                                @for(category <- webpage.getCategories) {
+                                    <li data-categories="@category.getCategories">@category.getTitle</li>
+                                }
+                                </ul>
+                            </small>
+                        </h1>
+                    </div>
+
+                    @* Loading icon *@
+                    <div class="icon-loader">
+                        <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
+                    </div>
+                    @* Error message to display when an error occurred *@
+                    <div class="error-message">
+                        <div class="alert alert-info">
+                            An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
+                        </div>
+                    </div>
+
+                    @* Storage for the results *@
+                    <div class="row results-container">
+
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
 
-        <div class="container-fluid">
-            <div id="body-content">
-                @content
-            </div>
-
-            @* Footer *@
-            <div id="footer">
-                <p>
-                    Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
-                    from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> are licensed by
-                    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-                </p>
-                <p>
-                    Gauge Chart made with <a href="http://www.amcharts.com/">AmCharts</a>
-                </p>
-            </div>
+        @* Footer *@
+        <div id="footer" class="container-fluid">
+            <p>
+                Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
+                from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> are licensed by
+                <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+            </p>
+            <p>
+                Gauge Chart made with <a href="http://www.amcharts.com/">AmCharts</a>
+            </p>
         </div>
     </body>
 </html>

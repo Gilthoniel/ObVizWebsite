@@ -2,9 +2,8 @@ package webservice;
 
 import com.google.gson.reflect.TypeToken;
 import constants.Constants;
-import edu.umd.cs.findbugs.annotations.NonNull;
-import models.Initiatable;
 import models.AndroidApp;
+import models.Initiatable;
 import models.Review;
 import models.TopicTitles;
 import models.errors.NoAppFoundException;
@@ -150,7 +149,7 @@ public class WebService {
      * Get the name of the topics for an id
      * @return Map : key is the id and value is the array of titles
      */
-    public F.Promise<Map<Integer, List<String>>> getTopicTitles() {
+    public F.Promise<Map<Integer, String>> getTopicTitles() {
 
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_TOPIC_TITLES));
@@ -159,14 +158,11 @@ public class WebService {
         String cacheKey = "topictitles";
         // Return the list of topics in mapped form for easiest uses
         return service.<List<TopicTitles>>get(Constants.baseURL, params, type, cacheKey).map(titles -> {
-            Map<Integer, List<String>> mappedTitles = new TreeMap<>();
+            Map<Integer, String> mappedTitles = new TreeMap<>();
             for (TopicTitles title : titles) {
-                List<String> upper = new ArrayList<>();
-                for (String opinion : title.getTitles()) {
-                    upper.add(opinion.substring(0, 1).toUpperCase() + opinion.substring(1));
-                }
+                String opinion = title.getTitle();
 
-                mappedTitles.put(title.getID(), upper);
+                mappedTitles.put(title.getID(), opinion.substring(0, 1).toUpperCase() + opinion.substring(1));
             }
 
             return mappedTitles;

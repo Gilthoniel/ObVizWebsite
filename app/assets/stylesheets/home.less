@@ -1,22 +1,4 @@
 
-#home-searchbar {
-  margin: 10px 0;
-
-  .logo {
-    margin: 20px 0 60px 0;
-
-    text-align: center;
-    font-size: 5em;
-  }
-
-  .description p {
-    margin: 20px 0;
-
-    text-align: center;
-    font-size: 2em;
-  }
-}
-
 #search-results {
 
   display: none;
@@ -24,7 +6,7 @@
 
   .btn-close {
     position: absolute;
-    top: 20px;
+    top: 0;
     right: 0;
   }
 }
@@ -71,44 +53,6 @@
       }
     }
   }
-
-  .results-container {
-    text-align: center;
-
-    .body-app {
-      padding: 0 10px 20px 10px;
-      text-align: left;
-
-      .media {
-        background-color: white;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        border-top-left-radius: 25px;
-        border-bottom-left-radius: 40px;
-
-        .media-heading {
-          margin-top: 5px;
-        }
-
-        .mid-content {
-          margin-bottom: 5px;
-        }
-
-        .chart-gauge {
-          width: 110px;
-          height: 100px;
-        }
-      }
-
-      svg {
-        vertical-align: middle;
-        margin-right: 10px;
-      }
-
-      hr {
-        margin: 0 10px 0 0;
-      }
-    }
-  }
 }
 
 #list-applications {
@@ -130,14 +74,6 @@
 /* SMALL SCREEN FIXES */
 
 @media screen and (max-width: @screen-xs-max) {
-
-  #home-searchbar {
-
-    .description p {
-      font-size: 1.2em;
-      font-weight: normal;
-    }
-  }
 
   .page-header {
     h1 {

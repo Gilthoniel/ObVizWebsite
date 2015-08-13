@@ -12,14 +12,14 @@ public class Date implements Serializable {
 
     private static final long serialVersionUID = -1812320280233313292L;
     private long $date;
-    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM YYYY");
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM YYYY");
 
     public long getValue() {
         return $date;
     }
 
     public String getWithMinutes() {
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss, dd MMMM YYYY");
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss, dd MMM YYYY");
 
         return formatter.format(new java.util.Date($date));
     }

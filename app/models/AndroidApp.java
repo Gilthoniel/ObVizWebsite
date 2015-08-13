@@ -190,6 +190,17 @@ public class AndroidApp implements Initiatable, Serializable {
         return screenshots;
     }
 
+    public String getRandomScreen(int size) {
+
+        if (screenshots != null && screenshots.size() > 0) {
+            Random random = new Random();
+            return screenshots.get(random.nextInt(screenshots.size())).replaceFirst("[hw][0-9]+$", "w" + size);
+        } else {
+
+            return "";
+        }
+    }
+
     /**
      * Get the closest score in Integer format
      * @return total score of the application
@@ -226,7 +237,7 @@ public class AndroidApp implements Initiatable, Serializable {
             throw new UnsupportedOperationException("Should be initialize");
         } else if (mappedOpinions.isEmpty()) { // TODO : remove
 
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i < 10; i++) {
 
                 OpinionValue opinion = new OpinionValue(i);
                 opinion.setNegative(random.nextInt(300));

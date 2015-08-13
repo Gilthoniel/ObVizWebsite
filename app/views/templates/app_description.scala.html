@@ -1,4 +1,4 @@
-@(app: AndroidApp, titles: java.util.Map[Integer, java.util.List[String]])
+@(app: AndroidApp, titles: java.util.Map[Integer, String])
 
 <div class="app-information" data-id="@app.getAppID">
     <table>
@@ -44,7 +44,7 @@
     <div class="data" data-url="@controllers.routes.AJAX.getReviews(app.getAppID)">
         <span data-topic="0" data-title="Global" data-value="@app.getGlobalOpinion"></span>
         @for((id, value) <- app.getMappedOpinions) {
-            <span data-topic="@id" data-title="@titles.get(id).head" data-value="@value.percentage"></span>
+            <span data-topic="@id" data-title="@titles.get(id)" data-value="@value.percentage"></span>
         }
     </div>
 </div>
