@@ -29,133 +29,93 @@
 }
 
 /* Logo, Name, .. */
-#details-header {
-  position: relative;
-  padding: 0;
-  margin-bottom: 20px;
+#app-description {
 
-  background: #ececec;
-  border-bottom: 1px solid rgb(185, 183, 183);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-
-  h3 {
-    margin-top: 10px;
-  }
-
-  .slider-apps {
-    position: relative;
-    z-index: 75;
-
-    .related-app {
-      margin: 0 10px;
-      cursor: pointer;
-
-      .app-information { display: none; }
-    }
-
+  h1 {
     img {
-      height: 50px;
+      vertical-align: bottom;
     }
   }
 
-  #related-resumes {
-    position: relative;
-
-    .btn-remove {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-
-      background: none;
-      border: none;
-      color: #E45D5D;
-      font-size: 20px;
-    }
-
-    .btn-remove:hover {
-      color: #bc5555;
-    }
-  }
-
-  /** footer of the header to show the starting comparison **/
-  .comparison-bg {
-    max-width: 100%;
-    overflow: hidden;
-    padding: 0;
-
-    div {
-      position: relative;
-      height: 10px;
-      padding: 0;
-    }
-
-    .current {
-      background: @currentBar;
-      left: -100%;
-    }
-    .compared {
-      background: @comparedBar;
-      right: -100%;
-    }
-  }
-}
-
-.app-information {
-  margin: 0 auto;
-
-  td {
-    padding: 5px;
-    vertical-align: top;
-  }
-
-  .logo {
-    width: 100px;
-    img { width: 100%; }
-  }
-
-  .name {
-    font-size: 2em;
-    font-weight: bold;
-    vertical-align: bottom;
-
-    a, a:link, a:focus {
-      color: #1c1c1c;
-      text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
-    }
-
-    a:hover {
-      color: #c8c8c8;
-      text-decoration: none;
-    }
-
-    .bullet {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border-radius: 10px;
-      background: transparent;
-    }
-  }
-
-  ul {
-    padding: 0;
+  ul.information {
     list-style: none;
-    font-weight: normal;
+    padding: 0;
 
-    .developer {
-      font-size: 1.0em;
-      font-style: italic;
+    li {
+      display: inline-block;
+      margin-right: 20px;
     }
   }
 
-  .details {
-    padding-left: 10px;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  .slick-screenshots {
+
+    .slick-slide {
+      padding: 10px;
+
+      img {
+        box-shadow: 0 0 5px rgba(0,0,0,0.4);
+      }
+    }
   }
 }
-// Color of bullets
-#app-data { .bullet { background-color: @currentBar; }}
-#related-resumes { .bullet { background-color: @comparedBar; }}
+
+#alternatives {
+
+  .slick-alternatives {
+    .slick-slide {
+      padding: 10px;
+
+      .alternative-body {
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        cursor: pointer;
+      }
+
+      .alternative-body:hover {
+        box-shadow: 0 0 5px #66afe9;
+      }
+    }
+  }
+
+  .alternative-body {
+    width: 200px;
+
+    .header {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      background-position: center center;
+      background-size: cover;
+
+      .sub-header {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, white 20%, transparent);
+
+        table {
+          width: 100%;
+          height: 50px;
+          position: absolute;
+          bottom: 0;
+
+          td {
+            padding: 5px;
+            font-weight: normal;
+            font-size: 0.9em;
+          }
+
+          .logo {
+            width: 50px;
+            max-width: 50px;
+            height: 50px;
+
+            img { height: 100%; }
+          }
+        }
+      }
+    }
+  }
+}
 
 #details-aspects {
 
@@ -178,52 +138,13 @@
   #global-gauge {
     width: 100%;
     max-width: 400px;
-    margin: auto;
-  }
-}
-
-#details-block2 {
-  position: relative;
-
-  .btn-back {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    cursor: pointer;
-  }
-
-  .btn-back:hover {
-    fill: grey;
-  }
-}
-
-/* Indicator for the side of the opinions */
-#details-gauge {
-  width: 150px;
-  height: 130px;
-  margin: 20px auto;
-}
-
-/* List of opinions for the app */
-#details-opinions {
-  padding: 0;
-
-  span {
-    display: inline-block;
-    padding: 5px;
-    margin: 5px;
-  }
-
-  span:hover {
-    background-color: #3e7bc0;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+    margin: -30px auto auto auto;
   }
 }
 
 /* List of reviews of the spec app */
 #details-reviews {
+  position: relative;
   padding: 10px;
 
   .review {

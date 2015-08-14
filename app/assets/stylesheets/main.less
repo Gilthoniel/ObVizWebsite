@@ -100,6 +100,22 @@ img {
     z-index: 9999;
     margin-top: 0;
   }
+
+  #header-content {
+    position: relative;
+
+    #obvee-speaking {
+      float: right;
+
+      padding-left: 50px;
+      padding-bottom: 50px;
+      background: url('images/obvee.png') bottom left no-repeat;
+      background-size: auto 70px;
+
+      color: white;
+      font-size: 1.2em;
+    }
+  }
 }
 
 /* Body */
@@ -241,6 +257,7 @@ img {
 /** Body application **/
 @logoHeight: 50px;
 @subHeaderPadding: 5px;
+@gaugeSize: 100px;
 
 .body-app {
   position: relative;
@@ -248,25 +265,56 @@ img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  overflow: hidden;
 
   .header {
     position: relative;
     width: 100%;
-    height: 200px;
-    background-position: center center;
-    background-size: cover;
+    height: 170px;
+    background-position: top right;
+    background-size: 400px auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 
+    .opinion-indicator {
+      width: @gaugeSize;
+      height: @gaugeSize;
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      .gauge-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: 400px auto;
+        background-position: top right;
+
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+        -ms-filter: blur(10px);
+      }
+
+      .chart-gauge {
+        width: @gaugeSize;
+        height: @gaugeSize;
+
+        path.amcharts-gauge-arrow {
+          stroke: #686868;
+        }
+      }
+    }
+
     .sub-header {
       width: 100%;
-      height: 2 * @subHeaderPadding + @logoHeight;
       padding: @subHeaderPadding;
       position: absolute;
       bottom: 0;
       left: 0;
 
-      background: linear-gradient(to top, white, rgba(255, 255, 255, 0.8), transparent); /* Standard syntax */
+      background: linear-gradient(to top, white, white, transparent);
       color: black;
 
       .name {
@@ -279,7 +327,9 @@ img {
         font-size: 1.3em;
       }
 
-      img { height: @logoHeight; }
+      img {
+        height: @logoHeight;
+      }
     }
   }
 
@@ -313,20 +363,9 @@ img {
       }
     }
 
-    .media {
-
-      margin-top: 0;
-      overflow: visible;
-
-      .chart-gauge {
-        margin: auto;
-        width: 100px;
-        height: 90px;
-      }
-
-      .description {
-        padding-top: 10px;
-      }
+    .description {
+      min-height: 60px;
+      padding-top: 10px;
     }
 
     hr {

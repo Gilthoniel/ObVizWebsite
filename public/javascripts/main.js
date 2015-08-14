@@ -88,6 +88,8 @@ OBVIZ.search = {
 
             OBVIZ.search.get($(this).data("categories"));
         });
+
+        OBVIZ.hideAppElements(OBVIZ.$searchResults);
     },
 
     get: function(categories) {
@@ -168,7 +170,7 @@ OBVIZ.get = function($baseContainer, url, params) {
                     "arrows": [ {
                         "value": Number($element.data("value")),
                         "color": "#505050",
-                        "startWidth": 5,
+                        "startWidth": 10,
                         "radius": "100%",
                         "innerRadius": "30%",
                         "borderAlpha": 1,
@@ -213,4 +215,15 @@ OBVIZ.toggleContainer = function ($container) {
         });
 
     }
+};
+
+OBVIZ.hideAppElements = function($container) {
+
+    $container.on('mouseenter', '.header', function() {
+        $(this).find(".opinion-indicator").finish().fadeOut(200);
+    });
+
+    $container.on('mouseleave', '.header', function() {
+        $(this).find(".opinion-indicator").finish().fadeIn(200);
+    });
 };

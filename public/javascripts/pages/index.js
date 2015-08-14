@@ -27,6 +27,8 @@ OBVIZ.trending = {
             OBVIZ.trending.get($(this).data("categories"));
         });
 
+        OBVIZ.hideAppElements(OBVIZ.$trending);
+
         $categories.first().addClass("active");
         this.get();
     },

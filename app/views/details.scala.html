@@ -4,98 +4,116 @@
 @main(webpage) {
 
     @* Information about the application *@
-    <div class="row" id="details-header">
-        <div class="container">
-            <div class="row">
-                @* Information about the current application *@
-                <div class="col-xs-12 col-md-6" id="app-data">
-                    @views.html.templates.app_description(app, titles)
-                </div>
+    <div class="row" id="app-description">
+        <div class="col-md-6">
+            <h1><img height="40" src="@app.getImage" alt="" /> @app.getName</h1>
 
-                @* Information about the related application *@
-                <div class="col-xs-12 col-md-6">
-                    <div id="header-carousel">
-                        <h3>Compare with</h3>
-                        @* Carousel to display the related apps *@
-                        <div class="slider-apps" style="display: none;">
-                        @for(app <- related.take(16)) {
-                            <div class="related-app">
-                                <img src="@app.getImage" alt="@app.getName" />
+            <ul class="information">
+                <li>
+                    <h4>Rating</h4>
+                    @for(i <- 1 to app.getScore) {
+                        <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
+                    }
+                </li>
+                <li>
+                    <h4>Version</h4>
+                    @app.getMinOS
+                </li>
+                <li>
+                    <h4>Publication</h4>
+                    @app.getPublicationDate
+                </li>
+                <li>
+                    <h4>Category</h4>
+                    @app.getCategory.getTitle
+                </li>
+                <li>
+                    <h4>Installations</h4>
+                    @app.getInstallations
+                </li>
+                <li>
+                    <h4>Developer</h4>
+                    @app.getDeveloper
+                </li>
+            </ul>
 
-                                @views.html.templates.app_description(app, titles)
+            <hr />
+
+            <p>
+                @app.getDescription
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <div class="slick-screenshots">
+                @for(screenshot <- app.getScreenshots) {
+                    <div><img src="@screenshot" alt="" /></div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <h2>Alternatives <small>Click to compare</small></h2>
+    <div id="alternatives">
+        <div class="slick-alternatives">
+            @for(alternative <- related) {
+                <div>
+                    <div class="alternative-body" data-id="@alternative.getAppID">
+                        <div class="header" style="background-image: url('@alternative.getRandomScreen(400)')">
+                            <div class="sub-header">
+                                <table>
+                                    <tr>
+                                        <td class="logo"><img src="@alternative.getImage" alt="" /></td>
+                                        <td>@alternative.getName</td>
+                                    </tr>
+                                </table>
                             </div>
-                        }
-                        </div>
-                    </div>
-
-                    @* When comparison enabled, display the app information *@
-                    <div id="related-resumes" style="display: none;">
-                        <button class="btn-remove"><span class="glyphicon glyphicon-remove-circle"></span></button>
-                        <div class="box">
-
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 comparison-bg">
-            <div class="col-xs-6 current"></div>
-            <div class="col-xs-6 compared"></div>
+            }
         </div>
     </div>
 
-    <div id="details-block1" class="container">
-        <div class="row" id="details-aspects">
-            <h2>Opinions of the crowd...</h2>
+    <h2>Opinions of the crowd</h2>
+    <div class="row" id="details-aspects">
+        @* Global gauge *@
+        <div class=" col-xs-12 col-md-4">
+            <div id="global-gauge" data-title="Global" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
+        </div>
 
-            @* Global gauge *@
-            <div class=" col-xs-12 col-md-4">
-                <div id="global-gauge" data-title="Global" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
-            </div>
+        @* List of all the topics *@
+        <div class="col-xs-12 col-md-8 list-aspects">
+            @for(opinionValue <- app.getMostImportantTopics.take(8)) {
+                <div class="col-xs-6 col-sm-4 col-md-3">
+                    <div class="opinion-box" data-topic="@opinionValue.getTopicID">
+                        <div id="gauge-@opinionValue.getTopicID" data-title="@titles.get(opinionValue.getTopicID)"
+                                data-value="@opinionValue.percentage()" class="chart-gauge"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
-            @* List of all the topics *@
-            <div class="col-xs-12 col-md-8 list-aspects">
-                @for(opinionValue <- app.getMostImportantTopics.take(8)) {
-                    <div class="col-xs-6 col-sm-4 col-md-3">
-                        <div class="opinion-box" data-topic="@opinionValue.getTopicID">
-                            <div id="gauge-@opinionValue.getTopicID" data-title="@titles.get(opinionValue.getTopicID)"
-                                    data-value="@opinionValue.percentage()" class="chart-gauge"></div>
-                        </div>
+    <div class="row" id="details-reviews" data-url="@routes.AJAX.getReviews()">
+
+        @* List of the reviews of the application *@
+        <div class="col-xs-12">
+            <div id="base-container">
+                <div class="loading-message">
+                    <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
+                    reviews are loading ...
+                </div>
+
+                @for(id <- titles.keySet()) {
+                    <div class="topic-container" data-topic="@id" style="display: none;">
+
                     </div>
                 }
             </div>
-        </div>
-    </div>
 
-    <div id="details-block2" class="container" style="display: none;">
-        <div class="row">
-            <div class="col-xs-12">
-                <svg class="btn-back" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                    width="30" height="30">
-                    @views.html.icons.back()
-                </svg>
-
-                @* List of opinions with size related to the number *@
-                <div id="details-opinions">
-                @for(value <- app.getMostImportantTopics) {
-                    <span onclick="OBVIZ.goTo(@value.getTopicID)"
-                    style="font-size: @value.getFontSize(app.getMaxNumberOpinions)em">@titles.get(value.getTopicID)</span>
-                }
-                </div>
-            </div>
-
-            @* Gauge to display the opinions value *@
-            <div class="col-xs-12">
-                <div id="details-gauge" class="chart-gauge" data-title="Unknown" data-value="0"></div>
-            </div>
-        </div>
-
-        <div class="row" style="position: relative;">
-
-            @* List of the reviews of the application *@
-            <div class="col-xs-12" id="details-reviews">
-                <div id="base-container">
+            <div id="comparison-container" style="display: none;">
+                <div class="col-xs-6 current">
                     <div class="loading-message">
                         <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
                         reviews are loading ...
@@ -107,35 +125,36 @@
                         </div>
                     }
                 </div>
-
-                <div id="comparison-container" style="display: none;">
-                    <div class="col-xs-6 current">
-                        <div class="loading-message">
-                            <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
-                            reviews are loading ...
-                        </div>
-
-                        @for(id <- titles.keySet()) {
-                            <div class="topic-container" data-topic="@id" style="display: none;">
-
-                            </div>
-                        }
+                <div class="col-xs-6 compared">
+                    <div class="loading-message">
+                        <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
+                        reviews are loading ...
                     </div>
-                    <div class="col-xs-6 compared">
-                        <div class="loading-message">
-                            <img src="@routes.Assets.versioned("images/loading.png")" alt="" />
-                            reviews are loading ...
+
+                    @for(id <- titles.keySet()) {
+                        <div class="topic-container" data-topic="@id" style="display: none;">
+
                         </div>
-
-                        @for(id <- titles.keySet()) {
-                            <div class="topic-container" data-topic="@id" style="display: none;">
-
-                            </div>
-                        }
-                    </div>
+                    }
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="data" style="display:none;">
+        <div data-id="@app.getAppID" data-main="true">
+            @for((id, topic) <- app.getMappedOpinions) {
+                <div data-topic="@id" data-value="@topic.percentage" ></div>
+            }
+        </div>
+
+        @for(application <- related) {
+            <div data-id="@application.getAppID">
+                @for((id, topic) <- application.getMappedOpinions) {
+                    <div data-topic="@id" data-value="@topic.percentage" ></div>
+                }
+            </div>
+        }
     </div>
 
     <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/details.js")"></script>

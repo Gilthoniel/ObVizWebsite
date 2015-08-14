@@ -33,10 +33,11 @@ public class AJAX extends Controller {
 
     /**
      * Return a JSON format of the reviews of the application
-     * @param appID ID of the application
      * @return JSON
      */
-    public F.Promise<Result> getReviews(String appID) {
+    public F.Promise<Result> getReviews() {
+
+        final String appID = request().getQueryString("id");
 
         F.Promise<List<Review>> promise = wb.getReviews(appID);
         return promise.map(reviews -> {

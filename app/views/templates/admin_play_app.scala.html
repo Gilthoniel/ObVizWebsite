@@ -1,6 +1,6 @@
 @(app: AndroidApp, ids: java.util.Set[String])
 
-<li data-url="@routes.AJAX.getReviews(app.getAppID)" data-id="@app.getAppID">
+<li data-id="@app.getAppID">
     <div class="android-app @if(ids.contains(app.getAppID)) {parsed}">
         <div class="name">@app.getAppID</div>
         <div class="nb-reviews">Nb reviews: @app.getNbParsedReviews</div>
