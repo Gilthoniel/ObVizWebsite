@@ -106,7 +106,7 @@ public class Review implements Serializable {
 
                         String text = clause.getText();
                         for (String word : detail.getWords()) {
-                            text = text.replaceAll("(?i)("+word+")", "<strong>$1</strong>");
+                            text = text.replaceAll("(?i)\\b+("+word+")\\b+", "<strong>$1</strong>");
                         }
 
                         builder.append("<span class='clause clause-").append(detail.polarity).append("'>");
