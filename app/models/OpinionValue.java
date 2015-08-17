@@ -11,32 +11,20 @@ import java.io.Serializable;
 public class OpinionValue implements Comparable<OpinionValue>, Serializable {
 
     private static final long serialVersionUID = 5457078665521570453L;
-    private int numberPositive;
-    private int numberNegative;
+    private int nbPositiveOpinions;
+    private int nbNegativeOpinions;
     private int topicID;
 
     public OpinionValue(int id) {
         topicID = id;
     }
 
-    public void addPositives(int value) {
-        numberPositive += value;
-    }
-
-    public void setPositive(int value) {
-        numberPositive = value;
-    }
-
-    public void addNegatives(int value) {
-        numberNegative += value;
-    }
-
-    public void setNegative(int value) {
-        numberNegative = value;
-    }
-
     public int percentage() {
-        int percent = Math.round(numberPositive * 100 / (numberNegative + numberPositive));
+        if (nbPositiveOpinions <= 0 && nbNegativeOpinions <= 0) {
+            return 0;
+        }
+
+        int percent = Math.round(nbPositiveOpinions * 100 / (nbNegativeOpinions + nbPositiveOpinions));
 
         if (percent == 0) {
             return 1;
@@ -46,19 +34,24 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
     }
 
     public int getTotal() {
-        return numberNegative + numberPositive;
+        return nbNegativeOpinions + nbPositiveOpinions;
     }
 
     public int getNumberPositive() {
-        return numberPositive;
+        return nbPositiveOpinions;
     }
 
     public int getNumberNegative() {
-        return numberNegative;
+        return nbNegativeOpinions;
     }
 
     public int getTopicID() {
          return topicID;
+    }
+
+    public boolean isValid() {
+
+        return topicID > 0 && nbNegativeOpinions > 0 && nbPositiveOpinions > 0;
     }
 
     /**
@@ -73,6 +66,6 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
     @Override
     public int compareTo(@NonNull OpinionValue other) {
 
-        return Integer.compare(other.getTotal(), numberNegative + numberPositive);
+        return Integer.compare(other.getTotal(), nbNegativeOpinions + nbPositiveOpinions);
     }
 }

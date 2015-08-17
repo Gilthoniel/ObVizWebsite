@@ -188,15 +188,15 @@
 
     <div id="data" style="display:none;">
         <div data-id="@app.getAppID" data-main="true">
-            @for((id, topic) <- app.getMappedOpinions) {
-                <div data-topic="@id" data-value="@topic.percentage" ></div>
+            @for(value <- app.getOpinions) {
+                <div data-topic="@value.getTopicID" data-value="@value.percentage()" ></div>
             }
         </div>
 
         @for(application <- related) {
             <div data-id="@application.getAppID">
-                @for((id, topic) <- application.getMappedOpinions) {
-                    <div data-topic="@id" data-value="@topic.percentage" ></div>
+                @for(value <- application.getOpinions) {
+                    <div data-topic="@value.getTopicID" data-value="@value.percentage()" ></div>
                 }
             </div>
         }

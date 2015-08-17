@@ -31,16 +31,22 @@ public class AndroidApp implements Initiatable, Serializable {
     private Score score;
     private List<Review> reviews;
     private List<String> relatedUrls;
+    private boolean parsed;
     private int nbParsedReviews;
-
-    private Map<Integer, OpinionValue> mappedOpinions;
-    private int maxNumberOpinions;
-    private int totalPositive;
-    private int totalNegative;
+    List<OpinionValue> opinionsSummary;
 
     @Override
     public void init() {
 
+        // Remove topics without opinions
+        if (opinionsSummary != null) {
+            Iterator<OpinionValue> it = opinionsSummary.iterator();
+            while (it.hasNext()) {
+                if (!it.next().isValid()) {
+                    it.remove();
+                }
+            }
+        }
     }
 
     /**
@@ -136,6 +142,11 @@ public class AndroidApp implements Initiatable, Serializable {
         return publicationDate;
     }
 
+    public boolean isParsed() {
+
+        return parsed;
+    }
+
     /**
      * Return the list of URLs of the screenshots
      * @return List<String>
@@ -172,46 +183,41 @@ public class AndroidApp implements Initiatable, Serializable {
         if (relatedUrls != null) {
             return relatedUrls;
         } else {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
     }
 
-    public Map<Integer, OpinionValue> getMappedOpinions() {
+    public List<OpinionValue> getOpinions() {
 
-        if (mappedOpinions == null) { // TODO : remove
-            mappedOpinions = new HashMap<>();
-
-            for (int i = 1; i < 10; i++) {
-
-                OpinionValue opinion = new OpinionValue(i);
-                opinion.setNegative(random.nextInt(300));
-                opinion.setPositive(random.nextInt(300));
-
-                mappedOpinions.put(i, opinion);
-            }
+        if (opinionsSummary != null) {
+            return opinionsSummary;
+        } else {
+            return Collections.emptyList();
         }
-
-        return mappedOpinions;
     }
 
     public List<OpinionValue> getMostImportantTopics() {
 
-        List<OpinionValue> opinions = new ArrayList<>(getMappedOpinions().values());
+        List<OpinionValue> opinions = new ArrayList<>(getOpinions());
         Collections.sort(opinions);
 
         return opinions;
     }
 
-    public int getMaxNumberOpinions() {
-        return maxNumberOpinions;
-    }
-
     public int getGlobalOpinion() {
 
-        if (totalPositive > 0 && totalNegative > 0) {
-            return Math.round(totalPositive * 100 / (totalNegative + totalPositive));
-        } else {
+        int totalPositive = 0;
+        int totalNegative = 0;
+
+        for (OpinionValue value : getOpinions()) {
+            totalPositive += value.getNumberPositive();
+            totalNegative += value.getNumberNegative();
+        }
+
+        if (totalPositive <= 0 && totalNegative <= 0) {
             return 0;
         }
+
+        return totalPositive * 100 / (totalPositive + totalNegative);
     }
 }

@@ -15,12 +15,14 @@
                     <div class="opinion-indicator">
                         <div class="gauge-background" style="background-image: url('@screenshot')"></div>
 
-                        <div id="gauge-@app.getAppID.hashCode" data-value="@app.getGlobalOpinion" class="chart-gauge hidden-xs"></div>
+                        @if(app.isParsed) {
+                            <div id="gauge-@app.getAppID.hashCode" data-value="@app.getGlobalOpinion" class="chart-gauge hidden-xs"></div>
+                        }
                     </div>
 
                     <div class="sub-header">
                         <div class="name">
-                        @app.getName
+                            @app.getName
                         </div>
 
                         <img src="@app.getImage" alt="" />
