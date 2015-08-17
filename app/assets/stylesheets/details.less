@@ -38,16 +38,19 @@
   }
 
   ul.information {
+    width: 100%;
     list-style: none;
     padding: 0;
 
     li {
       display: inline-block;
       margin-right: 20px;
+      vertical-align: middle;
     }
   }
 
   .slick-screenshots {
+    cursor: move;
 
     .slick-slide {
       padding: 10px;
@@ -62,6 +65,8 @@
 #alternatives {
 
   .slick-alternatives {
+    cursor: move;
+
     .slick-slide {
       padding: 10px;
 
@@ -122,23 +127,28 @@
   .list-aspects {
 
     .opinion-box {
+      cursor: pointer;
+
       .chart-gauge {
         width: 100%;
         margin: auto;
       }
     }
 
-    .opinion-box:hover {
-      cursor: pointer;
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-      border-radius: 5px;
+    .opinion-box:hover,
+    .opinion-box.active {
+
+      .amcharts-axis-bottom-label {
+
+        text-shadow: 2px 2px 2px #66afe9;
+      }
     }
   }
 
   #global-gauge {
     width: 100%;
     max-width: 400px;
-    margin: -30px auto auto auto;
+    margin: auto;
   }
 }
 
@@ -147,79 +157,151 @@
   position: relative;
   padding: 10px;
 
-  .review {
-    width: 100%;
-    display: inline-block;
-    margin: 10px;
-    vertical-align: top;
-    font-size: 1.2em;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  h1 {
+    margin-bottom: 20px;
 
-    .clause-positive { color: #57b05e; }
-    .clause-negative { color: #cc6b6b; }
-
-    .header {
-      height: 35px;
-      max-width: 100%;
-      padding: 5px;
-      background-color: #eaeaea;
-
-      font-weight: normal;
-      white-space: nowrap;
-      overflow: hidden;
+    a, a:link, a:focus {
+      color: rgb(79, 187, 222);
+      text-decoration: none;
     }
 
-    .body {
-      position: relative;
-      background-color: @backgroundReview;
-      cursor: pointer;
+    a:hover {
+      color: #1d1d1d;
+      text-decoration: none;
+    }
 
-      .content {
-        position: relative;
-        height: 100px;
-        overflow: hidden;
+    img {
+      vertical-align: bottom;
+    }
+  }
+
+  #tab-description {
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  #tab-screenshots {
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  #tab-reviews,
+  #base-container {
+
+    .review {
+      width: 100%;
+      display: inline-block;
+      margin: 10px;
+      vertical-align: top;
+      font-size: 1.2em;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+      .clause-positive {
+        color: #57b05e;
+      }
+      .clause-negative {
+        color: #cc6b6b;
+      }
+
+      .header {
+        height: 35px;
+        max-width: 100%;
         padding: 5px;
-        margin: 0;
+        background-color: #eaeaea;
 
-        span { position: relative; }
+        font-weight: normal;
+        white-space: nowrap;
+        overflow: hidden;
+      }
 
-        .inner {
+      .body {
+        position: relative;
+        background-color: @backgroundReview;
+        cursor: pointer;
+
+        .content {
           position: relative;
+          height: 100px;
+          overflow: hidden;
+          padding: 5px;
+          margin: 0;
+
+          span {
+            position: relative;
+          }
+
+          .inner {
+            position: relative;
+          }
+        }
+
+        .top-gradient, .bottom-gradient {
+          width: 100%;
+          height: 50px;
+          position: absolute;
+          z-index: 1;
+        }
+
+        .top-gradient {
+          .topGradient(@backgroundReview);
+        }
+        .bottom-gradient {
+          .bottomGradient(@backgroundReview);
+          bottom: 0;
         }
       }
 
-      .top-gradient, .bottom-gradient {
-        width: 100%;
-        height: 50px;
-        position: absolute;
-        z-index: 1;
+      .footer {
+        padding: 5px;
+        font-size: 0.8em;
+        font-weight: normal;
+
+        span {
+          float: right;
+        }
       }
-
-      .top-gradient { .topGradient(@backgroundReview); }
-      .bottom-gradient { .bottomGradient(@backgroundReview); bottom: 0; }
     }
 
-    .footer {
-      padding: 5px;
-      font-size: 0.8em;
-      font-weight: normal;
+    .compared {
+      .header {
+        background-color: @comparedBG;
+      }
+    }
 
-      span { float: right; }
+    .loading-message {
+      display: none;
+      text-align: center;
+      margin-bottom: 20px;
+
+      img {
+        height: 20px;
+      }
     }
   }
 
-  .compared {
-    .header {
-      background-color: @comparedBG;
+  #comparison-container {
+    .nav-tabs {
+      > li:first-child {
+        margin-left: 20px;
+      }
     }
-  }
-
-  .loading-message {
-    display: none;
-    text-align: center;
-    margin-bottom: 20px;
-
-    img { height: 20px; }
   }
 }
 

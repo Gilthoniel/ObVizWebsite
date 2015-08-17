@@ -41,7 +41,7 @@ public class Application extends Controller {
         // Add one view to the app
         wb.markViewed(id);
 
-        F.Promise<AndroidApp> promise = wb.getAppDetails(id, Constants.Weight.FULL);
+        F.Promise<AndroidApp> promise = wb.getAppDetails(id, Constants.Weight.LIGHT);
         F.Promise<Map<Integer, String>> topics = wb.getTopicTitles();
 
         return promise.flatMap(app -> {

@@ -2,6 +2,7 @@ package models;
 
 import controllers.Login;
 import controllers.routes;
+import play.Play;
 import play.mvc.Call;
 import play.mvc.Http;
 import service.BaseUser;
@@ -54,6 +55,11 @@ public class WebPage {
 
     public List<CategorySet> getCategories() {
         return CategoryManager.instance.getCategories();
+    }
+
+    public boolean isProdMode() {
+
+        return Play.isProd();
     }
 
     /* PRIVATE */

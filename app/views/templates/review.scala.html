@@ -1,23 +1,28 @@
-@(review: Review, id: Integer)
+@import service.BaseUser
+@import service.BaseUserService
+@(review: Review, user: BaseUser)
 
 <div class="review">
     <div class="header">
-        @review.getTitle
+        @Html(review.getTitle)
     </div>
     <div class="body" onclick="OBVIZ.expand($(this));">
         <div class="top-gradient"></div>
         <div class="bottom-gradient"></div>
         <div class="content">
             <p class="inner">
-                @Html(review.getBody(id))
+                @Html(review.getContent)
             </p>
         </div>
     </div>
     <div class="footer">
-        @for(i <- 1 to review.getScore) {
+        @for(i <- 1 to review.starRatings) {
             <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
         }
 
-        <span>@review.getAuthorName, @review.getDate</span>
+        <span>@review.authorName, @review.reviewDate.toString</span>
+        @if(review.isQuestionable && user.right == BaseUserService.Rights.ADMIN) {
+            <span class="glyphicon glyphicon-alert"></span>
+        }
     </div>
 </div>

@@ -74,10 +74,10 @@ $(document).ready(function() {
         $searchResults.children().removeClass("active");
         $(this).addClass("active");
 
-        var url = $(this).data("url");
+        var url = $("#reviews-container").data("url");
         $reviewsContainer.html("Loading...");
 
-        $.get(url, { admin: true })
+        $.get(url, { id: $(this).data("id"), admin: true })
             .done(function(data) {
                 $reviewsContainer.html("");
 

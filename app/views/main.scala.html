@@ -120,9 +120,9 @@
 
                             <small>
                                 <ul class="list-categories">
-                                @for(category <- webpage.getCategories) {
-                                    <li data-categories="@category.getCategories">@category.getTitle</li>
-                                }
+                                    @for(category <- webpage.getCategories) {
+                                        <li data-categories="@category.getCategories">@category.getTitle</li>
+                                    }
                                 </ul>
                             </small>
                         </h1>
@@ -130,7 +130,7 @@
 
                     @* Loading icon *@
                     <div class="icon-loader">
-                        <img height="25" src="@routes.Assets.versioned("images/loading.png")" alt="" /> Loading...
+                        @views.html.templates.loading()
                     </div>
                     @* Error message to display when an error occurred *@
                     <div class="error-message">
@@ -150,13 +150,21 @@
         @* Footer *@
         <div id="footer" class="container-fluid">
             <p>
-                Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
-                from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> are licensed by
-                <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-            </p>
-            <p>
                 Gauge Chart made with <a href="http://www.amcharts.com/">AmCharts</a>
             </p>
         </div>
+
+        @* Google Analytics *@
+        @if(webpage.isProdMode) {
+            <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-66404682-1', 'auto');
+              ga('send', 'pageview');
+            </script>
+        }
     </body>
 </html>

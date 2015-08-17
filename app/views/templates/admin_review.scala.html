@@ -3,7 +3,7 @@
 <div class="col-xs-12 col-md-6">
     <div class="review">
         <div class="title">
-            @for(sentence <- review.getTitleSentences) {
+            @for(sentence <- review.parsedTitle) {
                 @for(clause <- sentence.getChildren) {
                     <span class="clause clause-@clause.getType.toString.toLowerCase"
                         data-sentence="@sentence.getID"
@@ -13,7 +13,7 @@
             }
         </div>
         <div class="body">
-        @for(sentence <- review.getBodySentences) {
+        @for(sentence <- review.parsedBody) {
             @for(clause <- sentence.getChildren) {
                 <span class="clause clause-@clause.getType.toString.toLowerCase"
                     data-sentence="@sentence.getID"
@@ -23,7 +23,7 @@
         }
         </div>
         <div class="date">
-            @review.getDate
+            @review.reviewDate.toString
         </div>
         <div class="actions">
             <img width="20" src="@routes.Assets.versioned("images/loading.png")" alt="" />
@@ -50,7 +50,7 @@
                 </div>
             </form>
             <button type="button" class="btn btn-default btn-send"
-                data-permalink="@review.getPermalink" data-id="@review.getID">Send</button>
+                data-permalink="@review.permalink" data-id="@review.getID">Send</button>
         </div>
     </div>
 </div>

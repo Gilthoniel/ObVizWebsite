@@ -1,26 +1,20 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import constants.Constants;
 import models.AndroidApp;
-import models.Opinion;
-import models.OpinionValue;
 import models.Review;
-import play.Logger;
 import play.libs.F;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import webservice.MessageParser;
 import webservice.WebService;
 
 import javax.inject.Inject;
-import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by gaylor on 13.07.15.
@@ -43,20 +37,13 @@ public class AJAX extends Controller {
         return promise.map(reviews -> {
 
             if (request().getQueryString("admin") == null) {
-                ObjectNode root = Json.newObject();
+                ArrayNode root = Json.newArray();
 
                 for (Review review : reviews) {
 
-                    if (review.getOpinions() != null) {
-                        for (Integer topicID : review.getOpinions().keySet()) {
+                    if (review.parsed && review.opinions != null && root.size() < 50) {
 
-                            String key = String.valueOf(topicID);
-                            if (root.get(key) == null) {
-                                root.set(key, Json.newArray());
-                            }
-
-                            ((ArrayNode) root.get(key)).add(views.html.templates.review.render(review, topicID).toString());
-                        }
+                        root.add(views.html.templates.review.render(review, Login.getLocalUser(session())).toString());
                     }
                 }
 
@@ -65,7 +52,7 @@ public class AJAX extends Controller {
                 ArrayNode root = Json.newArray();
 
                 for (Review review : reviews) {
-                    if (review.getBodySentences().size() > 0 && review.getReviewBody().length() > 15) {
+                    if (review.parsed && review.parsedBody.size() > 0 && review.reviewBody.length() > 15) {
                         root.add(views.html.templates.admin_review.render(review).toString());
                     }
                 }

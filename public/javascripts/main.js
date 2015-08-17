@@ -169,7 +169,7 @@ OBVIZ.get = function($baseContainer, url, params) {
                     } ],
                     "arrows": [ {
                         "value": Number($element.data("value")),
-                        "color": "#505050",
+                        "color": "rgb(75, 129, 174)",
                         "startWidth": 10,
                         "radius": "100%",
                         "innerRadius": "30%",

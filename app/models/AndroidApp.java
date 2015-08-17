@@ -33,7 +33,6 @@ public class AndroidApp implements Initiatable, Serializable {
     private List<String> relatedUrls;
     private int nbParsedReviews;
 
-    private Map<Integer, Set<Review>> mappedReviews;
     private Map<Integer, OpinionValue> mappedOpinions;
     private int maxNumberOpinions;
     private int totalPositive;
@@ -41,52 +40,7 @@ public class AndroidApp implements Initiatable, Serializable {
 
     @Override
     public void init() {
-        mappedReviews = new TreeMap<>();
-        mappedOpinions = new TreeMap<>();
 
-        if (reviews == null) {
-            return;
-        }
-
-        for (Review review : reviews) {
-
-            if (review.getOpinions() != null) {
-
-                review.getOpinions().forEach((topicID, opinions) -> {
-                    // Add the review for this topic ID
-                    if (!mappedReviews.containsKey(topicID)) {
-                        mappedReviews.put(topicID, new HashSet<>());
-                    }
-
-                    mappedReviews.get(topicID).add(review);
-
-                    // Update the number of opinions
-                    if (!mappedOpinions.containsKey(topicID)) {
-                        mappedOpinions.put(topicID, new OpinionValue(topicID));
-                    }
-
-                    OpinionValue opinionValue = mappedOpinions.get(topicID);
-                    for (Opinion opinion : opinions) {
-                        if (opinion.getPolarity() == Opinion.Polarity.POSITIVE) {
-                            opinionValue.addPositives(1);
-                        } else {
-                            opinionValue.addNegatives(1);
-                        }
-                    }
-                });
-            }
-        }
-
-        maxNumberOpinions = 0;
-        mappedOpinions.values().stream().forEach(opinionValue -> {
-
-            if (opinionValue.getTotal() > maxNumberOpinions) {
-                maxNumberOpinions = opinionValue.getTotal();
-            }
-
-            totalPositive += opinionValue.getNumberPositive();
-            totalNegative += opinionValue.getNumberNegative();
-        });
     }
 
     /**
@@ -222,20 +176,10 @@ public class AndroidApp implements Initiatable, Serializable {
         }
     }
 
-    public Map<Integer, Set<Review>> getMappedReviews() {
-
-        if (mappedReviews == null) {
-            throw new UnsupportedOperationException("Should be initialize");
-        }
-
-        return mappedReviews;
-    }
-
     public Map<Integer, OpinionValue> getMappedOpinions() {
 
-        if (mappedOpinions == null) {
-            throw new UnsupportedOperationException("Should be initialize");
-        } else if (mappedOpinions.isEmpty()) { // TODO : remove
+        if (mappedOpinions == null) { // TODO : remove
+            mappedOpinions = new HashMap<>();
 
             for (int i = 1; i < 10; i++) {
 
@@ -252,7 +196,7 @@ public class AndroidApp implements Initiatable, Serializable {
 
     public List<OpinionValue> getMostImportantTopics() {
 
-        List<OpinionValue> opinions = new ArrayList<>(mappedOpinions.values());
+        List<OpinionValue> opinions = new ArrayList<>(getMappedOpinions().values());
         Collections.sort(opinions);
 
         return opinions;

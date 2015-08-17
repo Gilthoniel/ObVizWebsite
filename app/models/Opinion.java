@@ -1,8 +1,7 @@
 package models;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
+import java.util.*;
 
 /**
  * Created by gaylor on 02.07.15.
@@ -12,46 +11,80 @@ public class Opinion implements Serializable {
 
     private static final long serialVersionUID = -4273595504109641382L;
 
-    public enum Polarity {
-        @SerializedName("negative")
-        NEGATIVE,
-        @SerializedName("positive")
-        POSITIVE
-    }
+    enum Type { CLASSIC, WEAK }
 
-    private int id;
-    private Polarity polarity;
-    private boolean negation;
-    private String polarityWord;
-    private String aspect;
-    private int polWordPosition;
-    private int aspectPosition;
-    private String phrase;
-    private int sentenceId;
-    private int polarityWordClauseId;
-    private int aspectClauseId;
+    public int topicID;
+    public int nbOpinions;
+    public int opinionValue;
+    public List<OpinionDetail> opinions;
 
-    public Polarity getPolarity() {
-        return polarity;
-    }
+    public class OpinionDetail implements Serializable {
 
-    public int getAspectID() {
-        return aspectClauseId;
-    }
+        private static final long serialVersionUID = 7726615802718595835L;
+        public String polarity;
+        public boolean isNegated;
+        public boolean isInTitle;
+        public Type type;
+        List<String> polarityWords;
+        List<String> aspects;
+        List<String> otherWords;
+        int sentenceID;
+        int clauseID;
+        String phrase;
 
-    public int getPolarityID() {
-        return polarityWordClauseId;
-    }
+        public List<String> getWords() {
+            List<String> words = new ArrayList<>();
+            words.addAll(polarityWords);
 
-    public int getSentenceID() {
-        return sentenceId;
-    }
+            if (aspects != null) {
+                words.addAll(aspects);
+            }
 
-    public String getWord() {
-        return polarityWord;
-    }
+            if (otherWords != null) {
+                words.addAll(otherWords);
+            }
 
-    public String getAspect() {
-            return aspect;
+            return words;
         }
+    }
+
+    public static class ParsedOpinion extends HashMap<Integer, Map<Integer, List<OpinionDetail>>> {
+
+        private static final long serialVersionUID = 2089526101092532249L;
+
+        public void put(Opinion opinions, boolean isInTitle) {
+            for (OpinionDetail opinion : opinions.opinions) {
+
+                if (isInTitle == opinion.isInTitle) {
+
+                    if (!containsKey(opinion.sentenceID)) {
+                        put(opinion.sentenceID, new HashMap<>());
+                    }
+
+                    Map<Integer, List<OpinionDetail>> details = get(opinion.sentenceID);
+
+                    int clauseID = opinion.clauseID > 0 ? opinion.clauseID : 0;
+                    if (!details.containsKey(clauseID)) {
+                        details.put(clauseID, new ArrayList<>());
+                    }
+
+                    List<OpinionDetail> detail = details.get(clauseID);
+                    detail.add(opinion);
+                }
+            }
+        }
+
+        public List<OpinionDetail> get(int sentenceID, int clauseID) {
+            if (containsKey(sentenceID)) {
+
+                Map<Integer, List<OpinionDetail>> details = get(sentenceID);
+                if (details.containsKey(clauseID)) {
+
+                    return details.get(clauseID);
+                }
+            }
+
+            return Collections.emptyList();
+        }
+    }
 }

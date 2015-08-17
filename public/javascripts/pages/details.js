@@ -84,6 +84,19 @@ OBVIZ.comparison = {
         // Store the id of the compared app
         OBVIZ.$reviews.data("compared", $(this).data("id"));
 
+        // Swap the good panes
+        $("#tab-description")
+            .find(".app-description").hide()
+            .filter("[data-id='" + $(this).data("id") + "']").show();
+
+        $("#tab-screenshots")
+            .find(".app-screenshot").hide()
+            .filter("[data-id='" + $(this).data("id") + "']").show();
+
+        $("#comparison-container")
+            .find(".app-title").hide()
+            .filter("[data-id='" + $(this).data("id") + "']").show();
+
         // Click again on the active topic
         OBVIZ.$topics.find(".opinion-box.active").click();
     },
@@ -241,6 +254,9 @@ OBVIZ.reviews = {
 
             var appID = OBVIZ.$data.find("div[data-main='true']").data("id");
             OBVIZ.reviews.get(topicID, appID, true);
+
+            // Display the reviews tab
+            $("#tab-link-reviews").click();
         });
     },
 
@@ -273,21 +289,18 @@ OBVIZ.reviews = {
                 $containers.parent().find(".loading-message").hide(); // Hide the loading icon
                 $containers.empty();
 
-                if (typeof data[topicID] !== 'undefined') {
+                $.each(data, function(i, review) {
+                    $containers.each(function() {
+                        var columns = "col-xs-12";
+                        if ($(this).parent().is("#base-container")) {
+                            columns += " col-lg-4";
+                        }
 
-                    $.each(data[topicID], function(i, review) {
-                        $containers.each(function() {
-                            var columns = "col-xs-12";
-                            if ($(this).parent().is("#base-container")) {
-                                columns += " col-lg-4";
-                            }
-
-                            $(this).append('<div class="'+columns+'">'+review+'</div>');
-                        });
+                        $(this).append('<div class="'+columns+'">'+review+'</div>');
                     });
+                });
 
-                    OBVIZ.refreshScroll($containers);
-                }
+                OBVIZ.refreshScroll($containers);
 
             }).fail(function() {
                 $containers.data("parsed", false);
