@@ -53,6 +53,11 @@ OBVIZ.comparison = {
 
         // Clean the containers
         OBVIZ.$comparedContainer.find(".compared").find(".topic-container").empty().data("parsed", false);
+        // Swap the container if necessary
+        OBVIZ.$baseContainer.fadeOut(200, function() {
+
+            OBVIZ.$comparedContainer.fadeIn(200);
+        });
 
         // Add the second arrow to each gauge
         OBVIZ.$gauges.each(function() {
@@ -60,10 +65,10 @@ OBVIZ.comparison = {
             var id = -1;
             if ($(this).parent().is(".opinion-box")) {
 
-                // This is a gauge of the current app
+                // Topic gauge
                 id = $(this).parent().data("topic");
             } else {
-
+                // Global gauge
                 id = "0";
             }
 
@@ -76,7 +81,11 @@ OBVIZ.comparison = {
             }
         });
 
+        // Store the id of the compared app
         OBVIZ.$reviews.data("compared", $(this).data("id"));
+
+        // Click again on the active topic
+        OBVIZ.$topics.find(".opinion-box.active").click();
     },
 
     stop: function() {
@@ -87,6 +96,12 @@ OBVIZ.comparison = {
         });
 
         OBVIZ.$reviews.data("compared", undefined);
+
+        // Swap the containers
+        OBVIZ.$comparedContainer.fadeOut(200, function() {
+
+            OBVIZ.$baseContainer.fadeIn(200);
+        });
     }
 };
 
@@ -183,11 +198,9 @@ OBVIZ.gauges = {
         }
     },
 
-    hoverIn: function() {
-        var $element = $(this);
+    hoverIn: function(index) {
 
-        var index = 1;
-        if ($element.parent().is("#app-data")) {
+        if (typeof index === 'undefined') {
             index = 0;
         }
 
@@ -209,29 +222,20 @@ OBVIZ.reviews = {
 
         OBVIZ.$topics.find(".list-aspects").on('click', '.opinion-box', function() {
 
+            OBVIZ.$topics.find(".opinion-box").removeClass("active");
+            $(this).addClass("active");
+
             var topicID = $(this).data("topic");
+            OBVIZ.$baseContainer.find(".topic-container:visible").fadeOut(200);
+            OBVIZ.$baseContainer.find(".topic-container[data-topic='" + topicID + "']").delay(200).fadeIn(200);
 
-            if (typeof OBVIZ.$reviews.data("compared") === 'undefined') {
+            OBVIZ.$comparedContainer.find(".topic-container:visible").fadeOut(200);
+            OBVIZ.$comparedContainer.find(".topic-container[data-topic='" + topicID + "']").delay(200).fadeIn(200);
 
-                // Swap the container if necessary
-                OBVIZ.$comparedContainer.fadeOut(200, function() {
-                    OBVIZ.$baseContainer.find(".topic-container").hide();
-                    OBVIZ.$baseContainer.find(".topic-container[data-topic='" + topicID + "']").show();
-
-                    OBVIZ.$baseContainer.fadeIn(200);
-                });
-            } else {
+            // Load the reviews for the compared app only if we have an ID
+            if (typeof OBVIZ.$reviews.data("compared") !== 'undefined') {
 
                 var comparedID = OBVIZ.$reviews.data("compared");
-
-                // Swap the container if necessary
-                OBVIZ.$baseContainer.fadeOut(200, function() {
-                    OBVIZ.$comparedContainer.find(".topic-container").hide();
-                    OBVIZ.$comparedContainer.find(".topic-container[data-topic='" + topicID + "']").show();
-
-                    OBVIZ.$comparedContainer.fadeIn(200);
-                });
-
                 OBVIZ.reviews.get(topicID, comparedID, false);
             }
 
