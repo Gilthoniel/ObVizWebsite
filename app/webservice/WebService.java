@@ -85,11 +85,12 @@ public class WebService {
      * @param size number of reviews per page
      * @return list of reviews
      */
-    public F.Promise<List<Review>> getReviews(String id, int pageNumber, int size) {
+    public F.Promise<Review.ReviewContainer> getReviews(String id, int topicID, int pageNumber, int size) {
 
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_REVIEWS));
         params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("topic_id", String.valueOf(topicID)));
         if (pageNumber >= 0) {
             params.add(new BasicNameValuePair("page_nr", String.valueOf(pageNumber)));
         }
@@ -98,15 +99,14 @@ public class WebService {
             params.add(new BasicNameValuePair("nb_per_page", String.valueOf(size)));
         }
 
-        Type type = new TypeToken<List<Review>>(){}.getType();
-        String cacheKey = "reviews:" + id +":" + pageNumber + ":" + size;
-        return service.get(Constants.baseURL, params, type, cacheKey,
+        String cacheKey = "reviews:" + id + ":" + topicID + ":" + pageNumber + ":" + size;
+        return service.get(Constants.baseURL, params, Review.ReviewContainer.class, cacheKey,
                 new ServerOverloadedException(), new NoAppFoundException());
     }
 
-    public F.Promise<List<Review>> getReviews(String id) {
+    public F.Promise<Review.ReviewContainer> getReviews(String id, int topicID) {
 
-        return getReviews(id, -1, 0);
+        return getReviews(id, topicID, -1, 0);
     }
 
     /**

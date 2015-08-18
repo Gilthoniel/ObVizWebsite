@@ -144,7 +144,7 @@ public class AndroidApp implements Initiatable, Serializable {
 
     public boolean isParsed() {
 
-        return parsed;
+        return opinionsSummary != null;
     }
 
     /**
@@ -215,9 +215,14 @@ public class AndroidApp implements Initiatable, Serializable {
         }
 
         if (totalPositive <= 0 && totalNegative <= 0) {
-            return 0;
+            return -1;
         }
 
         return totalPositive * 100 / (totalPositive + totalNegative);
+    }
+
+    public class Pager {
+        public List<AndroidApp> apps;
+        public int nbTotalPages;
     }
 }

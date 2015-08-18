@@ -3,8 +3,11 @@ package webservice;
 import com.google.gson.reflect.TypeToken;
 import constants.Constants;
 import models.AndroidApp;
+import models.Review;
 import models.admin.Argument;
 import models.admin.Log;
+import models.errors.NoAppFoundException;
+import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
@@ -32,14 +35,13 @@ public class AdminWebService {
      * Get the list of parsed applications
      * @return list of application
      */
-    public F.Promise<List<AndroidApp>> getParsedApps(int pageNumber, int numberPerPage) {
+    public F.Promise<AndroidApp.Pager> getParsedApps(int pageNumber, int numberPerPage) {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_PARSED_APP));
         params.add(new BasicNameValuePair("page_nr", String.valueOf(pageNumber)));
         params.add(new BasicNameValuePair("nb_per_page", String.valueOf(numberPerPage)));
 
-        Type type = new TypeToken<List<AndroidApp>>(){}.getType();
-        return service.getNoCache(Constants.adminURL, params, type);
+        return service.getNoCache(Constants.adminURL, params, AndroidApp.Pager.class);
     }
 
     /**
@@ -80,6 +82,19 @@ public class AdminWebService {
 
         Type type = new TypeToken<List<Argument>>(){}.getType();
         return service.getNoCache(Constants.adminURL, params, type);
+    }
+
+    public F.Promise<Review.ReviewContainer> getReviews(String id, int pageNumber) {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_REVIEWS));
+        params.add(new BasicNameValuePair("id", id));
+        if (pageNumber >= 0) {
+            params.add(new BasicNameValuePair("page_nr", String.valueOf(pageNumber)));
+        }
+        params.add(new BasicNameValuePair("nb_per_page", "1000"));
+
+        return service.get(Constants.baseURL, params, Review.ReviewContainer.class, null,
+                new ServerOverloadedException(), new NoAppFoundException());
     }
 
     private List<NameValuePair> encodeValues(List<NameValuePair> params) {

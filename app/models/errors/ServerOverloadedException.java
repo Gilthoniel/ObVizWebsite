@@ -9,6 +9,8 @@ import java.io.IOException;
  */
 public class ServerOverloadedException extends IOException {
 
+    private static final long serialVersionUID = -1870883255284902488L;
+
     @Override
     public String getMessage() {
         return Constants.SERVER_OVERLOADED_EXCEPTION;

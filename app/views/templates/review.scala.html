@@ -4,25 +4,28 @@
 
 <div class="review">
     <div class="header">
-        @Html(review.getTitle)
-    </div>
-    <div class="body" onclick="OBVIZ.expand($(this));">
-        <div class="top-gradient"></div>
-        <div class="bottom-gradient"></div>
-        <div class="content">
-            <p class="inner">
-                @Html(review.getContent)
-            </p>
+        <div class="rating pull-right">
+            @for(i <- 1 to review.starRatings) {
+                <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
+            }
         </div>
-    </div>
-    <div class="footer">
-        @for(i <- 1 to review.starRatings) {
-            <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />
-        }
 
-        <span>@review.authorName, @review.reviewDate.toString</span>
-        @if(review.isQuestionable && user.right == BaseUserService.Rights.ADMIN) {
-            <span class="glyphicon glyphicon-alert"></span>
+        <a target="_blank" href="@review.permalink">@review.authorName</a>
+    </div>
+    <div class="body">
+        @review.getDisplayType match {
+            case 0 => {
+                <span class="review-title">@Html(review.getTitle.trim)</span><br>
+                <span class="review-body">@Html(review.getContent)</span>
+            }
+
+            case 1 => {
+                <span class="review-body">@Html(review.getContent)</span>
+            }
+
+            case _ => {
+                <span class="review-title">@Html(review.getTitle)</span>
+            }
         }
     </div>
 </div>

@@ -111,9 +111,8 @@ OBVIZ.search = {
 };
 
 OBVIZ.get = function($baseContainer, url, params) {
-    // Hide the error message
-    $baseContainer.find(".error-message").hide();
     // Show a loading icon
+    $baseContainer.find(".icon-loader").find(".box-loading").removeClass("with-error");
     $baseContainer.find(".icon-loader").slideDown();
 
     // Display the good container
@@ -194,8 +193,7 @@ OBVIZ.get = function($baseContainer, url, params) {
         .fail(function(xhr, status) {
 
             if (status != 'abort') {
-                $baseContainer.find(".icon-loader").stop().fadeOut();
-                $baseContainer.find(".error-message").stop().fadeIn();
+                $baseContainer.find(".icon-loader").find(".box-loading").addClass("with-error");
             }
         });
 };

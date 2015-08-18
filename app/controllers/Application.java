@@ -54,9 +54,7 @@ public class Application extends Controller {
             return wb.getAppDetails(ids, Constants.Weight.LIGHT).flatMap(apps -> {
                 return topics.map(titles -> {
 
-                    webpage.addPath(routes.Application.index(), app.getCategory().getTitle());
                     webpage.addPath(routes.Application.details(app.getAppID()), app.getName());
-
                     return ok((play.twirl.api.Html) views.html.details.render(webpage, app, titles, apps));
                 });
             });

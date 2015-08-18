@@ -2,25 +2,28 @@
 $(document).ready(function() {
 
     /** Load parsed applications **/
-    var activePage = 1;
     var $pagination = $("#app-pagination");
+    var offset = 1;
     var $searchResults = $("#search-results");
     var $appLoading = $("#app-loading");
-    $pagination.on('click', 'li', function() {
+    $pagination.data("page", 1);
+    $pagination.on('click', 'a', function() {
 
-        if ($(this).hasClass("page-number")) {
+        var page = 1;
+        if ($(this).parent().is(".previous")) {
 
-            loadApplications($(this).data("value"));
-        } else if ($(this).hasClass("empty-page")) {
+            page = Number($pagination.data("page")) - 1;
 
-            loadApplications(activePage + 1);
-        } else if ($(this).hasClass("btn-navigation")) {
+        } else if ($(this).parent().is(".next")) {
 
-            var index = activePage + Number($(this).data("nav"));
-            if (index >= 1) {
-                loadApplications(index);
-            }
+            page = Number($pagination.data("page")) + 1;
+        } else {
+
+            page = $(this).data("page");
         }
+
+        $pagination.data("page", page);
+        loadApplications(page);
     });
 
     function loadApplications(pageNumber) {
@@ -33,28 +36,12 @@ $(document).ready(function() {
 
                 $appLoading.fadeOut();
 
-                if (data.length == 0) {
+                $searchResults.empty();
+                $.each(data.applications, function(i, item) {
+                    $searchResults.append(item);
+                });
 
-                    $pagination.find(".empty-page").remove();
-
-                } else {
-                    $searchResults.html("");
-                    activePage = pageNumber;
-
-                    $pagination.find(".page-number.active").removeClass("active");
-
-                    if ($pagination.find(".page-number[data-value='" + pageNumber + "']").size() == 0) {
-
-                        $pagination.find(".empty-page")
-                            .before('<li class="page-number" data-value="' + pageNumber + '"><a href="#">' + pageNumber + '</a></li>');
-                    }
-
-                    $pagination.find(".page-number[data-value='" + pageNumber + "']").addClass("active");
-
-                    $.each(data, function(i, item) {
-                        $searchResults.append(item);
-                    });
-                }
+                reloadPager(pageNumber, data.nbPage);
             })
             .fail(function() {
                 $appLoading.fadeOut();
@@ -64,7 +51,7 @@ $(document).ready(function() {
     }
 
     // Load the first page
-    loadApplications(1);
+    loadApplications($pagination.data("page"));
 
     /** Load reviews **/
     var $reviewsContainer = $("#reviews-container");
@@ -77,7 +64,7 @@ $(document).ready(function() {
         var url = $("#reviews-container").data("url");
         $reviewsContainer.html("Loading...");
 
-        $.get(url, { id: $(this).data("id"), admin: true })
+        $.get(url, { id: $(this).data("id"), p: 0 })
             .done(function(data) {
                 $reviewsContainer.html("");
 
@@ -196,4 +183,37 @@ $(document).ready(function() {
             $clauses.removeClass("clause-positive").removeClass("clause-negative");
         });
     });
+
+    function reloadPager(page, maxPage) {
+
+        $pagination.empty();
+
+        if (page > 1) {
+            $pagination.append('<li class="previous"><a href="#">Previous</a></li>');
+        }
+
+        if (page - offset > 1) {
+            appendPage(false, 1);
+            $pagination.append('<li class="separator">&bull;&bull;&bull;</li>');
+        }
+
+        var min = Math.max(page - offset, 1);
+        var max = Math.min(page + offset, maxPage);
+        for (var i = min; i <= max; i++) {
+            appendPage(i == page, i);
+        }
+
+        if (page + offset < maxPage) {
+            $pagination.append('<li class="separator">&bull;&bull;&bull;</li>');
+            appendPage(false, maxPage);
+        }
+
+        if (page < maxPage) {
+            $pagination.append('<li class="next"><a href="#">Next</a></li>');
+        }
+    }
+
+    function appendPage(isActive, page) {
+        $pagination.append('<li class="' + (isActive ? "active" : "") + '"><a data-page="' + page + '" href="#">' + page + '</a></li>');
+    }
 });

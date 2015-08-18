@@ -2,45 +2,26 @@
 
 @views.html.administration.admin_main(webpage) {
     <div class="row" style="margin-bottom: 20px;">
-        <div class="col-xs-2 col-md-1" style="text-align: center;">
-            <span id="app-loading"><img width="30" src="@routes.Assets.versioned("images/loading.png")" alt="" /></span>
-        </div>
-        <div class="col-xs-10 col-md-5">
+        <div class="col-xs-10 col-md-4">
             <nav>
-                <ul class="pagination" id="app-pagination" data-url="@routes.Administration.getParsedApplications()">
-                    <li class="btn-navigation" data-nav="-1">
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-number active" data-value="1">
-                        <a href="#">1</a>
-                    </li>
-                    <li class="empty-page">
-                        <a href="#">...</a>
-                    </li>
+                <ul class="pager" id="app-pagination" data-url="@routes.Administration.getParsedApplications()">
 
-                    <li class="btn-navigation" data-nav="1">
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-8">
             Press 'W' to change side selection
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12 col-md-4">
-
+            <span id="app-loading"><img width="30" src="@routes.Assets.versioned("images/loading.png")" alt="" /></span>
             <ul id="search-results">
 
             </ul>
         </div>
-        <div class="col-xs-12 col-md-8" id="reviews-container" data-url="@routes.AJAX.getReviews()">
+        <div class="col-xs-12 col-md-8" id="reviews-container" data-url="@routes.Administration.getAdminReviews()">
 
         </div>
     </div>

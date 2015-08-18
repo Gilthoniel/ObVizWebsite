@@ -15,7 +15,7 @@ public class Constants {
 
     public static final int NUMBER_PARSED_APP_PER_PAGE = 20;
 
-    public static final int NUMBER_TRENDING_APPS = 20;
+    public static final int NUMBER_TRENDING_APPS = 21;
 
     /* Command builder */
     public enum Weight {LIGHT, MEDIUM, FULL}
@@ -101,4 +101,5 @@ public class Constants {
 
     public static final String NO_APP_EXCEPTION = "NO_APP";
     public static final String SERVER_OVERLOADED_EXCEPTION = "SERVER_OVERLOADED";
+    public static final String AJAX_REQUEST_EXCEPTION = "AJAX_REQUEST_EXCEPTION";
 }

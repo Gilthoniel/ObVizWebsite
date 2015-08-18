@@ -16,9 +16,17 @@ html, body {
 #app-pagination {
   margin: 0;
 
-  li {
-    display: inline-block;
-    margin-bottom: 5px;
+  li.active {
+    a {
+      background: #64A4EC;
+      color: white;
+      border-color: #4281AA;
+      font-weight: bold;
+    }
+  }
+
+  li.separator {
+    padding: 5px;
   }
 }
 

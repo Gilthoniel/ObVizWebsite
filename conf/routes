@@ -29,5 +29,6 @@ GET         /ajax/trending                        @controllers.AJAX.getTrending(
 GET         /ajax/admin/logs                      @controllers.Administration.loadLogs()
 GET         /ajax/admin/app                       @controllers.Administration.getParsedApplications()
 GET         /ajax/admin/applogs                   @controllers.Administration.readFile()
+GET         /ajax/admin/reviews                   @controllers.Administration.getAdminReviews()
 POST        /ajax/admin/rights                    @controllers.Administration.setUserRight()
 POST        /ajax/admin/arg                       @controllers.Administration.proposeArgument()

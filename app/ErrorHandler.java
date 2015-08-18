@@ -49,6 +49,9 @@ public class ErrorHandler extends Controller implements HttpErrorHandler {
                 return F.Promise.pure(
                         Results.internalServerError((play.twirl.api.Html) views.html.error.render(webpage, message))
                 );
+            case Constants.AJAX_REQUEST_EXCEPTION:
+
+                return F.Promise.pure(badRequest());
             default:
 
                 return internalServerError(exception, webpage);

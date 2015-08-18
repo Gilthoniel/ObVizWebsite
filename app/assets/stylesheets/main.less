@@ -178,58 +178,6 @@ img {
   }
 }
 
-/** Colors of the category icons **/
-.category-games { fill: #6686cc; }
-.header-games { background: #6686cc; }
-
-.category-communication { fill: #348BCB; }
-.header-communication { background: #348BCB; }
-
-.category-social { fill: #348BCB; }
-.header-social { background: #348BCB; }
-
-.category-audio { fill: #89C074; }
-.header-audio { background: #89C074; }
-
-.category-default { fill: #8cb2cb; }
-.header-default { background-color: #8cb2cb; }
-
-.category-entertainment { fill: #89C074; }
-.header-entertainment { background: #89C074; }
-
-.category-tools { fill: #D89358; }
-.header-tools { background: #D89358; }
-
-.category-books { fill: #89C074; }
-
-.category-business { fill: #D6DD6E; }
-
-.category-comics { fill: #89C074; }
-
-.category-education { fill: #D6DD6E; }
-
-.category-finance { fill: #D5C50D; }
-
-.category-health { fill: #BC2F2F; }
-
-.category-medical { fill: #BC2F2F; }
-
-.category-personalization { fill: #D89358; }
-
-.category-photo { fill: #89C074; }
-
-.category-productivity { fill: #D6DD6E; }
-
-.category-shopping { fill: #89C074; }
-
-.category-sports { fill: #BC2F2F; }
-
-.category-transportation { fill: #D6DD6E; }
-
-.category-travel { fill: #D6DD6E; }
-
-.category-weather { fill: black; }
-
 /** Hide elements used to store some data **/
 .data {
   display: none;
@@ -257,6 +205,29 @@ img {
   line-height: 14px;
   padding: 5px;
   border-radius: 15px;
+}
+
+.pager {
+  display: none;
+  clear: both;
+
+  li {
+    font-weight: normal;
+    margin: 0 5px;
+  }
+
+  li.active {
+    a {
+      background: #64A4EC;
+      color: white;
+      border-color: #4281AA;
+      font-weight: bold;
+    }
+  }
+
+  li.separator {
+    padding: 5px;
+  }
 }
 
 /** Body application **/
@@ -374,6 +345,10 @@ img {
     .description {
       min-height: 60px;
       padding-top: 10px;
+    }
+
+    .label {
+      font-family: 'Oxygen', sans-serif;
     }
 
     hr {

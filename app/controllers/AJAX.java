@@ -1,14 +1,17 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
 import models.AndroidApp;
 import models.Review;
+import models.errors.AJAXRequestException;
 import play.libs.F;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import webservice.MessageParser;
 import webservice.WebService;
 
 import javax.inject.Inject;
@@ -29,36 +32,33 @@ public class AJAX extends Controller {
      * Return a JSON format of the reviews of the application
      * @return JSON
      */
-    public F.Promise<Result> getReviews() {
+    public F.Promise<Result> getReviews() throws AJAXRequestException {
 
         final String appID = request().getQueryString("id");
+        final int topicID = MessageParser.parseInt(request().getQueryString("t"));
+        final int page = MessageParser.parseInt(request().getQueryString("p"));
+        final int size = MessageParser.parseInt(request().getQueryString("s"));
+        if (topicID < 0 || page < 0 || size < 0) {
+            throw new AJAXRequestException();
+        }
 
-        F.Promise<List<Review>> promise = wb.getReviews(appID);
-        return promise.map(reviews -> {
+        F.Promise<Review.ReviewContainer> promise = wb.getReviews(appID, topicID, page, size);
+        return promise.map(container -> {
 
-            if (request().getQueryString("admin") == null) {
-                ArrayNode root = Json.newArray();
+            ObjectNode root = Json.newObject();
 
-                for (Review review : reviews) {
+            ArrayNode reviews = root.putArray("reviews");
+            for (Review review : container.reviews) {
 
-                    if (review.parsed && review.opinions != null && root.size() < 50) {
+                if (review.parsed && review.opinions != null && root.size() < 50) {
 
-                        root.add(views.html.templates.review.render(review, Login.getLocalUser(session())).toString());
-                    }
+                    reviews.add(views.html.templates.review.render(review, Login.getLocalUser(session())).toString());
                 }
-
-                return ok(root);
-            } else {
-                ArrayNode root = Json.newArray();
-
-                for (Review review : reviews) {
-                    if (review.parsed && review.parsedBody.size() > 0 && review.reviewBody.length() > 15) {
-                        root.add(views.html.templates.admin_review.render(review).toString());
-                    }
-                }
-
-                return ok(root);
             }
+
+            root.put("nbPage", container.nbTotalPages);
+
+            return ok(root);
         });
     }
 

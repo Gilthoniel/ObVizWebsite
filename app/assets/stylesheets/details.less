@@ -128,9 +128,10 @@
 
     .opinion-box {
       cursor: pointer;
+      margin-top: 20px;
 
       .chart-gauge {
-        width: 100%;
+        width: 95%;
         margin: auto;
       }
     }
@@ -152,6 +153,20 @@
   }
 }
 
+#app-not-parsed {
+  width: 50%;
+  margin: 50px auto;
+  padding-bottom: 80px;
+  padding-left: 80px;
+
+  background: url('images/obvee.png') bottom left no-repeat;
+  background-size: auto 100px;
+
+  font-size: 1.5em;
+  font-weight: normal;
+  text-align: center;
+}
+
 /* List of reviews of the spec app */
 #details-reviews {
   position: relative;
@@ -159,6 +174,7 @@
 
   h1 {
     margin-bottom: 20px;
+    text-align: center;
 
     a, a:link, a:focus {
       color: rgb(79, 187, 222);
@@ -166,12 +182,16 @@
     }
 
     a:hover {
-      color: #1d1d1d;
+      color: #3e3e3e;
       text-decoration: none;
     }
 
     img {
       vertical-align: bottom;
+    }
+
+    small {
+      color: #DDD;
     }
   }
 
@@ -207,92 +227,43 @@
 
     .review {
       width: 100%;
-      display: inline-block;
-      margin: 10px;
-      vertical-align: top;
-      font-size: 1.2em;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-
-      .clause-positive {
-        color: #57b05e;
-      }
-      .clause-negative {
-        color: #cc6b6b;
-      }
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid rgb(243, 243, 243);
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
 
       .header {
-        height: 35px;
-        max-width: 100%;
-        padding: 5px;
-        background-color: #eaeaea;
-
-        font-weight: normal;
-        white-space: nowrap;
-        overflow: hidden;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #f2f2f2;
+        box-shadow: 0 2px 2px -2px #f2f2f2;
       }
 
       .body {
-        position: relative;
-        background-color: @backgroundReview;
-        cursor: pointer;
+        margin-top: 10px;
 
-        .content {
-          position: relative;
-          height: 100px;
-          overflow: hidden;
-          padding: 5px;
-          margin: 0;
-
-          span {
-            position: relative;
-          }
-
-          .inner {
-            position: relative;
-          }
+        .review-title {
+          font-size: 1.2em;
+          font-weight: normal;
         }
 
-        .top-gradient, .bottom-gradient {
-          width: 100%;
-          height: 50px;
-          position: absolute;
-          z-index: 1;
+        .review-body {
+          color: grey;
+          font-family: 'Ubuntu', sans-serif;
         }
 
-        .top-gradient {
-          .topGradient(@backgroundReview);
-        }
-        .bottom-gradient {
-          .bottomGradient(@backgroundReview);
-          bottom: 0;
-        }
-      }
-
-      .footer {
-        padding: 5px;
-        font-size: 0.8em;
-        font-weight: normal;
-
-        span {
-          float: right;
-        }
+        .clause-positive { color: @colorPositive; }
+        .clause-negative { color: @colorNegative; }
       }
     }
 
     .compared {
-      .header {
-        background-color: @comparedBG;
+      .review {
+        background: @comparedBG;
       }
     }
 
     .loading-message {
       display: none;
-      text-align: center;
-      margin-bottom: 20px;
-
-      img {
-        height: 20px;
-      }
     }
   }
 

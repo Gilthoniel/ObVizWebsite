@@ -14,6 +14,9 @@ OBVIZ.$baseContainer = $("#base-container");
 OBVIZ.$comparedContainer = $("#comparison-container");
 OBVIZ.$data = $("#data");
 OBVIZ.$topics = $("#details-aspects");
+OBVIZ.$pagers = $(".pager");
+
+OBVIZ.NUMBER_OF_REVIEWS = 24;
 
 OBVIZ.carousel = {
 
@@ -26,7 +29,11 @@ OBVIZ.carousel = {
             slidesToShow: 1,
             centerMode: true,
             variableWidth: true,
-            swipeToSlide: true
+            swipeToSlide: true,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            cssEase: 'ease-out',
+            speed: 1000
         });
         $slickScreenshots.fadeIn();
 
@@ -52,7 +59,7 @@ OBVIZ.comparison = {
         }
 
         // Clean the containers
-        OBVIZ.$comparedContainer.find(".compared").find(".topic-container").empty().data("parsed", false);
+        OBVIZ.$comparedContainer.find(".compared").find(".topic-container").empty();
         // Swap the container if necessary
         OBVIZ.$baseContainer.fadeOut(200, function() {
 
@@ -239,28 +246,69 @@ OBVIZ.reviews = {
             $(this).addClass("active");
 
             var topicID = $(this).data("topic");
+            OBVIZ.$reviews.data("topic", topicID);
             OBVIZ.$baseContainer.find(".topic-container:visible").fadeOut(200);
             OBVIZ.$baseContainer.find(".topic-container[data-topic='" + topicID + "']").delay(200).fadeIn(200);
+            OBVIZ.$baseContainer.data("page", 0);
 
             OBVIZ.$comparedContainer.find(".topic-container:visible").fadeOut(200);
             OBVIZ.$comparedContainer.find(".topic-container[data-topic='" + topicID + "']").delay(200).fadeIn(200);
+            OBVIZ.$comparedContainer.data("page", 0);
 
             // Load the reviews for the compared app only if we have an ID
             if (typeof OBVIZ.$reviews.data("compared") !== 'undefined') {
 
                 var comparedID = OBVIZ.$reviews.data("compared");
-                OBVIZ.reviews.get(topicID, comparedID, false);
+                OBVIZ.reviews.get(topicID, comparedID, 0, false);
             }
 
             var appID = OBVIZ.$data.find("div[data-main='true']").data("id");
-            OBVIZ.reviews.get(topicID, appID, true);
+            OBVIZ.reviews.get(topicID, appID, 0, true);
 
             // Display the reviews tab
             $("#tab-link-reviews").click();
         });
+
+        OBVIZ.$pagers.on('click', 'a', function(event) {
+            event.preventDefault();
+
+            if ($(this).parent().is(".disabled") || $(this).parent().is(".active")) {
+                return;
+            }
+
+            var page = 0;
+            var topicID = OBVIZ.$reviews.data("topic");
+
+            // Set the page number
+            if ($(this).is(".previous") || $(this).is(".next")) {
+                page = $(this).is(".previous") ? -1 : 1;
+
+                if (typeof OBVIZ.$reviews.data("compared") !== 'undefined') {
+                    page += Number(OBVIZ.$comparedContainer.data("page"));
+                } else {
+                    page += Number(OBVIZ.$baseContainer.data("page"));
+                }
+            } else if (typeof $(this).data("page") !== 'undefined') {
+
+                page = $(this).data("page");
+            }
+
+            // Check if we are in compare mode
+            if (typeof OBVIZ.$reviews.data("compared") !== 'undefined') {
+                var comparedID = OBVIZ.$reviews.data("compared");
+                OBVIZ.reviews.get(topicID, comparedID, page, false);
+            }
+
+            // Get the reviews of the main application of the page
+            var appID = OBVIZ.$data.find("div[data-main='true']").data("id");
+            OBVIZ.reviews.get(topicID, appID, page, true);
+
+            OBVIZ.$comparedContainer.data("page", page);
+            OBVIZ.$baseContainer.data("page", page);
+        });
     },
 
-    get: function(topicID, appID, mainApp) {
+    get: function(topicID, appID, page, mainApp) {
         var $containers;
 
         if (mainApp) {
@@ -271,82 +319,45 @@ OBVIZ.reviews = {
             $containers = OBVIZ.$comparedContainer.find(".compared").find("div[data-topic='"+topicID+"']");
         }
 
-        // Check if the reviews didn't have already loaded
-        if ($containers.data("parsed")) {
-            OBVIZ.refreshScroll($containers);
-            return;
-        } else {
-            // Show the loading image
-            $containers.parent().find(".loading-message").fadeIn();
-        }
+
+        // Show the loading image
+        $containers.empty();
+        $containers.parent().find(".loading-message").find(".box-loading").removeClass("with-error");
+        $containers.parent().find(".loading-message").fadeIn();
 
         var url = OBVIZ.$reviews.data("url");
 
-        $containers.data("parsed", true);
-        $.get(url, { id: appID })
+        $.get(url, { id: appID, t: topicID, p: page, s: OBVIZ.NUMBER_OF_REVIEWS })
             .done(function(data) {
 
                 $containers.parent().find(".loading-message").hide(); // Hide the loading icon
-                $containers.empty();
+                OBVIZ.$pagers.show();
 
-                $.each(data, function(i, review) {
+                $.each(data.reviews, function(i, review) {
                     $containers.each(function() {
                         var columns = "col-xs-12";
                         if ($(this).parent().is("#base-container")) {
-                            columns += " col-lg-4";
+                            if (i % 2 == 0) {
+                                $(this).append('<div class="clearfix"></div>');
+                            }
+
+                            columns += " col-lg-6";
                         }
 
                         $(this).append('<div class="'+columns+'">'+review+'</div>');
                     });
                 });
 
-                OBVIZ.refreshScroll($containers);
+                if (mainApp) {
+                    rebuildPager(page, data.nbPage);
+                }
 
             }).fail(function() {
-                $containers.data("parsed", false);
+
+                // TODO
+                $containers.parent().find(".loading-message").find(".box-loading").addClass("with-error"); // Hide the loading icon
             });
     }
-};
-
-/**
- * Set the height of a review body to its initial height when the user click on it
- * @param element the review body
- */
-OBVIZ.expand = function(element) {
-    var $gradients = element.find(".top-gradient, .bottom-gradient");
-    $gradients.hide();
-
-    var $p = element.find(".inner");
-    $p.parent().animate({
-        height: ($p.outerHeight() + 10)+"px"
-    }, 500, function() {
-        $p.parent().height("auto");
-    });
-};
-
-/**
- * Set the position of the scroll to display the opinion
- * @param container
- */
-OBVIZ.refreshScroll = function(container) {
-    // Scroll the opinions after the elements are displayed
-    container.find('.review').each(function() {
-        var $body = $(this).find('.content');
-        var position = $body.find(".clause-negative, .clause-positive").position();
-        // Move the opinion in the displayed area
-        if (typeof position !== 'undefined') {
-            $body.animate({
-                scrollTop: position.top - 20
-            });
-        }
-
-        // hide the gradient if the opinion is at the top or the text is too small
-        if ($body.find(".inner").innerHeight() <= 100) {
-            $body.siblings(".top-gradient, .bottom-gradient").fadeOut();
-        } else if ($body.scrollTop() <= 10) {
-            $body.siblings(".top-gradient").fadeOut();
-        }
-    });
 };
 
 OBVIZ.rotate = function($elems, offset, cx, cy) {
@@ -380,3 +391,79 @@ $(document).ready(function() {
     OBVIZ.carousel.init();
     OBVIZ.reviews.init();
 });
+
+/** Private functions **/
+
+function rebuildPager(page, totalPage) {
+
+    var $element = OBVIZ.$pagers.first();
+
+    $element.empty();
+
+    if (totalPage > 1) {
+        if (page == 0) {
+            $element.append('<li class="disabled"><a class="previous" href="#">Previous</a></li>');
+        } else {
+            $element.append('<li><a class="previous" href="#">Previous</a></li>');
+        }
+    }
+
+    if (totalPage > 10) {
+
+        var offset = 3;
+        if (page - offset > 0) {
+
+            appendPage(false, 0, $element);
+            $element.append('<li class="separator">&bull;&bull;&bull;</li>');
+
+        } else {
+
+            for(var j = 0; j <= offset + 1; j++) {
+
+                appendPage(j == page, j, $element);
+            }
+
+        }
+
+        if (page - offset > 0 && page + offset < totalPage) {
+
+            for (var l = page - offset; l <= page + offset; l++) {
+                appendPage(l == page, l, $element);
+            }
+        }
+
+        if (page + offset < totalPage) {
+            $element.append('<li class="separator">&bull;&bull;&bull;</li>');
+            appendPage(false, totalPage - 1, $element);
+        } else {
+            for(var k = totalPage - offset - 1; k < totalPage; k++) {
+
+                appendPage(k == page, k, $element);
+            }
+        }
+    } else {
+
+        for(var i = 0; i < totalPage; i++) {
+
+            appendPage(i == page, i, $element);
+        }
+    }
+
+    if (totalPage > 1) {
+        if (page >= totalPage - 1) {
+            $element.append('<li class="disabled"><a class="next" href="#">Next</a></li>');
+        } else {
+            $element.append('<li><a class="next" href="#">Next</a></li>');
+        }
+    }
+
+    OBVIZ.$pagers.each(function() {
+        $(this).html($element.html());
+    });
+}
+
+function appendPage(isActive, page, element) {
+
+    var active = isActive ? "active" : "";
+    element.append('<li class="' + active + '"><a data-page="' + page + '" href="#">' + (page + 1) + '</a></li>');
+}

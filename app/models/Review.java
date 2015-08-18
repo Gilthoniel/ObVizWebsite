@@ -65,6 +65,20 @@ public class Review implements Serializable {
         }
     }
 
+    public int getDisplayType() {
+
+        if (reviewBody != null && reviewBody.length() > 0 && reviewTitle != null && reviewTitle.length() > 0) {
+
+            return 0;
+        } else if (reviewBody != null && reviewBody.length() > 0) {
+
+            return 1;
+        } else {
+
+            return 2;
+        }
+    }
+
     @Override
     public boolean equals(Object object) {
 
@@ -87,15 +101,19 @@ public class Review implements Serializable {
         StringBuilder builder = new StringBuilder();
         for (Sentence sentence : sentences) {
 
-            for (Clause clause : sentence.getChildren()) {
+            Iterator<Clause> it = sentence.getChildren().iterator();
+            while (it.hasNext()) {
+                Clause clause = it.next();
 
                 if (clause.getType() == Clause.ClauseType.PARAGRAPH) {
 
-                    builder.append("<br />");
+                    if (it.hasNext()) {
+                        builder.append("<br>");
+                    }
 
                 } else {
 
-                    List<OpinionDetail> details = parsedOpinion.get(sentence.getID(), clause.getID());
+                    List<OpinionDetail> details = parsedOpinion.get(sentence.getID(), clause.getGroupID());
                     if (details.isEmpty()) {
                         // If there's no opinions, we check if there's a global for the entire sentence
                         details = parsedOpinion.get(sentence.getID(), 0);
@@ -122,5 +140,12 @@ public class Review implements Serializable {
         }
 
         return builder;
+    }
+
+    public class ReviewContainer implements Serializable {
+
+        private static final long serialVersionUID = -450393000052750910L;
+        public List<Review> reviews;
+        public int nbTotalPages;
     }
 }

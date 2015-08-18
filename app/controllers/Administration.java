@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
 import models.AndroidApp;
+import models.Review;
 import models.WebPage;
 import models.WebPage.WebPath;
 import models.admin.Argument;
 import models.admin.Log;
+import models.errors.AJAXRequestException;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -22,7 +24,10 @@ import webservice.AdminWebService;
 import webservice.MessageParser;
 
 import javax.inject.Inject;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -201,7 +206,7 @@ public class Administration extends Controller {
         int pageNumber = MessageParser.parseInt(request().getQueryString("p"));
         int numberPerPage = Constants.NUMBER_PARSED_APP_PER_PAGE;
 
-        F.Promise<List<AndroidApp>> promiseApps = wb.getParsedApps(pageNumber, numberPerPage);
+        F.Promise<AndroidApp.Pager> promiseApps = wb.getParsedApps(pageNumber, numberPerPage);
         F.Promise<List<Argument>> promiseArguments = wb.getArguments();
 
         return promiseArguments.flatMap(tArguments -> {
@@ -211,20 +216,41 @@ public class Administration extends Controller {
                 appIDs.addAll(tArguments.stream().map(Argument::getAppID).collect(Collectors.toList()));
             }
 
-            return promiseApps.map(androidApps -> {
+            return promiseApps.map(pager -> {
 
-                if (androidApps == null) {
-                    androidApps = new ArrayList<>();
+                ObjectNode root = Json.newObject();
+
+                ArrayNode apps = root.putArray("applications");
+                for (AndroidApp app : pager.apps) {
+                    apps.add(views.html.templates.admin_play_app.render(app, appIDs).toString());
                 }
 
-                ArrayNode root = Json.newArray();
-
-                for (AndroidApp app : androidApps) {
-                    root.add(views.html.templates.admin_play_app.render(app, appIDs).toString());
-                }
-
+                root.put("nbPage", pager.nbTotalPages);
                 return ok(root);
             });
+        });
+    }
+
+    public F.Promise<Result> getAdminReviews() throws AJAXRequestException {
+
+        final String appID = request().getQueryString("id");
+        final int page = MessageParser.parseInt(request().getQueryString("p"));
+        if (page < 0) {
+            throw new AJAXRequestException();
+        }
+
+        F.Promise<Review.ReviewContainer> promise = wb.getReviews(appID, page);
+        return promise.map(container -> {
+
+            ArrayNode root = Json.newArray();
+
+            for (Review review : container.reviews) {
+                if (review.parsed && review.parsedBody.size() > 0 && review.reviewBody.length() > 15) {
+                    root.add(views.html.templates.admin_review.render(review).toString());
+                }
+            }
+
+            return ok(root);
         });
     }
 

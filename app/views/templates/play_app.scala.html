@@ -12,13 +12,12 @@
         <a href="@routes.Application.details(app.getAppID)">
             @defining(app.getRandomScreen(400)) { screenshot =>
                 <div class="header" style="background-image: url('@screenshot')">
-                    <div class="opinion-indicator">
-                        <div class="gauge-background" style="background-image: url('@screenshot')"></div>
-
-                        @if(app.isParsed) {
+                    @if(app.getGlobalOpinion > 0) {
+                        <div class="opinion-indicator">
+                            <div class="gauge-background" style="background-image: url('@screenshot')"></div>
                             <div id="gauge-@app.getAppID.hashCode" data-value="@app.getGlobalOpinion" class="chart-gauge hidden-xs"></div>
-                        }
-                    </div>
+                        </div>
+                    }
 
                     <div class="sub-header">
                         <div class="name">
