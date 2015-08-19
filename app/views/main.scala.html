@@ -149,9 +149,22 @@
 
         @* Footer *@
         <div id="footer" class="container-fluid">
-            <p>
-                Gauge Chart made with <a href="http://www.amcharts.com/">AmCharts</a>
-            </p>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <ul>
+                            <li><a href="@routes.Application.contact()"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+                            <li><a href="@routes.Application.disclaimer()"><span class="glyphicon glyphicon-info-sign"></span> Disclaimer</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <p>
+                            Gauge Chart made with <a href="http://www.amcharts.com/">AmCharts</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         @* Google Analytics *@

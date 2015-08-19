@@ -29,6 +29,18 @@ public class Application extends Controller {
         return ok((play.twirl.api.Html) views.html.index.render(webpage));
     }
 
+    public Result contact() {
+        WebPage webpage = new WebPage(session());
+
+        return ok((play.twirl.api.Html) views.html.contact.render(webpage));
+    }
+
+    public Result disclaimer() {
+        WebPage webpage = new WebPage(session());
+
+        return ok((play.twirl.api.Html) views.html.disclaimer.render(webpage));
+    }
+
     /**
      * Application page where we find information about it
      * @return html result

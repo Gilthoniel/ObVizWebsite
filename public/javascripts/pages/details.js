@@ -106,6 +106,10 @@ OBVIZ.comparison = {
 
         // Click again on the active topic
         OBVIZ.$topics.find(".opinion-box.active").click();
+
+        $("html, body").animate({
+            scrollTop: $("#anchor-comparison").offset().top - 60
+        });
     },
 
     stop: function() {
