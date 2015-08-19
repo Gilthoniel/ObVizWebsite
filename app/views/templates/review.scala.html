@@ -4,6 +4,11 @@
 
 <div class="review">
     <div class="header">
+        @if(review.isQuestionable && user != null && user.right == BaseUserService.Rights.ADMIN) {
+            <div class="questionable pull-right">
+                <span class="glyphicon glyphicon-alert"></span>
+            </div>
+        }
         <div class="rating pull-right">
             @for(i <- 1 to review.starRatings) {
                 <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" />

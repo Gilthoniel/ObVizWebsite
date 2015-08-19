@@ -1,7 +1,6 @@
 package models;
 
 import constants.Constants;
-import play.Logger;
 
 import java.io.Serializable;
 import java.util.*;
@@ -30,7 +29,7 @@ public class AndroidApp implements Initiatable, Serializable {
     private List<String> screenshots;
     private Score score;
     private List<Review> reviews;
-    private List<String> relatedUrls;
+    private List<String> relatedIDs;
     private boolean parsed;
     private int nbParsedReviews;
     List<OpinionValue> opinionsSummary;
@@ -184,8 +183,8 @@ public class AndroidApp implements Initiatable, Serializable {
 
     public List<String> getRelatedIDs() {
 
-        if (relatedUrls != null) {
-            return relatedUrls;
+        if (relatedIDs != null) {
+            return relatedIDs;
         } else {
             return Collections.emptyList();
         }
