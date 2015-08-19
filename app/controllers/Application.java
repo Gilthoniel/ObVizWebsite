@@ -8,7 +8,7 @@ import models.errors.ServerOverloadedException;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Result;
-import service.CategoryManager;
+import service.TopicsManager;
 import webservice.WebService;
 
 import javax.inject.Inject;
@@ -18,6 +18,8 @@ public class Application extends Controller {
 
     @Inject
     private WebService wb;
+    @Inject
+    private TopicsManager topics;
 
     /**
      * Homepage
@@ -54,7 +56,6 @@ public class Application extends Controller {
         wb.markViewed(id);
 
         F.Promise<AndroidApp> promise = wb.getAppDetails(id, Constants.Weight.LIGHT);
-        F.Promise<Map<Integer, String>> topics = wb.getTopicTitles();
 
         return promise.flatMap(app -> {
 
@@ -63,12 +64,10 @@ public class Application extends Controller {
                 ids = ids.subList(0, 10);
             }
 
-            return wb.getAppDetails(ids, Constants.Weight.LIGHT).flatMap(apps -> {
-                return topics.map(titles -> {
+            return wb.getAppDetails(ids, Constants.Weight.LIGHT).map(apps -> {
 
-                    webpage.addPath(routes.Application.details(app.getAppID()), app.getName());
-                    return ok((play.twirl.api.Html) views.html.details.render(webpage, app, titles, apps));
-                });
+                webpage.addPath(routes.Application.details(app.getAppID()), app.getName());
+                return ok((play.twirl.api.Html) views.html.details.render(webpage, app, topics, apps));
             });
         });
     }

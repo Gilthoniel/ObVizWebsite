@@ -7,11 +7,12 @@ package constants;
 public class Constants {
 
     /* Cache parameters */
-    public static int TIME_CACHE_EXPIRED = 60 * 60; // in second
+    public static int TIME_CACHE_EXPIRED = 60 * 60 * 1000; // in ms
 
     /* WebService parameters */
     public static final String baseURL = "http://vps186042.ovh.net/ObVizService";
     public static final String adminURL = "http://vps186042.ovh.net/ObVizServiceAdmin";
+    public static final int TIMEOUT = 20000;
 
     public static final int NUMBER_PARSED_APP_PER_PAGE = 20;
 

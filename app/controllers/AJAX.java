@@ -12,6 +12,7 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import webservice.MessageParser;
+import service.TopicsManager;
 import webservice.WebService;
 
 import javax.inject.Inject;
@@ -27,6 +28,8 @@ public class AJAX extends Controller {
 
     @Inject
     private WebService wb;
+    @Inject
+    private TopicsManager topics;
 
     /**
      * Return a JSON format of the reviews of the application
@@ -71,10 +74,9 @@ public class AJAX extends Controller {
         String name = request().getQueryString("query");
 
         return wb.search(name, manageCategories(request())).map(applications -> {
-
             ArrayNode root = Json.newArray();
             for (AndroidApp app : applications) {
-                root.add(views.html.templates.play_app.render(app).toString());
+                root.add(views.html.templates.play_app.render(app, topics).toString());
             }
 
             return ok(root);
@@ -88,7 +90,6 @@ public class AJAX extends Controller {
     public F.Promise<Result> getTrending() {
 
         return wb.getTrending(manageCategories(request())).map(applications -> {
-
             ArrayNode root = Json.newArray();
 
             List<Integer> indexes = new ArrayList<>();
@@ -102,7 +103,7 @@ public class AJAX extends Controller {
             }
 
             for (Integer index : indexes) {
-                root.add(views.html.templates.play_app.render(applications.get(index)).toString());
+                root.add(views.html.templates.play_app.render(applications.get(index), topics).toString());
             }
 
             return ok(root);

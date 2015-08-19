@@ -69,7 +69,9 @@ public class WebService {
             List<AndroidApp> apps = new ArrayList<>(result);
             Iterator<AndroidApp> it = apps.iterator();
             while (it.hasNext()) {
-                if (it.next() == null) {
+                AndroidApp app = it.next();
+
+                if (app == null || !app.isParsed()) {
                     it.remove();
                 }
             }
@@ -125,7 +127,7 @@ public class WebService {
         }
 
         String cacheKey = "search:" + name + ":" + String.join(":", categories);
-        return service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {}.getType(), cacheKey);
+        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {}.getType(), cacheKey));
     }
 
     /**
@@ -142,7 +144,7 @@ public class WebService {
         }
 
         String cacheKey = "trending:" + String.join(":", categories);
-        return service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>(){}.getType(), cacheKey);
+        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>(){}.getType(), cacheKey));
     }
 
     /**
@@ -195,6 +197,16 @@ public class WebService {
                 t.init();
             }
             return t;
+        });
+    }
+
+    private <T extends Initiatable> F.Promise<List<T>> initListPromise(F.Promise<List<T>> promise) {
+
+        return promise.map(list -> {
+
+            list.forEach(T::init);
+
+            return list;
         });
     }
 }

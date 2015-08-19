@@ -1,5 +1,6 @@
 package webservice;
 
+import constants.Constants;
 import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import play.Logger;
@@ -58,7 +59,7 @@ public class ConnectionService {
                 T result = MessageParser.<T>fromJson(response.getBodyAsStream(), type);
                 if (result != null) {
 
-                    mCache.set(cacheKey, result);
+                    mCache.set(cacheKey, result, Constants.TIME_CACHE_EXPIRED);
 
                     return result;
                 }

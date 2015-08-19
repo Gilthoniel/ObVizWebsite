@@ -1,4 +1,5 @@
-@(webpage: WebPage, app: AndroidApp, titles: java.util.Map[Integer, String],
+@import service.TopicsManager
+@(webpage: WebPage, app: AndroidApp, topics: TopicsManager,
         related: java.util.List[AndroidApp])
 
 @main(webpage) {
@@ -57,7 +58,7 @@
             @for(opinionValue <- app.getMostImportantTopics.take(8)) {
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="opinion-box" data-topic="@opinionValue.getTopicID">
-                        <div id="gauge-@opinionValue.getTopicID" data-title="@titles.get(opinionValue.getTopicID)"
+                        <div id="gauge-@opinionValue.getTopicID" data-title="@topics.getTitle(opinionValue.getTopicID)"
                         data-value="@opinionValue.percentage()" class="chart-gauge"></div>
                     </div>
                 </div>
@@ -81,8 +82,8 @@
                     @views.html.templates.loading()
                 </div>
 
-                @for(id <- titles.keySet()) {
-                    <div class="topic-container" data-topic="@id" style="display: none;">
+                @for(opinion <- app.getOpinions) {
+                    <div class="topic-container" data-topic="@opinion.getTopicID" style="display: none;">
 
                     </div>
                 }
@@ -176,8 +177,8 @@
                                 @views.html.templates.loading()
                             </div>
 
-                            @for(id <- titles.keySet()) {
-                                <div class="topic-container" data-topic="@id" style="display: none;"></div>
+                            @for(opinion <- app.getOpinions) {
+                                <div class="topic-container" data-topic="@opinion.getTopicID" style="display: none;"></div>
                             }
                         </div>
                         <div class="col-xs-6 compared">
@@ -185,8 +186,8 @@
                                 @views.html.templates.loading()
                             </div>
 
-                            @for(id <- titles.keySet()) {
-                                <div class="topic-container" data-topic="@id" style="display: none;"></div>
+                            @for(opinion <- app.getOpinions) {
+                                <div class="topic-container" data-topic="@opinion.getTopicID" style="display: none;"></div>
                             }
                         </div>
 

@@ -46,6 +46,10 @@ public class AndroidApp implements Initiatable, Serializable {
                     it.remove();
                 }
             }
+
+            Collections.sort(opinionsSummary, (opinion1, opinion2) ->
+                    Integer.compare(opinion2.getNumberPositive() - opinion2.getNumberNegative(),
+                                        opinion1.getNumberPositive() - opinion1.getNumberNegative()));
         }
     }
 
@@ -194,6 +198,15 @@ public class AndroidApp implements Initiatable, Serializable {
         } else {
             return Collections.emptyList();
         }
+    }
+
+    public int getMostPositive() {
+
+        return opinionsSummary.get(0).getTopicID();
+    }
+
+    public int getMostNegative() {
+        return opinionsSummary.get(opinionsSummary.size() - 1).getTopicID();
     }
 
     public List<OpinionValue> getMostImportantTopics() {
