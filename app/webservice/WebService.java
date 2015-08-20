@@ -204,7 +204,7 @@ public class WebService {
 
         return promise.map(list -> {
 
-            list.forEach(T::init);
+            list.stream().filter(item -> item != null).forEach(T::init);
 
             return list;
         });

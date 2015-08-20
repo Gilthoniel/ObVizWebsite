@@ -129,6 +129,9 @@ public class Administration extends Controller {
             list = Arrays.asList(files);
         }
 
+        Collections.sort(list);
+        Collections.reverse(list);
+
         return ok((play.twirl.api.Html) views.html.administration.app_logs.render(webpage, list));
     }
 
