@@ -62,7 +62,7 @@ public class CustomCache implements CacheApi {
      */
     public boolean contains(String key) {
 
-        return cache.isElementInMemory(key) || cache.isElementOnDisk(key);
+        return (cache.isElementInMemory(key) || cache.isElementOnDisk(key)) && !cache.get(key).isExpired();
     }
 
     /**
@@ -75,7 +75,7 @@ public class CustomCache implements CacheApi {
     public <T> T get(String key) {
 
         Element element = cache.get(key);
-        if (element != null) {
+        if (element != null && !element.isExpired()) {
 
             return (T) element.getObjectValue();
 
