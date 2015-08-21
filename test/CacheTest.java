@@ -52,9 +52,9 @@ public class CacheTest {
     public void testAddElementInCache() {
         System.out.println("-- TEST ADD ELEMENT IN CACHE --");
 
-        cache.set(KEY_CACHE, STRING_TEST);
+        cache.set("IN_CACHE_TEST", STRING_TEST);
 
-        Assert.assertTrue("Cannot find entry in the cache", cache.contains(KEY_CACHE));
+        Assert.assertTrue("Cannot find entry in the cache", cache.contains("IN_CACHE_TEST"));
     }
 
     @Test
@@ -70,6 +70,7 @@ public class CacheTest {
             e.printStackTrace();
         }
 
+        Assert.assertFalse("Cache returns true for contains", cache.contains(KEY_CACHE));
         Assert.assertNull("Entry found in the cache but it shouldn't be the case", cache.get(KEY_CACHE));
     }
 

@@ -62,7 +62,7 @@ public class CustomCache implements CacheApi {
      */
     public boolean contains(String key) {
 
-        return cache.isElementInMemory(key) || cache.isElementOnDisk(key);
+        return cache.isKeyInCache(key) && cache.get(key) != null;
     }
 
     /**
@@ -78,11 +78,9 @@ public class CustomCache implements CacheApi {
         if (element != null) {
 
             return (T) element.getObjectValue();
-
         } else {
 
             return null;
-
         }
     }
 
