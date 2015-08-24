@@ -36,6 +36,8 @@
         </tbody>
     </table>
 
+    <button class="btn btn-danger" id="button-cache" data-url="@routes.Administration.resetCache()">Clear cache</button>
+
     <div id="data" data-url="@routes.Administration.setUserRight()"></div>
     <script type="text/javascript">
         function changeRights(button, right) {
@@ -50,5 +52,15 @@
                     alert("Error occurred");
                 });
         }
+
+        $(document).ready(function() {
+
+            $("#button-cache").click(function() {
+
+                $.post($(this).data("url")).done(function() {
+                    alert("Cache cleared");
+                });
+            });
+        });
     </script>
 }

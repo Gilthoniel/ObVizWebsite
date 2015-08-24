@@ -37,7 +37,7 @@ public class AndroidApp implements Initiatable, Serializable {
     @Override
     public void init() {
 
-        // Remove topics without opinions
+        //* Remove topics without opinions
         if (opinionsSummary != null) {
             Iterator<OpinionValue> it = opinionsSummary.iterator();
             while (it.hasNext()) {
@@ -50,6 +50,7 @@ public class AndroidApp implements Initiatable, Serializable {
                     Integer.compare(opinion2.getNumberPositive() - opinion2.getNumberNegative(),
                                         opinion1.getNumberPositive() - opinion1.getNumberNegative()));
         }
+        // */
     }
 
     /**

@@ -32,5 +32,6 @@ GET         /ajax/admin/logs                      @controllers.Administration.lo
 GET         /ajax/admin/app                       @controllers.Administration.getParsedApplications()
 GET         /ajax/admin/applogs                   @controllers.Administration.readFile()
 GET         /ajax/admin/reviews                   @controllers.Administration.getAdminReviews()
+POST        /ajax/admin/reset                     @controllers.Administration.resetCache()
 POST        /ajax/admin/rights                    @controllers.Administration.setUserRight()
 POST        /ajax/admin/arg                       @controllers.Administration.proposeArgument()

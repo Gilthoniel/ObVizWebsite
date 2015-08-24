@@ -20,6 +20,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import service.BaseUser;
 import service.BaseUserService;
+import service.cache.CustomCache;
 import webservice.AdminWebService;
 import webservice.MessageParser;
 
@@ -42,6 +43,9 @@ public class Administration extends Controller {
     private AdminWebService wb;
     @Inject
     private play.Application application;
+    @Inject
+    private CustomCache cache;
+
     private List<WebPath> paths;
 
     public Administration() {
@@ -283,5 +287,16 @@ public class Administration extends Controller {
         }
 
         return ok(root);
+    }
+
+    public Result resetCache() {
+        final BaseUser user = Login.getLocalUser(session());
+        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
+            return badRequest("Not authorized");
+        }
+
+        cache.clear();
+
+        return ok();
     }
 }

@@ -43,11 +43,11 @@ $(document).ready(function() {
     OBVIZ.search.init();
     OBVIZ.$searchbar.hover(function() {
 
-        OBVIZ.$searchbar.find(".form-group").animate({
+        OBVIZ.$searchbar.find(".form-group.hidden-xs").animate({
             width: 200
         }, 200);
 
-        OBVIZ.$searchbar.find("input[type='text']").focus();
+        OBVIZ.$searchbar.find(".hidden-xs input[type='text']").focus();
 
     }, function() {
         // Nothing happens on hover out
@@ -72,6 +72,9 @@ OBVIZ.search = {
     init: function() {
         OBVIZ.$searchbar.submit(function(event) {
             event.preventDefault();
+
+            // Close the menu
+            $("#navbar-obviz").find(".navbar-collpase").removeClass("in");
 
             var $categories = OBVIZ.$searchResults.find(".list-categories li");
             $categories.removeClass("active");

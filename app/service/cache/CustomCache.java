@@ -162,4 +162,9 @@ public class CustomCache implements CacheApi {
 
         cache.remove(key);
     }
+
+    public void clear() {
+
+        cache.removeAll();
+    }
 }

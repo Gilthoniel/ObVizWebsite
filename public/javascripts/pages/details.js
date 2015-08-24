@@ -23,9 +23,9 @@ OBVIZ.carousel = {
     init: function() {
         var $slickScreenshots = $(".slick-screenshots");
         $slickScreenshots.slick({
-            infinite: true,
+            infinite: false,
             dots: true,
-            arrows: false,
+            arrows: true,
             slidesToShow: 1,
             centerMode: true,
             variableWidth: true,
@@ -39,8 +39,8 @@ OBVIZ.carousel = {
 
         var $slickAlternatives = $(".slick-alternatives");
         $slickAlternatives.slick({
-            infinite: true,
-            arrows: false,
+            infinite: false,
+            arrows: true,
             dots: true,
             variableWidth: true,
             swipeToSlide: true
