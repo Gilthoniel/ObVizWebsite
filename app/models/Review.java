@@ -120,14 +120,21 @@ public class Review implements Serializable {
                     }
 
                     if (details.size() > 0) {
-                        OpinionDetail detail = details.get(0);
-
                         String text = clause.getText();
-                        for (String word : detail.getWords()) {
-                            text = text.replaceAll("(?i)\\b+("+word+")\\b+", "<strong>$1</strong>");
+                        for (OpinionDetail detail : details) {
+
+                            if (detail.isGoodOpinion == null || detail.isGoodOpinion) {
+                                for (String word : detail.getWords()) {
+                                    text = text.replaceAll("(?i)\\b+(" + word + ")\\b+", "<strong>$1</strong>");
+                                }
+                            } else {
+                                for (String word : detail.getWords()) {
+                                    text = text.replaceAll("(?i)\\b+(" + word + ")\\b+", "<strong><span class='bad-opinion'>$1</span></strong>");
+                                }
+                            }
                         }
 
-                        builder.append("<span class='clause clause-").append(detail.polarity).append("'>");
+                        builder.append("<span class='clause clause-").append(details.get(0).polarity).append("'>");
                         builder.append(text);
                     } else {
 

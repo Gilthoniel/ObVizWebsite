@@ -71,7 +71,7 @@ public class WebService {
             while (it.hasNext()) {
                 AndroidApp app = it.next();
 
-                if (app == null /*|| !app.isParsed()*/) {
+                if (app == null || !app.isParsed()) {
                     it.remove();
                 }
             }

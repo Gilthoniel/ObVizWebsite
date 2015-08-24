@@ -24,6 +24,7 @@ public class Opinion implements Serializable {
         public String polarity;
         public boolean isNegated;
         public boolean isInTitle;
+        public Boolean isGoodOpinion;
         public Type type;
         List<String> polarityWords;
         List<String> aspects;

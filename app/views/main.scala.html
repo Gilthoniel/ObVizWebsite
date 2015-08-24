@@ -36,6 +36,23 @@
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
+        <style type="text/css">
+            @if(webpage.getUser != null) {
+                @webpage.getUser.right match {
+                    case Rights.ADMIN => {
+                        .bad-opinion {
+                            font-weight: bold;
+                            color: #DE2BCF;
+                        }
+                    }
+
+                    case _ => {}
+                }
+            } else {
+
+            }
+        </style>
+
     </head>
     <body>
 
