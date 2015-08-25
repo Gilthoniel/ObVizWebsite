@@ -84,12 +84,12 @@ $(document).ready(function() {
     var clauseSide = "positive";
     $reviewsContainer.on('click', '.clause', function() {
         var opposite = clauseSide == 'positive' ? 'negative' : 'positive';
-        $(this).closest(".review").find(".clause").removeClass("clause-" + opposite);
+        $(this).closest(".review").find(".clause").removeClass("clause-propose-" + opposite);
 
-        if ($(this).hasClass("clause-" + clauseSide)) {
-            $(this).removeClass("clause-" + clauseSide);
+        if ($(this).hasClass("clause-propose-" + clauseSide)) {
+            $(this).removeClass("clause-propose-" + clauseSide);
         } else {
-            $(this).addClass("clause-" + clauseSide);
+            $(this).addClass("clause-propose-" + clauseSide);
         }
     });
 
@@ -122,14 +122,15 @@ $(document).ready(function() {
         // Get information
         var $body = $(this).closest(".review").find(".body");
         $body = $body.add($(this).closest(".review").find(".title"));
-        var $clauses = $body.find(".clause-positive, .clause-negative");
+        var $clauses = $body.find(".clause-propose-positive, .clause-propose-negative");
         if ($clauses.size() <= 0) {
             console.log("Proposition without clauses !");
             return;
         }
 
-        var side = $clauses.is(".clause-positive") ? 'positive' : 'negative';
+        var side = $clauses.is(".clause-propose-positive") ? 'positive' : 'negative';
         var type = Number($(this).siblings("form").find("input[type='radio']").filter(":checked").val());
+
         var text = '';
         var components = [];
         $clauses.each(function() {
@@ -141,6 +142,21 @@ $(document).ready(function() {
             });
             console.log($(this).data("in-title"));
         });
+
+        var opinions = [];
+        if (type == 3) {
+            // Put the side of the opinions if we choose "Not an argument"
+            side = $clauses.is(".clause-positive") ? 'positive' : 'negative';
+
+            var regexp = /<strong>(.+?)<\/strong>/g;
+            var match = regexp.exec(text);
+            while (match != null) {
+                opinions.push(match[1]);
+
+                match = regexp.exec(text);
+            }
+        }
+        text = text.replace(/<strong>(.+?)<\/strong>/g, "$1");
 
         // Show the loading, disable the button
         $(this).siblings("img").show();
@@ -156,6 +172,7 @@ $(document).ready(function() {
             type: type,
             text: text,
             components: components,
+            opinions: opinions,
             createdAt: {
                 $date: $.now()
             },
@@ -180,7 +197,7 @@ $(document).ready(function() {
 
             $button.siblings("img").hide();
             $button.prop("disabled", false);
-            $clauses.removeClass("clause-positive").removeClass("clause-negative");
+            $clauses.removeClass("clause-propose-positive").removeClass("clause-propose-negative");
         });
     });
 

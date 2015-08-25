@@ -3,24 +3,10 @@
 <div class="col-xs-12 col-md-6">
     <div class="review">
         <div class="title">
-            @for(sentence <- review.parsedTitle) {
-                @for(clause <- sentence.getChildren) {
-                    <span class="clause clause-@clause.getType.toString.toLowerCase"
-                        data-sentence="@sentence.getID"
-                        data-clause="@clause.getID"
-                        data-in-title="true">@clause.getText</span>
-                }
-            }
+            @Html(review.getTitle)
         </div>
         <div class="body">
-        @for(sentence <- review.parsedBody) {
-            @for(clause <- sentence.getChildren) {
-                <span class="clause clause-@clause.getType.toString.toLowerCase"
-                    data-sentence="@sentence.getID"
-                    data-clause="@clause.getID"
-                    data-in-title="false">@clause.getText</span>
-            }
-        }
+            @Html(review.getContent)
         </div>
         <div class="date">
             @review.reviewDate.toString

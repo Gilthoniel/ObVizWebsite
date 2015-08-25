@@ -48,6 +48,9 @@ public class ReviewDeserializer implements JsonDeserializer<Review> {
             JsonArray opinions = obj.getAsJsonArray("opinions");
             if (opinions != null && opinions.size() > 0) {
                 review.opinions = MessageParser.fromJson(opinions.get(0), Opinion.class);
+            } else {
+
+
             }
         }
 

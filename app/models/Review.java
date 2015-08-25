@@ -41,7 +41,7 @@ public class Review implements Serializable {
             return parsedTitleContent;
         }
 
-        if (opinions != null && parsedTitle != null) {
+        if (parsedTitle != null) {
 
             return (parsedTitleContent = parseContent(parsedTitle, true).toString());
         } else {
@@ -55,7 +55,7 @@ public class Review implements Serializable {
             return parsedBodyContent;
         }
 
-        if (opinions != null && parsedBody != null) {
+        if (parsedBody != null) {
 
             return (parsedBodyContent = parseContent(parsedBody, false).toString());
 
@@ -119,8 +119,8 @@ public class Review implements Serializable {
                         details = parsedOpinion.get(sentence.getID(), 0);
                     }
 
+                    String text = clause.getText();
                     if (details.size() > 0) {
-                        String text = clause.getText();
                         for (OpinionDetail detail : details) {
 
                             if (detail.isGoodOpinion == null || detail.isGoodOpinion) {
@@ -134,14 +134,22 @@ public class Review implements Serializable {
                             }
                         }
 
-                        builder.append("<span class='clause clause-").append(details.get(0).polarity).append("'>");
-                        builder.append(text);
+                        builder.append("<span class='clause clause-")
+                                .append(details.get(0).polarity);
+
                     } else {
 
-                        builder.append("<span class='clause'>").append(clause.getText());
+                        builder.append("<span class='clause");
                     }
 
-                    builder.append("</span>");
+                    builder.append(" clause-").append(clause.getType().name().toLowerCase())
+                            .append("'")
+                            .append(" data-sentence='").append(sentence.getID()).append("'")
+                            .append(" data-clause='").append(clause.getID()).append("'")
+                            .append(" data-in-title='").append(isInTitle).append("'")
+                            .append(">")
+                            .append(text)
+                            .append("</span>");
                 }
             }
         }

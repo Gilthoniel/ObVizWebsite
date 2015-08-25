@@ -251,6 +251,15 @@ public class Administration extends Controller {
 
             ArrayNode root = Json.newArray();
 
+            Collections.sort(container.reviews, (review, other) -> {
+
+                int nbReview = review.opinions != null ? review.opinions.nbOpinions : 0;
+                int nbOther = other.opinions != null ? other.opinions.nbOpinions : 0;
+
+                return Integer.compare(nbReview, nbOther);
+            });
+            Collections.reverse(container.reviews);
+
             for (Review review : container.reviews) {
                 if (review.parsed && review.parsedBody.size() > 0 && review.reviewBody.length() > 15) {
                     root.add(views.html.templates.admin_review.render(review).toString());

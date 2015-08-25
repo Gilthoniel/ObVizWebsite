@@ -69,7 +69,14 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("cmd", Constants.PROPOSE_ARGUMENT));
         params.add(new BasicNameValuePair("argument", json));
 
+        /*
         return service.post(Constants.adminURL, encodeValues(params));
+        //*/
+
+        //*
+        Logger.info(json);
+        return F.Promise.pure(false);
+        //*/
     }
 
     /**
@@ -91,7 +98,7 @@ public class AdminWebService {
         if (pageNumber >= 0) {
             params.add(new BasicNameValuePair("page_nr", String.valueOf(pageNumber)));
         }
-        params.add(new BasicNameValuePair("nb_per_page", "1000"));
+        params.add(new BasicNameValuePair("nb_per_page", "4000"));
 
         return service.get(Constants.baseURL, params, Review.ReviewContainer.class, null,
                 new ServerOverloadedException(), new NoAppFoundException());

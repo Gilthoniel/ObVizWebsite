@@ -84,30 +84,28 @@ html, body {
     word-wrap: break-word;
 
     .body, .title {
-      font-weight: normal;
+      font-weight: lighter;
+      font-size: 0.8em;
 
       .clause {
         cursor: pointer;
       }
 
-      .clause-clause:hover {
-        background: #a5a5a5;
-      }
+      .clause-clause:hover { background: #a5a5a5; }
+      .clause-punctuation:hover { background: #3a7cff; }
+      .clause-connector:hover {  background: #a75a1b; }
 
-      .clause-punctuation:hover {
-        background: #3a7cff;
-      }
+      .clause-propose-positive { border: 2px dashed #4AB462; }
+      .clause-propose-negative { border: 2px dashed #B44A4A; }
 
-      .clause-connector:hover {
-        background: #a70e0f;
-      }
+      .clause-positive { background: #CAF3CD; }
+      .clause-negative { background: #E4C8C8; }
 
-      .clause-positive { color: #57b05e; }
-      .clause-negative { color: #cc6b6b; }
+      .bad-opinion { background: #66375e; }
     }
 
     .title {
-      font-weight: bold;
+      font-size: 1.0em;
     }
 
     .date {

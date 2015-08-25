@@ -54,6 +54,10 @@ public class Opinion implements Serializable {
         private static final long serialVersionUID = 2089526101092532249L;
 
         public void put(Opinion opinions, boolean isInTitle) {
+            if (opinions == null) {
+                return;
+            }
+
             for (OpinionDetail opinion : opinions.opinions) {
 
                 if (isInTitle == opinion.isInTitle) {
