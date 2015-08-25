@@ -356,10 +356,12 @@ OBVIZ.reviews = {
                     rebuildPager(page, data.nbPage);
                 }
 
-            }).fail(function() {
+            }).fail(function(xhr) {
 
-                // TODO
-                $containers.parent().find(".loading-message").find(".box-loading").addClass("with-error"); // Hide the loading icon
+                if (xhr.status == '400') {
+                    // Hide the loading icon and display an error message
+                    $containers.parent().find(".loading-message").find(".box-loading").addClass("with-error");
+                }
             });
     }
 };

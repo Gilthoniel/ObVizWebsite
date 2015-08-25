@@ -193,9 +193,9 @@ OBVIZ.get = function($baseContainer, url, params) {
                 });
             });
         })
-        .fail(function(xhr, status) {
+        .fail(function(xhr) {
 
-            if (status != 'abort') {
+            if (xhr.status == '400') {
                 $baseContainer.find(".icon-loader").find(".box-loading").addClass("with-error");
             }
         });
