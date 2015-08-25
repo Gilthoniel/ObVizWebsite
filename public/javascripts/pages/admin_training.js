@@ -128,7 +128,7 @@ $(document).ready(function() {
             return;
         }
 
-        var side = $clauses.is(".clause-propose-positive") ? 'positive' : 'negative';
+        var side = $clauses.is(".clause-propose-positive") ? 'positive' : 'neutral';
         var type = Number($(this).siblings("form").find("input[type='radio']").filter(":checked").val());
 
         var text = '';
@@ -146,7 +146,12 @@ $(document).ready(function() {
         var opinions = [];
         if (type == 3) {
             // Put the side of the opinions if we choose "Not an argument"
-            side = $clauses.is(".clause-positive") ? 'positive' : 'negative';
+            side = 'neutral';
+            if ($clauses.is(".clause-positive")) {
+                side = 'positive';
+            } else if ($clauses.is(".clause-negative")) {
+                side = 'negative';
+            }
 
             var regexp = /<strong>(.+?)<\/strong>/g;
             var match = regexp.exec(text);

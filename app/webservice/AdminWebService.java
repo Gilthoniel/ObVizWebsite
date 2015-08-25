@@ -69,11 +69,11 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("cmd", Constants.PROPOSE_ARGUMENT));
         params.add(new BasicNameValuePair("argument", json));
 
-        //*
+        /*
         return service.post(Constants.adminURL, encodeValues(params));
         //*/
 
-        /*
+        //*
         Logger.info(json);
         return F.Promise.pure(false);
         //*/
