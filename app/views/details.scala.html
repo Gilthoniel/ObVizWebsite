@@ -200,15 +200,17 @@
 
     <div id="data" style="display:none;">
         <div data-id="@app.getAppID" data-main="true">
+            <div data-topic="0" data-value="@app.getGlobalOpinion"></div>
             @for(value <- app.getOpinions) {
-                <div data-topic="@value.getTopicID" data-value="@value.percentage()" ></div>
+                <div data-topic="@value.getTopicID" data-value="@value.percentage()"></div>
             }
         </div>
 
         @for(application <- related) {
             <div data-id="@application.getAppID">
+                <div data-topic="0" data-value="@application.getGlobalOpinion"></div>
                 @for(value <- application.getOpinions) {
-                    <div data-topic="@value.getTopicID" data-value="@value.percentage()" ></div>
+                    <div data-topic="@value.getTopicID" data-value="@value.percentage()"></div>
                 }
             </div>
         }

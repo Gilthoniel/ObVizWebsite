@@ -7,8 +7,6 @@ import models.Review;
 import models.TopicTitles;
 import models.admin.Argument;
 import models.admin.Log;
-import models.errors.NoAppFoundException;
-import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
@@ -70,11 +68,11 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("cmd", Constants.PROPOSE_ARGUMENT));
         params.add(new BasicNameValuePair("argument", json));
 
-        /*
+        //*
         return service.post(Constants.adminURL, encodeValues(params));
         //*/
 
-        //*
+        /*
         Logger.info(json);
         return F.Promise.pure(false);
         //*/
@@ -107,8 +105,7 @@ public class AdminWebService {
         }
         params.add(new BasicNameValuePair("nb_per_page", "4000"));
 
-        return service.get(Constants.baseURL, params, Review.ReviewContainer.class, null,
-                new ServerOverloadedException(), new NoAppFoundException());
+        return service.get(Constants.baseURL, params, Review.ReviewContainer.class, null);
     }
 
     /**

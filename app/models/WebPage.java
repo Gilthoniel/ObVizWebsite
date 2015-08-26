@@ -20,9 +20,14 @@ public class WebPage {
     private List<WebPath> breadcrumb;
     private BaseUser user;
 
-    public WebPage(Http.Session session) {
+    public WebPage() {
+
         breadcrumb = new LinkedList<>();
         addPath(routes.Application.index(), "Home");
+    }
+
+    public WebPage(Http.Session session) {
+        this();
 
         user = Login.getLocalUser(session);
     }

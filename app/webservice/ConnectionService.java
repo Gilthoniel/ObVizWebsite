@@ -1,7 +1,7 @@
 package webservice;
 
 import constants.Constants;
-import models.errors.ServerOverloadedException;
+import models.errors.BackEndRequestException;
 import org.apache.http.NameValuePair;
 import play.Logger;
 import play.libs.F;
@@ -27,12 +27,9 @@ public class ConnectionService {
      * @param url String of the url
      * @param params list of the query parameters
      * @param type class of the object
-     * @param networkException exception thrown if a network error occurred
-     * @param nullException exception thrown if a null result occurred
      * @return WSResponse
      */
-    public <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, String cacheKey,
-                                       Throwable networkException, Throwable nullException)
+    public <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, String cacheKey)
     {
 
         // Populate the client object
@@ -43,6 +40,7 @@ public class ConnectionService {
 
         // If the request is in the cache, we get it
         if (cacheKey != null && mCache.contains(cacheKey)) {
+
             return F.Promise.pure(mCache.get(cacheKey));
         }
 
@@ -53,32 +51,22 @@ public class ConnectionService {
                 if (response.getStatus() != 200) {
 
                     Logger.warn("Bad status code (" + response.getStatus() + ") for GET request [" + url + "] with queries " + params + " !");
-                    throw networkException;
+                    throw new BackEndRequestException("Bad status code for the request");
                 }
 
                 T result = MessageParser.<T>fromJson(response.getBodyAsStream(), type);
                 if (result != null) {
 
                     mCache.set(cacheKey, result, Constants.TIME_CACHE_EXPIRED);
-
-                    return result;
                 }
 
-                throw nullException;
+                return result;
             });
     }
 
-    public <T> F.Promise<T> get(final String url, final List<NameValuePair> params, Type type, String cacheKey) {
-
-        Throwable error = new ServerOverloadedException();
-
-        return get(url, params, type, cacheKey, error, error);
-    }
-
     public <T> F.Promise<T> getNoCache(final String url, final List<NameValuePair> params, Type type) {
-        Throwable error = new ServerOverloadedException();
 
-        return get(url, params, type, null, error, error);
+        return get(url, params, type, null);
     }
 
     /**

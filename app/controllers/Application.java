@@ -3,8 +3,6 @@ package controllers;
 import constants.Constants;
 import models.AndroidApp;
 import models.WebPage;
-import models.errors.NoAppFoundException;
-import models.errors.ServerOverloadedException;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -12,7 +10,8 @@ import service.TopicsManager;
 import webservice.WebService;
 
 import javax.inject.Inject;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Application extends Controller {
 
@@ -47,9 +46,7 @@ public class Application extends Controller {
      * Application page where we find information about it
      * @return html result
      */
-    public F.Promise<Result> details(String id)
-            throws NoAppFoundException, ServerOverloadedException
-    {
+    public F.Promise<Result> details(String id) {
         final WebPage webpage = new WebPage(session());
 
         // Add one view to the app
@@ -58,6 +55,12 @@ public class Application extends Controller {
         F.Promise<AndroidApp> promise = wb.getAppDetails(id, Constants.Weight.LIGHT);
 
         return promise.flatMap(app -> {
+
+            if (app == null) {
+                return F.Promise.pure(notFound(
+                                (play.twirl.api.Html) views.html.error.render(webpage, Constants.APP_NOT_FOUND))
+                );
+            }
 
             List<String> ids = new LinkedList<>(app.getRelatedIDs());
             if (ids.size() > 20) {

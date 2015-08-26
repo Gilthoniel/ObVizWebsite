@@ -6,8 +6,6 @@ import models.AndroidApp;
 import models.Initiatable;
 import models.Review;
 import models.TopicTitles;
-import models.errors.NoAppFoundException;
-import models.errors.ServerOverloadedException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
@@ -42,8 +40,7 @@ public class WebService {
         params.add(new BasicNameValuePair("weight", weight.toString()));
 
         String cacheKey = "details:" + id + ":" + weight;
-        F.Promise<AndroidApp> promise = service.get(Constants.baseURL, params, AndroidApp.class, cacheKey,
-                new ServerOverloadedException(), new NoAppFoundException());
+        F.Promise<AndroidApp> promise = service.get(Constants.baseURL, params, AndroidApp.class, cacheKey);
 
         return initPromise(promise);
     }
@@ -58,11 +55,7 @@ public class WebService {
 
         List<F.Promise<AndroidApp>> promises = new LinkedList<>();
         for (String id : ids) {
-            promises.add(initPromise(getAppDetails(id, weight).recover(throwable -> {
-                Logger.error("Fail when attempt to get information for an app: "+id);
-
-                return null;
-            })));
+            promises.add(initPromise(getAppDetails(id, weight)));
         }
 
         return F.Promise.sequence(promises).map(result -> {
@@ -102,13 +95,7 @@ public class WebService {
         }
 
         String cacheKey = "reviews:" + id + ":" + topicID + ":" + pageNumber + ":" + size;
-        return service.get(Constants.baseURL, params, Review.ReviewContainer.class, cacheKey,
-                new ServerOverloadedException(), new NoAppFoundException());
-    }
-
-    public F.Promise<Review.ReviewContainer> getReviews(String id, int topicID) {
-
-        return getReviews(id, topicID, -1, 0);
+        return service.get(Constants.baseURL, params, Review.ReviewContainer.class, cacheKey);
     }
 
     /**

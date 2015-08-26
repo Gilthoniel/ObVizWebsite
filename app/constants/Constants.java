@@ -6,6 +6,9 @@ package constants;
  */
 public class Constants {
 
+    /* ERROR'S MESSAGE */
+    public static final String APP_NOT_FOUND = "Sorry, we can't find this. You should try to use the search bar!";
+
     /* Cache parameters */
     public static int TIME_CACHE_EXPIRED = 60 * 60 * 1000; // in ms
 

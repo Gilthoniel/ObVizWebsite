@@ -323,6 +323,7 @@ public class Administration extends Controller {
         }
 
         cache.clear();
+        Logger.info("Cache reset by " + user.name);
 
         return ok();
     }
