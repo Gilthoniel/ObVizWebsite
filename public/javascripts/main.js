@@ -139,6 +139,14 @@ OBVIZ.get = function($baseContainer, url, params) {
             $container.empty();
             // Add the items
             $.each(data, function(i, item) {
+                if (i % 3 == 0) {
+                    $container.append('<div class="hidden-xs hidden-sm clearfix"></div>');
+                }
+
+                if (i % 2 == 0) {
+                    $container.append('<div class="visible-sm-block clearfix"></div>');
+                }
+
                 $container.append(item);
             });
 

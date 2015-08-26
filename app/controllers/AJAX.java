@@ -76,7 +76,7 @@ public class AJAX extends Controller {
         return wb.search(name, manageCategories(request())).map(applications -> {
             ArrayNode root = Json.newArray();
             for (AndroidApp app : applications) {
-                root.add(views.html.templates.play_app.render(app, topics).toString());
+                root.add(views.html.templates.play_app.render(app, topics, "chart-search").toString());
             }
 
             return ok(root);
@@ -103,7 +103,7 @@ public class AJAX extends Controller {
             }
 
             for (Integer index : indexes) {
-                root.add(views.html.templates.play_app.render(applications.get(index), topics).toString());
+                root.add(views.html.templates.play_app.render(applications.get(index), topics, "chart-trending").toString());
             }
 
             return ok(root);

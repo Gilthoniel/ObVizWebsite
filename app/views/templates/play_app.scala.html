@@ -1,5 +1,5 @@
 @import service.TopicsManager
-@(app: AndroidApp, topics: TopicsManager)
+@(app: AndroidApp, topics: TopicsManager, chartID: String)
 
 @import constants.Utils
 
@@ -30,7 +30,7 @@
         <div class="body">
             @if(app.getGlobalOpinion > 0) {
                 <div class="opinion-indicator">
-                    <div id="gauge-@app.getAppID.hashCode" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
+                    <div id="@chartID-@app.getAppID.replaceAll("\\.", "-")" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
                 </div>
                 <ul>
                     <li>
