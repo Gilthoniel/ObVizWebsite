@@ -18,10 +18,12 @@ GET         /authenticate/:provider/denied        @controllers.Login.oAuthDenied
 GET         /login                                @controllers.Login.login()
 
 # Administration
-GET         /admin                                @controllers.Administration.admin()
+GET         /admin                                @controllers.Administration.crawlers()
 GET         /admin/users                          @controllers.Administration.users()
 GET         /admin/training                       @controllers.Administration.training()
 GET         /admin/logs                           @controllers.Administration.logs()
+GET         /admin/topics                         @controllers.Administration.topics()
+POST        /admin/topicsupdate                   @controllers.Administration.updateTopic()
 
 # AJAX
 GET         /ajax/reviews                         @controllers.AJAX.getReviews()

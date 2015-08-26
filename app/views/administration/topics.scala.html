@@ -1,0 +1,94 @@
+@(webpage: WebPage, topics: java.util.List[TopicTitles])
+
+@administration.admin_main(webpage) {
+
+    @requestHeader.flash.get("error") match {
+        case Some(message) => {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Something goes wrong!</strong> @message
+            </div>
+        }
+
+        case None => {}
+    }
+
+    @requestHeader.flash.get("success") match {
+        case Some(message) => {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @message
+            </div>
+        }
+
+        case None => {}
+    }
+
+    <div id="table-editor">
+        <form class="form-horizontal" method="POST" action="@routes.Administration.updateTopic()">
+            <div class="form-group">
+                <label for="input-id" class="col-xs-2 control-label">ID</label>
+                <div class="col-xs-1">
+                    <input type="text" id="input-id" class="form-control" name="id" value="-1" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-type" class="col-xs-2 control-label">Type</label>
+                <div class="col-xs-3">
+                    <select id="input-type" class="form-control" name="type">
+                        <option value="SPECIFIC">SPECIFIC</option>
+                        <option value="DEFINED">DEFINED</option>
+                        <option value="GENERAL">GENERAL</option>
+                        <option value="CATEGORY">CATEGORY</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-title" class="col-xs-2 control-label">Title</label>
+                <div class="col-xs-3">
+                    <input id="input-title" type="text" class="form-control" name="title" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-keys" class="col-xs-2 control-label">Keys</label>
+                <div class="col-xs-3">
+                    <input id="input-keys" type="text" class="form-control" name="keys" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table id="topics-table" class="display" data-page-length="50">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TYPE</th>
+                <th>TITLE</th>
+                <th>KEYS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(topic <- topics) {
+                <tr>
+                    <td>@topic.getID</td>
+                    <td>@topic.getType</td>
+                    <td>@topic.getTitle</td>
+                    <td>@for(key <- topic.getKeys){@key, }</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/datatables.select.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/admin_topics.js")"></script>
+}

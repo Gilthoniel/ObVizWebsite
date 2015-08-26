@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
 import models.AndroidApp;
 import models.Review;
+import models.TopicTitles;
 import models.WebPage;
 import models.WebPage.WebPath;
 import models.admin.Argument;
@@ -50,10 +51,11 @@ public class Administration extends Controller {
 
     public Administration() {
         paths = new LinkedList<>();
-        paths.add(new WebPath(routes.Administration.admin(), "Crawler logs"));
-        paths.add(new WebPath(routes.Administration.users(), "Users' rights"));
-        paths.add(new WebPath(routes.Administration.training(), "Training"));
         paths.add(new WebPath(routes.Administration.logs(), "Logs"));
+        paths.add(new WebPath(routes.Administration.crawlers(), "Crawlers"));
+        paths.add(new WebPath(routes.Administration.training(), "Training"));
+        paths.add(new WebPath(routes.Administration.topics(), "Topics"));
+        paths.add(new WebPath(routes.Administration.users(), "Users"));
         paths.add(new WebPath(routes.Application.index(), "Back to website"));
     }
 
@@ -61,7 +63,7 @@ public class Administration extends Controller {
      * Logs of the crawlers
      * @return Html
      */
-    public F.Promise<Result> admin() {
+    public F.Promise<Result> crawlers() {
         WebPage webpage = new WebPage(session(), paths);
         if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
             return F.Promise.pure(redirect(routes.Application.index()));
@@ -81,7 +83,7 @@ public class Administration extends Controller {
                 }
             }
 
-            webpage.getBreadcrumb().get(0).activate();
+            webpage.getBreadcrumb().get(1).activate();
             return ok((play.twirl.api.Html) views.html.administration.index.render(webpage, mappedLogs));
         });
     }
@@ -98,7 +100,7 @@ public class Administration extends Controller {
 
         List<BaseUser> users = BaseUser.find.all();
 
-        webpage.getBreadcrumb().get(1).activate();
+        webpage.getBreadcrumb().get(4).activate();
         return ok((play.twirl.api.Html) views.html.administration.users.render(webpage, users));
     }
 
@@ -112,6 +114,7 @@ public class Administration extends Controller {
             return redirect(routes.Application.index());
         }
 
+        webpage.getBreadcrumb().get(2).activate();
         return ok((play.twirl.api.Html) views.html.administration.training.render(webpage));
     }
 
@@ -136,7 +139,22 @@ public class Administration extends Controller {
         Collections.sort(list);
         Collections.reverse(list);
 
+        webpage.getBreadcrumb().get(0).activate();
         return ok((play.twirl.api.Html) views.html.administration.app_logs.render(webpage, list));
+    }
+
+    public F.Promise<Result> topics() {
+        WebPage webpage = new WebPage(session(), paths);
+        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
+            return F.Promise.pure(redirect(routes.Application.index()));
+        }
+
+        return wb.getTopics().map(topics -> {
+
+            webpage.getBreadcrumb().get(3).activate();
+            return ok((play.twirl.api.Html) views.html.administration.topics.render(webpage, topics));
+        });
+
     }
 
     /** AJAX **/
@@ -307,5 +325,45 @@ public class Administration extends Controller {
         cache.clear();
 
         return ok();
+    }
+
+    public Result updateTopic() {
+        final BaseUser user = Login.getLocalUser(session());
+        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
+            return redirect(routes.Application.index());
+        }
+
+        DynamicForm form = Form.form().bindFromRequest(request());
+        TopicTitles topic = new TopicTitles(form);
+
+        if (topic.isValid()) {
+
+            //*
+            wb.updateTopic(MessageParser.toJson(topic)).map(result -> {
+
+                if (result != null) {
+                    successMessage();
+                } else {
+                    errorMessage();
+                }
+
+                return null;
+            });
+            //*/
+        } else {
+
+            Logger.info("Bad json: " + MessageParser.toJson(topic));
+            errorMessage();
+        }
+
+        return redirect(routes.Administration.topics());
+    }
+
+    private void errorMessage() {
+        flash("error", "Topic is not valid for modification.");
+    }
+
+    private void successMessage() {
+        flash("success", "Successfully update topic");
     }
 }

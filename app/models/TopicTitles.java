@@ -1,5 +1,8 @@
 package models;
 
+import play.data.DynamicForm;
+import webservice.MessageParser;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,7 +15,26 @@ public class TopicTitles implements Serializable {
     private static final long serialVersionUID = -7874128752238578952L;
     private int _id;
     private String title;
+    private String type;
     private String[] keys;
+
+    public TopicTitles(DynamicForm form) {
+        _id = MessageParser.parseInt(form.get("id"));
+        title = form.get("title");
+        type = form.get("type");
+
+        String tempKeys = form.get("keys");
+        if (tempKeys != null && !tempKeys.isEmpty()) {
+            keys = tempKeys.split("\\s*,\\s*");
+        } else {
+            keys = new String[]{};
+        }
+    }
+
+    public boolean isValid() {
+
+        return _id > 0 && title != null && !title.isEmpty() && type != null && !type.isEmpty();
+    }
 
     public int getID() {
         return _id;
@@ -28,5 +50,14 @@ public class TopicTitles implements Serializable {
         } else {
             return "Unknown";
         }
+    }
+
+    public String getType() {
+
+        return type;
+    }
+
+    public String[] getKeys() {
+        return keys;
     }
 }

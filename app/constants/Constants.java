@@ -32,6 +32,8 @@ public class Constants {
     public static final String GET_APPS_CRAWLER_LOGS = "Get_Apps_Crawler_Logs";
     public static final String PROPOSE_ARGUMENT = "Propose_App_Argument";
     public static final String GET_ARGUMENTS = "Get_App_Arguments";
+    public static final String GET_APP_TOPICS = "Get_App_Topics";
+    public static final String UPDATE_TOPIC = "Insert_App_Topic";
 
     /* Machines */
     public static final String[] MACHINES = new String[] {

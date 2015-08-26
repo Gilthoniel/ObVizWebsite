@@ -26,7 +26,7 @@ public class Global extends GlobalSettings {
             @Override
             public Call afterAuth() {
 
-                return routes.Administration.admin();
+                return routes.Administration.logs();
             }
 
             @Override

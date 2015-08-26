@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import constants.Constants;
 import models.AndroidApp;
 import models.Review;
+import models.TopicTitles;
 import models.admin.Argument;
 import models.admin.Log;
 import models.errors.NoAppFoundException;
@@ -91,6 +92,12 @@ public class AdminWebService {
         return service.getNoCache(Constants.adminURL, params, type);
     }
 
+    /**
+     * Get a list of reviews
+     * @param id Application ID
+     * @param pageNumber Page Number
+     * @return list of reviews
+     */
     public F.Promise<Review.ReviewContainer> getReviews(String id, int pageNumber) {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_REVIEWS));
@@ -103,6 +110,33 @@ public class AdminWebService {
         return service.get(Constants.baseURL, params, Review.ReviewContainer.class, null,
                 new ServerOverloadedException(), new NoAppFoundException());
     }
+
+    /**
+     * Get the list of topics
+     * @return list of topics
+     */
+    public F.Promise<List<TopicTitles>> getTopics() {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_APP_TOPICS));
+
+        return service.getNoCache(Constants.adminURL, params, new TypeToken<List<TopicTitles>>() {
+        }.getType());
+    }
+
+    /**
+     * Update a topic in the database
+     * @param json Object TopicTitles
+     * @return true if success, else false
+     */
+    public F.Promise<TopicTitles> updateTopic(String json) {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.UPDATE_TOPIC));
+        params.add(new BasicNameValuePair("topic", json));
+
+        return service.post(Constants.adminURL, encodeValues(params), TopicTitles.class);
+    }
+
+    /* PRIVATE FUNCTIONS */
 
     private List<NameValuePair> encodeValues(List<NameValuePair> params) {
         List<NameValuePair> values = new ArrayList<>();

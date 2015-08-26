@@ -79,25 +79,23 @@
                         }
                         </ul>
 
-                        @currentAuth() { auth =>
-                            @if(webpage.getUser != null) {
-                                @webpage.getUser.right match {
-                                    case Rights.ADMIN => {
-                                        <ul class="nav navbar-nav navbar-right">
-                                            <li><a href="@controllers.routes.Administration.admin()">Administration</a></li>
-                                            <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
-                                        </ul>
-                                    }
-
-                                    case Rights.USER => {
-                                        <ul class="nav navbar-nav navbar-right">
-                                            <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
-                                        </ul>
-                                    }
+                        @if(webpage.getUser != null) {
+                            @webpage.getUser.right match {
+                                case Rights.ADMIN => {
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="@controllers.routes.Administration.logs()">Administration</a></li>
+                                        <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                                    </ul>
                                 }
-                            } else {
 
+                                case Rights.USER => {
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                                    </ul>
+                                }
                             }
+                        } else {
+
                         }
 
                         <form class="navbar-form navbar-right" role="search" id="search-bar">
