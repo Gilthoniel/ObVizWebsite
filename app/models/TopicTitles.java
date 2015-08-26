@@ -16,6 +16,8 @@ public class TopicTitles implements Serializable {
     private int _id;
     private String title;
     private String type;
+    private String category;
+    private String appID;
     private String[] keys;
 
     public TopicTitles(DynamicForm form) {
@@ -28,6 +30,14 @@ public class TopicTitles implements Serializable {
             keys = tempKeys.split("\\s*,\\s*");
         } else {
             keys = new String[]{};
+        }
+
+        if (form.data().containsKey("category")) {
+            category = form.get("category");
+        }
+
+        if (form.data().containsKey("app")) {
+            appID = form.get("app");
         }
     }
 
@@ -53,8 +63,15 @@ public class TopicTitles implements Serializable {
     }
 
     public String getType() {
-
         return type;
+    }
+
+    public String getCategory() {
+        return category != null ? category : "";
+    }
+
+    public String getAppID() {
+        return appID != null ? appID : "";
     }
 
     public String[] getKeys() {

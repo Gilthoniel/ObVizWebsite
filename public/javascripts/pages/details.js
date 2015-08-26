@@ -58,6 +58,11 @@ OBVIZ.comparison = {
             return;
         }
 
+        if (typeof $(this).data("url") !== 'undefined') {
+
+            window.location = $(this).data("url");
+        }
+
         // Clean the containers
         OBVIZ.$comparedContainer.find(".compared").find(".topic-container").empty();
         // Swap the container if necessary

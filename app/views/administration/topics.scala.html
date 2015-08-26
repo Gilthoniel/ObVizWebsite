@@ -28,6 +28,33 @@
         case None => {}
     }
 
+    <form class="form-inline" id="form-filters">
+        <div class="form-group">
+            <label for="search-type">Type</label>
+            <select id="search-type" class="form-control" data-column="1">
+                <option selected="selected"></option>
+                <option value="SPECIFIC">SPECIFIC</option>
+                <option value="DEFINED">DEFINED</option>
+                <option value="GENERAL">GENERAL</option>
+                <option value="CATEGORY">CATEGORY</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="search-app">App ID</label>
+            <input type="text" id="search-app" class="form-control" placeholder="Filter by app id..." data-column="4" />
+        </div>
+
+        <div class="form-group">
+            <label for="search-category">Category</label>
+            <input type="text" id="search-category" class="form-control" placeholder="Filter by category..." data-column="3" />
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-danger">Clear</button>
+        </div>
+    </form>
+
     <div id="table-editor">
         <form class="form-horizontal" method="POST" action="@routes.Administration.updateTopic()">
             <div class="form-group">
@@ -54,14 +81,27 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="input-category" class="col-xs-2 control-label">Category</label>
+                <div class="col-xs-3">
+                    <input id="input-category" type="text" class="form-control" name="category" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-app" class="col-xs-2 control-label">App ID</label>
+                <div class="col-xs-3">
+                    <input id="input-app" type="text" class="form-control" name="app" />
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="input-keys" class="col-xs-2 control-label">Keys</label>
                 <div class="col-xs-3">
-                    <input id="input-keys" type="text" class="form-control" name="keys" />
+                    <textarea id="input-keys" class="form-control" name="keys"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-10">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-danger">Close</button>
                 </div>
             </div>
         </form>
@@ -73,6 +113,8 @@
                 <th>ID</th>
                 <th>TYPE</th>
                 <th>TITLE</th>
+                <th>CATEGORY</th>
+                <th>APP ID</th>
                 <th>KEYS</th>
             </tr>
         </thead>
@@ -82,6 +124,8 @@
                     <td>@topic.getID</td>
                     <td>@topic.getType</td>
                     <td>@topic.getTitle</td>
+                    <td>@topic.getCategory</td>
+                    <td>@topic.getAppID</td>
                     <td>@for(key <- topic.getKeys){@key, }</td>
                 </tr>
             }

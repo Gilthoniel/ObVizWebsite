@@ -130,7 +130,14 @@ public class AdminWebService {
         params.add(new BasicNameValuePair("cmd", Constants.UPDATE_TOPIC));
         params.add(new BasicNameValuePair("topic", json));
 
+        //*
         return service.post(Constants.adminURL, encodeValues(params), TopicTitles.class);
+        //*/
+
+        /*
+        Logger.info(json);
+        return F.Promise.pure(null);
+        //*/
     }
 
     /* PRIVATE FUNCTIONS */
