@@ -8,10 +8,11 @@
         <div class="body">
             @Html(review.getContent)
         </div>
-        <div class="date">
-            @review.reviewDate.toString
-        </div>
         <div class="actions">
+            <div class="date">
+                @review.reviewDate.toString &bull; <a href="@review.permalink">Link <span class="glyphicon glyphicon-share"></span></a>
+            </div>
+
             <img width="20" src="@routes.Assets.versioned("images/loading.png")" alt="" />
             <form class="form-inline">
                 <div class="radio">
