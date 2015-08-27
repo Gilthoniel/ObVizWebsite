@@ -139,7 +139,7 @@ OBVIZ.get = function($baseContainer, url, params) {
             $container.empty();
             // Add the items
             $.each(data, function(i, item) {
-                if (i % 3 == 0) {
+                if (i % 4 == 0) {
                     $container.append('<div class="hidden-xs hidden-sm clearfix"></div>');
                 }
 
@@ -180,7 +180,7 @@ OBVIZ.get = function($baseContainer, url, params) {
                     "arrows": [ {
                         "value": Number($element.data("value")),
                         "color": "rgb(75, 129, 174)",
-                        "startWidth": 10,
+                        "startWidth": 5,
                         "radius": "100%",
                         "innerRadius": "30%",
                         "borderAlpha": 1,

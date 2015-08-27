@@ -4,12 +4,7 @@
 
     <div id="table-editor">
         <form class="form-horizontal" method="POST" action="@routes.Administration.updateCategory()">
-            <div class="form-group">
-                <label for="input-id" class="col-xs-2 control-label">ID</label>
-                <div class="col-xs-2">
-                    <input type="text" id="input-id" class="form-control" name="id" />
-                </div>
-            </div>
+            <input type="hidden" id="input-id" class="form-control" name="id" />
             <div class="form-group">
                 <label for="input-category" class="col-xs-2 control-label">Category</label>
                 <div class="col-xs-2">
@@ -91,6 +86,9 @@
                             return data;
                         }
                     }
+                }, {
+                    targets: 0,
+                    visible: false
                 }]
             }));
 

@@ -6,21 +6,19 @@
     val screenshot = app.getRandomScreen(400)
 }
 
-<div class="col-xs-12 col-sm-6 col-md-4">
+<div class="col-xs-12 col-sm-6 col-md-3">
     <div class="body-app">
 
         <a href="@routes.Application.details(app.getAppID)">
             @defining(app.getRandomScreen(400)) { screenshot =>
-                <div class="header" style="background-image: url('@screenshot')">
+                <div class="header">
+                    <div class="background" style="background-image: url('@screenshot')"></div>
                     <div class="sub-header">
                         <div class="name">
                             @for(i <- 1 to app.getScore) {
                                 <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
                             }<br>
 
-                            @if(webpage.isAdmin) {
-                                <a href="@routes.Administration.training()#@app.getAppID">ADMIN</a>
-                            }
                             @app.getName
                         </div>
 
@@ -50,7 +48,14 @@
             <hr />
 
             <div class="description">
-                @{Utils.getMaxCharacters(app.getDescription, 100)}
+                @{Utils.getMaxCharacters(app.getDescription, 80)}
+            </div>
+            <div class="admin-link">
+                @if(webpage.isAdmin) {
+                    <a href="@routes.Administration.training()#@app.getAppID">
+                        Admin training <span class="glyphicon glyphicon-share"></span>
+                    </a>
+                }
             </div>
         </div>
     </div>

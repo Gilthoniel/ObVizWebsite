@@ -92,7 +92,7 @@ public class Administration extends Controller {
 
         List<BaseUser> users = BaseUser.find.all();
 
-        webpage.getBreadcrumb().get(5).activate();
+        webpage.getBreadcrumb().get(6).activate();
         return ok((play.twirl.api.Html) views.html.administration.users.render(webpage, users));
     }
 
