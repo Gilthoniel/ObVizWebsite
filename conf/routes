@@ -23,7 +23,11 @@ GET         /admin/users                          @controllers.Administration.us
 GET         /admin/training                       @controllers.Administration.training()
 GET         /admin/logs                           @controllers.Administration.logs()
 GET         /admin/topics                         @controllers.Administration.topics()
+GET         /admin/categories                     @controllers.Administration.categories()
+GET         /admin/types                          @controllers.Administration.categoriesTypes()
 POST        /admin/topicsupdate                   @controllers.Administration.updateTopic()
+POST        /admin/types                          @controllers.Administration.insertType()
+POST        /admin/categories                     @controllers.Administration.updateCategory()
 
 # AJAX
 GET         /ajax/reviews                         @controllers.AJAX.getReviews()

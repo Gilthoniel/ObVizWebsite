@@ -1,0 +1,76 @@
+@(webpage: WebPage, types: java.util.List[CategoryType])
+
+@administration.data_settings(webpage) {
+
+    <div id="actions-editor">
+        <button type="button" class="btn btn-primary" id="insert-button">Insert</button>
+    </div>
+
+    <div id="table-editor">
+        <form class="form-horizontal" method="POST" action="@routes.Administration.insertType()">
+            <div class="form-group">
+                <label for="input-id" class="col-xs-2 control-label">ID</label>
+                <div class="col-xs-1">
+                    <input type="text" id="input-id" class="form-control" name="id" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-title" class="col-xs-2 control-label">Title</label>
+                <div class="col-xs-2">
+                    <input type="text" id="input-title" class="form-control" name="title" placeholder="Title..." />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-danger">Clear</button>
+                    <button type="button" class="btn btn-danger">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table id="topics-table" class="display" data-page-length="50">
+        <thead>
+            <tr>
+                <th data-width="0px">ID</th>
+                <th>TITLE</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(t <- types) {
+            <tr>
+                <td>@t._id</td>
+                <td>@t.title</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            var $table = $("#topics-table");
+            $table.data("table", $table.removeAttr('width').DataTable({
+                ordering: true,
+                select: 'single'
+            }));
+
+            var $editor = $("#table-editor");
+            $editor.find("form").on('reset', function() {
+                $(this).find("input[name='id']").prop("disabled", true);
+            });
+
+            $("#insert-button").click(function() {
+                $editor.find("form").trigger('reset');
+                $editor.slideDown(700);
+            });
+        });
+
+        function updateFieldsEditor(data, $editor) {
+            $editor.find("input[name='id']").prop("disabled", false).val(data[0]);
+            $editor.find("input[name='title']").val(data[1]);
+        }
+    </script>
+}

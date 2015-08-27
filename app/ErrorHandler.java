@@ -1,4 +1,5 @@
 import com.google.inject.Inject;
+import controllers.WebPageInformation;
 import models.WebPage;
 import play.Configuration;
 import play.Environment;
@@ -11,6 +12,7 @@ import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Results;
+import play.mvc.With;
 
 import javax.inject.Provider;
 
@@ -18,6 +20,7 @@ import javax.inject.Provider;
  * Created by gaylor on 07.07.15.
  * Dispatch errors
  */
+@With(WebPageInformation.class)
 public class ErrorHandler extends DefaultHttpErrorHandler {
 
     @Inject
@@ -37,7 +40,7 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
 
     @Override
     public F.Promise<Result> onClientError(Http.RequestHeader request, int statusCode, String message) {
-        final WebPage webpage = new WebPage();
+        final WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
 
         return F.Promise.<Result>pure(
                 Results.status(statusCode, (play.twirl.api.Html) views.html.error.render(webpage, message))
@@ -47,7 +50,7 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
     @Override
     protected F.Promise<Result> onProdServerError(Http.RequestHeader request, UsefulException exception) {
 
-        final WebPage webpage = new WebPage();
+        final WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
         String message = "It seems that the server is overloaded. Please come back later :-)";
 
         return F.Promise.pure(

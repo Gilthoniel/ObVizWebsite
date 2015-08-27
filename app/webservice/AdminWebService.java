@@ -2,9 +2,7 @@ package webservice;
 
 import com.google.gson.reflect.TypeToken;
 import constants.Constants;
-import models.AndroidApp;
-import models.Review;
-import models.TopicTitles;
+import models.*;
 import models.admin.Argument;
 import models.admin.Log;
 import org.apache.http.NameValuePair;
@@ -18,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -132,6 +131,53 @@ public class AdminWebService {
 
         //*
         return service.post(Constants.adminURL, encodeValues(params), TopicTitles.class);
+        //*/
+
+        /*
+        Logger.info(json);
+        return F.Promise.pure(null);
+        //*/
+    }
+
+    public F.Promise<List<Category>> getCategories() {
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", "Get_App_Categories"));
+
+        Type type = new TypeToken<List<Category>>(){}.getType();
+        return service.getNoCache(Constants.adminURL, params, type);
+    }
+
+    public F.Promise<List<CategoryType>> getCategoryTypes() {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", "Get_App_Categories_Types"));
+
+        Type type = new TypeToken<List<CategoryType>>(){}.getType();
+        return service.getNoCache(Constants.adminURL, params, type);
+    }
+
+    public F.Promise<CategoryType> insertCategoryType(String json) {
+        List<NameValuePair> params = new LinkedList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.INSERT_TYPE));
+        params.add(new BasicNameValuePair("category_type", json));
+
+        //*
+        return service.post(Constants.adminURL, encodeValues(params), CategoryType.class);
+        //*/
+
+        /*
+        Logger.info(json);
+        return F.Promise.pure(true);
+        //*/
+    }
+
+    public F.Promise<Category> updateCategory(String json) {
+        List<NameValuePair> params = new LinkedList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.UPDATE_CATEGORY));
+        params.add(new BasicNameValuePair("category", json));
+
+        //*
+        return service.post(Constants.adminURL, params, Category.class);
         //*/
 
         /*

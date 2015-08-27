@@ -1,118 +1,108 @@
 package service;
 
+import com.google.inject.Inject;
 import constants.Constants;
-import models.CategorySet;
+import models.Category;
+import models.CategoryType;
+import play.libs.F;
+import webservice.WebService;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Singleton;
+import java.util.*;
 
 /**
  * Created by gaylor on 06-Aug-15.
  * List of set of categories
  */
+@Singleton
 public class CategoryManager {
 
-    public static final CategoryManager instance = new CategoryManager();
+    @Inject
+    private WebService wb;
 
-    private List<CategorySet> sets;
+    private Map<String, Category> mCategories;
+    private Map<Integer, List<Category>> mTypes;
+    private Map<Integer, String> mTypeTitles;
+    private boolean isInitialize = false;
 
-    private CategoryManager() {
-        sets = new ArrayList<>();
+    public List<Wrapper> getSuperCategories() {
 
-        /** All **/
-        CategorySet all = new CategorySet("All");
-        sets.add(all);
+        if (!isInitialize) {
+            init();
+        }
 
-        /** Games **/
-        CategorySet games = new CategorySet("Games");
+        List<Wrapper> list = new LinkedList<>();
 
-        games.addAll(new Constants.Category[] {
-                Constants.Category.ACTION,
-                Constants.Category.ADVENTURE,
-                Constants.Category.ARCADE,
-                Constants.Category.BOARD,
-                Constants.Category.CARD,
-                Constants.Category.CASINO,
-                Constants.Category.CASUAL,
-                Constants.Category.EDUCATIONAL,
-                Constants.Category.MUSIC,
-                Constants.Category.PUZZLE,
-                Constants.Category.RACING,
-                Constants.Category.ROLE_PLAYING,
-                Constants.Category.SIMULATION,
-                Constants.Category.GAME_SPORTS,
-                Constants.Category.STRATEGY,
-                Constants.Category.TRIVIA,
-                Constants.Category.WORD
-        });
-        sets.add(games);
+        for (Map.Entry<Integer, List<Category>> entry : mTypes.entrySet()) {
+            Wrapper wrapper = new Wrapper();
+            wrapper.title = mTypeTitles.get(entry.getKey());
 
-        /** Social **/
-        CategorySet social = new CategorySet("Social");
+            StringJoiner joiner = new StringJoiner(",");
+            for (Category category : entry.getValue()) {
+                joiner.add(category.category);
+            }
+            wrapper.categories = String.join(",", joiner.toString());
 
-        social.addAll(new Constants.Category[]{
-                Constants.Category.COMMUNICATION,
-                Constants.Category.SOCIAL
-        });
-        sets.add(social);
+            list.add(wrapper);
+        }
 
-        /** Entertainment **/
-        CategorySet entertainment = new CategorySet("Entertainment");
-
-        entertainment.addAll(new Constants.Category[] {
-                Constants.Category.MUSIC_AND_AUDIO,
-                Constants.Category.ENTERTAINMENT,
-                Constants.Category.COMICS,
-                Constants.Category.BOOKS_AND_REFERENCE,
-                Constants.Category.PHOTOGRAPHY,
-                Constants.Category.SHOPPING
-        });
-        sets.add(entertainment);
-
-        /** Tools **/
-        CategorySet tools = new CategorySet("Tools");
-
-        tools.addAll(new Constants.Category[]{
-                Constants.Category.TOOLS,
-                Constants.Category.PERSONALIZATION
-        });
-        sets.add(tools);
-
-        /** WORK **/
-        CategorySet work = new CategorySet("Work");
-
-        work.addAll(new Constants.Category[] {
-                Constants.Category.BUSINESS,
-                Constants.Category.EDUCATION,
-                Constants.Category.FINANCE,
-                Constants.Category.PRODUCTIVITY,
-                Constants.Category.TRANSPORTATION,
-                Constants.Category.TRAVEL_AND_LOCAL
-        });
-        sets.add(work);
-
-        /** HEALTH **/
-        CategorySet health = new CategorySet("Health");
-
-        health.addAll(new Constants.Category[] {
-                Constants.Category.HEALTH_AND_FITNESS,
-                Constants.Category.SPORTS,
-                Constants.Category.MEDICAL
-        });
-        sets.add(health);
-
-        /** Others **/
-        CategorySet others = new CategorySet("Others");
-        others.addAll(new Constants.Category[] {
-                Constants.Category.NEWS_AND_MAGAZINES,
-                Constants.Category.WEATHER,
-                Constants.Category.LIFESTYLE
-        });
-        sets.add(others);
+        return list;
     }
 
-    public List<CategorySet> getCategories() {
+    public Category getFrom(String category) {
 
-        return sets;
+        if (!isInitialize) {
+            init();
+        }
+
+        if (mCategories.containsKey(category)) {
+
+            return mCategories.get(category);
+        } else {
+
+            return Category.instanceDefault;
+        }
+    }
+
+    private synchronized void init() {
+
+        if (isInitialize) {
+            return;
+        }
+
+        F.Promise<List<CategoryType>> promiseTypes = wb.getCategoryTypes();
+        F.Promise<List<Category>> promiseCategories = wb.getCategories();
+
+        promiseTypes.flatMap(types -> {
+
+            mTypes = new HashMap<>();
+            mTypeTitles = new HashMap<>();
+            for (CategoryType type : types) {
+                mTypes.put(type._id, new LinkedList<>());
+                mTypeTitles.put(type._id, type.title);
+            }
+
+            return promiseCategories.map(categories -> {
+
+                mCategories = new HashMap<>();
+                for (Category cat : categories) {
+                    mCategories.put(cat.category, cat);
+
+                    for (int type : cat.types) {
+                        mTypes.get(type).add(cat);
+                    }
+                }
+
+                isInitialize = true;
+
+                return null;
+            });
+        }).get(Constants.TIMEOUT);
+    }
+
+    public class Wrapper {
+
+        public String title;
+        public String categories;
     }
 }

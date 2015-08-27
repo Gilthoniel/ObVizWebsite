@@ -1,45 +1,46 @@
 package controllers;
 
+import com.google.inject.Inject;
 import constants.Constants;
 import models.AndroidApp;
 import models.WebPage;
 import play.libs.F;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
-import service.TopicsManager;
+import play.mvc.With;
 import webservice.WebService;
 
-import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
 
+@With(WebPageInformation.class)
 public class Application extends Controller {
 
-    @Inject
     private WebService wb;
+
     @Inject
-    private TopicsManager topics;
+    public Application(WebService service) {
+        wb = service;
+    }
 
     /**
      * Homepage
      * @return html result
      */
     public Result index() {
-        WebPage webpage = new WebPage(session());
 
-        return ok((play.twirl.api.Html) views.html.index.render(webpage));
+        return ok((play.twirl.api.Html) views.html.index.render(getWebpage()));
     }
 
     public Result contact() {
-        WebPage webpage = new WebPage(session());
 
-        return ok((play.twirl.api.Html) views.html.contact.render(webpage));
+        return ok((play.twirl.api.Html) views.html.contact.render(getWebpage()));
     }
 
     public Result disclaimer() {
-        WebPage webpage = new WebPage(session());
 
-        return ok((play.twirl.api.Html) views.html.disclaimer.render(webpage));
+        return ok((play.twirl.api.Html) views.html.disclaimer.render(getWebpage()));
     }
 
     /**
@@ -47,7 +48,6 @@ public class Application extends Controller {
      * @return html result
      */
     public F.Promise<Result> details(String id) {
-        final WebPage webpage = new WebPage(session());
 
         // Add one view to the app
         wb.markViewed(id);
@@ -58,7 +58,7 @@ public class Application extends Controller {
 
             if (app == null) {
                 return F.Promise.pure(notFound(
-                                (play.twirl.api.Html) views.html.error.render(webpage, Constants.APP_NOT_FOUND))
+                                (play.twirl.api.Html) views.html.error.render(getWebpage(), Constants.APP_NOT_FOUND))
                 );
             }
 
@@ -69,10 +69,16 @@ public class Application extends Controller {
 
             return wb.getAppDetails(ids, Constants.Weight.LIGHT).map(apps -> {
 
+                WebPage webpage = getWebpage();
                 webpage.addPath(routes.Application.details(app.getAppID()), app.getName());
-                return ok((play.twirl.api.Html) views.html.details.render(webpage, app, topics, apps));
+                return ok((play.twirl.api.Html) views.html.details.render(webpage, app, apps));
             });
         });
+    }
+
+    private WebPage getWebpage() {
+
+        return (WebPage) Http.Context.current().args.get("com.obviz.webpage");
     }
 
 }

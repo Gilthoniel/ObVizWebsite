@@ -1,5 +1,4 @@
-@import service.TopicsManager
-@(app: AndroidApp, topics: TopicsManager, chartID: String)
+@(app: AndroidApp, webpage: WebPage, chartID: String)
 
 @import constants.Utils
 
@@ -18,6 +17,10 @@
                             @for(i <- 1 to app.getScore) {
                                 <img height="15" src="@routes.Assets.versioned("images/icons/star.png")" alt="" />
                             }<br>
+
+                            @if(webpage.isAdmin) {
+                                <a href="@routes.Administration.training()#@app.getAppID">ADMIN</a>
+                            }
                             @app.getName
                         </div>
 
@@ -35,11 +38,11 @@
                 <ul>
                     <li>
                         <img height="20" src="@routes.Assets.versioned("images/trending_up.png")" alt="" />
-                        @topics.getTitle(app.getMostPositive)
+                        @webpage.getTopics.getTitle(app.getMostPositive)
                     </li>
                     <li>
                         <img height="20" src="@routes.Assets.versioned("images/trending_down.png")" alt="" />
-                        @topics.getTitle(app.getMostNegative)
+                        @webpage.getTopics.getTitle(app.getMostNegative)
                     </li>
                 </ul>
             }

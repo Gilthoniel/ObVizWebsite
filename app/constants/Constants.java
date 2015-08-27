@@ -37,75 +37,15 @@ public class Constants {
     public static final String GET_ARGUMENTS = "Get_App_Arguments";
     public static final String GET_APP_TOPICS = "Get_App_Topics";
     public static final String UPDATE_TOPIC = "Insert_App_Topic";
+    public static final String INSERT_TYPE = "Insert_App_Category_Type";
+    public static final String UPDATE_CATEGORY = "Update_App_Category";
 
     /* Machines */
     public static final String[] MACHINES = new String[] {
             "liapc3", "claudiu", "liapc4", "liapc13", "liapc55"
     };
 
-    /* Category */
-
-    public enum Category {
-        SOCIAL("social", "Social"),
-        ADVENTURE("games", "Adventure"),
-        GAME_SPORTS("games", "Sport"),
-        STRATEGY("games", "Strategy"),
-        ACTION("games", "Action"),
-        PUZZLE("games", "Puzzle"),
-        ARCADE("games", "Arcade"),
-        CARD("games", "Card"),
-        CASUAL("games", "Casual"),
-        CASINO("games", "Casino"),
-        TRIVIA("games", "Trivia"),
-        SIMULATION("games", "Simulation"),
-        RACING("games", "Racing"),
-        ROLE_PLAYING("games", "RPG"),
-        WORD("games", "Word"),
-        BOARD("games", "Board"),
-        EDUCATIONAL("games", "Educational"),
-        MUSIC("games", "Music"),
-        COMMUNICATION("communication", "Communication"),
-        MUSIC_AND_AUDIO("audio", "Music and Audio"),
-        ENTERTAINMENT("entertainment", "Entertainment"),
-        TOOLS("tools", "Tools"),
-        BOOKS_AND_REFERENCE("books", "Books"),
-        PERSONALIZATION("personalization", "Personalization"),
-        PRODUCTIVITY("productivity", "Productivity"),
-        WEATHER("weather", "Weather"),
-        SHOPPING("shopping", "Shopping"),
-        TRANSPORTATION("transportation", "Transportation"),
-        LIFESTYLE("lifestyle", "Lifestyle"),
-        TRAVEL_AND_LOCAL("travel", "Travel and Local"),
-        PHOTOGRAPHY("photo", "Photography"),
-        BUSINESS("business", "Business"),
-        HEALTH_AND_FITNESS("health", "Health"),
-        FINANCE("finance", "Finance"),
-        SPORTS("sports", "Sports"),
-        EDUCATION("education", "Education"),
-        NEWS_AND_MAGAZINES("news", "News and Magazines"),
-        MEDICAL("medical", "Medical"),
-        COMICS("comics", "Comics"),
-        DEFAULT("default", "Application");
-
-        private final String name;
-        private final String title;
-        Category(String value, String title) {
-            name = value;
-            this.title = title;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-    }
-
     /* Exception */
 
-    public static final String NO_APP_EXCEPTION = "NO_APP";
-    public static final String SERVER_OVERLOADED_EXCEPTION = "SERVER_OVERLOADED";
     public static final String AJAX_REQUEST_EXCEPTION = "AJAX_REQUEST_EXCEPTION";
 }

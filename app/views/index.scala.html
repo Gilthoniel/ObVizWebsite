@@ -9,8 +9,8 @@
 
                 <small>
                     <ul class="list-categories">
-                    @for(category <- webpage.getCategories) {
-                        <li data-categories="@category.getCategories">@category.getTitle</li>
+                    @for(category <- webpage.getCategories.getSuperCategories) {
+                        <li data-categories="@category.categories">@category.title</li>
                     }
                     </ul>
                 </small>

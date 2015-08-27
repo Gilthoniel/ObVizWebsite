@@ -1,24 +1,17 @@
 /**
- * Created by gaylor on 08/25/2015.
- * Management for the topics page
+ * Created by gaylor on 08/27/2015.
  */
 
 $(document).ready(function() {
 
-    var table = $("#topics-table").removeAttr('width').DataTable({
-        ordering: true,
-        select: 'single',
-        columnDefs: [{
-            targets: 2,
-            width: "10%"
-        }]
-    });
+    var table = $("#topics-table").data("table");
 
     var $filters = $("#form-filters");
     $filters.find(".form-control").on('input change', function() {
 
         table.column(Number($(this).data("column"))).search($(this).val()).draw();
     });
+    $filters.find("#search-type").change();
     $filters.find("button").click(function() {
 
         $filters.find(".form-control").val("").change();
@@ -28,14 +21,10 @@ $(document).ready(function() {
 
         var $editor = $("#table-editor");
         var data = table.row(indexes[0]).data();
-        console.log(data);
 
-        $editor.find("input[name='id']").val(data[0]);
-        $editor.find("select[name='type']").val(data[1]);
-        $editor.find("input[name='title']").val(data[2].replace(/&amp;/g, "&"));
-        $editor.find("input[name='category']").val(data[3]).prop("disabled", !(data[1] == 'CATEGORY'));
-        $editor.find("input[name='app']").val(data[4]).prop("disabled", !(data[1] == 'SPECIFIC'));
-        $editor.find("textarea[name='keys']").val(data[5]);
+        if (typeof updateFieldsEditor == 'function') {
+            updateFieldsEditor(data, $editor);
+        }
 
         $editor.stop().slideDown(700);
     });

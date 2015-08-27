@@ -2,10 +2,7 @@ package webservice;
 
 import com.google.gson.reflect.TypeToken;
 import constants.Constants;
-import models.AndroidApp;
-import models.Initiatable;
-import models.Review;
-import models.TopicTitles;
+import models.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
@@ -15,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.jar.Attributes;
 
 /**
  * Created by gaylor on 25.06.15.
@@ -114,7 +112,8 @@ public class WebService {
         }
 
         String cacheKey = "search:" + name + ":" + String.join(":", categories);
-        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {}.getType(), cacheKey));
+        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {
+        }.getType(), cacheKey));
     }
 
     /**
@@ -131,7 +130,8 @@ public class WebService {
         }
 
         String cacheKey = "trending:" + String.join(":", categories);
-        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>(){}.getType(), cacheKey));
+        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {
+        }.getType(), cacheKey));
     }
 
     /**
@@ -156,6 +156,27 @@ public class WebService {
 
             return mappedTitles;
         });
+    }
+
+    /**
+     * Get the categories
+     * @return list of categories
+     */
+    public F.Promise<List<Category>> getCategories() {
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", "Get_App_Categories"));
+
+        Type type = new TypeToken<List<Category>>(){}.getType();
+        return service.getNoCache(Constants.baseURL, params, type);
+    }
+
+    public F.Promise<List<CategoryType>> getCategoryTypes() {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", "Get_App_Categories_Types"));
+
+        Type type = new TypeToken<List<CategoryType>>(){}.getType();
+        return service.getNoCache(Constants.baseURL, params, type);
     }
 
     /* POST request */

@@ -6,8 +6,11 @@ import play.Play;
 import play.mvc.Call;
 import play.mvc.Http;
 import service.BaseUser;
+import service.BaseUserService;
 import service.CategoryManager;
+import service.TopicsManager;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,22 +22,17 @@ public class WebPage {
 
     private List<WebPath> breadcrumb;
     private BaseUser user;
+    private TopicsManager mTopics;
+    private CategoryManager mCategories;
 
-    public WebPage() {
+    public WebPage(TopicsManager topics, CategoryManager categories, Http.Session session) {
+        mTopics = topics;
+        mCategories = categories;
+
+        user = Login.getLocalUser(session);
 
         breadcrumb = new LinkedList<>();
         addPath(routes.Application.index(), "Home");
-    }
-
-    public WebPage(Http.Session session) {
-        this();
-
-        user = Login.getLocalUser(session);
-    }
-
-    public WebPage(Http.Session session, List<WebPath> paths) {
-        user = Login.getLocalUser(session);
-        breadcrumb = paths;
     }
 
     /**
@@ -44,6 +42,12 @@ public class WebPage {
      */
     public void addPath(Call path, String title) {
         breadcrumb.add(new WebPath(path, title));
+    }
+
+    public void addAllPaths(Collection<WebPath> collection) {
+
+        breadcrumb.clear();
+        breadcrumb.addAll(collection);
     }
 
     /**
@@ -58,13 +62,22 @@ public class WebPage {
         return user;
     }
 
-    public List<CategorySet> getCategories() {
-        return CategoryManager.instance.getCategories();
+    public TopicsManager getTopics() {
+        return mTopics;
+    }
+
+    public CategoryManager getCategories() {
+        return mCategories;
     }
 
     public boolean isProdMode() {
 
         return Play.isProd();
+    }
+
+    public boolean isAdmin() {
+
+        return user != null && user.right == BaseUserService.Rights.ADMIN;
     }
 
     /* PRIVATE */

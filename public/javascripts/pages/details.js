@@ -51,6 +51,17 @@ OBVIZ.carousel = {
 
 OBVIZ.comparison = {
 
+    init: function() {
+
+        OBVIZ.$comparedContainer.find(".title-app").mouseenter(function() {
+            OBVIZ.gauges.hoverIn(0);
+        });
+
+        OBVIZ.$comparedContainer.find(".title-comparison").mouseenter(function() {
+            OBVIZ.gauges.hoverIn(1);
+        });
+    },
+
     start: function() {
         // This function must be called with a click event
         var $slide = $(this);
@@ -401,6 +412,7 @@ $(document).ready(function() {
     OBVIZ.gauges.init();
     OBVIZ.carousel.init();
     OBVIZ.reviews.init();
+    OBVIZ.comparison.init();
 });
 
 /** Private functions **/

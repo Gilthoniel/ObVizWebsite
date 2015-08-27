@@ -1,7 +1,5 @@
 package models;
 
-import constants.Constants;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -12,10 +10,9 @@ import java.util.*;
 public class AndroidApp implements Initiatable, Serializable {
 
     private static final long serialVersionUID = 1820727929435164026L;
-    private static Random random = new Random();
 
     private String appID;
-    private Constants.Category category;
+    private String category;
     private String coverImgUrl;
     private String currentVersion;
     private String description;
@@ -28,11 +25,9 @@ public class AndroidApp implements Initiatable, Serializable {
     private Date publicationDate;
     private List<String> screenshots;
     private Score score;
-    private List<Review> reviews;
     private List<String> relatedIDs;
-    private boolean parsed;
+    private List<OpinionValue> opinionsSummary;
     private int nbParsedReviews;
-    List<OpinionValue> opinionsSummary;
 
     @Override
     public void init() {
@@ -65,12 +60,9 @@ public class AndroidApp implements Initiatable, Serializable {
      * Category of the application
      * @return String
      */
-    public Constants.Category getCategory() {
-        if (category != null) {
-            return category;
-        } else {
-            return Constants.Category.DEFAULT;
-        }
+    public String getCategory() {
+
+        return category;
     }
 
     /**
@@ -178,10 +170,6 @@ public class AndroidApp implements Initiatable, Serializable {
         return (int) Math.round(score.getTotal());
     }
 
-    public int getNbParsedReviews() {
-        return nbParsedReviews;
-    }
-
     public List<String> getRelatedIDs() {
 
         if (relatedIDs != null) {
@@ -198,6 +186,11 @@ public class AndroidApp implements Initiatable, Serializable {
         } else {
             return Collections.emptyList();
         }
+    }
+
+    public int getNbParsedReviews() {
+
+        return nbParsedReviews;
     }
 
     public int getMostPositive() {

@@ -1,40 +1,14 @@
-@(webpage: WebPage, topics: java.util.List[TopicTitles])
+@(webpage: WebPage, topics: java.util.List[TopicTitles], categories: java.util.List[Category])
 
-@administration.admin_main(webpage) {
-
-    @requestHeader.flash.get("error") match {
-        case Some(message) => {
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Something goes wrong!</strong> @message
-            </div>
-        }
-
-        case None => {}
-    }
-
-    @requestHeader.flash.get("success") match {
-        case Some(message) => {
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                @message
-            </div>
-        }
-
-        case None => {}
-    }
+@administration.data_settings(webpage) {
 
     <form class="form-inline" id="form-filters">
         <div class="form-group">
             <label for="search-type">Type</label>
             <select id="search-type" class="form-control" data-column="1">
-                <option selected="selected"></option>
+                <option></option>
                 <option value="SPECIFIC">SPECIFIC</option>
-                <option value="DEFINED">DEFINED</option>
+                <option value="DEFINED" selected="selected">DEFINED</option>
                 <option value="GENERAL">GENERAL</option>
                 <option value="CATEGORY">CATEGORY</option>
             </select>
@@ -93,6 +67,18 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="input-name" class="col-xs-2 control-label">Name</label>
+                <div class="col-xs-3">
+                    <input id="input-name" type="text" class="form-control" name="name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-categories" class="col-xs-2 control-label">Categories</label>
+                <div class="col-xs-3">
+                    <div id="magicsuggest"></div>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="input-keys" class="col-xs-2 control-label">Keys</label>
                 <div class="col-xs-3">
                     <textarea id="input-keys" class="form-control" name="keys"></textarea>
@@ -114,25 +100,96 @@
                 <th>TYPE</th>
                 <th>TITLE</th>
                 <th>CATEGORY</th>
-                <th>APP ID</th>
+                <th data-width="0px">APP ID</th>
+                <th>NAME</th>
+                <th>CATEGORIES</th>
                 <th>KEYS</th>
             </tr>
         </thead>
         <tbody>
-            @for(topic <- topics) {
-                <tr>
-                    <td>@topic.getID</td>
-                    <td>@topic.getType</td>
-                    <td>@topic.getTitle</td>
-                    <td>@topic.getCategory</td>
-                    <td>@topic.getAppID</td>
-                    <td>@for(key <- topic.getKeys){@key, }</td>
-                </tr>
-            }
+        @for(topic <- topics) {
+            <tr>
+                <td>@topic.getID</td>
+                <td>@topic.getType</td>
+                <td>@topic.getTitle</td>
+                <td>@topic.getCategory</td>
+                <td>@topic.getAppID</td>
+                <td>@topic.getName</td>
+                <td>@for(category <- topic.getCategories) {@category,}</td>
+                <td>@for(key <- topic.getKeys.sorted) {@key, }</td>
+            </tr>
+        }
         </tbody>
     </table>
 
-    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/jquery.dataTables.min.js")"></script>
-    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/datatables.select.min.js")"></script>
-    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/admin_topics.js")"></script>
+    <div id="data-categories">
+        @for(category <- categories) {
+            <span data-name="@category.category"></span>
+        }
+    </div>
+
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/magicsuggest-min.js")"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            var $table = $("#topics-table");
+            $table.data("table", $table.removeAttr('width').DataTable({
+                ordering: true,
+                select: 'single',
+                columnDefs: [{
+                    targets: 6,
+                    render: function(data, type) {
+                        if (type == 'display') {
+
+                            return data.length > 0 ? '__FILL__' : '';
+                        } else {
+
+                            return data;
+                        }
+                    }
+                }]
+            }));
+
+            var data = [];
+            $("#data-categories").find("span").each(function() {
+                data.push($(this).data("name"));
+            });
+            /* Magic suggest for categories field */
+            $("#table-editor").data("categories", $("#magicsuggest").magicSuggest({
+                allowFreeEntries: false,
+                name: 'categories',
+                maxSelection: null,
+                data: data
+            }));
+        });
+
+        function updateFieldsEditor(data, $editor) {
+
+            $editor.find("input[name='id']").val(data[0]);
+            $editor.find("select[name='type']").val(data[1]);
+            $editor.find("input[name='title']").val(data[2].replace(/&amp;/g, "&"));
+            $editor.find("input[name='category']").val(data[3]).prop("disabled", !(data[1] == 'CATEGORY'));
+            $editor.find("input[name='app']").val(data[4]).prop("disabled", !(data[1] == 'SPECIFIC'));
+            $editor.find("input[name='name']").val(data[5]).prop("disabled", !(data[1] == 'DEFINED'));
+
+            if (data[6].length > 0) {
+
+                var categories = [];
+                $.each(data[6].split(","), function(i, item) {
+                    if (item.length > 0) {
+                        categories.push({
+                            name: item,
+                            id: item
+                        });
+                    }
+                });
+                $editor.data("categories").setSelection(categories);
+
+            } else {
+                $editor.data("categories").clear();
+            }
+
+            $editor.find("textarea[name='keys']").val(data[7]);
+        }
+    </script>
 }

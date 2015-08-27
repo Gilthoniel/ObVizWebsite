@@ -4,7 +4,10 @@ import play.data.DynamicForm;
 import webservice.MessageParser;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by gaylor on 02.07.15.
@@ -18,18 +21,28 @@ public class TopicTitles implements Serializable {
     private String type;
     private String category;
     private String appID;
+    private String name;
+    private List<String> categories;
     private String[] keys;
 
     public TopicTitles(DynamicForm form) {
         _id = MessageParser.parseInt(form.get("id"));
         title = form.get("title");
         type = form.get("type");
+        name = form.get("name");
 
         String tempKeys = form.get("keys");
         if (tempKeys != null && !tempKeys.isEmpty()) {
             keys = tempKeys.split("\\s*,\\s*");
         } else {
             keys = new String[]{};
+        }
+
+        categories = new LinkedList<>();
+        for (Map.Entry<String, String> entry : form.data().entrySet()) {
+            if (entry.getKey().startsWith("categories")) {
+                categories.add(entry.getValue());
+            }
         }
 
         if (form.data().containsKey("category")) {
@@ -72,6 +85,14 @@ public class TopicTitles implements Serializable {
 
     public String getAppID() {
         return appID != null ? appID : "";
+    }
+
+    public String getName() {
+        return name != null ? name : "";
+    }
+
+    public List<String> getCategories() {
+        return categories != null ? categories : Collections.EMPTY_LIST;
     }
 
     public String[] getKeys() {

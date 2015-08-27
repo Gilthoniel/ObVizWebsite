@@ -50,8 +50,7 @@ public class ConnectionService {
                 // HTTP success code is 200
                 if (response.getStatus() != 200) {
 
-                    Logger.warn("Bad status code (" + response.getStatus() + ") for GET request [" + url + "] with queries " + params + " !");
-                    throw new BackEndRequestException("Bad status code for the request");
+                    throw new BackEndRequestException("Bad status code (" + response.getStatus() + ") for GET request [" + url + "] with queries " + params + " !");
                 }
 
                 T result = MessageParser.<T>fromJson(response.getBodyAsStream(), type);

@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
 import models.AndroidApp;
 import models.Review;
+import models.WebPage;
 import models.errors.AJAXRequestException;
 import play.libs.F;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.mvc.With;
 import webservice.MessageParser;
 import service.TopicsManager;
 import webservice.WebService;
@@ -24,12 +26,11 @@ import java.util.List;
  * Created by gaylor on 13.07.15.
  * AJAX command for the website
  */
+@With(WebPageInformation.class)
 public class AJAX extends Controller {
 
     @Inject
     private WebService wb;
-    @Inject
-    private TopicsManager topics;
 
     /**
      * Return a JSON format of the reviews of the application
@@ -74,9 +75,11 @@ public class AJAX extends Controller {
         String name = request().getQueryString("query");
 
         return wb.search(name, manageCategories(request())).map(applications -> {
+            WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
+
             ArrayNode root = Json.newArray();
             for (AndroidApp app : applications) {
-                root.add(views.html.templates.play_app.render(app, topics, "chart-search").toString());
+                root.add(views.html.templates.play_app.render(app, webpage, "chart-search").toString());
             }
 
             return ok(root);
@@ -102,8 +105,9 @@ public class AJAX extends Controller {
                 indexes = indexes.subList(0, Constants.NUMBER_TRENDING_APPS);
             }
 
+            WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
             for (Integer index : indexes) {
-                root.add(views.html.templates.play_app.render(applications.get(index), topics, "chart-trending").toString());
+                root.add(views.html.templates.play_app.render(applications.get(index), webpage, "chart-trending").toString());
             }
 
             return ok(root);

@@ -54,17 +54,11 @@ $(document).ready(function() {
     loadApplications($pagination.data("page"));
 
     /** Load reviews **/
-    var $reviewsContainer = $("#reviews-container");
-    $searchResults.on('click', 'li', function() {
-
-        // Active state management
-        $searchResults.children().removeClass("active");
-        $(this).addClass("active");
-
+    function loadReviews(id) {
         var url = $("#reviews-container").data("url");
         $reviewsContainer.html("Loading...");
 
-        $.get(url, { id: $(this).data("id"), p: 0 })
+        $.get(url, { id: id, p: 0 })
             .done(function(data) {
                 $reviewsContainer.html("");
 
@@ -78,7 +72,22 @@ $(document).ready(function() {
             }).fail(function() {
                 $reviewsContainer.html("Error, please retry");
             });
+    }
+
+    var $reviewsContainer = $("#reviews-container");
+    $searchResults.on('click', 'li', function() {
+
+        // Active state management
+        $searchResults.children().removeClass("active");
+        $(this).addClass("active");
+
+        loadReviews($(this).data("id"));
     });
+
+    // If there's an hash in the url
+    if (window.location.hash) {
+        loadReviews(window.location.hash.replace("#", ""));
+    }
 
     /** Choose clauses **/
     var clauseSide = "positive";

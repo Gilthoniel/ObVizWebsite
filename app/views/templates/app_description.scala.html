@@ -1,4 +1,4 @@
-@(app: AndroidApp)
+@(app: AndroidApp, webpage: WebPage)
 
 <ul class="information">
     <li>
@@ -17,7 +17,7 @@
     </li>
     <li>
         <h4>Category</h4>
-        @app.getCategory.getTitle
+        @webpage.getCategories.getFrom(app.getCategory).title
     </li>
     <li>
         <h4>Price</h4>

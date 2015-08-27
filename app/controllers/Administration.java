@@ -3,10 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
-import models.AndroidApp;
-import models.Review;
-import models.TopicTitles;
-import models.WebPage;
+import models.*;
 import models.WebPage.WebPath;
 import models.admin.Argument;
 import models.admin.Log;
@@ -16,9 +13,7 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.F;
 import play.libs.Json;
-import play.mvc.Controller;
-import play.mvc.Result;
-import play.mvc.Security;
+import play.mvc.*;
 import service.BaseUser;
 import service.BaseUserService;
 import service.cache.CustomCache;
@@ -38,6 +33,7 @@ import java.util.stream.Collectors;
  * Administration panel for settings, etc ...
  */
 @Security.Authenticated(Secured.class)
+@With(WebPageAdmin.class)
 public class Administration extends Controller {
 
     @Inject
@@ -55,6 +51,8 @@ public class Administration extends Controller {
         paths.add(new WebPath(routes.Administration.crawlers(), "Crawlers"));
         paths.add(new WebPath(routes.Administration.training(), "Training"));
         paths.add(new WebPath(routes.Administration.topics(), "Topics"));
+        paths.add(new WebPath(routes.Administration.categories(), "Categories"));
+        paths.add(new WebPath(routes.Administration.categoriesTypes(), "Types"));
         paths.add(new WebPath(routes.Administration.users(), "Users"));
         paths.add(new WebPath(routes.Application.index(), "Back to website"));
     }
@@ -64,10 +62,7 @@ public class Administration extends Controller {
      * @return Html
      */
     public F.Promise<Result> crawlers() {
-        WebPage webpage = new WebPage(session(), paths);
-        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
-            return F.Promise.pure(redirect(routes.Application.index()));
-        }
+        WebPage webpage = getWebpage();
 
         List<F.Promise<List<Log>>> promises = new ArrayList<>();
         for (String machine : Constants.MACHINES) {
@@ -93,14 +88,11 @@ public class Administration extends Controller {
      * @return Html
      */
     public Result users() {
-        WebPage webpage = new WebPage(session(), paths);
-        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
-            return redirect(routes.Application.index());
-        }
+        WebPage webpage = getWebpage();
 
         List<BaseUser> users = BaseUser.find.all();
 
-        webpage.getBreadcrumb().get(4).activate();
+        webpage.getBreadcrumb().get(5).activate();
         return ok((play.twirl.api.Html) views.html.administration.users.render(webpage, users));
     }
 
@@ -109,10 +101,7 @@ public class Administration extends Controller {
      * @return Html
      */
     public Result training() {
-        WebPage webpage = new WebPage(session(), paths);
-        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
-            return redirect(routes.Application.index());
-        }
+        WebPage webpage = getWebpage();
 
         webpage.getBreadcrumb().get(2).activate();
         return ok((play.twirl.api.Html) views.html.administration.training.render(webpage));
@@ -123,10 +112,7 @@ public class Administration extends Controller {
      * @return
      */
     public Result logs() {
-        WebPage webpage = new WebPage(session(), paths);
-        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
-            return redirect(routes.Application.index());
-        }
+        WebPage webpage = getWebpage();
 
         File logsDirectory = application.getFile("logs/archived");
 
@@ -144,27 +130,116 @@ public class Administration extends Controller {
     }
 
     public F.Promise<Result> topics() {
-        WebPage webpage = new WebPage(session(), paths);
-        if (webpage.getUser() == null || webpage.getUser().right != BaseUserService.Rights.ADMIN) {
-            return F.Promise.pure(redirect(routes.Application.index()));
-        }
+        WebPage webpage = getWebpage();
 
-        return wb.getTopics().map(topics -> {
+        return wb.getTopics().flatMap(topics -> wb.getCategories().map(categories -> {
 
             webpage.getBreadcrumb().get(3).activate();
-            return ok((play.twirl.api.Html) views.html.administration.topics.render(webpage, topics));
-        });
+            return ok((play.twirl.api.Html) views.html.administration.topics.render(webpage, topics, categories));
+        }));
 
+    }
+
+    public F.Promise<Result> updateTopic() {
+
+        DynamicForm form = Form.form().bindFromRequest(request());
+        TopicTitles topic = new TopicTitles(form);
+
+        if (topic.isValid()) {
+
+            //*
+            return wb.updateTopic(MessageParser.toJson(topic)).map(result -> {
+
+                if (result != null) {
+                    successMessage();
+                } else {
+                    errorMessage();
+                }
+
+                return redirect(routes.Administration.topics());
+            });
+            //*/
+        } else {
+
+            Logger.info("Bad json: " + MessageParser.toJson(topic));
+            errorMessage();
+        }
+
+        return F.Promise.pure(redirect(routes.Administration.topics()));
+    }
+
+    public F.Promise<Result> categories() {
+        WebPage webpage = getWebpage();
+
+        return wb.getCategories().flatMap(categories -> wb.getCategoryTypes().map(types -> {
+
+            webpage.getBreadcrumb().get(4).activate();
+            return ok((play.twirl.api.Html) views.html.administration.categories.render(webpage, categories, types));
+        }));
+    }
+
+    public F.Promise<Result> updateCategory() {
+        DynamicForm form = Form.form().bindFromRequest();
+        Category category = new Category(form);
+
+        if (category.isValid()) {
+
+            return wb.updateCategory(MessageParser.toJson(category)).map(result -> {
+
+                if (result != null) {
+                    successMessage();
+                } else {
+                    errorMessage();
+                }
+
+                return redirect(routes.Administration.categories());
+            });
+        } else {
+
+            errorMessage();
+            Logger.info("Bad json: " + MessageParser.toJson(category));
+        }
+
+        return F.Promise.pure(redirect(routes.Administration.categories()));
+    }
+
+    public F.Promise<Result> categoriesTypes() {
+        WebPage webpage = getWebpage();
+
+        return wb.getCategoryTypes().map(types -> {
+
+            webpage.getBreadcrumb().get(5).activate();
+            return ok((play.twirl.api.Html) views.html.administration.category_types.render(webpage, types));
+        });
+    }
+
+    public F.Promise<Result> insertType() {
+        DynamicForm form = Form.form().bindFromRequest();
+        CategoryType type = new CategoryType(form);
+
+        if (type.isValid()) {
+            return wb.insertCategoryType(MessageParser.toJson(type)).map(result -> {
+
+                if (result != null) {
+                    successMessage();
+                } else {
+                    errorMessage();
+                }
+
+                return redirect(routes.Administration.categoriesTypes());
+            });
+        } else {
+
+            errorMessage();
+            Logger.info("Bad json: "+MessageParser.toJson(type));
+        }
+
+        return F.Promise.pure(redirect(routes.Administration.categoriesTypes()));
     }
 
     /** AJAX **/
 
     public F.Promise<Result> loadLogs() {
-
-        final BaseUser user = Login.getLocalUser(session());
-        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
-            return F.Promise.pure(badRequest("Not authorized"));
-        }
 
         List<F.Promise<List<Log>>> promises = new ArrayList<>();
         for (String machine : Constants.MACHINES) {
@@ -186,11 +261,6 @@ public class Administration extends Controller {
     }
 
     public Result setUserRight() {
-
-        final BaseUser user = Login.getLocalUser(session());
-        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
-            return badRequest("Not authorized");
-        }
 
         DynamicForm form = Form.form().bindFromRequest();
 
@@ -318,9 +388,6 @@ public class Administration extends Controller {
 
     public Result resetCache() {
         final BaseUser user = Login.getLocalUser(session());
-        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
-            return badRequest("Not authorized");
-        }
 
         cache.clear();
         Logger.info("Cache reset by " + user.name);
@@ -328,43 +395,19 @@ public class Administration extends Controller {
         return ok();
     }
 
-    public Result updateTopic() {
-        final BaseUser user = Login.getLocalUser(session());
-        if (user == null || user.right != BaseUserService.Rights.ADMIN) {
-            return redirect(routes.Application.index());
-        }
-
-        DynamicForm form = Form.form().bindFromRequest(request());
-        TopicTitles topic = new TopicTitles(form);
-
-        if (topic.isValid()) {
-
-            //*
-            wb.updateTopic(MessageParser.toJson(topic)).map(result -> {
-
-                if (result != null) {
-                    successMessage();
-                } else {
-                    errorMessage();
-                }
-
-                return null;
-            });
-            //*/
-        } else {
-
-            Logger.info("Bad json: " + MessageParser.toJson(topic));
-            errorMessage();
-        }
-
-        return redirect(routes.Administration.topics());
-    }
-
     private void errorMessage() {
-        flash("error", "Topic is not valid for modification.");
+        flash("error", "Json is not valid for modification.");
     }
 
     private void successMessage() {
         flash("success", "Successfully update topic");
+    }
+
+    private WebPage getWebpage() {
+
+        WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
+        webpage.addAllPaths(paths);
+
+        return webpage;
     }
 }

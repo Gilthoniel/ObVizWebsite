@@ -1,0 +1,130 @@
+@(webpage: WebPage, categories: java.util.List[Category], types: java.util.List[CategoryType])
+
+@administration.data_settings(webpage) {
+
+    <div id="table-editor">
+        <form class="form-horizontal" method="POST" action="@routes.Administration.updateCategory()">
+            <div class="form-group">
+                <label for="input-id" class="col-xs-2 control-label">ID</label>
+                <div class="col-xs-2">
+                    <input type="text" id="input-id" class="form-control" name="id" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-category" class="col-xs-2 control-label">Category</label>
+                <div class="col-xs-2">
+                    <input type="text" id="input-category" class="form-control" name="category" placeholder="Category..." />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-title" class="col-xs-2 control-label">Title</label>
+                <div class="col-xs-2">
+                    <input type="text" id="input-title" class="form-control" name="title" placeholder="Title..." />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-types" class="col-xs-2 control-label">Types</label>
+                <div class="col-xs-2">
+                    <div id="magicsuggest"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-danger">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table id="topics-table" class="display" data-page-length="50">
+        <thead>
+            <tr>
+                <th data-width="0px">ID</th>
+                <th data-width="20%">CATEGORY</th>
+                <th data-width="20%">TITLE</th>
+                <th>TYPES</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(category <- categories) {
+            <tr>
+                <td>@category._id.getValue</td>
+                <td>@category.category</td>
+                <td>@category.title</td>
+                <td>@for(i <- category.types) {@i,}</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div id="data-types">
+        @for(t <- types) {
+            <span data-id="@t._id" data-title="@t.title"></span>
+        }
+    </div>
+
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/magicsuggest-min.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var $table = $("#topics-table");
+            $table.data("table", $table.removeAttr('width').DataTable({
+                ordering: true,
+                select: 'single',
+                columnDefs: [{
+                    targets: 3,
+                    render: function(data, type) {
+                        if (type == 'display') {
+                            var text = '';
+                            $.each(data.split(","), function(i, item) {
+                                if (!$.isNumeric(item)) {
+                                    return;
+                                }
+
+                                text += $("#data-types").find("span[data-id='"+item+"']").data("title") + ', '
+                            });
+
+                            return text;
+                        } else {
+
+                            return data;
+                        }
+                    }
+                }]
+            }));
+
+            var data = [];
+            $("#data-types").find("span").each(function() {
+                data.push({
+                    id: Number($(this).data("id")),
+                    name: $(this).data("title")
+                })
+            });
+
+            $("#table-editor").data("category", $("#magicsuggest").magicSuggest({
+                allowFreeEntries: false,
+                name: 'types',
+                data: data
+            }));
+        });
+
+        function updateFieldsEditor(data, $editor) {
+            $editor.find("input[name='id']").prop("disabled", false).val(data[0]);
+            $editor.find("input[name='category']").val(data[1]);
+            $editor.find("input[name='title']").val(data[2].replace(/&amp;/g, "&"));
+
+            var types = [];
+            var $dataTypes = $("#data-types");
+            $.each(data[3].split(","), function(i, item) {
+                if ($.isNumeric(item)) {
+                    types.push({
+                        id: Number(item),
+                        name: $dataTypes.find("span[data-id='"+item+"']").data("title")
+                    });
+                }
+            });
+            $editor.data("category").setSelection(types);
+        }
+    </script>
+}

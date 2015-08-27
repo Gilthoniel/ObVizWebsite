@@ -1,6 +1,5 @@
-@import service.TopicsManager
-@(webpage: WebPage, app: AndroidApp, topics: TopicsManager,
-        related: java.util.List[AndroidApp])
+
+@(webpage: WebPage, app: AndroidApp, related: java.util.List[AndroidApp])
 
 @main(webpage) {
 
@@ -9,7 +8,7 @@
         <div class="col-md-6">
             <h1><img height="40" src="@app.getImage" alt="" /> @app.getName</h1>
 
-            @views.html.templates.app_description(app)
+            @views.html.templates.app_description(app, webpage)
         </div>
 
         <div class="col-md-6">
@@ -63,9 +62,10 @@
             @* List of all the topics *@
             <div class="col-xs-12 col-md-8 list-aspects">
             @for(opinionValue <- app.getMostImportantTopics.take(8)) {
-                <div class="col-xs-12 col-sm-6 col-md-3">
+
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="opinion-box" data-topic="@opinionValue.getTopicID">
-                        <div id="gauge-@opinionValue.getTopicID" data-title="@topics.getTitle(opinionValue.getTopicID)"
+                        <div id="gauge-@opinionValue.getTopicID" data-title="@webpage.getTopics.getTitle(opinionValue.getTopicID)"
                         data-value="@opinionValue.percentage()" class="chart-gauge"></div>
                     </div>
                 </div>
@@ -115,14 +115,14 @@
                     </ul>
 
                     <div class="col-xs-6">
-                        <h1 onmouseover="OBVIZ.gauges.hoverIn(0)">
+                        <h1 class="title-app">
                             <img height="40" src="@app.getImage" alt="" /> @app.getName
                         </h1>
                     </div>
                     <div class="col-xs-6">
                     @for(application <- related) {
                         <div class="app-title" data-id="@application.getAppID" style="display: none;">
-                            <h1 onmouseover="OBVIZ.gauges.hoverIn(1)">
+                            <h1 class="title-comparison">
                                 <a href="@routes.Application.details(application.getAppID)">
                                     <img height="40" src="@application.getImage" alt="" /> @application.getName
                                     <small><span class="glyphicon glyphicon-share-alt"></span></small>
@@ -138,12 +138,12 @@
                         @* Description *@
                         <div role="tabpanel" class="tab-pane active" id="tab-description">
                             <div class="col-xs-6">
-                            @views.html.templates.app_description(app)
+                            @views.html.templates.app_description(app, webpage)
                             </div>
                             <div class="col-xs-6">
                             @for(application <- related) {
                                 <div class="app-description" data-id="@application.getAppID" style="display: none;">
-                                @views.html.templates.app_description(application)
+                                @views.html.templates.app_description(application, webpage)
                                 </div>
                             }
                             </div>

@@ -14,4 +14,11 @@ public class ID implements Serializable {
     public String getValue() {
         return $oid;
     }
+
+    public static ID create(String value) {
+        ID id = new ID();
+        id.$oid = value;
+
+        return id;
+    }
 }

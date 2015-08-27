@@ -1,0 +1,36 @@
+@(webpage: WebPage)(content: Html)
+
+@administration.admin_main(webpage) {
+
+  @requestHeader.flash.get("error") match {
+    case Some(message) => {
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Something goes wrong!</strong> @message
+      </div>
+    }
+
+    case None => {}
+  }
+
+  @requestHeader.flash.get("success") match {
+    case Some(message) => {
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        @message
+      </div>
+    }
+
+    case None => {}
+  }
+
+  @content
+
+  <script type="text/javascript" src="@routes.Assets.versioned("javascripts/jquery.dataTables.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.versioned("javascripts/datatables.select.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/admin_data.js")"></script>
+}
