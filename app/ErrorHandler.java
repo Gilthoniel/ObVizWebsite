@@ -1,5 +1,6 @@
 import com.google.inject.Inject;
 import controllers.WebPageInformation;
+import controllers.routes;
 import models.WebPage;
 import play.Configuration;
 import play.Environment;
@@ -13,6 +14,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Results;
 import play.mvc.With;
+import service.CategoryManager;
 
 import javax.inject.Provider;
 
@@ -20,7 +22,6 @@ import javax.inject.Provider;
  * Created by gaylor on 07.07.15.
  * Dispatch errors
  */
-@With(WebPageInformation.class)
 public class ErrorHandler extends DefaultHttpErrorHandler {
 
     @Inject
@@ -39,10 +40,15 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
     }
 
     @Override
+    @With(WebPageInformation.class)
     public F.Promise<Result> onClientError(Http.RequestHeader request, int statusCode, String message) {
-        final WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
+        WebPage webpage = new WebPage(null, null, Http.Context.current().session());
 
-        return F.Promise.<Result>pure(
+        if (statusCode == 404) {
+            message = "404 - Not Found";
+        }
+
+        return F.Promise.pure(
                 Results.status(statusCode, (play.twirl.api.Html) views.html.error.render(webpage, message))
         );
     }

@@ -135,14 +135,16 @@
                         <h1>
                             Results
 
-                            <small>
-                                <ul class="list-categories">
-                                    <li data-categories="">All</li>
-                                    @for(category <- webpage.getCategories.getSuperCategories) {
-                                        <li data-categories="@category.categories">@category.title</li>
-                                    }
-                                </ul>
-                            </small>
+                            @if(webpage.getCategories != null) {
+                                <small>
+                                    <ul class="list-categories">
+                                        <li data-categories="">All</li>
+                                        @for(category <- webpage.getCategories.getSuperCategories) {
+                                            <li data-categories="@category.categories">@category.title</li>
+                                        }
+                                    </ul>
+                                </small>
+                            }
                         </h1>
                     </div>
 
