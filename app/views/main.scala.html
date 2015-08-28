@@ -131,21 +131,9 @@
                         <button class="pull-right btn btn-default btn-close" onclick="OBVIZ.search.close()">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
+                        @templates.categories(webpage, "search")
 
-                        <h1>
-                            Results
-
-                            @if(webpage.getCategories != null) {
-                                <small>
-                                    <ul class="list-categories">
-                                        <li data-categories="">All</li>
-                                        @for(category <- webpage.getCategories.getSuperCategories) {
-                                            <li data-categories="@category.categories">@category.title</li>
-                                        }
-                                    </ul>
-                                </small>
-                            }
-                        </h1>
+                        <h1>Results <small></small></h1>
                     </div>
 
                     @* Loading icon *@

@@ -376,6 +376,37 @@ img {
   }
 }
 
+/* Main titles */
+.page-header {
+
+  .categories {
+    float: right;
+    margin-right: 50px;
+
+    .list-categories {
+      display: inline-block;
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        padding: 5px;
+        margin-right: 5px;
+        cursor: pointer;
+
+        .colored { display: none; }
+      }
+
+      li:hover,
+      li.active {
+
+        .mono-color{ display: none; }
+        .colored { display: inherit; }
+      }
+    }
+  }
+}
+
 /** Small screen fixes **/
 
 @media screen and (max-width: @screen-xs-max) {

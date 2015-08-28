@@ -2,9 +2,9 @@ package service;
 
 import com.google.inject.Inject;
 import constants.Constants;
+import models.Topic;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
-import play.Logger;
 import service.cache.CustomCache;
 import webservice.WebService;
 
@@ -30,7 +30,19 @@ public class TopicsManager {
         mCache = cache.getPinnedCache();
     }
 
-    public String getTitle(int topicID, boolean firstTry) {
+    public String getTitle(int topicID) {
+
+        Topic topic = getTopic(topicID);
+        if (topic != null) {
+
+            return topic.getTitle();
+        } else {
+
+            return "Unknown";
+        }
+    }
+
+    public Topic getTopic(int topicID, boolean firstTry) {
 
         Container container = getContainer();
 
@@ -40,16 +52,16 @@ public class TopicsManager {
         } else if (firstTry) {
 
             mCache.remove(CACHE_KEY);
-            return getTitle(topicID, false);
+            return getTopic(topicID, false);
         } else {
 
-            return "Unknown";
+            return null;
         }
     }
 
-    public String getTitle(int topicID) {
+    public Topic getTopic(int topicID) {
 
-        return getTitle(topicID, true);
+        return getTopic(topicID, true);
     }
 
     private synchronized Container init() {
@@ -62,7 +74,9 @@ public class TopicsManager {
         return mWebservice.getTopicTitles().map(topics -> {
 
             container.titles = new HashMap<>();
-            container.titles.putAll(topics);
+            for (Topic topic : topics) {
+                container.titles.put(topic.getID(), topic);
+            }
 
             mCache.put(new Element(CACHE_KEY, container));
             return container;
@@ -81,6 +95,6 @@ public class TopicsManager {
 
     private class Container {
 
-        private Map<Integer, String> titles;
+        private Map<Integer, Topic> titles;
     }
 }

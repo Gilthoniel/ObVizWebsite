@@ -38,16 +38,20 @@ public class CategoryManager {
         List<Wrapper> list = new LinkedList<>();
 
         for (Map.Entry<Integer, List<Category>> entry : container.mTypes.entrySet()) {
-            Wrapper wrapper = new Wrapper();
-            wrapper.title = container.mTypeTitles.get(entry.getKey());
+            CategoryType type = container.mTypeTitles.get(entry.getKey());
 
-            StringJoiner joiner = new StringJoiner(",");
-            for (Category category : entry.getValue()) {
-                joiner.add(category.category);
+            if (type.isActive()) {
+                Wrapper wrapper = new Wrapper();
+                wrapper.categoryType = type;
+
+                StringJoiner joiner = new StringJoiner(",");
+                for (Category category : entry.getValue()) {
+                    joiner.add(category.category);
+                }
+                wrapper.categories = String.join(",", joiner.toString());
+
+                list.add(wrapper);
             }
-            wrapper.categories = String.join(",", joiner.toString());
-
-            list.add(wrapper);
         }
 
         return list;
@@ -94,7 +98,7 @@ public class CategoryManager {
             container.mTypeTitles = new HashMap<>();
             for (CategoryType type : types) {
                 container.mTypes.put(type._id, new LinkedList<>());
-                container.mTypeTitles.put(type._id, type.title);
+                container.mTypeTitles.put(type._id, type);
             }
 
             return promiseCategories.map(categories -> {
@@ -127,13 +131,13 @@ public class CategoryManager {
 
     public class Wrapper {
 
-        public String title;
+        public CategoryType categoryType;
         public String categories;
     }
 
     private class Container {
         private Map<String, Category> mCategories;
         private Map<Integer, List<Category>> mTypes;
-        private Map<Integer, String> mTypeTitles;
+        private Map<Integer, CategoryType> mTypeTitles;
     }
 }

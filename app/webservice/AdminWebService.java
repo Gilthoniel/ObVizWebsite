@@ -111,26 +111,26 @@ public class AdminWebService {
      * Get the list of topics
      * @return list of topics
      */
-    public F.Promise<List<TopicTitles>> getTopics() {
+    public F.Promise<List<Topic>> getTopics() {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_APP_TOPICS));
 
-        return service.getNoCache(Constants.adminURL, params, new TypeToken<List<TopicTitles>>() {
+        return service.getNoCache(Constants.adminURL, params, new TypeToken<List<Topic>>() {
         }.getType());
     }
 
     /**
      * Update a topic in the database
-     * @param json Object TopicTitles
+     * @param json Object Topic
      * @return true if success, else false
      */
-    public F.Promise<TopicTitles> updateTopic(String json) {
+    public F.Promise<Topic> updateTopic(String json) {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.UPDATE_TOPIC));
         params.add(new BasicNameValuePair("topic", json));
 
         //*
-        return service.post(Constants.adminURL, encodeValues(params), TopicTitles.class);
+        return service.post(Constants.adminURL, encodeValues(params), Topic.class);
         //*/
 
         /*

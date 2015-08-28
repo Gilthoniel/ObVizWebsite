@@ -1,6 +1,7 @@
 package models;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
+import service.TopicsManager;
 
 import java.io.Serializable;
 
@@ -14,23 +15,33 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
     private int nbPositiveOpinions;
     private int nbNegativeOpinions;
     private int topicID;
+    private int percent = -1;
 
-    public OpinionValue(int id) {
-        topicID = id;
+    public void compute(TopicsManager manager, int nbReviews) {
+
+        Topic topic = manager.getTopic(topicID);
+        if (topic.isSpecial()) {
+
+            double value = (nbReviews - (nbNegativeOpinions - nbPositiveOpinions) / topic.getGaugeThreshold()) / nbReviews;
+            percent = (int) Math.min(0, Math.max(100, value));
+
+        } else {
+
+            if (nbPositiveOpinions <= 0 && nbNegativeOpinions <= 0) {
+                percent = 0;
+            }
+
+            percent = Math.round(nbPositiveOpinions * 100 / (nbNegativeOpinions + nbPositiveOpinions));
+
+            if (percent == 0) {
+                percent = 1;
+            }
+        }
     }
 
     public int percentage() {
-        if (nbPositiveOpinions <= 0 && nbNegativeOpinions <= 0) {
-            return 0;
-        }
 
-        int percent = Math.round(nbPositiveOpinions * 100 / (nbNegativeOpinions + nbPositiveOpinions));
-
-        if (percent == 0) {
-            return 1;
-        } else {
-            return percent;
-        }
+        return percent;
     }
 
     public int getTotal() {

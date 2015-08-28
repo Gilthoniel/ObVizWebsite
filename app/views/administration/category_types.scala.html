@@ -21,6 +21,22 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="input-icon" class="col-xs-2 control-label">Icon</label>
+                <div class="col-xs-2">
+                    <input type="text" id="input-icon" class="form-control" name="icon" placeholder="Icon.." />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="active" />
+                            Active
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-10">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-danger">Clear</button>
@@ -35,6 +51,8 @@
             <tr>
                 <th data-width="0px">ID</th>
                 <th>TITLE</th>
+                <th>ACTIVE</th>
+                <th>ICON</th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +60,8 @@
             <tr>
                 <td>@t._id</td>
                 <td>@t.title</td>
+                <td>@t.active</td>
+                <td>@t.icon</td>
             </tr>
         }
         </tbody>
@@ -71,6 +91,8 @@
         function updateFieldsEditor(data, $editor) {
             $editor.find("input[name='id']").prop("disabled", false).val(data[0]);
             $editor.find("input[name='title']").val(data[1]);
+            $editor.find("input[name='active']").prop("checked", data[2] == 'true');
+            $editor.find("input[name='icon']").val(data[3]);
         }
     </script>
 }

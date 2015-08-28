@@ -61,7 +61,7 @@
 
             @* List of all the topics *@
             <div class="col-xs-12 col-md-8 list-aspects">
-            @for(opinionValue <- app.getMostImportantTopics.take(8)) {
+            @for(opinionValue <- app.getMostImportantTopics(webpage.getTopics).take(8)) {
 
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="opinion-box" data-topic="@opinionValue.getTopicID">
@@ -86,7 +86,6 @@
 
                     @for(opinion <- app.getOpinions) {
                         <div class="topic-container" data-topic="@opinion.getTopicID" style="display: none;">
-
                     </div>
                     }
 

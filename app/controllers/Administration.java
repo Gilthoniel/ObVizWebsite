@@ -145,7 +145,7 @@ public class Administration extends Controller {
     public F.Promise<Result> updateTopic() {
 
         DynamicForm form = Form.form().bindFromRequest(request());
-        TopicTitles topic = new TopicTitles(form);
+        Topic topic = new Topic(form);
 
         if (topic.isValid()) {
 

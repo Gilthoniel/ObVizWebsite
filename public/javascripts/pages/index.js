@@ -18,18 +18,6 @@ OBVIZ.trending = {
 
     init: function() {
 
-        var $categories = OBVIZ.$trending.find(".list-categories li");
-        OBVIZ.$trending.find(".list-categories").on('click', 'li', function() {
-
-            $categories.removeClass("active");
-            $(this).addClass("active");
-
-            OBVIZ.trending.get($(this).data("categories"));
-        });
-
-        OBVIZ.hideAppElements(OBVIZ.$trending);
-
-        $categories.first().addClass("active");
         this.get();
     },
 

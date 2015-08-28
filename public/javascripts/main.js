@@ -60,7 +60,36 @@ $(document).ready(function() {
                 width: 0
             }, 200);
         }
-    })
+    });
+
+    /* General categories mechanism */
+    $(".categories").on('click', 'li', function() {
+
+        var categories = $(this).data("categories");
+        if ($(this).is(".active")) {
+
+            $(this).removeClass("active");
+            categories = '';
+
+            $(this).closest(".page-header").find("h1 small").empty();
+        } else {
+
+            var $categories = $(this).siblings("li");
+            $categories.removeClass("active");
+            $(this).addClass("active");
+
+            $(this).closest(".page-header").find("h1 small").html($(this).data("title"));
+        }
+
+        switch ($(this).data("action")) {
+            case 'trends':
+                OBVIZ.trending.get(categories);
+                break;
+            default:
+                OBVIZ.search.get(categories);
+                break;
+        }
+    });
 });
 
 /**
@@ -78,21 +107,9 @@ OBVIZ.search = {
 
             var $categories = OBVIZ.$searchResults.find(".list-categories li");
             $categories.removeClass("active");
-            $categories.first().addClass("active");
 
             OBVIZ.search.get();
         });
-
-        OBVIZ.$searchResults.find(".list-categories").on('click', 'li', function() {
-
-            var $categories = OBVIZ.$searchResults.find(".list-categories li");
-            $categories.removeClass("active");
-            $(this).addClass("active");
-
-            OBVIZ.search.get($(this).data("categories"));
-        });
-
-        OBVIZ.hideAppElements(OBVIZ.$searchResults);
     },
 
     get: function(categories) {
@@ -224,15 +241,4 @@ OBVIZ.toggleContainer = function ($container) {
         });
 
     }
-};
-
-OBVIZ.hideAppElements = function($container) {
-
-    $container.on('mouseenter', '.header', function() {
-        $(this).find(".opinion-indicator").finish().fadeOut(200);
-    });
-
-    $container.on('mouseleave', '.header', function() {
-        $(this).find(".opinion-indicator").finish().fadeIn(200);
-    });
 };

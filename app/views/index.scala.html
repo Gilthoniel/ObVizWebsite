@@ -4,18 +4,9 @@
 
     <div id="trending" data-url="@routes.AJAX.getTrending">
         <div class="page-header">
-            <h1>
-                Trending
+            @templates.categories(webpage, "trends")
 
-                <small>
-                    <ul class="list-categories">
-                        <li data-categories="">All</li>
-                    @for(category <- webpage.getCategories.getSuperCategories) {
-                        <li data-categories="@category.categories">@category.title</li>
-                    }
-                    </ul>
-                </small>
-            </h1>
+            <h1>Trending <small></small></h1>
         </div>
 
         @* Loading icon *@

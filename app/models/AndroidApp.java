@@ -1,5 +1,8 @@
 package models;
 
+import service.TopicsManager;
+
+import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.*;
 
@@ -28,6 +31,8 @@ public class AndroidApp implements Initiatable, Serializable {
     private List<String> relatedIDs;
     private List<OpinionValue> opinionsSummary;
     private int nbParsedReviews;
+
+    private boolean isOpinionsComputed = false;
 
     @Override
     public void init() {
@@ -179,13 +184,25 @@ public class AndroidApp implements Initiatable, Serializable {
         }
     }
 
-    public List<OpinionValue> getOpinions() {
+    public List<OpinionValue> getOpinions(@Nullable TopicsManager manager) {
 
         if (opinionsSummary != null) {
+
+            if (manager != null && !isOpinionsComputed) {
+                for (OpinionValue opinion : opinionsSummary) {
+                    opinion.compute(manager, nbParsedReviews);
+                }
+            }
+
             return opinionsSummary;
         } else {
             return Collections.emptyList();
         }
+    }
+
+    public List<OpinionValue> getOpinions() {
+
+        return getOpinions(null);
     }
 
     public int getNbParsedReviews() {
@@ -202,9 +219,9 @@ public class AndroidApp implements Initiatable, Serializable {
         return opinionsSummary.get(opinionsSummary.size() - 1).getTopicID();
     }
 
-    public List<OpinionValue> getMostImportantTopics() {
+    public List<OpinionValue> getMostImportantTopics(TopicsManager manager) {
 
-        List<OpinionValue> opinions = new ArrayList<>(getOpinions());
+        List<OpinionValue> opinions = new ArrayList<>(getOpinions(manager));
         Collections.sort(opinions);
 
         return opinions;
@@ -215,7 +232,7 @@ public class AndroidApp implements Initiatable, Serializable {
         int totalPositive = 0;
         int totalNegative = 0;
 
-        for (OpinionValue value : getOpinions()) {
+        for (OpinionValue value : getOpinions(null)) {
             totalPositive += value.getNumberPositive();
             totalNegative += value.getNumberNegative();
         }

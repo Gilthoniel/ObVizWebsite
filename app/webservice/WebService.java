@@ -7,12 +7,12 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
 import play.libs.F;
+import service.TopicsManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.jar.Attributes;
 
 /**
  * Created by gaylor on 25.06.15.
@@ -138,25 +138,15 @@ public class WebService {
      * Get the name of the topics for an id
      * @return Map : key is the id and value is the array of titles
      */
-    public F.Promise<Map<Integer, String>> getTopicTitles() {
+    public F.Promise<List<Topic>> getTopicTitles() {
 
         Logger.info("__TOPICS__ : Connection open to load");
 
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_TOPIC_TITLES));
 
-        Type type = new TypeToken<List<TopicTitles>>() {}.getType();
-        // Return the list of topics in mapped form for easiest uses
-        return service.<List<TopicTitles>>getNoCache(Constants.baseURL, params, type).map(titles -> {
-            Map<Integer, String> mappedTitles = new TreeMap<>();
-            for (TopicTitles title : titles) {
-                String opinion = title.getTitle();
-
-                mappedTitles.put(title.getID(), opinion.substring(0, 1).toUpperCase() + opinion.substring(1));
-            }
-
-            return mappedTitles;
-        });
+        Type type = new TypeToken<List<Topic>>() {}.getType();
+        return service.<List<Topic>>getNoCache(Constants.baseURL, params, type);
     }
 
     /**
