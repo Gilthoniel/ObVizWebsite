@@ -1,14 +1,16 @@
 @(webpage: WebPage, action: String)
 
-<div class="categories">
-  <ul class="list-categories">
-    @for(category <- webpage.getCategories.getSuperCategories) {
-      <li data-categories="@category.categories" data-title="@category.categoryType.title" data-action="@action">
-        <img height="40" class="mono-color"
-        src="@routes.Assets.versioned("images/icons/" + category.categoryType.getIcon)" alt="" />
-        <img height="40" class="colored"
-        src="@routes.Assets.versioned("images/icons/colored/" + category.categoryType.getIcon)" alt="" />
-      </li>
-    }
-  </ul>
-</div>
+@if(webpage.getCategories != null) {
+    <div class="categories">
+        <ul class="list-categories">
+        @for(category <- webpage.getCategories.getSuperCategories) {
+            <li data-categories="@category.categories" data-title="@category.categoryType.title" data-action="@action">
+                <img height="40" class="mono-color"
+                src="@routes.Assets.versioned("images/icons/" + category.categoryType.getIcon)" alt="" />
+                <img height="40" class="colored"
+                src="@routes.Assets.versioned("images/icons/colored/" + category.categoryType.getIcon)" alt="" />
+            </li>
+        }
+        </ul>
+    </div>
+}
