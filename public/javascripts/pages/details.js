@@ -33,7 +33,8 @@ OBVIZ.carousel = {
             autoplay: true,
             autoplaySpeed: 5000,
             cssEase: 'ease-out',
-            speed: 1000
+            speed: 1000,
+            lazyLoad: 'ondemand'
         });
         $slickScreenshots.fadeIn();
 

@@ -14,7 +14,7 @@
         <div class="col-md-6">
             <div class="slick-screenshots">
                 @for(screenshot <- app.getScreenshots.take(10)) {
-                    <div><img src="@screenshot" alt="" /></div>
+                    <div><img data-lazy="@screenshot" src="" alt="" /></div>
                 }
             </div>
         </div>

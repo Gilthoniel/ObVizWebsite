@@ -16,6 +16,8 @@ import play.libs.Json;
 import play.mvc.*;
 import service.BaseUser;
 import service.BaseUserService;
+import service.CategoryManager;
+import service.TopicsManager;
 import service.cache.CustomCache;
 import webservice.AdminWebService;
 import webservice.MessageParser;
@@ -152,6 +154,8 @@ public class Administration extends Controller {
 
                 if (result != null) {
                     successMessage();
+                    // Clear the cache to force an update of the data
+                    cache.getPinnedCache().remove(TopicsManager.CACHE_KEY);
                 } else {
                     errorMessage();
                 }
@@ -188,6 +192,8 @@ public class Administration extends Controller {
 
                 if (result != null) {
                     successMessage();
+                    // Clean the cache to force the update
+                    cache.getPinnedCache().remove(CategoryManager.CACHE_KEY);
                 } else {
                     errorMessage();
                 }
@@ -222,6 +228,8 @@ public class Administration extends Controller {
 
                 if (result != null) {
                     successMessage();
+                    // Clean the cache to force the update
+                    cache.getPinnedCache().remove(CategoryManager.CACHE_KEY);
                 } else {
                     errorMessage();
                 }

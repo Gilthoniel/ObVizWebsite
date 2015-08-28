@@ -19,7 +19,7 @@ public class Constants {
 
     public static final int NUMBER_PARSED_APP_PER_PAGE = 20;
 
-    public static final int NUMBER_TRENDING_APPS = 21;
+    public static final int NUMBER_TRENDING_APPS = 20;
 
     /* Command builder */
     public enum Weight {LIGHT, MEDIUM, FULL}

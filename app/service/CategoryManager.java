@@ -4,7 +4,10 @@ import com.google.inject.Inject;
 import constants.Constants;
 import models.Category;
 import models.CategoryType;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 import play.libs.F;
+import service.cache.CustomCache;
 import webservice.WebService;
 
 import javax.inject.Singleton;
@@ -17,25 +20,26 @@ import java.util.*;
 @Singleton
 public class CategoryManager {
 
-    @Inject
-    private WebService wb;
+    public static final String CACHE_KEY = "com.obviz.category";
 
-    private Map<String, Category> mCategories;
-    private Map<Integer, List<Category>> mTypes;
-    private Map<Integer, String> mTypeTitles;
-    private boolean isInitialize = false;
+    private WebService wb;
+    private Cache mCache;
+
+    @Inject
+    public CategoryManager(WebService webservice, CustomCache cache) {
+        wb = webservice;
+        mCache = cache.getPinnedCache();
+    }
 
     public List<Wrapper> getSuperCategories() {
 
-        if (!isInitialize) {
-            init();
-        }
+        Container container = getContainer();
 
         List<Wrapper> list = new LinkedList<>();
 
-        for (Map.Entry<Integer, List<Category>> entry : mTypes.entrySet()) {
+        for (Map.Entry<Integer, List<Category>> entry : container.mTypes.entrySet()) {
             Wrapper wrapper = new Wrapper();
-            wrapper.title = mTypeTitles.get(entry.getKey());
+            wrapper.title = container.mTypeTitles.get(entry.getKey());
 
             StringJoiner joiner = new StringJoiner(",");
             for (Category category : entry.getValue()) {
@@ -49,60 +53,87 @@ public class CategoryManager {
         return list;
     }
 
-    public Category getFrom(String category) {
+    public Category getFrom(String category, boolean firstTry) {
 
-        if (!isInitialize) {
-            init();
-        }
+        Container container = getContainer();
 
-        if (mCategories.containsKey(category)) {
+        if (container.mCategories.containsKey(category)) {
 
-            return mCategories.get(category);
+            return container.mCategories.get(category);
+        } else if (firstTry) {
+
+            mCache.remove(CACHE_KEY);
+            return getFrom(category, false);
+
         } else {
 
             return Category.instanceDefault;
         }
     }
 
-    private synchronized void init() {
+    public Category getFrom(String category) {
 
-        if (isInitialize) {
-            return;
+        return getFrom(category, true);
+    }
+
+    private synchronized Container init() {
+
+        if (mCache.isElementInMemory(CACHE_KEY)) {
+
+            return (Container) mCache.get(CACHE_KEY).getObjectValue();
         }
+
+        final Container container = new Container();
 
         F.Promise<List<CategoryType>> promiseTypes = wb.getCategoryTypes();
         F.Promise<List<Category>> promiseCategories = wb.getCategories();
 
-        promiseTypes.flatMap(types -> {
+        return promiseTypes.flatMap(types -> {
 
-            mTypes = new HashMap<>();
-            mTypeTitles = new HashMap<>();
+            container.mTypes = new HashMap<>();
+            container.mTypeTitles = new HashMap<>();
             for (CategoryType type : types) {
-                mTypes.put(type._id, new LinkedList<>());
-                mTypeTitles.put(type._id, type.title);
+                container.mTypes.put(type._id, new LinkedList<>());
+                container.mTypeTitles.put(type._id, type.title);
             }
 
             return promiseCategories.map(categories -> {
 
-                mCategories = new HashMap<>();
+                container.mCategories = new HashMap<>();
                 for (Category cat : categories) {
-                    mCategories.put(cat.category, cat);
+                    container.mCategories.put(cat.category, cat);
 
                     for (int type : cat.types) {
-                        mTypes.get(type).add(cat);
+                        container.mTypes.get(type).add(cat);
                     }
                 }
 
-                isInitialize = true;
-
-                return null;
+                mCache.put(new Element(CACHE_KEY, container));
+                return container;
             });
         }).get(Constants.TIMEOUT);
+    }
+
+    private Container getContainer() {
+
+        Element element = mCache.get(CACHE_KEY);
+        if (element != null) {
+            return (Container) element.getObjectValue();
+        } else {
+
+            return init();
+        }
     }
 
     public class Wrapper {
 
         public String title;
         public String categories;
+    }
+
+    private class Container {
+        private Map<String, Category> mCategories;
+        private Map<Integer, List<Category>> mTypes;
+        private Map<Integer, String> mTypeTitles;
     }
 }

@@ -140,13 +140,14 @@ public class WebService {
      */
     public F.Promise<Map<Integer, String>> getTopicTitles() {
 
+        Logger.info("__TOPICS__ : Connection open to load");
+
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_TOPIC_TITLES));
 
         Type type = new TypeToken<List<TopicTitles>>() {}.getType();
-        String cacheKey = "topictitles";
         // Return the list of topics in mapped form for easiest uses
-        return service.<List<TopicTitles>>get(Constants.baseURL, params, type, cacheKey).map(titles -> {
+        return service.<List<TopicTitles>>getNoCache(Constants.baseURL, params, type).map(titles -> {
             Map<Integer, String> mappedTitles = new TreeMap<>();
             for (TopicTitles title : titles) {
                 String opinion = title.getTitle();
@@ -163,6 +164,8 @@ public class WebService {
      * @return list of categories
      */
     public F.Promise<List<Category>> getCategories() {
+
+        Logger.info("__CATEGORIES__ : Connection open to load");
 
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", "Get_App_Categories"));

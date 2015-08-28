@@ -18,4 +18,12 @@
         <persistence strategy="localTempSwap" />
 
     </cache>
+
+    <cache name="cache-pinned"
+           maxBytesLocalHeap="100M">
+
+        <pinning store="localMemory" />
+
+    </cache>
+
 </ehcache>
