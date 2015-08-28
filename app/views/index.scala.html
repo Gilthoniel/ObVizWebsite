@@ -6,17 +6,10 @@
         <div class="page-header">
             @templates.categories(webpage, "trends")
 
-            <h1>Trending <small></small></h1>
-        </div>
-
-        @* Loading icon *@
-        <div class="icon-loader">
+            <h1>Trending</h1>
+            @* Loading icon *@
+            <div class="icon-loader">
             @views.html.templates.loading()
-        </div>
-        @* Error message to display when an error occurred *@
-        <div class="error-message">
-            <div class="alert alert-info">
-                An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
             </div>
         </div>
 

@@ -133,17 +133,10 @@
                         </button>
                         @templates.categories(webpage, "search")
 
-                        <h1>Results <small></small></h1>
-                    </div>
-
-                    @* Loading icon *@
-                    <div class="icon-loader">
+                        <h1>Results</h1>
+                        @* Loading icon *@
+                        <div class="icon-loader">
                         @views.html.templates.loading()
-                    </div>
-                    @* Error message to display when an error occurred *@
-                    <div class="error-message">
-                        <div class="alert alert-info">
-                            An <strong>error</strong> occurred during the request. Try to refresh the page or come back later!
                         </div>
                     </div>
 

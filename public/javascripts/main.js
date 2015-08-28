@@ -68,17 +68,24 @@ $(document).ready(function() {
         var categories = $(this).data("categories");
         if ($(this).is(".active")) {
 
-            $(this).removeClass("active");
+            $(this).removeClass("active").find(".title").animate({
+                width: "0px"
+            });
             categories = '';
-
-            $(this).closest(".page-header").find("h1 small").empty();
         } else {
 
             var $categories = $(this).siblings("li");
-            $categories.removeClass("active");
-            $(this).addClass("active");
+            $categories
+                .removeClass("active")
+                .find(".title").animate({
+                    width: "0px"
+                });
 
-            $(this).closest(".page-header").find("h1 small").html($(this).data("title"));
+            $(this)
+                .addClass("active")
+                .find(".title").animate({
+                    width: "150px"
+                });
         }
 
         switch ($(this).data("action")) {
@@ -133,7 +140,7 @@ OBVIZ.search = {
 OBVIZ.get = function($baseContainer, url, params) {
     // Show a loading icon
     $baseContainer.find(".icon-loader").find(".box-loading").removeClass("with-error");
-    $baseContainer.find(".icon-loader").slideDown();
+    $baseContainer.find(".icon-loader").fadeIn();
 
     // Display the good container
     if ($baseContainer.is("#search-results")) {
@@ -172,7 +179,7 @@ OBVIZ.get = function($baseContainer, url, params) {
                 .css("opacity", 0)
                 .css("top", 100);
             $container.show();
-            $baseContainer.find(".icon-loader").stop().slideUp();
+            $baseContainer.find(".icon-loader").stop().fadeOut();
 
             // Init the gauges
             $items.find(".chart-gauge").each(function() {
@@ -212,7 +219,7 @@ OBVIZ.get = function($baseContainer, url, params) {
 
             // Animate to show the items
             $items.each(function(i) {
-                $(this).delay(i * 50).animate({
+                $(this).animate({
                     opacity: 1,
                     top: 0
                 });

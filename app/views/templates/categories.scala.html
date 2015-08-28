@@ -9,6 +9,8 @@
                 src="@routes.Assets.versioned("images/icons/" + category.categoryType.getIcon)" alt="" />
                 <img height="40" class="colored"
                 src="@routes.Assets.versioned("images/icons/colored/" + category.categoryType.getIcon)" alt="" />
+
+                <span class="title">@category.categoryType.title</span>
             </li>
         }
         </ul>
