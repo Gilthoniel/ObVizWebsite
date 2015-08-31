@@ -192,6 +192,8 @@ public class AndroidApp implements Initiatable, Serializable {
                 for (OpinionValue opinion : opinionsSummary) {
                     opinion.compute(manager, nbParsedReviews);
                 }
+
+                isOpinionsComputed = true;
             }
 
             return opinionsSummary;

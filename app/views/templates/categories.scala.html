@@ -2,7 +2,7 @@
 
 @if(webpage.getCategories != null) {
     <div class="categories">
-        <ul class="list-categories">
+        <ul class="list-categories hidden-xs">
         @for(category <- webpage.getCategories.getSuperCategories) {
             <li data-categories="@category.categories" data-title="@category.categoryType.title" data-action="@action">
                 <img height="40" class="mono-color"
@@ -14,5 +14,15 @@
             </li>
         }
         </ul>
+
+        <div class="form-group visible-xs-inline-block">
+            <label for="input-categories" class="sr-only">Categories</label>
+            <select id="input-categories" class="form-control" data-action="@action">
+                <option value="">All</option>
+                @for(category <- webpage.getCategories.getSuperCategories) {
+                    <option value="@category.categories">@category.categoryType.title</option>
+                }
+            </select>
+        </div>
     </div>
 }

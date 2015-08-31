@@ -25,8 +25,12 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
             double value = (nbReviews - (nbNegativeOpinions - nbPositiveOpinions) / topic.getGaugeThreshold()) / nbReviews;
             percent = (int) Math.min(0, Math.max(100, value));
 
-        } else {
+        }
+    }
 
+    public int percentage() {
+
+        if (percent < 0) {
             if (nbPositiveOpinions <= 0 && nbNegativeOpinions <= 0) {
                 percent = 0;
             }
@@ -37,9 +41,6 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
                 percent = 1;
             }
         }
-    }
-
-    public int percentage() {
 
         return percent;
     }

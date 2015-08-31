@@ -38,10 +38,10 @@
     box-shadow: 0 0 15px @colorGoodShadow;
     width: 20px;
     height: 20px;
-    margin: 0 auto;
+    margin-left: -10px;
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 50%;
     -moz-animation: spinoffPulse 1s infinite linear;
     -webkit-animation: spinoffPulse 1s infinite linear;
   }
@@ -75,6 +75,22 @@
 
   .text-error {
     display: block;
+  }
+}
+
+@media screen and (max-width: @screen-xs-max) {
+  .box-loading {
+    height: 30px;
+
+    .circle {
+      width: 30px;
+      height: 30px;
+    }
+
+    .inner-circle {
+      width: 10px;
+      height: 10px;
+    }
   }
 }
 

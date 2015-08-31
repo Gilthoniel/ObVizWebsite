@@ -96,6 +96,18 @@ $(document).ready(function() {
                 OBVIZ.search.get(categories);
                 break;
         }
+    }).on('input change', 'select', function() {
+
+        var categories = $(this).val();
+
+        switch ($(this).data("action")) {
+            case 'trends':
+                OBVIZ.trending.get(categories);
+                break;
+            default:
+                OBVIZ.search.get(categories);
+                break;
+        }
     });
 });
 

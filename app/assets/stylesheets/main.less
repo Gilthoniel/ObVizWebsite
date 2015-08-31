@@ -381,7 +381,7 @@ img {
 
   h1 {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 10px;
   }
 
   .icon-loader {
@@ -390,6 +390,8 @@ img {
   }
 
   .categories {
+    position: relative;
+    top: 5px;
     float: right;
     margin-right: 50px;
 
@@ -464,6 +466,21 @@ img {
     .body {
       ul {
         padding: 20px 0;
+      }
+    }
+  }
+
+  .page-header {
+    .categories {
+      margin: 0;
+
+      label {
+        font-weight: normal;
+      }
+
+      select.form-control {
+        display: inline-block !important;
+        width: auto !important;
       }
     }
   }
