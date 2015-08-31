@@ -33,4 +33,9 @@
             }
         }
     </div>
+    <div>
+        @if(user != null && user.right == BaseUserService.Rights.ADMIN) {
+            <a href="@review.permalink">permalink</a>
+        }
+    </div>
 </div>

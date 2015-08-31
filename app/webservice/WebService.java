@@ -158,7 +158,7 @@ public class WebService {
         Logger.info("__CATEGORIES__ : Connection open to load");
 
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("cmd", "Get_App_Categories"));
+        params.add(new BasicNameValuePair("cmd", Constants.GET_CATEGORIES));
 
         Type type = new TypeToken<List<Category>>(){}.getType();
         return service.getNoCache(Constants.baseURL, params, type);
@@ -166,7 +166,7 @@ public class WebService {
 
     public F.Promise<List<CategoryType>> getCategoryTypes() {
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("cmd", "Get_App_Categories_Types"));
+        params.add(new BasicNameValuePair("cmd", Constants.GET_CATEGORIES_TYPES));
 
         Type type = new TypeToken<List<CategoryType>>(){}.getType();
         return service.getNoCache(Constants.baseURL, params, type);

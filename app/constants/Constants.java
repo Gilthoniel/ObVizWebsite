@@ -30,6 +30,8 @@ public class Constants {
     public static final String SEARCH_APPS = "Search_Apps";
     public static final String APP_VIEWED = "App_Viewed";
     public static final String GET_TRENDING_APPS = "Get_Trending_Apps";
+    public static final String GET_CATEGORIES = "Get_App_Categories";
+    public static final String GET_CATEGORIES_TYPES = "Get_App_Categories_Types";
 
     public static final String GET_PARSED_APP = "Get_Parsed_Apps";
     public static final String GET_APPS_CRAWLER_LOGS = "Get_Apps_Crawler_Logs";
