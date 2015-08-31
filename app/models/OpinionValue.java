@@ -63,7 +63,7 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
 
     public boolean isValid() {
 
-        return topicID > 0 && nbNegativeOpinions > 0 && nbPositiveOpinions > 0;
+        return topicID > 0 && (nbNegativeOpinions > 0 || nbPositiveOpinions > 0);
     }
 
     /**
