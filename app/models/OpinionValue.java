@@ -1,6 +1,7 @@
 package models;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
+import play.Logger;
 import service.TopicsManager;
 
 import java.io.Serializable;
@@ -23,7 +24,9 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
         if (topic.isSpecial()) {
 
             double value = (nbReviews - (nbNegativeOpinions - nbPositiveOpinions) / topic.getGaugeThreshold()) / nbReviews;
-            percent = (int) Math.min(0, Math.max(100, value));
+            value *= 100;
+            Logger.info("Value: " + value);
+            percent = (int) Math.max(0, Math.min(100, value));
 
         }
     }
