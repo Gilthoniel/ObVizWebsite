@@ -184,6 +184,9 @@ OBVIZ.gauges = {
                 "bands": OBVIZ.bands,
                 "bottomText": element.data("title"),
                 "bottomTextYOffset": 20,
+                "topText": element.data("total"),
+                "topTextYOffset": 60,
+                "topTextFontSize": 14,
                 "endValue": 100
             } ],
             "arrows": [ {
@@ -414,6 +417,15 @@ $(document).ready(function() {
     OBVIZ.carousel.init();
     OBVIZ.reviews.init();
     OBVIZ.comparison.init();
+
+    var $aspects = OBVIZ.$topics.find(".list-aspects");
+    $aspects.find("ul").each(function() {
+        $(this).css("width", ($(this).find("li").width()+5) * $(this).find("li").size() + "px");
+    });
+    $aspects.mCustomScrollbar({
+        axis: "x",
+        theme: 'rounded-dark'
+    });
 });
 
 /** Private functions **/
