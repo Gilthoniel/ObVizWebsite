@@ -122,6 +122,8 @@ public class Administration extends Controller {
         List<File> list = null;
         if (files != null) {
             list = Arrays.asList(files);
+        } else {
+            list = new ArrayList<>();
         }
 
         Collections.sort(list);
