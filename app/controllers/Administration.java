@@ -347,12 +347,21 @@ public class Administration extends Controller {
 
             ArrayNode root = Json.newArray();
 
+            // Get the reviews with bad opinions in first
             Collections.sort(container.reviews, (review, other) -> {
 
                 int nbReview = review.opinions != null ? review.opinions.nbOpinions : 0;
+                boolean reviewBad = review.opinions != null ? review.opinions.containsBadOpinion() : false;
                 int nbOther = other.opinions != null ? other.opinions.nbOpinions : 0;
+                boolean otherBad = other.opinions != null ? other.opinions.containsBadOpinion() : false;
 
-                return Integer.compare(nbReview, nbOther);
+                if (!reviewBad && !otherBad) {
+
+                    return Integer.compare(nbReview, nbOther);
+                } else {
+
+                    return Boolean.compare(reviewBad, otherBad);
+                }
             });
             Collections.reverse(container.reviews);
 

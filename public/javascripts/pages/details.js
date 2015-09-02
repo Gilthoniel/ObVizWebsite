@@ -184,9 +184,6 @@ OBVIZ.gauges = {
                 "bands": OBVIZ.bands,
                 "bottomText": element.data("title"),
                 "bottomTextYOffset": 20,
-                "topText": element.data("total"),
-                "topTextYOffset": 60,
-                "topTextFontSize": 14,
                 "endValue": 100
             } ],
             "arrows": [ {

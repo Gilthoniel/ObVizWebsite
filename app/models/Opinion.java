@@ -18,6 +18,17 @@ public class Opinion implements Serializable {
     public int opinionValue;
     public List<OpinionDetail> opinions;
 
+    public boolean containsBadOpinion() {
+
+        for (OpinionDetail opinion : opinions) {
+            if (opinion.isGoodOpinion != null && !opinion.isGoodOpinion) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public class OpinionDetail implements Serializable {
 
         private static final long serialVersionUID = 7726615802718595835L;
