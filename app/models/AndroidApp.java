@@ -1,5 +1,6 @@
 package models;
 
+import play.Logger;
 import service.TopicsManager;
 
 import javax.annotation.Nullable;
@@ -198,6 +199,7 @@ public class AndroidApp implements Initiatable, Serializable {
 
             return opinionsSummary;
         } else {
+
             return Collections.emptyList();
         }
     }
@@ -222,6 +224,8 @@ public class AndroidApp implements Initiatable, Serializable {
     }
 
     public List<OpinionValue> getMostImportantTopics(TopicsManager manager) {
+
+        Logger.info(manager.toString());
 
         List<OpinionValue> opinions = new ArrayList<>(getOpinions(manager));
         Collections.sort(opinions);

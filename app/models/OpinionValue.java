@@ -21,7 +21,7 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
     public void compute(TopicsManager manager, int nbReviews) {
 
         Topic topic = manager.getTopic(topicID);
-        if (topic.isSpecial()) {
+        if (topic != null && topic.isSpecial()) {
 
             double value = (nbReviews - (nbNegativeOpinions - nbPositiveOpinions) / topic.getGaugeThreshold()) / nbReviews;
             value *= 100;

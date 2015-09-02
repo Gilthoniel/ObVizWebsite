@@ -33,6 +33,11 @@ public class Topic implements Serializable {
         type = form.get("type");
         name = form.get("name");
         gaugeThreshold = Double.parseDouble(form.get("threshold"));
+        if (gaugeThreshold <= 0) {
+            useSpecialGauge = false;
+        } else {
+            useSpecialGauge = true;
+        }
 
         String tempKeys = form.get("keys");
         if (tempKeys != null && !tempKeys.isEmpty()) {
