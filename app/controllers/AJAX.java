@@ -3,7 +3,9 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
+import constants.Utils;
 import models.AndroidApp;
+import models.DiscoverItem;
 import models.Review;
 import models.WebPage;
 import models.errors.AJAXRequestException;
@@ -13,13 +15,12 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.With;
-import webservice.MessageParser;
-import service.TopicsManager;
 import webservice.WebService;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,9 +40,9 @@ public class AJAX extends Controller {
     public F.Promise<Result> getReviews() throws AJAXRequestException {
 
         final String appID = request().getQueryString("id");
-        final int topicID = MessageParser.parseInt(request().getQueryString("t"));
-        final int page = MessageParser.parseInt(request().getQueryString("p"));
-        final int size = MessageParser.parseInt(request().getQueryString("s"));
+        final int topicID = Utils.parseInt(request().getQueryString("t"));
+        final int page = Utils.parseInt(request().getQueryString("p"));
+        final int size = Utils.parseInt(request().getQueryString("s"));
         if (topicID < 0 || page < 0 || size < 0) {
             throw new AJAXRequestException();
         }
@@ -78,8 +79,29 @@ public class AJAX extends Controller {
             WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
 
             ArrayNode root = Json.newArray();
-            for (AndroidApp app : applications) {
-                root.add(views.html.templates.play_app.render(app, webpage, "chart-search").toString());
+            Iterator<AndroidApp> it = applications.iterator();
+            while (it.hasNext() && root.size() < Constants.NUMBER_RESULT_SEARCH) {
+                root.add(views.html.templates.play_app.render(it.next(), webpage).toString());
+            }
+
+            return ok(root);
+        });
+    }
+
+    /**
+     * Execute a discover search for the given queries
+     * @return Json array of discover items
+     */
+    public F.Promise<Result> discover() {
+
+        String name = request().getQueryString("query");
+
+        return wb.discover(name, manageCategories(request())).map(items -> {
+            WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
+
+            ArrayNode root = Json.newArray();
+            for (DiscoverItem item : items) {
+                root.add(views.html.templates.discover_item.render(item, webpage).toString());
             }
 
             return ok(root);
@@ -107,7 +129,7 @@ public class AJAX extends Controller {
 
             WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
             for (Integer index : indexes) {
-                root.add(views.html.templates.play_app.render(applications.get(index), webpage, "chart-trending").toString());
+                root.add(views.html.templates.play_app.render(applications.get(index), webpage).toString());
             }
 
             return ok(root);

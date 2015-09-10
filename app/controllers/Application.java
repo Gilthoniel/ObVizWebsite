@@ -76,6 +76,11 @@ public class Application extends Controller {
         });
     }
 
+    public Result discover() {
+
+        return ok((play.twirl.api.Html) views.html.discover.render(getWebpage()));
+    }
+
     private WebPage getWebpage() {
 
         return (WebPage) Http.Context.current().args.get("com.obviz.webpage");

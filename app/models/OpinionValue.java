@@ -38,10 +38,6 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
             }
 
             percent = Math.round(nbPositiveOpinions * 100 / (nbNegativeOpinions + nbPositiveOpinions));
-
-            if (percent == 0) {
-                percent = 1;
-            }
         }
 
         return percent;

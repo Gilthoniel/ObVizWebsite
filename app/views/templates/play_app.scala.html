@@ -1,62 +1,56 @@
-@(app: AndroidApp, webpage: WebPage, chartID: String)
+@(app: AndroidApp, webpage: WebPage)
 
 @import constants.Utils
 
-@{
-    val screenshot = app.getRandomScreen(400)
-}
+<div class="body-app">
 
-<div class="col-xs-12 col-sm-6 col-md-3">
-    <div class="body-app">
+    <a href="@routes.Application.details(app.getAppID)">
+        @defining(app.getRandomScreen(400)) { screenshot =>
+            <div class="header">
+                <div class="background" style="background-image: url('@screenshot')"></div>
+                <div class="sub-header">
+                    <div class="name">
+                        @for(i <- 1 to app.getScore) {
+                            <img height="15" src="@routes.Assets.versioned("images/rating.png")" alt="" />
+                        }<br>
 
-        <a href="@routes.Application.details(app.getAppID)">
-            @defining(app.getRandomScreen(400)) { screenshot =>
-                <div class="header">
-                    <div class="background" style="background-image: url('@screenshot')"></div>
-                    <div class="sub-header">
-                        <div class="name">
-                            @for(i <- 1 to app.getScore) {
-                                <img height="15" src="@routes.Assets.versioned("images/rating.png")" alt="" />
-                            }<br>
-
-                            @app.getName
-                        </div>
-
-                        <img src="@app.getImage" alt="" />
+                        @app.getName
                     </div>
+
+                    <img src="@app.getImage" alt="" />
                 </div>
-            }
-        </a>
-
-        <div class="body">
-            @if(app.getGlobalOpinion > 0) {
-                <div class="opinion-indicator">
-                    <div id="@chartID-@app.getAppID.replaceAll("\\.", "-")" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
-                </div>
-                <ul>
-                    <li>
-                        <img height="20" src="@routes.Assets.versioned("images/trending_up.png")" alt="" />
-                        @webpage.getTopics.getTitle(app.getMostPositive)
-                    </li>
-                    <li>
-                        <img height="20" src="@routes.Assets.versioned("images/trending_down.png")" alt="" />
-                        @webpage.getTopics.getTitle(app.getMostNegative)
-                    </li>
-                </ul>
-            }
-
-            <hr />
-
-            <div class="description">
-                @{Utils.getMaxCharacters(app.getDescription, 80)}
             </div>
-            <div class="admin-link">
-                @if(webpage.isAdmin) {
-                    <a href="@routes.Administration.training()#@app.getAppID">
-                        Admin training <span class="glyphicon glyphicon-share"></span>
-                    </a>
-                }
+        }
+    </a>
+
+    <div class="body">
+        @if(app.getGlobalOpinion > 0) {
+            <div class="opinion-indicator">
+                <div data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
             </div>
+            <ul>
+                <li>
+                    <img height="20" src="@routes.Assets.versioned("images/trending_up.png")" alt="" />
+                    @webpage.getTopics.getTitle(app.getMostPositive)
+                </li>
+                <li>
+                    <img height="20" src="@routes.Assets.versioned("images/trending_down.png")" alt="" />
+                    @webpage.getTopics.getTitle(app.getMostNegative)
+                </li>
+            </ul>
+        }
+
+        <hr />
+
+        <div class="description">
+            @{Utils.getMaxCharacters(app.getDescription, 80)}
+        </div>
+        <div class="admin-link">
+            @if(webpage.isAdmin) {
+                <a href="@routes.Administration.training()#@app.getAppID">
+                    Admin training <span class="glyphicon glyphicon-share"></span>
+                </a>
+            }
         </div>
     </div>
 </div>

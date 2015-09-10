@@ -4,10 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
+import com.google.inject.Inject;
+import models.AndroidApp;
 import models.Review;
+import models.adapters.AndroidAppDeserializer;
 import models.adapters.ReviewDeserializer;
 import play.Logger;
+import service.TopicsManager;
 
+import javax.inject.Singleton;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
@@ -16,14 +21,16 @@ import java.lang.reflect.Type;
  * Created by gaylor on 25.06.15.
  * Json parser
  */
+@Singleton
 public class MessageParser {
 
-    public static MessageParser instance = new MessageParser();
-    private static Gson gson;
+    private Gson gson;
 
-    private MessageParser() {
+    @Inject
+    private MessageParser(AndroidAppDeserializer android) {
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Review.class, new ReviewDeserializer());
+        builder.registerTypeAdapter(Review.class, new ReviewDeserializer(this));
+        builder.registerTypeAdapter(AndroidApp.class, android);
 
         gson = builder.create();
     }
@@ -35,7 +42,7 @@ public class MessageParser {
      * @param <T> type of the return
      * @return the instance of the class
      */
-    public static <T> T fromJson(String json, Type type) {
+    public <T> T fromJson(String json, Type type) {
         try {
             return gson.fromJson(json, type);
 
@@ -45,7 +52,7 @@ public class MessageParser {
         }
     }
 
-    public static <T> T fromJson(JsonElement json, Type type) {
+    public <T> T fromJson(JsonElement json, Type type) {
         try {
 
             return gson.fromJson(json, type);
@@ -55,7 +62,7 @@ public class MessageParser {
         }
     }
 
-    public static <T> T fromJson(InputStream stream, Type type) {
+    public <T> T fromJson(InputStream stream, Type type) {
         try {
 
             return gson.fromJson(new InputStreamReader(stream), type);
@@ -70,21 +77,8 @@ public class MessageParser {
      * @param object the object
      * @return String of the parsing
      */
-    public static String toJson(Object object) {
+    public String toJson(Object object) {
 
         return gson.toJson(object);
-    }
-
-    /**
-     * Convert a string into a integer if the string is correct
-     * @param number The integer under String format
-     * @return the number or -1
-     */
-    public static int parseInt(String number) {
-        if (number != null && number.matches("^[\\-0-9]+$")) {
-            return Integer.parseInt(number);
-        } else {
-            return -1;
-        }
     }
 }

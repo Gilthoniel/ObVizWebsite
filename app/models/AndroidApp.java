@@ -1,9 +1,10 @@
 package models;
 
-import play.Logger;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import service.TopicsManager;
+import webservice.MessageParser;
 
-import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.*;
 
@@ -11,7 +12,7 @@ import java.util.*;
  * Created by gaylor on 29.06.15.
  * Represent a Google Play Application for Android device
  */
-public class AndroidApp implements Initiatable, Serializable {
+public class AndroidApp implements Serializable {
 
     private static final long serialVersionUID = 1820727929435164026L;
 
@@ -35,21 +36,41 @@ public class AndroidApp implements Initiatable, Serializable {
 
     private boolean isOpinionsComputed = false;
 
-    @Override
-    public void init() {
+    public AndroidApp(JsonObject json, MessageParser parser, TopicsManager topics) {
+        appID = json.get("appID").getAsString();
+        category = json.get("category").getAsString();
+        coverImgUrl = json.get("coverImgUrl").getAsString();
+        currentVersion = json.get("currentVersion").getAsString();
+        description = json.get("description").getAsString();
+        developer = json.get("developer").getAsString();
+        installations = json.get("installations").getAsString();
+        isFree = json.get("isFree").getAsBoolean();
+        price = json.get("price").getAsString();
+        minimumOSVersion = json.get("minimumOSVersion").getAsString();
+        name = json.get("name").getAsString();
+        publicationDate = parser.fromJson(json.get("publicationDate"), Date.class);
+        screenshots = parser.fromJson(json.get("screenshots"), new TypeToken<List<String>>(){}.getType());
+        score = parser.fromJson(json.get("score"), Score.class);
+        relatedIDs = parser.fromJson(json.get("relatedIDs"), new TypeToken<List<String>>(){}.getType());
+        opinionsSummary = parser.fromJson(json.get("opinionsSummary"), new TypeToken<List<OpinionValue>>(){}.getType());
+        nbParsedReviews = json.get("nbParsedReviews").getAsInt();
 
         //* Remove topics without opinions
         if (opinionsSummary != null) {
             Iterator<OpinionValue> it = opinionsSummary.iterator();
             while (it.hasNext()) {
-                if (!it.next().isValid()) {
+                OpinionValue opinion = it.next();
+
+                if (!opinion.isValid()) {
                     it.remove();
+                } else {
+                    opinion.compute(topics, nbParsedReviews);
                 }
             }
 
             Collections.sort(opinionsSummary, (opinion1, opinion2) ->
-                    Integer.compare(opinion2.getNumberPositive() - opinion2.getNumberNegative(),
-                                        opinion1.getNumberPositive() - opinion1.getNumberNegative()));
+                    Integer.compare(opinion1.percentage(), opinion2.percentage()));
+            Collections.reverse(opinionsSummary);
         }
         // */
     }
@@ -185,28 +206,15 @@ public class AndroidApp implements Initiatable, Serializable {
         }
     }
 
-    public List<OpinionValue> getOpinions(@Nullable TopicsManager manager) {
+    public List<OpinionValue> getOpinions() {
 
         if (opinionsSummary != null) {
-
-            if (manager != null && !isOpinionsComputed) {
-                for (OpinionValue opinion : opinionsSummary) {
-                    opinion.compute(manager, nbParsedReviews);
-                }
-
-                isOpinionsComputed = true;
-            }
 
             return opinionsSummary;
         } else {
 
             return Collections.emptyList();
         }
-    }
-
-    public List<OpinionValue> getOpinions() {
-
-        return getOpinions(null);
     }
 
     public int getNbParsedReviews() {
@@ -225,7 +233,7 @@ public class AndroidApp implements Initiatable, Serializable {
 
     public List<OpinionValue> getMostImportantTopics(TopicsManager manager) {
 
-        List<OpinionValue> opinions = new ArrayList<>(getOpinions(manager));
+        List<OpinionValue> opinions = new ArrayList<>(getOpinions());
         Collections.sort(opinions);
 
         return opinions;
@@ -236,7 +244,7 @@ public class AndroidApp implements Initiatable, Serializable {
         int totalPositive = 0;
         int totalNegative = 0;
 
-        for (OpinionValue value : getOpinions(null)) {
+        for (OpinionValue value : getOpinions()) {
             totalPositive += value.getNumberPositive();
             totalNegative += value.getNumberNegative();
         }

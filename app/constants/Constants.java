@@ -13,12 +13,12 @@ public class Constants {
     public static int TIME_CACHE_EXPIRED = 60 * 60 * 1000; // in ms
 
     /* WebService parameters */
-    public static final String baseURL = "http://vps186042.ovh.net/ObVizService";
-    public static final String adminURL = "http://vps186042.ovh.net/ObVizServiceAdmin";
+    public static final String baseURL = "http://ns3369837.ip-37-187-91.eu/ObVizService";
+    public static final String adminURL = "http://ns3369837.ip-37-187-91.eu/ObVizServiceAdmin";
     public static final int TIMEOUT = 20000;
 
     public static final int NUMBER_PARSED_APP_PER_PAGE = 20;
-
+    public static final int NUMBER_RESULT_SEARCH = 20;
     public static final int NUMBER_TRENDING_APPS = 20;
 
     /* Command builder */
@@ -28,6 +28,7 @@ public class Constants {
     public static final String GET_TOPIC_TITLES = "Get_App_Topics";
     public static final String GET_REVIEWS = "Get_Reviews";
     public static final String SEARCH_APPS = "Search_Apps";
+    public static final String DISCOVER_APPS = "Discover_Apps";
     public static final String APP_VIEWED = "App_Viewed";
     public static final String GET_TRENDING_APPS = "Get_Trending_Apps";
     public static final String GET_CATEGORIES = "Get_App_Categories";

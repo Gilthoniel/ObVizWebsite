@@ -7,12 +7,14 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
 import play.libs.F;
-import service.TopicsManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by gaylor on 25.06.15.
@@ -23,6 +25,8 @@ public class WebService {
 
     @Inject
     private ConnectionService service;
+    @Inject
+    private MessageParser parser;
 
     /**
      * Get the information about one application
@@ -38,9 +42,7 @@ public class WebService {
         params.add(new BasicNameValuePair("weight", weight.toString()));
 
         String cacheKey = "details:" + id + ":" + weight;
-        F.Promise<AndroidApp> promise = service.get(Constants.baseURL, params, AndroidApp.class, cacheKey);
-
-        return initPromise(promise);
+        return service.get(Constants.baseURL, params, AndroidApp.class, cacheKey);
     }
 
     /**
@@ -53,7 +55,7 @@ public class WebService {
 
         List<F.Promise<AndroidApp>> promises = new LinkedList<>();
         for (String id : ids) {
-            promises.add(initPromise(getAppDetails(id, weight)));
+            promises.add(getAppDetails(id, weight));
         }
 
         return F.Promise.sequence(promises).map(result -> {
@@ -108,12 +110,25 @@ public class WebService {
         params.add(new BasicNameValuePair("cmd", Constants.SEARCH_APPS));
         params.add(new BasicNameValuePair("name", name));
         if (categories.size() > 0) {
-            params.add(new BasicNameValuePair("categories", MessageParser.toJson(categories)));
+            params.add(new BasicNameValuePair("categories", parser.toJson(categories)));
         }
 
         String cacheKey = "search:" + name + ":" + String.join(":", categories);
-        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {
-        }.getType(), cacheKey));
+        return service.get(Constants.baseURL, params,
+                new TypeToken<List<AndroidApp>>() {}.getType(), cacheKey);
+    }
+
+    public F.Promise<List<DiscoverItem>> discover(String name, List<String> categories) {
+
+        List<NameValuePair> params = new LinkedList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.DISCOVER_APPS));
+        params.add(new BasicNameValuePair("name", name));
+        if (categories.size() > 0) {
+            params.add(new BasicNameValuePair("categories", parser.toJson(categories)));
+        }
+
+        String cacheKey = "discover:" + name + ":" + String.join(":", categories);
+        return service.get(Constants.baseURL, params, new TypeToken<List<DiscoverItem>>(){}.getType(), cacheKey);
     }
 
     /**
@@ -126,12 +141,12 @@ public class WebService {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_TRENDING_APPS));
         if (categories.size() > 0) {
-            params.add(new BasicNameValuePair("categories", MessageParser.toJson(categories)));
+            params.add(new BasicNameValuePair("categories", parser.toJson(categories)));
         }
 
         String cacheKey = "trending:" + String.join(":", categories);
-        return initListPromise(service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {
-        }.getType(), cacheKey));
+        return service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {
+        }.getType(), cacheKey);
     }
 
     /**
@@ -181,33 +196,5 @@ public class WebService {
         params.add(new BasicNameValuePair("id", appID));
 
         return service.post(Constants.baseURL, params);
-    }
-
-    /* PRIVATE */
-
-    /**
-     * Init the object gotten by the request
-     * @param promise which returns the object
-     * @param <T> type of the object
-     * @return a new promise with the object initiated
-     */
-    private <T extends Initiatable> F.Promise<T> initPromise(F.Promise<T> promise) {
-
-        return promise.map(t -> {
-            if (t != null) {
-                t.init();
-            }
-            return t;
-        });
-    }
-
-    private <T extends Initiatable> F.Promise<List<T>> initListPromise(F.Promise<List<T>> promise) {
-
-        return promise.map(list -> {
-
-            list.stream().filter(item -> item != null).forEach(T::init);
-
-            return list;
-        });
     }
 }

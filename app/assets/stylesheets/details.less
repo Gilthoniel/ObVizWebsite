@@ -121,6 +121,10 @@
   }
 }
 
+#anchor-comparison {
+  margin-top: 50px;
+}
+
 #details-aspects {
 
   .list-aspects {
@@ -139,7 +143,7 @@
     .opinion-box {
       width: 100%;
       cursor: pointer;
-      margin-top: 20px;
+      margin: 5px;
 
       .chart-gauge {
         width: 95%;
@@ -150,10 +154,8 @@
     .opinion-box:hover,
     .opinion-box.active {
 
-      .amcharts-axis-bottom-label {
-
-        fill: #66afe9;
-      }
+      border-radius: 25px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
     }
 
     .mCSB_scrollTools.mCSB_scrollTools_horizontal {
@@ -371,24 +373,4 @@
       display: none !important;
     }
   }
-}
-
-/**********************************************/
-
-.amcharts-gauge-arrow path {
-  transform-origin: 0 0;
-}
-
-@keyframes arrow {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.arrow-rotate {
-  animation: arrow 2s infinite;
 }

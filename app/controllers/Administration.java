@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
+import constants.Utils;
 import models.*;
 import models.WebPage.WebPath;
 import models.admin.Argument;
@@ -44,6 +45,8 @@ public class Administration extends Controller {
     private play.Application application;
     @Inject
     private CustomCache cache;
+    @Inject
+    private MessageParser parser;
 
     private List<WebPath> paths;
 
@@ -152,7 +155,7 @@ public class Administration extends Controller {
         if (topic.isValid()) {
 
             //*
-            return wb.updateTopic(MessageParser.toJson(topic)).map(result -> {
+            return wb.updateTopic(parser.toJson(topic)).map(result -> {
 
                 if (result != null) {
                     successMessage();
@@ -167,7 +170,7 @@ public class Administration extends Controller {
             //*/
         } else {
 
-            Logger.info("Bad json: " + MessageParser.toJson(topic));
+            Logger.info("Bad json: " + parser.toJson(topic));
             errorMessage();
         }
 
@@ -190,7 +193,7 @@ public class Administration extends Controller {
 
         if (category.isValid()) {
 
-            return wb.updateCategory(MessageParser.toJson(category)).map(result -> {
+            return wb.updateCategory(parser.toJson(category)).map(result -> {
 
                 if (result != null) {
                     successMessage();
@@ -205,7 +208,7 @@ public class Administration extends Controller {
         } else {
 
             errorMessage();
-            Logger.info("Bad json: " + MessageParser.toJson(category));
+            Logger.info("Bad json: " + parser.toJson(category));
         }
 
         return F.Promise.pure(redirect(routes.Administration.categories()));
@@ -226,7 +229,7 @@ public class Administration extends Controller {
         CategoryType type = new CategoryType(form);
 
         if (type.isValid()) {
-            return wb.insertCategoryType(MessageParser.toJson(type)).map(result -> {
+            return wb.insertCategoryType(parser.toJson(type)).map(result -> {
 
                 if (result != null) {
                     successMessage();
@@ -241,7 +244,7 @@ public class Administration extends Controller {
         } else {
 
             errorMessage();
-            Logger.info("Bad json: "+MessageParser.toJson(type));
+            Logger.info("Bad json: " + parser.toJson(type));
         }
 
         return F.Promise.pure(redirect(routes.Administration.categoriesTypes()));
@@ -308,7 +311,7 @@ public class Administration extends Controller {
 
     public F.Promise<Result> getParsedApplications() {
 
-        int pageNumber = MessageParser.parseInt(request().getQueryString("p"));
+        int pageNumber = Utils.parseInt(request().getQueryString("p"));
         int numberPerPage = Constants.NUMBER_PARSED_APP_PER_PAGE;
 
         F.Promise<AndroidApp.Pager> promiseApps = wb.getParsedApps(pageNumber, numberPerPage);
@@ -339,7 +342,7 @@ public class Administration extends Controller {
     public F.Promise<Result> getAdminReviews() throws AJAXRequestException {
 
         final String appID = request().getQueryString("id");
-        final int page = MessageParser.parseInt(request().getQueryString("p"));
+        final int page = Utils.parseInt(request().getQueryString("p"));
         if (page < 0) {
             throw new AJAXRequestException();
         }

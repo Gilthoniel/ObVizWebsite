@@ -21,6 +21,8 @@ public class ConnectionService {
 
     @Inject
     private CustomCache mCache;
+    @Inject
+    private MessageParser mParser;
 
     /**
      * HTTP GET request
@@ -53,7 +55,7 @@ public class ConnectionService {
                     throw new BackEndRequestException("Bad status code (" + response.getStatus() + ") for GET request [" + url + "] with queries " + params + " !");
                 }
 
-                T result = MessageParser.<T>fromJson(response.getBodyAsStream(), type);
+                T result = mParser.<T>fromJson(response.getBodyAsStream(), type);
                 if (result != null) {
 
                     mCache.set(cacheKey, result, Constants.TIME_CACHE_EXPIRED);
@@ -94,7 +96,7 @@ public class ConnectionService {
                     Logger.warn("Bad status code (" + response.getStatus() + ") for POST request [" + url + "] with queries " + params + " !");
                 }
 
-                return MessageParser.<T>fromJson(response.getBody(), type);
+                return mParser.<T>fromJson(response.getBody(), type);
             })
             .recover(throwable -> {
 

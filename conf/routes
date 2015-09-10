@@ -11,6 +11,7 @@ GET         /assets/*file                         controllers.Assets.versioned(p
 GET         /details/:id                          @controllers.Application.details(id)
 GET         /contact                              @controllers.Application.contact()
 GET         /disclaimer                           @controllers.Application.disclaimer()
+GET         /discover                             @controllers.Application.discover()
 #Play Authenticate
 GET         /logout                               com.feth.play.module.pa.controllers.Authenticate.logout()
 GET         /authenticate/:provider               com.feth.play.module.pa.controllers.Authenticate.authenticate(provider)
@@ -32,6 +33,7 @@ POST        /admin/categories                     @controllers.Administration.up
 # AJAX
 GET         /ajax/reviews                         @controllers.AJAX.getReviews()
 GET         /ajax/search                          @controllers.AJAX.search()
+GET         /ajax/discover                        @controllers.AJAX.discover()
 GET         /ajax/trending                        @controllers.AJAX.getTrending()
 
 GET         /ajax/admin/logs                      @controllers.Administration.loadLogs()

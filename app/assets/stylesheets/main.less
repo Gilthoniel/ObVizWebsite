@@ -196,34 +196,66 @@ img {
   }
 }
 
+/** Search results **/
+#search-results {
+
+  display: none;
+  position: relative;
+
+  .mCSB_scrollTools_horizontal {
+    width: 80%;
+    left: 10%;
+  }
+
+  #search-result-applications {
+    width: 100%;
+    min-height: 320px;
+    overflow: hidden;
+
+    .list-container {
+      padding: 0;
+      list-style: none;
+
+      > li {
+        width: 260px;
+        display: inline-block;
+        margin: 0 10px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  #search-result-discover {
+    width: 100%;
+    overflow: hidden;
+
+    .discover-item {
+
+      h3 {
+        text-align: center;
+        font-weight: lighter;
+      }
+
+      .discover-apps {
+        padding: 0;
+        list-style: none;
+
+        > li {
+          display: inline-block;
+          width: 260px;
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+}
+
 /** Hide elements used to store some data **/
 .data {
   display: none;
 }
 
-/** Gauges **/
-.chart-gauge {
-
-  tspan {
-    font-weight: normal !important;
-  }
-
-  a {
-    display: none !important;
-  }
-}
-
 /** Components **/
-.btn-close {
-  color: #DA6262;
-
-  display: block;
-  width: 30px;
-  height: 30px;
-  line-height: 14px;
-  padding: 5px;
-  border-radius: 15px;
-}
 
 .pager {
   display: none;
@@ -393,7 +425,6 @@ img {
     position: relative;
     top: 5px;
     float: right;
-    margin-right: 50px;
 
     .list-categories {
       display: inline-block;

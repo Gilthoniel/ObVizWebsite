@@ -5,7 +5,8 @@
 $(document).ready(function() {
 
     /* Trending applications */
-    OBVIZ.trending.init();
+    OBVIZ.trending = new Trending();
+    OBVIZ.trending.get();
 });
 
 OBVIZ.$trending = $("#trending");
@@ -14,14 +15,9 @@ OBVIZ.$trending = $("#trending");
  * Functions to get the list of trending applications related to categories
  * @type {{init: Function, get: Function}}
  */
-OBVIZ.trending = {
+function Trending() {
 
-    init: function() {
-
-        this.get();
-    },
-
-    get: function(categories) {
+    this.get = function(categories) {
 
         var url = OBVIZ.$trending.data("url");
 
@@ -29,6 +25,64 @@ OBVIZ.trending = {
             categories = "";
         }
 
-        OBVIZ.get(OBVIZ.$trending, url, { categories: categories });
-    }
-};
+        OBVIZ.$trending.find(".icon-loader").stop().fadeIn();
+        $.get(url, { categories: categories })
+            .done(function(data) {
+                var $container = OBVIZ.$trending.find(".results-container");
+                $container.hide();
+
+                // Clean the container
+                $container.empty();
+                // Add the items
+                $.each(data, function(i, item) {
+                    if (i % 4 == 0) {
+                        $container.append('<div class="hidden-xs hidden-sm clearfix"></div>');
+                    }
+
+                    if (i % 2 == 0) {
+                        $container.append('<div class="visible-sm-block clearfix"></div>');
+                    }
+
+                    $container.append('<div class="col-xs-12 col-sm-6 col-md-3">'+item+'</div>');
+                });
+
+                // Hide the elements before display the block
+                var $items = $container.find(".body-app")
+                    .css("opacity", 0)
+                    .css("top", 100);
+                $container.show();
+                OBVIZ.$trending.find(".icon-loader").stop().fadeOut();
+
+                // Animate to show the items
+                $items.each(function(i) {
+                    $(this).delay(i * 100).animate({
+                        opacity: 1,
+                        top: 0
+                    }, function() {
+                        $(this).find(".chart-gauge").each(function() {
+                            var $element = $(this);
+
+                            $element.data("gauge", GaugeCharts.make($element, {
+                                bands: OBVIZ.bands,
+                                radius: 0.9,
+                                text: {
+                                    value: $element.data("title")
+                                }
+                            }));
+                            $element.data("gauge").addArrow({
+                                value: Number($element.data("value")),
+                                color: "rgb(75, 129, 174)",
+                                baseLength: 8
+                            });
+                        });
+                    });
+                });
+
+            }).fail(function(xhr) {
+
+                if (xhr.status == '400') {
+                    OBVIZ.$trending.find(".icon-loader").find(".box-loading").addClass("with-error");
+                }
+            });
+    };
+}

@@ -87,6 +87,13 @@ OBVIZ.comparison = {
         OBVIZ.$gauges.each(function() {
 
             var id = -1;
+            var arrow = {
+                color: "rgb(79, 187, 222)",
+                baseLength: 10,
+                radius: 1.0,
+                innerRadius: 0.4
+            };
+
             if ($(this).parent().is(".opinion-box")) {
 
                 // Topic gauge
@@ -94,14 +101,15 @@ OBVIZ.comparison = {
             } else {
                 // Global gauge
                 id = "0";
+                arrow.baseLength = 20;
             }
 
-            var value = OBVIZ.$data.find("div[data-id='"+$slide.data("id")+"']").find("div[data-topic='"+id+"']").data("value");
-            if (typeof value === 'undefined') {
+            arrow.value = OBVIZ.$data.find("div[data-id='"+$slide.data("id")+"']").find("div[data-topic='"+id+"']").data("value");
+            if (typeof arrow.value === 'undefined') {
                 // TODO : if the compared app has no data for this topic, what to do ?
                 console.log("Fail for id "+id);
             } else {
-                OBVIZ.gauges.addArrow($(this), value);
+                OBVIZ.gauges.addArrow($(this), arrow);
             }
         });
 
@@ -133,7 +141,7 @@ OBVIZ.comparison = {
 
         // Clean the arrows
         OBVIZ.$gauges.each(function() {
-            OBVIZ.gauges.cleanArrow($(this));
+            $(this).data("gauge").cleanArrow();
         });
 
         OBVIZ.$reviews.data("compared", undefined);
@@ -166,76 +174,43 @@ OBVIZ.gauges = {
     },
 
     makeGauge: function(element) {
-        var chartID = element.attr("id");
-        element.data("gauge", AmCharts.makeChart(chartID, {
-            "addClassNames": true,
-            "type": "gauge",
-            "theme": "light",
-            "color": "#000000",
-            "fontFamily": "Dosis",
-            "fontSize": 16,
-            "axes": [ {
-                "axisThickness": 0,
-                "axisAlpha": 0.0,
-                "tickAlpha": 0.0,
-                "valueInterval": 100,
-                "showFirstLabel": false,
-                "showLastLabel": false,
-                "bands": OBVIZ.bands,
-                "bottomText": element.data("title"),
-                "bottomTextYOffset": 20,
-                "endValue": 100
-            } ],
-            "arrows": [ {
-                "value": Number(element.data("value")),
-                "color": "#505050",
-                "startWidth": 10,
-                "radius": "100%",
-                "innerRadius": "40%",
-                "borderAlpha": 1,
-                "id": "0"
-            } ],
-            "export": {
-                "enabled": true
-            },
-            "panEventsEnabled": false
-        }));
-    },
 
-    addArrow: function(gauge, value, color) {
-        color = typeof color !== 'undefined' ? color : "rgb(79, 187, 222)";
-        var chart = gauge.data("gauge");
+        var text = {
+            value: element.data("title"),
+            position: 0.9,
+            font: "14px Dosis"
+        };
 
-        if (typeof chart !== 'undefined') {
+        var arrow = {
+            value: Number(element.data("value")),
+            color: "#505050",
+            baseLength: 10,
+            radius: 1.0,
+            innerRadius: 0.4
+        };
 
-            OBVIZ.gauges.cleanArrow(gauge);
+        if (element.is("#global-gauge")) {
+            text.position = 0.8;
+            text.font = "40px Dosis";
 
-            chart.addArrow({
-                "value": Number(value),
-                "color": color,
-                "startWidth": 10,
-                "radius": "100%",
-                "innerRadius": "40%",
-                "borderAlpha": 1,
-                "borderColor": "#000000",
-                "id": "1"
-            });
-
-            chart.validateNow();
+            arrow.baseLength = 20;
         }
+
+        element.data("gauge", GaugeCharts.make(element, {
+            bands: OBVIZ.bands,
+            radius: 0.9,
+            text: text
+        }));
+        element.data("gauge").addArrow(arrow);
     },
 
-    cleanArrow: function(gauge) {
+    addArrow: function(gauge, arrow) {
         var chart = gauge.data("gauge");
 
         if (typeof chart !== 'undefined') {
 
-            // Clean the array but keep the first
-            while (chart.arrows.length > 1) {
-                chart.arrows.pop();
-            }
-
-            chart.validateNow();
+            chart.cleanArrow();
+            chart.addArrow(arrow);
         }
     },
 
@@ -247,12 +222,7 @@ OBVIZ.gauges = {
 
         OBVIZ.$gauges.each(function() {
 
-            var $svg = $(this).find("svg");
-            var cx = $svg.width() / 2;
-            var cy = $svg.height() / 2;
-
-            var $elems = $(this).find(".amcharts-gauge-arrow-"+index+" path");
-            OBVIZ.rotate($elems, 5, cx, cy);
+            $(this).data("gauge").shakeArrow(index);
         });
     }
 };
@@ -421,7 +391,13 @@ $(document).ready(function() {
     });
     $aspects.mCustomScrollbar({
         axis: "x",
-        theme: 'rounded-dark'
+        theme: 'dark',
+        mouseWheel: {
+            enable: false
+        },
+        scrollButtons: {
+            enable: true
+        }
     });
 });
 

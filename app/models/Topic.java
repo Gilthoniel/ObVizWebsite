@@ -1,5 +1,6 @@
 package models;
 
+import constants.Utils;
 import play.data.DynamicForm;
 import webservice.MessageParser;
 
@@ -28,7 +29,7 @@ public class Topic implements Serializable {
     private double gaugeThreshold;
 
     public Topic(DynamicForm form) {
-        _id = MessageParser.parseInt(form.get("id"));
+        _id = Utils.parseInt(form.get("id"));
         title = form.get("title");
         type = form.get("type");
         name = form.get("name");

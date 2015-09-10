@@ -24,6 +24,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="input-icon" class="col-xs-2 control-label">Icon</label>
+                <div class="col-xs-4">
+                    <input type="text" id="input-icon" class="form-control" name="icon" placeholder="Icon..." />
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-10">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="button" class="btn btn-danger">Close</button>
@@ -39,6 +45,7 @@
                 <th data-width="20%">CATEGORY</th>
                 <th data-width="20%">TITLE</th>
                 <th>TYPES</th>
+                <th>ICON</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +55,7 @@
                 <td>@category.category</td>
                 <td>@category.title</td>
                 <td>@for(i <- category.types) {@i,}</td>
+                <td>@category.icon</td>
             </tr>
         }
         </tbody>
@@ -123,6 +131,8 @@
                 }
             });
             $editor.data("category").setSelection(types);
+
+            $editor.find("input[name='icon']").val(data[4]);
         }
     </script>
 }

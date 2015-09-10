@@ -1,5 +1,6 @@
 package models;
 
+import constants.Utils;
 import play.data.DynamicForm;
 import webservice.MessageParser;
 
@@ -15,7 +16,7 @@ public class CategoryType {
     public boolean active;
 
     public CategoryType(DynamicForm form) {
-        int id = MessageParser.parseInt(form.get("id"));
+        int id = Utils.parseInt(form.get("id"));
         if (id > 0) {
             _id = id;
         }

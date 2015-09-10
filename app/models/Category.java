@@ -1,5 +1,6 @@
 package models;
 
+import constants.Utils;
 import play.Logger;
 import play.data.DynamicForm;
 import webservice.MessageParser;
@@ -25,6 +26,7 @@ public class Category {
     public String category;
     public String title;
     public List<Integer> types;
+    public String icon;
 
     private Category() {}
 
@@ -37,9 +39,11 @@ public class Category {
         for (Map.Entry<String,String> entry : form.data().entrySet()) {
 
             if (entry.getKey().startsWith("types")) {
-                types.add(MessageParser.parseInt(entry.getValue()));
+                types.add(Utils.parseInt(entry.getValue()));
             }
         }
+
+        icon = form.get("icon") != null ? form.get("icon") : "";
     }
 
     public boolean isValid() {

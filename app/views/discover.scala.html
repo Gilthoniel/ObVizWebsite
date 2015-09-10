@@ -1,0 +1,60 @@
+@(webpage: WebPage)
+
+@main(webpage) {
+
+    <div id="chart" style="width: 200px; height: 200px;"></div>
+
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/gaugechart.js")"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            var chart = GaugeCharts.make($("#chart"), {
+                bands: [ {
+                    "color": "#cc4748",
+                    "end": 20,
+                    "radius": 0.8,
+                    "start": 0
+                }, {
+                    "color": "#CF6868",
+                    "end": 40,
+                    "radius": 0.8,
+                    "start": 20
+                }, {
+                    "color": "#e6e6e6",
+                    "end": 60,
+                    "radius": 0.8,
+                    "start": 40
+                }, {
+                    "color": "#A5D1A5",
+                    "end": 80,
+                    "radius": 0.8,
+                    "start": 60
+                }, {
+                    "color": "#84b761",
+                    "end": 100,
+                    "radius": 0.8,
+                    "start": 80
+                }],
+                text: {
+                    value: "Global",
+                    size: 20,
+                    color: "black",
+                    position: 0.8
+                }
+            });
+            chart.addArrow({
+                value: 10,
+                strokeColor: "black"
+            });
+            chart.addArrow({
+                value: 70,
+                strokeColor: "black"
+            });
+
+            $("#chart").click(function() {
+                chart.shakeArrow(0);
+            });
+
+        });
+    </script>
+}

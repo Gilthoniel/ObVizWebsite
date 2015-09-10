@@ -27,8 +27,9 @@
         @* Javascript libraries *@
         <script type="text/javascript" src="@routes.Assets.versioned("lib/jquery/jquery.min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/gauge.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/gaugechart.js")"></script>
         <script type="text/javascript" src="@routes.Assets.versioned("slick/slick.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/jquery.mCustomScrollbar.min.js")"></script>
 
         <script type="text/javascript" src="@routes.Assets.versioned("javascripts/main.js")"></script>
 
@@ -127,23 +128,39 @@
                 <div id="body-content">
                     @content
                 </div>
-                <div id="search-results" data-url="@controllers.routes.AJAX.search()">
+                <div id="search-results" data-search="@controllers.routes.AJAX.search()"
+                        data-discover="@controllers.routes.AJAX.discover()">
+
+                    @* Title with categories *@
                     <div class="page-header">
-                        <button class="pull-right btn btn-default btn-close" onclick="OBVIZ.search.close()">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
                         @templates.categories(webpage, "search")
 
-                        <h1>Results</h1>
+                        <h1>
+                            Results
+                            <button class="btn btn-danger btn-xs" onclick="OBVIZ.search.close()">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </h1>
                         @* Loading icon *@
                         <div class="icon-loader">
-                        @views.html.templates.loading()
+                            @views.html.templates.loading()
                         </div>
                     </div>
 
                     @* Storage for the results *@
-                    <div class="row results-container">
+                    <div class="results-container">
+                        <div id="search-result-applications">
+                            <ul class="list-container"></ul>
+                        </div>
 
+                        <h1>Discover more</h1>
+                        @* Loading icon *@
+                        <div class="icon-loader">
+                            @views.html.templates.loading()
+                        </div>
+                        <div id="search-result-discover">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,9 +178,6 @@
                         </ul>
                     </div>
                     <div class="col-xs-12 col-md-6">
-                        <p>
-                            Gauge Chart made with <a href="http://www.amcharts.com/">AmCharts</a>
-                        </p>
                         <p>
                             Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
                             from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by
