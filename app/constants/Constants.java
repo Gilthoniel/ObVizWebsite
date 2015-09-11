@@ -7,10 +7,10 @@ package constants;
 public class Constants {
 
     /* ERROR'S MESSAGE */
-    public static final String APP_NOT_FOUND = "Sorry, we can't find this. You should try to use the search bar!";
+    public static final String APP_NOT_FOUND = "Sorry, we can't find this application. You should try to use the search bar!";
 
     /* Cache parameters */
-    public static int TIME_CACHE_EXPIRED = 60 * 60 * 1000; // in ms
+    public static int TIME_CACHE_EXPIRED = 30 * 60 * 1000; // in ms
 
     /* WebService parameters */
     public static final String baseURL = "http://ns3369837.ip-37-187-91.eu/ObVizService";

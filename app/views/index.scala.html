@@ -3,6 +3,26 @@
 @main(webpage) {
 
     <div id="trending" data-url="@routes.AJAX.getTrending">
+
+        @* Video *@
+        <div class="row" id="home-intro">
+            <div class="col-xs-12 col-md-6">
+                <video width="480" height="270" controls>
+                    <source src="@routes.Assets.versioned("video/ObveeVer2Final%202web.mp4")" type="video/mp4" />
+                    Your browser doesn't support video
+                </video>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <p>
+                    Search and discover applications of the Google Play Store<br><br>
+
+                        Find which are the best for you.
+                </p>
+            </div>
+        </div>
+
+        @* Trend Apps *@
         <div class="page-header">
             @templates.categories(webpage, "trends")
 
