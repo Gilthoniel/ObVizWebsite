@@ -29,8 +29,10 @@ public class Application extends Controller {
      * @return html result
      */
     public Result index() {
+        WebPage webpage = getWebpage();
+        webpage.getBreadcrumb().get(0).activate();
 
-        return ok((play.twirl.api.Html) views.html.index.render(getWebpage()));
+        return ok((play.twirl.api.Html) views.html.index.render(webpage));
     }
 
     public Result contact() {
@@ -70,10 +72,16 @@ public class Application extends Controller {
             return wb.getAppDetails(ids, Constants.Weight.LIGHT).map(apps -> {
 
                 WebPage webpage = getWebpage();
-                webpage.addPath(routes.Application.details(app.getAppID()), app.getName());
+                webpage.addPath(routes.Application.details(app.getAppID()), app.getName(), true);
                 return ok((play.twirl.api.Html) views.html.details.render(webpage, app, apps));
             });
         });
+    }
+
+    public Result controversies() {
+        WebPage webpage = getWebpage();
+
+        return ok((play.twirl.api.Html) views.html.controversies.render(webpage));
     }
 
     public Result discover() {

@@ -12,6 +12,8 @@ GET         /details/:id                          @controllers.Application.detai
 GET         /contact                              @controllers.Application.contact()
 GET         /disclaimer                           @controllers.Application.disclaimer()
 GET         /discover                             @controllers.Application.discover()
+GET         /controversies                        @controllers.Application.controversies()
+
 #Play Authenticate
 GET         /logout                               com.feth.play.module.pa.controllers.Authenticate.logout()
 GET         /authenticate/:provider               com.feth.play.module.pa.controllers.Authenticate.authenticate(provider)

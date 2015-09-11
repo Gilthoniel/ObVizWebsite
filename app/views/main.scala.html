@@ -76,8 +76,11 @@
                     <div class="collapse navbar-collapse" id="navbar-obviz">
                         <ul class="nav navbar-nav">
                         @for(path <- webpage.getBreadcrumb) {
-                            <li><a href="@path.getPath">@path.getTitle</a></li>
+                            <li class="@if(path.isActive){active}"><a href="@path.getPath">@path.getTitle</a></li>
                         }
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li><a href="@routes.Application.controversies()">Controversies</a></li>
                         </ul>
 
                         @if(webpage.getUser != null) {
@@ -115,6 +118,10 @@
             <div class="container" id="header-content">
                 <div id="obvee-speaking">
                     Hey! Enter some keywords or an app name !
+                </div>
+
+                <div>
+                    Find your application
                 </div>
             </div>
         </div>

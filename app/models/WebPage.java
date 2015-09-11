@@ -32,7 +32,7 @@ public class WebPage {
         user = Login.getLocalUser(session);
 
         breadcrumb = new LinkedList<>();
-        addPath(routes.Application.index(), "Home");
+        addPath(routes.Application.index(), "Trends");
     }
 
     /**
@@ -42,6 +42,10 @@ public class WebPage {
      */
     public void addPath(Call path, String title) {
         breadcrumb.add(new WebPath(path, title));
+    }
+
+    public void addPath(Call path, String title, boolean isActive) {
+        breadcrumb.add(new WebPath(path, title, isActive));
     }
 
     public void addAllPaths(Collection<WebPath> collection) {
