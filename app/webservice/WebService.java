@@ -127,8 +127,7 @@ public class WebService {
             params.add(new BasicNameValuePair("categories", parser.toJson(categories)));
         }
 
-        String cacheKey = "discover:" + name + ":" + String.join(":", categories);
-        return service.get(Constants.baseURL, params, new TypeToken<List<DiscoverItem>>(){}.getType(), cacheKey);
+        return service.getNoCache(Constants.baseURL, params, new TypeToken<List<DiscoverItem>>(){}.getType());
     }
 
     /**

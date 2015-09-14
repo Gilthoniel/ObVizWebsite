@@ -1,13 +1,11 @@
 @(item: DiscoverItem, webpage: WebPage)
 
 <div class="discover-item">
-    <h3>
-        @if(item.topicID != null) {
-            Good criteria &laquo; @item.title &raquo;
-        } else {
-            Category &laquo; @item.title &raquo;
-        }
-    </h3>
+    @if(item.title != null) {
+        <h3>
+        @item.title
+        </h3>
+    }
     <div class="scroll-container">
         <ul class="discover-apps" style="width: @{280 * item.apps.size + 10}px">
             @for(app <- item.apps) {

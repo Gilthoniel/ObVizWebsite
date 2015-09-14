@@ -229,15 +229,13 @@ function Search() {
         var url = $container.data("discover");
         var $discover = $("#search-result-discover");
 
-        $discover.find(".icon-loader").stop().slideDown();
+        $discover.siblings(".icon-loader").stop().slideDown();
 
         if (typeof $discoverRequest !== 'undefined') {
             $discoverRequest.abort();
         }
         $discoverRequest = $.get(url, { query: query, categories: categories })
             .done(function(data) {
-
-                $discover.find(".icon-loader").stop().slideUp();
 
                 $discover
                     .hide()
@@ -257,6 +255,8 @@ function Search() {
                             updateOnImageLoad: false
                         }
                     });
+
+                $discover.siblings(".icon-loader").stop().slideUp();
 
                 $discover.find(".chart-gauge").each(function() {
                     GaugeCharts.make($(this), {
