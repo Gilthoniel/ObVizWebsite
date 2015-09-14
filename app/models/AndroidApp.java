@@ -34,13 +34,15 @@ public class AndroidApp implements Serializable {
     private List<OpinionValue> opinionsSummary;
     private int nbParsedReviews;
 
-    private boolean isOpinionsComputed = false;
-
     public AndroidApp(JsonObject json, MessageParser parser, TopicsManager topics) {
         appID = json.get("appID").getAsString();
         category = json.get("category").getAsString();
         coverImgUrl = json.get("coverImgUrl").getAsString();
-        currentVersion = json.get("currentVersion").getAsString();
+        if (json.has("currentVersion")) {
+            currentVersion = json.get("currentVersion").getAsString();
+        } else {
+            currentVersion = "";
+        }
         description = json.get("description").getAsString();
         developer = json.get("developer").getAsString();
         installations = json.get("installations").getAsString();
@@ -209,10 +211,8 @@ public class AndroidApp implements Serializable {
     public List<OpinionValue> getOpinions() {
 
         if (opinionsSummary != null) {
-
             return opinionsSummary;
         } else {
-
             return Collections.emptyList();
         }
     }
