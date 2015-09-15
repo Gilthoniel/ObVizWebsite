@@ -7,9 +7,15 @@
         @* Video *@
         <div class="row" id="home-intro">
             <div class="col-xs-12 col-md-6">
-                <video width="480" height="270" controls>
+                <video id="home-video" class="video-js vjs-default-skin vjs-big-play-centered" width="480" height="270"
+                        preload="auto" data-setup="{}" controls>
+
                     <source src="@routes.Assets.versioned("video/ObveeVer2Final%202web.mp4")" type="video/mp4" />
-                    Your browser doesn't support video
+
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
                 </video>
             </div>
 
@@ -38,5 +44,9 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/video.js")"></script>
+    <script type="text/javascript">
+        videojs.options.flash.swf = '@routes.Assets.versioned("video-js.swf")';
+    </script>
     <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/index.js")"></script>
 }
