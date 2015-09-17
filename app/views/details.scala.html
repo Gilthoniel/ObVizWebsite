@@ -62,7 +62,7 @@
             @* List of all the topics *@
             <div class="col-xs-12 col-md-8 list-aspects">
                 <ul>
-                    @for((opinion, index) <- app.getMostImportantTopics(webpage.getTopics).zipWithIndex) {
+                    @for((opinion, index) <- app.getMostImportantTopics.zipWithIndex) {
                         @if(index % 2 == 0) {
                             <li>
                                 <div class="opinion-box" data-topic="@opinion.getTopicID">
@@ -74,7 +74,7 @@
                     }
                 </ul>
                 <ul>
-                    @for((opinion, index) <- app.getMostImportantTopics(webpage.getTopics).zipWithIndex) {
+                    @for((opinion, index) <- app.getMostImportantTopics.zipWithIndex) {
                         @if(index % 2 == 1) {
                             <li>
                                 <div class="opinion-box" data-topic="@opinion.getTopicID">
