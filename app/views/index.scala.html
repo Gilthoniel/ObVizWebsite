@@ -1,32 +1,82 @@
-@(webpage: WebPage)
+@(webpage: WebPage, headline: HeadLine)
 
 @main(webpage) {
 
-    <div id="trending" data-url="@routes.AJAX.getTrending">
+    @* Video *@
+    <div class="row" id="home-intro">
+        <div class="col-xs-12 col-md-6">
+            <video id="home-video" class="video-js vjs-default-skin vjs-big-play-centered" width="480" height="270"
+            preload="auto" data-setup="{}" controls>
 
-        @* Video *@
-        <div class="row" id="home-intro">
-            <div class="col-xs-12 col-md-6">
-                <video id="home-video" class="video-js vjs-default-skin vjs-big-play-centered" width="480" height="270"
-                        preload="auto" data-setup="{}" controls>
+                <source src="@routes.Assets.versioned("video/ObveeVer2Final%202web.mp4")" type="video/mp4" />
 
-                    <source src="@routes.Assets.versioned("video/ObveeVer2Final%202web.mp4")" type="video/mp4" />
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
 
-                    <p class="vjs-no-js">
-                        To view this video please enable JavaScript, and consider upgrading to a web browser that
-                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                    </p>
-                </video>
+        <div class="col-xs-12 col-md-6">
+            <p>
+                Search and discover applications of the Google Play Store<br><br>
+
+                Find which are the best for you.
+            </p>
+        </div>
+    </div>
+
+    <h1>@headline.getTitle</h1>
+    @defining(headline.getApps.head) { app =>
+        <div class="row" id="home-tip">
+            <div class="col-md-2">
+                @if(headline.getTopicID != null) {
+                    <div data-value="@app.getOpinion(headline.getTopicID).percentage()" data-title="@webpage.getTopics.getTitle(headline.getTopicID)" class="chart-gauge"></div>
+                } else {
+                    <div data-value="@app.getGlobalOpinion" data-title="Global" class="chart-gauge"></div>
+                }
             </div>
+            <div class="col-md-6">
+                <ul>
+                    <li>
+                        <img height="70" src="@app.getImage" alt="Logo" />
+                    </li>
+                    <li>
+                        <h6>Developer</h6>
+                        @app.getDeveloper
+                    </li>
+                    <li>
+                        <h6>Rating</h6>
+                        @app.getScore / 5.0
+                    </li>
+                    <li>
+                        <h6>Category</h6>
+                        @webpage.getCategories.getFrom(app.getCategory).title
+                    </li>
+                    <li>
+                        <h6>Price</h6>
+                        @if(app.isFree) {
+                            Free
+                        } else {
+                            @app.getPrice
+                        }
+                    </li>
+                </ul>
 
-            <div class="col-xs-12 col-md-6">
+                <h6>Description</h6>
                 <p>
-                    Search and discover applications of the Google Play Store<br><br>
-
-                        Find which are the best for you.
+                    @app.getDescription
                 </p>
             </div>
+            <div class="col-md-4" id="action-alternatives">
+                <a href="@routes.Application.details(app.getAppID)">
+                    Get alternatives! <span class="glyphicon glyphicon-arrow-right"></span>
+                </a>
+            </div>
         </div>
+    }
+
+    <div id="trending" data-url="@routes.AJAX.getTrending">
 
         @* Trend Apps *@
         <div class="page-header">

@@ -33,6 +33,7 @@ public class Constants {
     public static final String GET_TRENDING_APPS = "Get_Trending_Apps";
     public static final String GET_CATEGORIES = "Get_App_Categories";
     public static final String GET_CATEGORIES_TYPES = "Get_App_Categories_Types";
+    public static final String GET_HEADLINE = "Get_Random_Headline";
 
     public static final String GET_PARSED_APP = "Get_Parsed_Apps";
     public static final String GET_APPS_CRAWLER_LOGS = "Get_Apps_Crawler_Logs";

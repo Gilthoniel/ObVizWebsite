@@ -7,6 +7,39 @@ $(document).ready(function() {
     /* Trending applications */
     OBVIZ.trending = new Trending();
     OBVIZ.trending.get();
+
+    OBVIZ.tip = (function() {
+
+        /* Private */
+        var $container = $("#home-tip");
+
+        // Constructor
+        {
+            $container.find(".chart-gauge").each(function() {
+                var $element = $(this);
+
+                $element.data("gauge", GaugeCharts.make($element, {
+                    bands: OBVIZ.bands,
+                    radius: 0.9,
+                    text: {
+                        value: $element.data("title"),
+                        position: 0.9,
+                        font: "14px Dosis"
+                    }
+                }));
+                $element.data("gauge").addArrow({
+                    value: Number($element.data("value")),
+                    color: "rgb(0,0,0)",
+                    baseLength: 8
+                });
+            });
+        }
+
+        /* Public */
+        return {
+
+        }
+    })();
 });
 
 OBVIZ.$trending = $("#trending");
