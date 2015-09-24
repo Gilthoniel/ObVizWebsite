@@ -29,11 +29,13 @@ public class Application extends Controller {
      * Homepage
      * @return html result
      */
-    public Result index() {
+    public F.Promise<Result> index() {
         WebPage webpage = getWebpage();
         webpage.getBreadcrumb().get(0).activate();
 
-        return ok((play.twirl.api.Html) views.html.index.render(webpage));
+        return wb.getHeadLine().map(headline -> {
+            return ok((play.twirl.api.Html) views.html.index.render(webpage, headline));
+        });
     }
 
     public Result contact() {

@@ -35,27 +35,23 @@ public class AndroidApp implements Serializable {
     private int nbParsedReviews;
 
     public AndroidApp(JsonObject json, MessageParser parser, TopicsManager topics) {
-        appID = json.get("appID").getAsString();
-        category = json.get("category").getAsString();
-        coverImgUrl = json.get("coverImgUrl").getAsString();
-        if (json.has("currentVersion")) {
-            currentVersion = json.get("currentVersion").getAsString();
-        } else {
-            currentVersion = "";
-        }
-        description = json.get("description").getAsString();
-        developer = json.get("developer").getAsString();
-        installations = json.get("installations").getAsString();
-        isFree = json.get("isFree").getAsBoolean();
-        price = json.get("price").getAsString();
-        minimumOSVersion = json.get("minimumOSVersion").getAsString();
-        name = json.get("name").getAsString();
+        appID = json.has("appID") ? json.get("appID").getAsString() : "";
+        category = json.has("category") ? json.get("category").getAsString() : "";
+        coverImgUrl = json.has("coverImgUrl") ? json.get("coverImgUrl").getAsString() : "";
+        currentVersion = json.has("currentVersion") ? json.get("currentVersion").getAsString() : "";
+        description = json.has("description") ? json.get("description").getAsString() : "";
+        developer = json.has("developer") ? json.get("developer").getAsString() : "";
+        installations = json.has("installations") ? json.get("installations").getAsString() : "";
+        isFree = !json.has("isFree") || json.get("isFree").getAsBoolean();
+        price = json.has("price") ? json.get("price").getAsString() : "";
+        minimumOSVersion = json.has("minimumOSVersion") ? json.get("minimumOSVersion").getAsString() : "";
+        name = json.has("name") ? json.get("name").getAsString() : "";
         publicationDate = parser.fromJson(json.get("publicationDate"), Date.class);
         screenshots = parser.fromJson(json.get("screenshots"), new TypeToken<List<String>>(){}.getType());
         score = parser.fromJson(json.get("score"), Score.class);
         relatedIDs = parser.fromJson(json.get("relatedIDs"), new TypeToken<List<String>>(){}.getType());
         opinionsSummary = parser.fromJson(json.get("opinionsSummary"), new TypeToken<List<OpinionValue>>(){}.getType());
-        nbParsedReviews = json.get("nbParsedReviews").getAsInt();
+        nbParsedReviews = json.has("nbParsedReviews") ? json.get("nbParsedReviews").getAsInt() : 0;
 
         //* Remove topics without opinions
         if (opinionsSummary != null) {
@@ -231,7 +227,7 @@ public class AndroidApp implements Serializable {
         return opinionsSummary.get(opinionsSummary.size() - 1).getTopicID();
     }
 
-    public List<OpinionValue> getMostImportantTopics(TopicsManager manager) {
+    public List<OpinionValue> getMostImportantTopics() {
 
         List<OpinionValue> opinions = new ArrayList<>(getOpinions());
         Collections.sort(opinions);
@@ -254,6 +250,16 @@ public class AndroidApp implements Serializable {
         }
 
         return totalPositive * 100 / (totalPositive + totalNegative);
+    }
+
+    public OpinionValue getOpinion(int topicID) {
+        for (OpinionValue opinion : opinionsSummary) {
+            if (opinion.getTopicID() == topicID) {
+                return opinion;
+            }
+        }
+
+        return null;
     }
 
     public class Pager {

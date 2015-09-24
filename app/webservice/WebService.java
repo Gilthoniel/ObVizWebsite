@@ -127,7 +127,8 @@ public class WebService {
             params.add(new BasicNameValuePair("categories", parser.toJson(categories)));
         }
 
-        return service.getNoCache(Constants.baseURL, params, new TypeToken<List<DiscoverItem>>(){}.getType());
+        return service.getNoCache(Constants.baseURL, params, new TypeToken<List<DiscoverItem>>() {
+        }.getType());
     }
 
     /**
@@ -146,6 +147,18 @@ public class WebService {
         String cacheKey = "trending:" + String.join(":", categories);
         return service.get(Constants.baseURL, params, new TypeToken<List<AndroidApp>>() {
         }.getType(), cacheKey);
+    }
+
+    /**
+     * Get the headline for the home page
+     * @return a head line
+     */
+    public F.Promise<HeadLine> getHeadLine() {
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_HEADLINE));
+
+        return service.getNoCache(Constants.baseURL, params, HeadLine.class);
     }
 
     /**
