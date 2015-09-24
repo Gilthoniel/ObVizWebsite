@@ -1,60 +1,85 @@
-@(webpage: WebPage)
+@(webpage: WebPage, apps: java.util.List[AndroidApp])
 
 @main(webpage) {
 
-    <div id="chart" style="width: 200px; height: 200px;"></div>
+    <div class="row" id="test-app">
+        @for(app <- apps) {
+            <div class="col-xs-3">
+                <div class="android-app">
+                    @* Part visible when nothing hovers the box *@
+                    <div class="main">
+                        @* Header with app screenshots *@
+                        <div class="header" style="background-image: url('@app.getScreenshots.head')">
+                            <img src="@app.getImage" alt="Application logo" />
+                        </div>
 
-    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/gaugechart.js")"></script>
+                        @* Content information about the opinions *@
+                        <div class="body">
+                            <h3>@app.getName</h3>
+                            <table>
+                                <tr>
+                                    <td class="icon">
+                                        <img height="20" src="@routes.Assets.versioned("images/trending_up.png")" alt="" />
+                                    </td>
+                                    <td class="title">
+                                        @webpage.getTopics.getTitle(app.getMostPositive)
+                                    </td>
+                                    <td class="global-opinion" rowspan="2">
+                                        <div data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="icon">
+                                        <img height="20" src="@routes.Assets.versioned("images/trending_down.png")" alt="" />
+                                    </td>
+                                    <td class="title">
+                                        @webpage.getTopics.getTitle(app.getMostNegative)
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* Part visible when the user hovers the box *@
+                    <div class="secondary">
+                        <ul>
+                            <li>
+                                <h6>Rating</h6>
+                                @app.getScore / 5.0
+                            </li>
+                            <li>
+                                <h6>Price</h6>
+                                @if(app.isFree) {
+                                    Free
+                                } else {
+                                    @app.getPrice
+                                }
+                            </li>
+                            <li>
+                                <h6>Category</h6>
+                                @webpage.getCategories.getFrom(app.getCategory).title
+                            </li>
+                        </ul>
+
+                        <a class="btn btn-default btn-explore" href="@routes.Application.details(app.getAppID)">Explore more</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
     <script type="text/javascript">
-
         $(document).ready(function() {
-            var chart = GaugeCharts.make($("#chart"), {
-                bands: [ {
-                    "color": "#cc4748",
-                    "end": 20,
-                    "radius": 0.8,
-                    "start": 0
-                }, {
-                    "color": "#CF6868",
-                    "end": 40,
-                    "radius": 0.8,
-                    "start": 20
-                }, {
-                    "color": "#e6e6e6",
-                    "end": 60,
-                    "radius": 0.8,
-                    "start": 40
-                }, {
-                    "color": "#A5D1A5",
-                    "end": 80,
-                    "radius": 0.8,
-                    "start": 60
-                }, {
-                    "color": "#84b761",
-                    "end": 100,
-                    "radius": 0.8,
-                    "start": 80
-                }],
-                text: {
-                    value: "Global",
-                    size: 20,
-                    color: "black",
-                    position: 0.8
-                }
-            });
-            chart.addArrow({
-                value: 10,
-                strokeColor: "black"
-            });
-            chart.addArrow({
-                value: 70,
-                strokeColor: "black"
-            });
-
-            $("#chart").click(function() {
-                chart.shakeArrow(0);
-            });
-
+            $("#test-app").find(".chart-gauge").each(function() {
+                    GaugeCharts.make($(this), {
+                        bands: OBVIZ.bands,
+                        radius: 0.7
+                    }).addArrow({
+                        value: Number($(this).data("value")),
+                        color: "rgb(75, 129, 174)",
+                        baseLength: 5
+                    });
+                });
         });
     </script>
 }

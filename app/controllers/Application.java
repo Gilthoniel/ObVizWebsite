@@ -11,6 +11,7 @@ import play.mvc.Result;
 import play.mvc.With;
 import webservice.WebService;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -84,9 +85,11 @@ public class Application extends Controller {
         return ok((play.twirl.api.Html) views.html.controversies.render(webpage));
     }
 
-    public Result discover() {
+    public F.Promise<Result> discover() {
 
-        return ok((play.twirl.api.Html) views.html.discover.render(getWebpage()));
+        return wb.getTrending(Collections.<String>emptyList()).map(apps -> {
+            return ok((play.twirl.api.Html) views.html.discover.render(getWebpage(), apps));
+        });
     }
 
     private WebPage getWebpage() {

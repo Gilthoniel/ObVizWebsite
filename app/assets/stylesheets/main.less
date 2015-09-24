@@ -35,7 +35,9 @@ img {
     border-radius: 0;
 
     .navbar-brand {
-      padding: 10px 15px;
+      margin-right: 10px;
+      padding: 0;
+      img { width: 50px; height: 50px; }
     }
 
     .nav:first-child {
@@ -504,6 +506,125 @@ img {
         display: inline-block !important;
         width: auto !important;
       }
+    }
+  }
+}
+
+// TODO : tests
+#test-app {
+  .android-app {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    margin: 10px 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid #F2F2F2;
+    overflow: hidden;
+
+    .main, .secondary {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      transition: opacity 500ms ease-out;
+      -webkit-transition: opacity 500ms ease-out;
+    }
+
+    .main {
+      z-index: 10;
+
+      .header {
+        width: 100%;
+        height: 100px;
+        background: url('') center center no-repeat;
+        background-size: cover;
+
+        img {
+          width: 50px;
+          height: 50px;
+          margin: 5px;
+
+          filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+        }
+      }
+
+      .body {
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        background: #FBFBFB;
+
+        h3 {
+          margin: 0;
+          font-size: 1.2em;
+        }
+
+        table {
+          width: 100%;
+
+          .icon {
+            width: 30px;
+            padding: 5px;
+
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          .global-opinion {
+            width: 60px;
+
+            div {
+              width: 60px;
+              height: 60px;
+            }
+          }
+        }
+      }
+    }
+
+    .secondary {
+      z-index: 9;
+
+      ul {
+        padding: 0;
+        list-style: none;
+
+        li {
+          display: inline-block;
+          margin: 10px;
+
+          h6 {
+            font-size: 1.1em;
+            font-weight: normal;
+            margin: 0;
+          }
+        }
+      }
+
+      .btn-explore {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+  }
+
+  .android-app:hover {
+
+    .main {
+      opacity: 0;
+    }
+
+    .secondary {
+      z-index: 11;
     }
   }
 }
