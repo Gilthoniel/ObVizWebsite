@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import constants.Constants;
 import models.AndroidApp;
 import models.WebPage;
+import play.data.DynamicForm;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -31,7 +32,6 @@ public class Application extends Controller {
      */
     public F.Promise<Result> index() {
         WebPage webpage = getWebpage();
-        webpage.getBreadcrumb().get(0).activate();
 
         return wb.getHeadLine().map(headline -> {
             return ok((play.twirl.api.Html) views.html.index.render(webpage, headline));
@@ -92,6 +92,21 @@ public class Application extends Controller {
         return wb.getTrending(Collections.<String>emptyList()).map(apps -> {
             return ok((play.twirl.api.Html) views.html.discover.render(getWebpage(), apps));
         });
+    }
+
+    public Result search(String query) {
+        WebPage webpage = getWebpage();
+        webpage.addPath(routes.Application.index(), "Home");
+        webpage.addPath(null, "Search results");
+
+        return ok((play.twirl.api.Html) views.html.search.render(webpage, query));
+    }
+
+    public Result postSearch() {
+
+        DynamicForm form = DynamicForm.form().bindFromRequest();
+
+        return redirect(routes.Application.search(form.get("query")));
     }
 
     private WebPage getWebpage() {

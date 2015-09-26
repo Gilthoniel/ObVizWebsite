@@ -1,0 +1,36 @@
+@(webpage: WebPage, query: String)
+
+@main(webpage) {
+    <div id="search-results" data-search="@controllers.routes.AJAX.search()"
+    data-discover="@controllers.routes.AJAX.discover()" data-query="@query">
+
+        @* Title with categories *@
+        <div class="page-header">
+            @templates.categories(webpage, "search")
+
+            <h1>Results</h1>
+            @* Loading icon *@
+            <div class="icon-loader">
+                @views.html.templates.loading()
+            </div>
+        </div>
+
+        @* Storage for the results *@
+        <div class="results-container">
+            <div id="search-result-applications">
+                <ul class="list-container"></ul>
+            </div>
+
+            <h1>Discover more</h1>
+            @* Loading icon *@
+            <div class="icon-loader">
+            @views.html.templates.loading()
+            </div>
+            <div id="search-result-discover">
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/search.js")"></script>
+}

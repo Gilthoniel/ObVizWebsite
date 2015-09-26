@@ -1,7 +1,6 @@
 package models;
 
 import controllers.Login;
-import controllers.routes;
 import play.Play;
 import play.mvc.Call;
 import play.mvc.Http;
@@ -32,7 +31,6 @@ public class WebPage {
         user = Login.getLocalUser(session);
 
         breadcrumb = new LinkedList<>();
-        addPath(routes.Application.index(), "Trends");
     }
 
     /**

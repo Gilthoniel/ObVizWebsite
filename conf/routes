@@ -12,6 +12,8 @@ GET         /details/:id                          @controllers.Application.detai
 GET         /contact                              @controllers.Application.contact()
 GET         /disclaimer                           @controllers.Application.disclaimer()
 GET         /discover                             @controllers.Application.discover()
+POST        /search                               @controllers.Application.postSearch()
+GET         /search                               @controllers.Application.search(q: String)
 GET         /controversies                        @controllers.Application.controversies()
 
 #Play Authenticate

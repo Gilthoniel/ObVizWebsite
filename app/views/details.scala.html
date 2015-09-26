@@ -21,13 +21,13 @@
     </div>
 
     @if(related.size() > 0) {
-        <h2>
-            Alternatives
-            @if(app.isParsed) {
-                <small>Click to compare</small>
-            }
-        </h2>
         <div id="alternatives">
+            <h2>
+                Alternatives
+                @if(app.isParsed) {
+                    <small>Click to compare</small>
+                }
+            </h2>
             <div class="slick-alternatives">
                 @for(alternative <- related) {
                     <div>
@@ -52,8 +52,9 @@
     }
 
     @if(app.isParsed) {
-        <h2 id="anchor-comparison">Opinions of the crowd</h2>
         <div class="row" id="details-aspects">
+            <h2 id="anchor-comparison">Opinions of the crowd</h2>
+
             @* Global gauge *@
             <div class=" col-xs-12 col-md-4">
                 <div id="global-gauge" data-title="Global" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>

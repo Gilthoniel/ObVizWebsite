@@ -8,7 +8,7 @@ html, body {
 
   font-family: 'Dosis', sans-serif;
   font-weight: lighter;
-  background-color: #F8F8F8;
+  background: url('images/background.jpg') #07233a top center no-repeat;
 }
 
 img {
@@ -17,228 +17,88 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+a, a:link, a:focus {
+  color: #003A65;
+}
+
+a:hover {
+  color: #292929;
+  text-decoration: none;
+}
+
 /* Header */
-@navbarHeight: 50px;
-@headerColor: #286090;
 
 #header {
+  position: relative;
+  min-height: 100px;
+  padding-top: 20px;
 
-  height: 200px;
-  padding: 0;
-  background-color: @headerColor;
+  #header-search-bar {
+    position: absolute;
+    right: 0;
+    bottom: @searchPositionBottom;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
 
-  /* Navigation */
-  .navbar {
-    width: 100%;
-    margin-top: 20px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
-    border-radius: 0;
-
-    .navbar-brand {
-      margin-right: 10px;
-      padding: 0;
-      img { width: 50px; height: 50px; }
-    }
-
-    .nav:first-child {
-      font-size: 1.5em;
-      color: white;
-      font-weight: lighter;
-
-      > li > a {
+    form {
+      .wrapper-input {
         display: inline-block;
-        padding: 15px 10px;
-      }
-    }
-
-    .navbar-text {
-      color: black;
-    }
-
-    #search-bar {
-      margin-top: 10px;
-      margin-right: 0;
-      margin-left: 0;
-      padding: 0;
-      overflow: hidden;
-
-      button[type='submit'] {
-        background: none;
-        border: none;
-        border-radius: 5px;
-      }
-
-      button[type='submit']:hover {
-        background: rgba(0,0,0,0.1);
-      }
-
-      .form-group.hidden-xs {
-        width: 0;
-      }
-      .form-group {
+        padding: @searchPadding;
+        background: url('images/search_icon.png') @searchBackground 5px center no-repeat;
+        background-size: 30px 30px;
+        border-radius: @searchBorderRadius;
 
         input[type='text'] {
-          width: 200px;
-          background: transparent;
-          box-shadow: none;
+          width: 300px;
+          background: none;
           border: none;
-          border-bottom: 1px solid #d3d3d3;
-          font-size: 18px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          color: #4D4D4D;
+        }
+
+        button[type='submit'] {
+          border: none;
+          background: none;
+          font-size: 16px;
+        }
+
+        button[type='submit']:hover {
+          color: #cdcdcd;
         }
       }
-
-      input:focus {
-        outline: 0;
-      }
-    }
-  }
-
-  .navbar.affix {
-    width: 100%;
-    z-index: 9999;
-    margin-top: 0;
-  }
-  .navbar.affix-top { z-index: 9999; }
-
-  #header-content {
-    position: relative;
-    font-size: 1.6em;
-    color: white;
-
-    #obvee-speaking {
-      float: right;
-
-      padding-left: 100px;
-      padding-bottom: 60px;
-      background: url('images/MontreDroiteHaut.png') 0 0 no-repeat;
-      background-size: auto 90px;
-
-      color: white;
-      font-size: 0.7em;
     }
   }
 }
 
 /* Body */
-@bodyShadowHeight: 300px;
-
 #body {
   position: relative;
-  top: -30px;
+  margin-top: 10px;
+  margin-bottom: 30px;
   padding: 0;
+  background: white;
+  box-shadow: 0 0 5px black;
 
-  #body-header,
-  #body-footer {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: @bodyShadowHeight;
-
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  .breadcrumb {
+    margin: 10px 10px;
   }
 
-  #body-header { top: 0; z-index: 1; }
-  #body-footer { bottom: 0; z-index: 2; }
-
-  #body-middle {
-    position: relative;
-    z-index: 10;
-    background: white;
+  #footer {
+    background: #e1e1e1;
+    margin: 20px 0 0 0;
     padding: 20px;
-    min-height: 2 * @bodyShadowHeight + 50px;
-  }
 
-  #search-results {
-    display: none;
-  }
-}
-
-/* Footer */
-@footerHeight: 200px;
-
-#footer {
-  width: 100%;
-  height: @footerHeight;
-  margin-top: -100px;
-  padding: 100px 20px 10px 20px;
-  background: @headerColor;
-  border-top: 1px solid #dadada;
-  color: white;
-
-  a, a:link, a:focus {
-    color: #cdcdcd;
-  }
-
-  a:hover {
-    color: #454545;
-    text-decoration: none;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-
-    li {
-      display: inline-block;
-      margin-right: 10px;
-    }
-  }
-
-  p {
-    text-align: right;
-  }
-}
-
-/** Search results **/
-#search-results {
-
-  display: none;
-  position: relative;
-
-  .mCSB_scrollTools_horizontal {
-    width: 80%;
-    left: 10%;
-  }
-
-  #search-result-applications {
-    width: 100%;
-    min-height: 320px;
-    overflow: hidden;
-
-    .list-container {
-      padding: 0;
+    ul {
       list-style: none;
+      padding: 0;
 
-      > li {
-        width: 260px;
+      li {
         display: inline-block;
-        margin: 0 10px;
-        vertical-align: middle;
+        margin-right: 10px;
       }
     }
-  }
 
-  #search-result-discover {
-    width: 100%;
-    overflow: hidden;
-
-    .discover-item {
-
-      h3 {
-        text-align: center;
-        font-weight: lighter;
-      }
-
-      .discover-apps {
-        padding: 0;
-        list-style: none;
-
-        > li {
-          display: inline-block;
-          width: 260px;
-          margin: 0 10px;
-        }
-      }
+    p {
+      text-align: right;
     }
   }
 }

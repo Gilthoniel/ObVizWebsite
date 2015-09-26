@@ -59,125 +59,43 @@
     <body>
 
         @* Header *@
-        <div id="header" class="container-fluid">
-            <nav class="navbar navbar-default" data-spy="affix" data-offset-top="20">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-obviz">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="@routes.Application.index()">
-                            <img src="@routes.Assets.versioned("images/favicon.png")" alt="" />
-                        </a>
+        <div id="header" class="container">
+            <a href="@routes.Application.index()">
+                <img src="@routes.Assets.versioned("images/header_logo.png")" alt="LOGO" />
+            </a>
+
+            <div id="header-search-bar">
+                <form method="POST" action="@routes.Application.postSearch()">
+                    <div class="wrapper-input">
+                        <input type="text" name="query" placeholder="Search for apps..." />
+                        <button type="submit"><span class="glyphicon glyphicon-arrow-right"></span></button>
                     </div>
-
-                    <div class="collapse navbar-collapse" id="navbar-obviz">
-                        <ul class="nav navbar-nav">
-                        @for(path <- webpage.getBreadcrumb) {
-                            <li class="@if(path.isActive){active}"><a href="@path.getPath">@path.getTitle</a></li>
-                        }
-                        </ul>
-                        <ul class="nav navbar-nav">
-                            <li><a href="@routes.Application.controversies()">Controversies</a></li>
-                        </ul>
-
-                        @if(webpage.getUser != null) {
-                            @webpage.getUser.right match {
-                                case Rights.ADMIN => {
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="@controllers.routes.Administration.logs()">Administration</a></li>
-                                        <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
-                                    </ul>
-                                }
-
-                                case Rights.USER => {
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
-                                    </ul>
-                                }
-                            }
-                        } else {
-
-                        }
-
-                        <form class="navbar-form navbar-right" role="search" id="search-bar">
-                            <button type="submit"><img height="30" src="@routes.Assets.versioned("images/search_icon.png")" alt="" /></button>
-                            <div class="form-group hidden-xs">
-                                <input type="text" placeholder="Search ..." />
-                            </div>
-                            <div class="form-group visible-xs-block">
-                                <input type="text" placeholder="Search ..." />
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="container" id="header-content">
-                <div id="obvee-speaking">
-                    Hey! Enter some keywords or an app name !
-                </div>
-
-                <div>
-                    Find your application
-                </div>
+                </form>
             </div>
         </div>
 
         @* Body *@
         <div id="body" class="container">
-            <div id="body-header"></div>
-            <div id="body-footer"></div>
 
-            <div id="body-middle">
-                <div id="body-content">
-                    @content
-                </div>
-                <div id="search-results" data-search="@controllers.routes.AJAX.search()"
-                        data-discover="@controllers.routes.AJAX.discover()">
+            @* Breadcrumb *@
+            @if(webpage.getBreadcrumb.size() > 0) {
+                <ol class="breadcrumb">
+                    @for(path <- webpage.getBreadcrumb) {
+                        @if(path.getPath != null) {
+                            <li><a href="@path.getPath">@path.getTitle</a></li>
+                        } else {
+                            <li>@path.getTitle</li>
+                        }
+                    }
+                </ol>
+            }
 
-                    @* Title with categories *@
-                    <div class="page-header">
-                        @templates.categories(webpage, "search")
-
-                        <h1>
-                            Results
-                            <button class="btn btn-danger btn-xs" onclick="OBVIZ.search.close()">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </h1>
-                        @* Loading icon *@
-                        <div class="icon-loader">
-                            @views.html.templates.loading()
-                        </div>
-                    </div>
-
-                    @* Storage for the results *@
-                    <div class="results-container">
-                        <div id="search-result-applications">
-                            <ul class="list-container"></ul>
-                        </div>
-
-                        <h1>Discover more</h1>
-                        @* Loading icon *@
-                        <div class="icon-loader">
-                            @views.html.templates.loading()
-                        </div>
-                        <div id="search-result-discover">
-
-                        </div>
-                    </div>
-                </div>
+            <div id="body-content">
+                @content
             </div>
-        </div>
 
-        @* Footer *@
-        <div id="footer" class="container-fluid">
-
-            <div class="container">
+            @* Footer *@
+            <div id="footer">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <ul>
