@@ -20,37 +20,6 @@
         </div>
     </div>
 
-    @if(related.size() > 0) {
-        <div id="alternatives">
-            <h2>
-                Alternatives
-                @if(app.isParsed) {
-                    <small>Click to compare</small>
-                }
-            </h2>
-            <div class="slick-alternatives">
-                @for(alternative <- related) {
-                    <div>
-                        <div class="alternative-body" data-id="@alternative.getAppID"
-                                @if(!app.isParsed) {data-url="@routes.Application.details(alternative.getAppID)"}>
-
-                            <div class="header" style="background-image: url('@alternative.getRandomScreen(400)')">
-                                <div class="sub-header">
-                                    <table>
-                                        <tr>
-                                            <td class="logo"><img src="@alternative.getImage" alt="" /></td>
-                                            <td>@alternative.getName</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    }
-
     @if(app.isParsed) {
         <div class="row" id="details-aspects">
             <h2 id="anchor-comparison">Opinions of the crowd</h2>
@@ -88,6 +57,37 @@
                 </ul>
             </div>
         </div>
+
+        @if(related.size() > 0) {
+            <div id="alternatives">
+                <h2>
+                    Alternatives
+                    @if(app.isParsed) {
+                        <small>Click to compare</small>
+                    }
+                </h2>
+                <div class="slick-alternatives">
+                @for(alternative <- related) {
+                    <div>
+                        <div class="alternative-body" data-id="@alternative.getAppID"
+                            @if(!app.isParsed) {data-url="@routes.Application.details(alternative.getAppID)"}>
+
+                            <div class="header" style="background-image: url('@alternative.getRandomScreen(400)')">
+                                <div class="sub-header">
+                                    <table>
+                                        <tr>
+                                            <td class="logo"><img src="@alternative.getImage" alt="" /></td>
+                                            <td>@alternative.getName</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                </div>
+            </div>
+        }
 
         <div class="row" id="details-reviews" data-url="@routes.AJAX.getReviews()">
 

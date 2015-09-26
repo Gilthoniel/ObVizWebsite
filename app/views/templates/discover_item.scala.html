@@ -7,7 +7,7 @@
         </h3>
     }
     <div class="scroll-container">
-        <ul class="discover-apps" style="width: @{280 * item.apps.size + 10}px">
+        <ul class="discover-apps" style="width: @{380 * item.apps.size + 10}px">
             @for(app <- item.apps) {
                 <li>
                     @views.html.templates.play_app.render(app, webpage)

@@ -69,19 +69,18 @@ GaugeCharts = {
     draw: function(chart) {
 
         // Set the dimensions
-        var side = Math.min(chart.$element.width(), chart.$element.height());
-        chart.$canvas.attr("width", side);
-        chart.$canvas.attr("height", side);
+        chart.$canvas.attr("width", chart.$element.width());
+        chart.$canvas.attr("height", chart.$element.height());
 
         var center = {
-            x: side / 2.0,
-            y: side / 2.0
+            x: chart.$element.width() / 2.0,
+            y: chart.$element.height() / 2.0
         };
 
         var ctx = chart.$canvas[0].getContext("2d");
-        ctx.clearRect(0, 0, side, side);
+        ctx.clearRect(0, 0, chart.$element.width(), chart.$element.height());
         var zeroAngle = Math.PI * 0.5 + (2 * Math.PI - chart.options.angle) / 2.0;
-        var gaugeRadius = chart.options.radius * side / 2.0;
+        var gaugeRadius = chart.options.radius * Math.min(center.x, center.y);
 
         // Draw the bands
         $.each(chart.options.bands, function(i, band) {

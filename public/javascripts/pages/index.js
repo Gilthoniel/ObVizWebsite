@@ -4,9 +4,12 @@
  */
 $(document).ready(function() {
 
+    OBVIZ.$trending = $("#trending");
+
     /* Trending applications */
     OBVIZ.trending = new Trending();
-    OBVIZ.trending.get();
+    var categories = OBVIZ.$trending.find(".categories li");
+    categories.eq(Math.floor(categories.length * Math.random())).click();
 
     OBVIZ.tip = (function() {
 
@@ -23,7 +26,7 @@ $(document).ready(function() {
                     radius: 0.9,
                     text: {
                         value: $element.data("title"),
-                        position: 0.9,
+                        position: 0.8,
                         font: "14px Dosis"
                     }
                 }));
@@ -41,8 +44,6 @@ $(document).ready(function() {
         }
     })();
 });
-
-OBVIZ.$trending = $("#trending");
 
 /**
  * Functions to get the list of trending applications related to categories
@@ -68,7 +69,7 @@ function Trending() {
                 $container.empty();
                 // Add the items
                 $.each(data, function(i, item) {
-                    if (i % 4 == 0) {
+                    if (i % 3 == 0) {
                         $container.append('<div class="hidden-xs hidden-sm clearfix"></div>');
                     }
 
@@ -76,7 +77,7 @@ function Trending() {
                         $container.append('<div class="visible-sm-block clearfix"></div>');
                     }
 
-                    $container.append('<div class="col-xs-12 col-sm-6 col-md-3">'+item+'</div>');
+                    $container.append('<div class="col-xs-12 col-sm-6 col-md-4">'+item+'</div>');
                 });
 
                 // Hide the elements before display the block
@@ -97,9 +98,11 @@ function Trending() {
 
                             $element.data("gauge", GaugeCharts.make($element, {
                                 bands: OBVIZ.bands,
-                                radius: 0.9,
+                                radius: 0.8,
                                 text: {
-                                    value: $element.data("title")
+                                    value: $element.data("title"),
+                                    position: 1.0,
+                                    font: "12px Dosis"
                                 }
                             }));
                             $element.data("gauge").addArrow({

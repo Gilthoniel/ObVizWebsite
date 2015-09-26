@@ -387,7 +387,7 @@ $(document).ready(function() {
 
     var $aspects = OBVIZ.$topics.find(".list-aspects");
     $aspects.find("ul").each(function() {
-        $(this).css("width", ($(this).find("li").width()+5) * $(this).find("li").size() + "px");
+        $(this).css("width", ($(this).find("li").width()+20) * $(this).find("li").size() + "px");
     });
     $aspects.mCustomScrollbar({
         axis: "x",
@@ -399,6 +399,8 @@ $(document).ready(function() {
             enable: true
         }
     });
+
+    OBVIZ.$topics.find(".opinion-box").first().click();
 });
 
 /** Private functions **/

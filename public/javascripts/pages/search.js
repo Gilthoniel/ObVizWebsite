@@ -28,7 +28,7 @@ function Search() {
         },
         scrollButtons: {
             enable: true,
-            scrollAmount: 270,
+            scrollAmount: 370,
             scrollType: 'stepped'
         },
         advanced: {
@@ -64,7 +64,7 @@ function Search() {
 
                 var $ul = $results.find(".list-container");
                 $ul.empty();
-                $ul.width(data.length * 280);
+                $ul.width(data.length * 370);
                 $ul.hide();
 
                 $.each(data, function(i, item) {
@@ -74,7 +74,12 @@ function Search() {
                 $ul.find(".chart-gauge").each(function() {
                     GaugeCharts.make($(this), {
                         bands: OBVIZ.bands,
-                        radius: 0.9
+                        radius: 0.9,
+                        text: {
+                            value: $(this).data("title"),
+                            position: 1.0,
+                            font: "12px Dosis"
+                        }
                     }).addArrow({
                         value: Number($(this).data("value")),
                         color: "rgb(75, 129, 174)",
@@ -122,7 +127,12 @@ function Search() {
                 $discover.find(".chart-gauge").each(function() {
                     GaugeCharts.make($(this), {
                         bands: OBVIZ.bands,
-                        radius: 0.9
+                        radius: 0.9,
+                        text: {
+                            value: $(this).data("title"),
+                            position: 1.0,
+                            font: "12px Dosis"
+                        }
                     }).addArrow({
                         value: Number($(this).data("value")),
                         color: "rgb(75, 129, 174)",
