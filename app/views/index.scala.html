@@ -42,8 +42,10 @@
                 <div class="row">
                     <div class="col-xs-5">
                         <h5>
-                            <img height="60" src="@app.getImage" alt="Logo" />
-                            @headline.getTitle
+                            <a href="@routes.Application.details(app.getAppID)">
+                                <img height="60" src="@app.getImage" alt="Logo" />
+                                @headline.getTitle
+                            </a>
                         </h5>
                         <p>
                         @app.getDescription
@@ -58,7 +60,7 @@
                     }
                     </div>
                     <div class="col-xs-4 headline-alternatives">
-                        <h5>Better alternatives</h5>
+                        <h5><strong>Better</strong> alternatives</h5>
                         <ul data-url="@routes.AJAX.getAlternativesHeadline()" data-id="@app.getAppID" data-topic="@headline.getTopicID">
                         </ul>
                     </div>

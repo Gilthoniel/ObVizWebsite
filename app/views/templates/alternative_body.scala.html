@@ -1,11 +1,10 @@
 @(app: AndroidApp)
 
+<a href="@routes.Application.details(app.getAppID)">
 <div class="alternative-body">
     <div class="media">
         <div class="media-left">
-            <a href="#">
-                <img height="30" class="media-object" src="@app.getImage" alt="LOGO" />
-            </a>
+            <img height="30" class="media-object" src="@app.getImage" alt="LOGO" />
         </div>
         <div class="media-body">
             <div data-value="@app.getGlobalOpinion" data-title="" class="chart-gauge"></div>
@@ -14,3 +13,4 @@
 
     <h6 class="media-heading">@app.getName</h6>
 </div>
+</a>
