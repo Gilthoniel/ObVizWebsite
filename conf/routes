@@ -39,6 +39,7 @@ GET         /ajax/reviews                         @controllers.AJAX.getReviews()
 GET         /ajax/search                          @controllers.AJAX.search()
 GET         /ajax/discover                        @controllers.AJAX.discover()
 GET         /ajax/trending                        @controllers.AJAX.getTrending()
+GET         /ajax/alternatives                    @controllers.AJAX.getAlternativesHeadline()
 
 GET         /ajax/admin/logs                      @controllers.Administration.loadLogs()
 GET         /ajax/admin/app                       @controllers.Administration.getParsedApplications()

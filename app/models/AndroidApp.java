@@ -30,7 +30,7 @@ public class AndroidApp implements Serializable {
     private Date publicationDate;
     private List<String> screenshots;
     private Score score;
-    private List<String> relatedIDs;
+    private List<String> alternativeApps;
     private List<OpinionValue> opinionsSummary;
     private int nbParsedReviews;
 
@@ -49,7 +49,7 @@ public class AndroidApp implements Serializable {
         publicationDate = parser.fromJson(json.get("publicationDate"), Date.class);
         screenshots = parser.fromJson(json.get("screenshots"), new TypeToken<List<String>>(){}.getType());
         score = parser.fromJson(json.get("score"), Score.class);
-        relatedIDs = parser.fromJson(json.get("relatedIDs"), new TypeToken<List<String>>(){}.getType());
+        alternativeApps = parser.fromJson(json.get("alternativeApps"), new TypeToken<List<String>>(){}.getType());
         opinionsSummary = parser.fromJson(json.get("opinionsSummary"), new TypeToken<List<OpinionValue>>(){}.getType());
         nbParsedReviews = json.has("nbParsedReviews") ? json.get("nbParsedReviews").getAsInt() : 0;
 
@@ -195,10 +195,10 @@ public class AndroidApp implements Serializable {
         return (int) Math.round(score.getTotal());
     }
 
-    public List<String> getRelatedIDs() {
+    public List<String> getAlternativeApps() {
 
-        if (relatedIDs != null) {
-            return relatedIDs;
+        if (alternativeApps != null) {
+            return alternativeApps;
         } else {
             return Collections.emptyList();
         }

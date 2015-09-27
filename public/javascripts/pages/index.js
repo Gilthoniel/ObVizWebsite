@@ -23,7 +23,7 @@ $(document).ready(function() {
 
                 $element.data("gauge", GaugeCharts.make($element, {
                     bands: OBVIZ.bands,
-                    radius: 0.9,
+                    radius: 1.0,
                     text: {
                         value: $element.data("title"),
                         position: 0.8,
@@ -36,6 +36,32 @@ $(document).ready(function() {
                     baseLength: 8
                 });
             });
+
+            var $ul = $container.find(".headline-alternatives ul");
+            $.get($ul.data("url"), { id: $ul.data("id"), topic: $ul.data("topic") })
+                .done(function(data) {
+                    $.each(data, function(i, item) {
+
+                        if (i < 2) {
+                            $ul.append("<li>" + item + "</li>");
+                        }
+                    });
+
+                    $ul.find(".chart-gauge").each(function() {
+                        var $element = $(this);
+
+                        $element.data("gauge", GaugeCharts.make($element, {
+                            bands: OBVIZ.bands,
+                            radius: 1.0
+                        }));
+                        $element.data("gauge").addArrow({
+                            value: Number($element.data("value")),
+                            color: "rgb(79, 187, 222)",
+                            baseLength: 5,
+                            radius: 0.9
+                        });
+                    });
+                });
         }
 
         /* Public */
@@ -101,14 +127,15 @@ function Trending() {
                                 radius: 0.8,
                                 text: {
                                     value: $element.data("title"),
-                                    position: 1.0,
+                                    position: 0.8,
                                     font: "12px Dosis"
                                 }
                             }));
                             $element.data("gauge").addArrow({
                                 value: Number($element.data("value")),
-                                color: "rgb(75, 129, 174)",
-                                baseLength: 8
+                                color: "rgb(0,0,0)",
+                                baseLength: 5,
+                                radius: 0.9
                             });
                         });
                     });

@@ -67,7 +67,7 @@ public class Application extends Controller {
                 );
             }
 
-            List<String> ids = new LinkedList<>(app.getRelatedIDs());
+            List<String> ids = new LinkedList<>(app.getAlternativeApps());
             if (ids.size() > 20) {
                 ids = ids.subList(0, 10);
             }

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import constants.Constants;
 import constants.Utils;
-import models.AndroidApp;
-import models.DiscoverItem;
-import models.Review;
-import models.WebPage;
+import models.*;
 import models.errors.AJAXRequestException;
 import play.libs.F;
 import play.libs.Json;
@@ -133,6 +130,30 @@ public class AJAX extends Controller {
             }
 
             return ok(root);
+        });
+    }
+
+    public F.Promise<Result> getAlternativesHeadline() {
+
+        String appID = request().getQueryString("id");
+        int topicID = Utils.parseInt(request().getQueryString("topic"));
+
+        return wb.getAppDetails(appID, Constants.Weight.LIGHT).flatMap(app -> {
+            final OpinionValue opinion = app.getOpinion(topicID);
+
+            return wb.getAppDetails(app.getAlternativeApps(), Constants.Weight.LIGHT).map(alternatives -> {
+
+                ArrayNode root = Json.newArray();
+                for (AndroidApp alt : alternatives) {
+
+                    OpinionValue other = alt.getOpinion(topicID);
+                    if (other != null && other.percentage() > opinion.percentage()) {
+                        root.add(views.html.templates.alternative_body.render(alt).toString());
+                    }
+                }
+
+                return ok(root);
+            });
         });
     }
 

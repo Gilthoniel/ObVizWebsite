@@ -40,34 +40,27 @@
                 <div class="block-title"></div>
 
                 <div class="row">
-                    <div class="col-xs-7">
-                        <h6>
+                    <div class="col-xs-5">
+                        <h5>
                             <img height="60" src="@app.getImage" alt="Logo" />
                             @headline.getTitle
-                        </h6>
+                        </h5>
                         <p>
                         @app.getDescription
                         </p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                     @if(headline.getTopicID != null) {
-                        <div data-value="@app.getOpinion(headline.getTopicID).percentage()" data-title="@webpage.getTopics.getTitle(headline.getTopicID)" class="chart-gauge"></div>
+                        <div data-value="@app.getOpinion(headline.getTopicID).percentage()"
+                            data-title="@{ 100 - app.getOpinion(headline.getTopicID).percentage() }% negative opinions" class="chart-gauge"></div>
                     } else {
                         <div data-value="@app.getGlobalOpinion" data-title="Global" class="chart-gauge"></div>
                     }
                     </div>
-                    <div class="col-xs-3 percent-tip">
-                    @if(headline.getTopicID != null) {
-                        @{ 100 - app.getOpinion(headline.getTopicID).percentage() }% of the opinions about
-                        @webpage.getTopics.getTitle(headline.getTopicID) are negative
-                    } else {
-                        @{ 100 - app.getGlobalOpinion }% of the opinions about
-                        @webpage.getTopics.getTitle(headline.getTopicID) are negative
-                    }
-                    </div>
-                    <div class="col-xs-12 headline-link">
-                        But we can show you some alternatives!
-                        <strong><a href="@routes.Application.details(app.getAppID)">Click here</a></strong> to explore &raquo;
+                    <div class="col-xs-4 headline-alternatives">
+                        <h5>Better alternatives</h5>
+                        <ul data-url="@routes.AJAX.getAlternativesHeadline()" data-id="@app.getAppID" data-topic="@headline.getTopicID">
+                        </ul>
                     </div>
                 </div>
             </div>

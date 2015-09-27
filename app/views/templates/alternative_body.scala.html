@@ -1,0 +1,16 @@
+@(app: AndroidApp)
+
+<div class="alternative-body">
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img height="30" class="media-object" src="@app.getImage" alt="LOGO" />
+            </a>
+        </div>
+        <div class="media-body">
+            <div data-value="@app.getGlobalOpinion" data-title="" class="chart-gauge"></div>
+        </div>
+    </div>
+
+    <h6 class="media-heading">@app.getName</h6>
+</div>
