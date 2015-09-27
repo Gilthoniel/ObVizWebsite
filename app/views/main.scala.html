@@ -60,17 +60,22 @@
 
         @* Header *@
         <div id="header" class="container">
-            <a href="@routes.Application.index()">
-                <img src="@routes.Assets.versioned("images/header_logo.png")" alt="LOGO" />
-            </a>
-
-            <div id="header-search-bar">
-                <form method="POST" action="@routes.Application.postSearch()">
-                    <div class="wrapper-input">
-                        <input type="text" name="query" placeholder="Search for apps..." />
-                        <button type="submit"><span class="glyphicon glyphicon-arrow-right"></span></button>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <a href="@routes.Application.index()">
+                        <img src="@routes.Assets.versioned("images/header_logo.png")" alt="LOGO" />
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div id="header-search-bar">
+                        <form method="POST" action="@routes.Application.postSearch()">
+                            <div class="wrapper-input">
+                                <input type="text" name="query" placeholder="Search for apps..." />
+                                <button type="submit"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -101,6 +106,10 @@
                         <ul>
                             <li><a href="@routes.Application.contact()"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
                             <li><a href="@routes.Application.disclaimer()"><span class="glyphicon glyphicon-info-sign"></span> Disclaimer</a></li>
+                            @if(webpage.isAdmin) {
+                                <li><a href="@routes.Administration.logs()"><span class="glyphicon glyphicon-cog"></span> Admin</a></li>
+                                <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                            }
                         </ul>
                     </div>
                     <div class="col-xs-12 col-md-6">

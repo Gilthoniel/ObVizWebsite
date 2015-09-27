@@ -40,7 +40,7 @@
                 <div class="block-title"></div>
 
                 <div class="row">
-                    <div class="col-xs-5">
+                    <div class="col-xs-12 col-sm-5">
                         <h5>
                             <a href="@routes.Application.details(app.getAppID)">
                                 <img height="60" src="@app.getImage" alt="Logo" />
@@ -51,7 +51,7 @@
                         @app.getDescription
                         </p>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-12 col-sm-3">
                     @if(headline.getTopicID != null) {
                         <div data-value="@app.getOpinion(headline.getTopicID).percentage()"
                             data-title="@{ 100 - app.getOpinion(headline.getTopicID).percentage() }% negative opinions" class="chart-gauge"></div>
@@ -59,7 +59,7 @@
                         <div data-value="@app.getGlobalOpinion" data-title="Global" class="chart-gauge"></div>
                     }
                     </div>
-                    <div class="col-xs-4 headline-alternatives">
+                    <div class="col-xs-12 col-sm-4 headline-alternatives">
                         <h5><strong>Better</strong> alternatives</h5>
                         <ul data-url="@routes.AJAX.getAlternativesHeadline()" data-id="@app.getAppID" data-topic="@headline.getTopicID">
                         </ul>
