@@ -23,7 +23,6 @@ public class CustomCache implements CacheApi {
 
     private CacheManager manager;
     private Cache cache;
-    private Cache pinnedCache;
 
     @Inject
     private CustomCache(ApplicationLifecycle lifecycle, Application application) {
@@ -46,7 +45,6 @@ public class CustomCache implements CacheApi {
         }
 
         cache = manager.getCache("cache-obviz");
-        pinnedCache = manager.getCache("cache-pinned");
 
         // Turn off the manager when Play stopped
         lifecycle.addStopHook(() -> {
@@ -168,13 +166,5 @@ public class CustomCache implements CacheApi {
     public void clear() {
 
         cache.removeAll();
-        pinnedCache.removeAll();
-    }
-
-    /* Cache for managers with special VIP store in memory */
-
-    public Cache getPinnedCache() {
-
-        return pinnedCache;
     }
 }

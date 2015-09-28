@@ -3,9 +3,7 @@ package service;
 import com.google.inject.Inject;
 import constants.Constants;
 import models.Topic;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
-import service.cache.CustomCache;
+import play.Logger;
 import webservice.WebService;
 
 import javax.inject.Singleton;
@@ -22,12 +20,14 @@ public class TopicsManager {
     public static final String CACHE_KEY = "com.obviz.topics";
 
     private WebService mWebservice;
-    private Cache mCache;
+    private Container mContainer;
+    private final Object mLock = new Object();
 
     @Inject
-    public TopicsManager(WebService webservice, CustomCache cache) {
+    public TopicsManager(WebService webservice) {
         mWebservice = webservice;
-        mCache = cache.getPinnedCache();
+
+        init();
     }
 
     public String getTitle(int topicID) {
@@ -42,54 +42,50 @@ public class TopicsManager {
         }
     }
 
-    public Topic getTopic(int topicID, boolean firstTry) {
-
-        Container container = getContainer();
-
-        if (container.titles.containsKey(topicID)) {
-
-            return container.titles.get(topicID);
-        } else if (firstTry) {
-
-            mCache.remove(CACHE_KEY);
-            return getTopic(topicID, false);
-        } else {
-
-            return null;
-        }
-    }
-
     public Topic getTopic(int topicID) {
 
         return getTopic(topicID, true);
     }
 
-    private synchronized Container init() {
+    private Topic getTopic(int topicID, boolean firstTry) {
 
-        if (mCache.isElementInMemory(CACHE_KEY)) {
-            return (Container) mCache.get(CACHE_KEY).getObjectValue();
-        }
-
-        Container container = new Container();
-        return mWebservice.getTopicTitles().map(topics -> {
-
-            container.titles = new HashMap<>();
-            for (Topic topic : topics) {
-                container.titles.put(topic.getID(), topic);
+        synchronized (mLock) {
+            while (mContainer == null) {
+                try {
+                    mLock.wait();
+                } catch (InterruptedException ignored) {}
             }
 
-            mCache.put(new Element(CACHE_KEY, container));
-            return container;
-        }).get(Constants.TIMEOUT);
+            if (mContainer.titles.containsKey(topicID)) {
+
+                return mContainer.titles.get(topicID);
+            } else if (firstTry) {
+
+                init();
+                return getTopic(topicID, false);
+            } else {
+
+                Logger.info("Can't find the topic with the id " + topicID);
+                return null;
+            }
+        }
     }
 
-    private Container getContainer() {
-        Element element = mCache.get(CACHE_KEY);
-        if (element != null) {
-            return (Container) element.getObjectValue();
-        } else {
+    public void init() {
 
-            return init();
+        synchronized (mLock) {
+            mContainer = new Container();
+            mContainer.titles = new HashMap<>();
+            mWebservice.getTopicTitles().map(topics -> {
+
+                for (Topic topic : topics) {
+                    mContainer.titles.put(topic.getID(), topic);
+                }
+
+                return null;
+            }).get(Constants.TIMEOUT);
+
+            mLock.notifyAll();
         }
     }
 

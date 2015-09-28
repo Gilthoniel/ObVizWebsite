@@ -47,6 +47,10 @@ public class Administration extends Controller {
     private CustomCache cache;
     @Inject
     private MessageParser parser;
+    @Inject
+    private TopicsManager topics;
+    @Inject
+    private CategoryManager categories;
 
     private List<WebPath> paths;
 
@@ -160,7 +164,7 @@ public class Administration extends Controller {
                 if (result != null) {
                     successMessage();
                     // Clear the cache to force an update of the data
-                    cache.getPinnedCache().remove(TopicsManager.CACHE_KEY);
+                    topics.init();
                 } else {
                     errorMessage();
                 }
@@ -198,7 +202,7 @@ public class Administration extends Controller {
                 if (result != null) {
                     successMessage();
                     // Clean the cache to force the update
-                    cache.getPinnedCache().remove(CategoryManager.CACHE_KEY);
+                    categories.init();
                 } else {
                     errorMessage();
                 }
@@ -234,7 +238,7 @@ public class Administration extends Controller {
                 if (result != null) {
                     successMessage();
                     // Clean the cache to force the update
-                    cache.getPinnedCache().remove(CategoryManager.CACHE_KEY);
+                    categories.init();
                 } else {
                     errorMessage();
                 }

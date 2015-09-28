@@ -400,7 +400,7 @@ $(document).ready(function() {
         }
     });
 
-    OBVIZ.$topics.find(".opinion-box").first().click();
+    OBVIZ.$topics.find(".opinion-box").get(1).click();
 });
 
 /** Private functions **/

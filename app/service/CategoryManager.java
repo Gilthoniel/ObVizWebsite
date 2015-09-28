@@ -23,55 +23,72 @@ public class CategoryManager {
     public static final String CACHE_KEY = "com.obviz.category";
 
     private WebService wb;
-    private Cache mCache;
+    private Container mContainer;
+    private final Object mLock = new Object();
 
     @Inject
-    public CategoryManager(WebService webservice, CustomCache cache) {
+    public CategoryManager(WebService webservice) {
         wb = webservice;
-        mCache = cache.getPinnedCache();
+
+        init();
     }
 
     public List<Wrapper> getSuperCategories() {
 
-        Container container = getContainer();
+        synchronized (mLock) {
 
-        List<Wrapper> list = new LinkedList<>();
-
-        for (Map.Entry<Integer, List<Category>> entry : container.mTypes.entrySet()) {
-            CategoryType type = container.mTypeTitles.get(entry.getKey());
-
-            if (type.isActive()) {
-                Wrapper wrapper = new Wrapper();
-                wrapper.categoryType = type;
-
-                StringJoiner joiner = new StringJoiner(",");
-                for (Category category : entry.getValue()) {
-                    joiner.add(category.category);
-                }
-                wrapper.categories = String.join(",", joiner.toString());
-
-                list.add(wrapper);
+            while (mContainer == null) {
+                try {
+                    mLock.wait();
+                } catch (InterruptedException ignored) {}
             }
-        }
 
-        return list;
+            List<Wrapper> list = new LinkedList<>();
+
+            for (Map.Entry<Integer, List<Category>> entry : mContainer.mTypes.entrySet()) {
+                CategoryType type = mContainer.mTypeTitles.get(entry.getKey());
+
+                if (type.isActive()) {
+                    Wrapper wrapper = new Wrapper();
+                    wrapper.categoryType = type;
+
+                    StringJoiner joiner = new StringJoiner(",");
+                    for (Category category : entry.getValue()) {
+                        joiner.add(category.category);
+                    }
+                    wrapper.categories = String.join(",", joiner.toString());
+
+                    list.add(wrapper);
+                }
+            }
+
+            return list;
+        }
     }
 
     public Category getFrom(String category, boolean firstTry) {
 
-        Container container = getContainer();
+        synchronized (mLock) {
 
-        if (container.mCategories.containsKey(category)) {
+            while (mContainer == null) {
+                try {
+                    mLock.wait();
+                } catch (InterruptedException ignored) {
+                }
+            }
 
-            return container.mCategories.get(category);
-        } else if (firstTry) {
+            if (mContainer.mCategories.containsKey(category)) {
 
-            mCache.remove(CACHE_KEY);
-            return getFrom(category, false);
+                return mContainer.mCategories.get(category);
+            } else if (firstTry) {
 
-        } else {
+                init();
+                return getFrom(category, false);
 
-            return Category.instanceDefault;
+            } else {
+
+                return Category.instanceDefault;
+            }
         }
     }
 
@@ -80,52 +97,40 @@ public class CategoryManager {
         return getFrom(category, true);
     }
 
-    private synchronized Container init() {
+    public void init() {
 
-        if (mCache.isElementInMemory(CACHE_KEY)) {
+        synchronized (mLock) {
 
-            return (Container) mCache.get(CACHE_KEY).getObjectValue();
-        }
+            mContainer = new Container();
 
-        final Container container = new Container();
+            F.Promise<List<CategoryType>> promiseTypes = wb.getCategoryTypes();
+            F.Promise<List<Category>> promiseCategories = wb.getCategories();
 
-        F.Promise<List<CategoryType>> promiseTypes = wb.getCategoryTypes();
-        F.Promise<List<Category>> promiseCategories = wb.getCategories();
+            promiseTypes.flatMap(types -> {
 
-        return promiseTypes.flatMap(types -> {
-
-            container.mTypes = new HashMap<>();
-            container.mTypeTitles = new HashMap<>();
-            for (CategoryType type : types) {
-                container.mTypes.put(type._id, new LinkedList<>());
-                container.mTypeTitles.put(type._id, type);
-            }
-
-            return promiseCategories.map(categories -> {
-
-                container.mCategories = new HashMap<>();
-                for (Category cat : categories) {
-                    container.mCategories.put(cat.category, cat);
-
-                    for (int type : cat.types) {
-                        container.mTypes.get(type).add(cat);
-                    }
+                mContainer.mTypes = new HashMap<>();
+                mContainer.mTypeTitles = new HashMap<>();
+                for (CategoryType type : types) {
+                    mContainer.mTypes.put(type._id, new LinkedList<>());
+                    mContainer.mTypeTitles.put(type._id, type);
                 }
 
-                mCache.put(new Element(CACHE_KEY, container));
-                return container;
-            });
-        }).get(Constants.TIMEOUT);
-    }
+                return promiseCategories.map(categories -> {
 
-    private Container getContainer() {
+                    mContainer.mCategories = new HashMap<>();
+                    for (Category cat : categories) {
+                        mContainer.mCategories.put(cat.category, cat);
 
-        Element element = mCache.get(CACHE_KEY);
-        if (element != null) {
-            return (Container) element.getObjectValue();
-        } else {
+                        for (int type : cat.types) {
+                            mContainer.mTypes.get(type).add(cat);
+                        }
+                    }
 
-            return init();
+                    return mContainer;
+                });
+            }).get(Constants.TIMEOUT);
+
+            mLock.notifyAll();
         }
     }
 
