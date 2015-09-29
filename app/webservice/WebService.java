@@ -80,12 +80,13 @@ public class WebService {
      * @param size number of reviews per page
      * @return list of reviews
      */
-    public F.Promise<Review.ReviewContainer> getReviews(String id, int topicID, int pageNumber, int size) {
+    public F.Promise<Review.ReviewContainer> getReviews(String id, int topicID, int pageNumber, int size, String order) {
 
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("cmd", Constants.GET_REVIEWS));
         params.add(new BasicNameValuePair("id", id));
         params.add(new BasicNameValuePair("topic_id", String.valueOf(topicID)));
+        params.add(new BasicNameValuePair("order", order));
         if (pageNumber >= 0) {
             params.add(new BasicNameValuePair("page_nr", String.valueOf(pageNumber)));
         }
@@ -94,7 +95,7 @@ public class WebService {
             params.add(new BasicNameValuePair("nb_per_page", String.valueOf(size)));
         }
 
-        String cacheKey = "reviews:" + id + ":" + topicID + ":" + pageNumber + ":" + size;
+        String cacheKey = "reviews:" + id + ":" + topicID + ":" + pageNumber + ":" + size + ":" + order;
         return service.get(Constants.baseURL, params, Review.ReviewContainer.class, cacheKey);
     }
 

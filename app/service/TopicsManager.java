@@ -17,8 +17,6 @@ import java.util.Map;
 @Singleton
 public class TopicsManager {
 
-    public static final String CACHE_KEY = "com.obviz.topics";
-
     private WebService mWebservice;
     private Container mContainer;
     private final Object mLock = new Object();
@@ -73,20 +71,21 @@ public class TopicsManager {
 
     public void init() {
 
-        synchronized (mLock) {
-            mContainer = new Container();
-            mContainer.titles = new HashMap<>();
-            mWebservice.getTopicTitles().map(topics -> {
+        mWebservice.getTopicTitles().map(topics -> {
+            // Block only to update the topics
+            synchronized (mLock) {
+                mContainer = new Container();
+                mContainer.titles = new HashMap<>();
 
                 for (Topic topic : topics) {
                     mContainer.titles.put(topic.getID(), topic);
                 }
 
-                return null;
-            }).get(Constants.TIMEOUT);
+                mLock.notifyAll();
+            }
 
-            mLock.notifyAll();
-        }
+            return null;
+        }).get(Constants.TIMEOUT);
     }
 
     private class Container {

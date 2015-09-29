@@ -43,15 +43,17 @@ public class AJAX extends Controller {
         if (topicID < 0 || page < 0 || size < 0) {
             throw new AJAXRequestException();
         }
+        String order = request().getQueryString("order");
+        if (order == null) {
+            order = "RANDOM";
+        }
 
-        F.Promise<Review.ReviewContainer> promise = wb.getReviews(appID, topicID, page, size);
+        F.Promise<Review.ReviewContainer> promise = wb.getReviews(appID, topicID, page, size, order);
         return promise.map(container -> {
-
             ObjectNode root = Json.newObject();
 
             ArrayNode reviews = root.putArray("reviews");
             for (Review review : container.reviews) {
-
                 if (review.parsed && review.opinions != null && root.size() < 50) {
 
                     reviews.add(views.html.templates.review.render(review, Login.getLocalUser(session())).toString());
@@ -59,7 +61,6 @@ public class AJAX extends Controller {
             }
 
             root.put("nbPage", container.nbTotalPages);
-
             return ok(root);
         });
     }

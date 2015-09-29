@@ -310,6 +310,7 @@ OBVIZ.reviews = {
             $containers = OBVIZ.$comparedContainer.find(".compared").find("div[data-topic='"+topicID+"']");
         }
 
+        var order = OBVIZ.filters.getOrder();
 
         // Show the loading image
         $containers.empty();
@@ -318,7 +319,7 @@ OBVIZ.reviews = {
 
         var url = OBVIZ.$reviews.data("url");
 
-        $.get(url, { id: appID, t: topicID, p: page, s: OBVIZ.NUMBER_OF_REVIEWS })
+        $.get(url, { id: appID, t: topicID, p: page, s: OBVIZ.NUMBER_OF_REVIEWS, order: order })
             .done(function(data) {
 
                 $containers.parent().find(".loading-message").hide(); // Hide the loading icon
@@ -399,6 +400,36 @@ $(document).ready(function() {
             enable: true
         }
     });
+
+    /** Filters for the reviews **/
+    OBVIZ.filters = (function() {
+        var $selects = $(".selection-filter");
+        $selects.on('change', function() {
+            $selects.val($(this).val());
+
+            var page = 0;
+            var topicID = OBVIZ.$reviews.data("topic");
+
+            // Check if we are in compare mode
+            if (typeof OBVIZ.$reviews.data("compared") !== 'undefined') {
+                var comparedID = OBVIZ.$reviews.data("compared");
+                OBVIZ.reviews.get(topicID, comparedID, page, false);
+            }
+
+            // Get the reviews of the main application of the page
+            var appID = OBVIZ.$data.find("div[data-main='true']").data("id");
+            OBVIZ.reviews.get(topicID, appID, page, true);
+
+            OBVIZ.$comparedContainer.data("page", page);
+            OBVIZ.$baseContainer.data("page", page);
+        });
+
+        return {
+            getOrder: function() {
+                return $selects.val();
+            }
+        }
+    })();
 
     OBVIZ.$topics.find(".opinion-box").get(1).click();
 });

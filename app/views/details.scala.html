@@ -94,15 +94,19 @@
             @* List of the reviews of the application *@
             <div class="col-xs-12">
                 <div id="base-container">
-                    @views.html.templates.pager()
+                    <div class="col-xs-12 col-sm-6">
+                        @views.html.templates.pager()
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        @views.html.templates.reviews_filters.render()
+                    </div>
 
                     <div class="loading-message">
                     @views.html.templates.loading()
                     </div>
 
                     @for(opinion <- app.getOpinions) {
-                        <div class="topic-container" data-topic="@opinion.getTopicID" style="display: none;">
-                    </div>
+                        <div class="topic-container" data-topic="@opinion.getTopicID" style="display: none;"></div>
                     }
 
                     @views.html.templates.pager()
@@ -187,7 +191,12 @@
                         </div>
                         @* Reviews *@
                         <div role="tabpanel" class="tab-pane" id="tab-reviews">
-                            @views.html.templates.pager()
+                            <div class="col-xs-12 col-sm-6">
+                                @views.html.templates.pager()
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                @views.html.templates.reviews_filters.render()
+                            </div>
 
                             <div class="col-xs-6 current">
                                 <div class="loading-message">

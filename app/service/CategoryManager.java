@@ -4,10 +4,7 @@ import com.google.inject.Inject;
 import constants.Constants;
 import models.Category;
 import models.CategoryType;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
 import play.libs.F;
-import service.cache.CustomCache;
 import webservice.WebService;
 
 import javax.inject.Singleton;
@@ -19,8 +16,6 @@ import java.util.*;
  */
 @Singleton
 public class CategoryManager {
-
-    public static final String CACHE_KEY = "com.obviz.category";
 
     private WebService wb;
     private Container mContainer;
@@ -99,14 +94,14 @@ public class CategoryManager {
 
     public void init() {
 
-        synchronized (mLock) {
+        F.Promise<List<CategoryType>> promiseTypes = wb.getCategoryTypes();
+        F.Promise<List<Category>> promiseCategories = wb.getCategories();
 
-            mContainer = new Container();
+        promiseTypes.flatMap(types -> promiseCategories.map(categories -> {
 
-            F.Promise<List<CategoryType>> promiseTypes = wb.getCategoryTypes();
-            F.Promise<List<Category>> promiseCategories = wb.getCategories();
+            synchronized (mLock) {
 
-            promiseTypes.flatMap(types -> {
+                mContainer = new Container();
 
                 mContainer.mTypes = new HashMap<>();
                 mContainer.mTypeTitles = new HashMap<>();
@@ -115,23 +110,20 @@ public class CategoryManager {
                     mContainer.mTypeTitles.put(type._id, type);
                 }
 
-                return promiseCategories.map(categories -> {
+                mContainer.mCategories = new HashMap<>();
+                for (Category cat : categories) {
+                    mContainer.mCategories.put(cat.category, cat);
 
-                    mContainer.mCategories = new HashMap<>();
-                    for (Category cat : categories) {
-                        mContainer.mCategories.put(cat.category, cat);
-
-                        for (int type : cat.types) {
-                            mContainer.mTypes.get(type).add(cat);
-                        }
+                    for (int type : cat.types) {
+                        mContainer.mTypes.get(type).add(cat);
                     }
+                }
 
-                    return mContainer;
-                });
-            }).get(Constants.TIMEOUT);
+                mLock.notifyAll();
+            }
 
-            mLock.notifyAll();
-        }
+            return null;
+        })).get(Constants.TIMEOUT);
     }
 
     public class Wrapper {
