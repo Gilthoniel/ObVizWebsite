@@ -32,6 +32,10 @@ public class Application extends Controller {
      */
     public F.Promise<Result> index() {
         WebPage webpage = getWebpage();
+        Http.Cookie cookie = request().cookie(Constants.COOKIE_VIDEO);
+        webpage.addParam("home-video", cookie != null ? "false" : "true");
+
+        response().setCookie(Constants.COOKIE_VIDEO, "", 3600 * 24 * 365, "/");
 
         return wb.getHeadLine().map(headline -> {
             return ok((play.twirl.api.Html) views.html.index.render(webpage, headline));

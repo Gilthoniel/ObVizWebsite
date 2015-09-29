@@ -11,6 +11,15 @@ $(document).ready(function() {
     var categories = OBVIZ.$trending.find(".categories li");
     categories.eq(Math.floor(categories.length * Math.random())).click();
 
+    OBVIZ.video = (function() {
+        var $container = $("#home-intro");
+
+        $("#replay-button").click(function() {
+            $container.slideDown();
+            $(this).slideUp();
+        });
+    })();
+
     OBVIZ.tip = (function() {
 
         /* Private */

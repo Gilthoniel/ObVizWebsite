@@ -11,19 +11,17 @@
     </a>
 
     <div class="body">
-        <h6><a href="@routes.Application.details(app.getAppID)">@app.getName</a></h6>
-        <table>
-            <tr>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-            </tr>
-        </table>
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img height="40" class="media-object" src="@app.getImage" alt="LOGO" />
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></h4>
+            </div>
+        </div>
         <ul>
-            <li><img src="@app.getImage" alt="LOGO" /></li>
             @for((opinion, index) <- app.getOpinions.take(3).zipWithIndex) {
                 <li @if(index > 1) {class="hidden-xs"}>
                     <div data-value="@opinion.percentage()"

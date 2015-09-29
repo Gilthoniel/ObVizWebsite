@@ -9,9 +9,7 @@ import service.BaseUserService;
 import service.CategoryManager;
 import service.TopicsManager;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by gaylor on 03.07.15.
@@ -23,10 +21,12 @@ public class WebPage {
     private BaseUser user;
     private TopicsManager mTopics;
     private CategoryManager mCategories;
+    private Map<String,String> mBundle;
 
     public WebPage(TopicsManager topics, CategoryManager categories, Http.Session session) {
         mTopics = topics;
         mCategories = categories;
+        mBundle = new HashMap<>();
 
         user = Login.getLocalUser(session);
 
@@ -70,6 +70,14 @@ public class WebPage {
 
     public CategoryManager getCategories() {
         return mCategories;
+    }
+
+    public void addParam(String key, String param) {
+        mBundle.put(key, param);
+    }
+
+    public String getParam(String key) {
+        return mBundle.get(key);
     }
 
     public boolean isProdMode() {

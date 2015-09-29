@@ -44,12 +44,14 @@ public class Constants {
     public static final String INSERT_TYPE = "Insert_App_Category_Type";
     public static final String UPDATE_CATEGORY = "Update_App_Category";
 
+    /* Cookies */
+    public static final String COOKIE_VIDEO = "OBVIZ_VIDEO";
+
     /* Machines */
     public static final String[] MACHINES = new String[] {
             "liapc3", "claudiu", "liapc4", "liapc13", "liapc55"
     };
 
     /* Exception */
-
     public static final String AJAX_REQUEST_EXCEPTION = "AJAX_REQUEST_EXCEPTION";
 }
