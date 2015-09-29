@@ -2,6 +2,33 @@
  * Created by gaylor on 02.07.15.
  * Javascript of the Home page
  */
+
+function onYouTubeIframeAPIReady() {
+    console.log("Loading video");
+    OBVIZ.video.setPlayer(new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: 'PCahcqUqv3A',
+        events: {
+            'onReady': function(event) {
+                if (OBVIZ.video.state()) {
+                    OBVIZ.video.getContainer().slideDown();
+                    event.target.playVideo();
+                } else {
+                    console.log(OBVIZ.video.getButton());
+                    OBVIZ.video.getButton().slideDown();
+                }
+            },
+            'onStateChange': function(event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    OBVIZ.video.getContainer().slideUp();
+                    OBVIZ.video.getButton().slideDown();
+                }
+            }
+        }
+    }));
+}
+
 $(document).ready(function() {
 
     OBVIZ.$trending = $("#trending");
@@ -13,11 +40,39 @@ $(document).ready(function() {
 
     OBVIZ.video = (function() {
         var $container = $("#home-intro");
+        var $button = $("#replay-button");
+        var player;
 
-        $("#replay-button").click(function() {
-            $container.slideDown();
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        $button.click(function() {
+            $container.slideDown(500, function() {
+                OBVIZ.video.getPlayer().playVideo();
+            });
             $(this).slideUp();
         });
+
+        return {
+            getContainer: function() {
+                return $container;
+            },
+            getButton: function() {
+                return $button;
+            },
+            getPlayer: function() {
+                return player;
+            },
+            setPlayer: function(value) {
+                player = value;
+            },
+            state: function() {
+                return $container.data("cookie");
+            }
+        }
     })();
 
     OBVIZ.tip = (function() {

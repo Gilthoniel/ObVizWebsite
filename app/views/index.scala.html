@@ -2,20 +2,18 @@
 
 @main(webpage) {
 
-    @* Video *@
-    @if(webpage.getParam("home-video") != "true"){
-        <div id="home-intro" style="display: none;">
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/PCahcqUqv3A?rel=0&amp;showinfo=0"
-            frameborder="0" allowfullscreen></iframe>
-        </div>
-    } else {
+    @* Video
+
         <div id="home-intro">
             <iframe width="640" height="360" src="https://www.youtube.com/embed/PCahcqUqv3A?rel=0&amp;showinfo=0&amp;autoplay=1"
             frameborder="0" allowfullscreen></iframe>
         </div>
-    }
+        *@
 
-    <div id="replay-button">
+    <div id="home-intro" data-cookie="@webpage.getParam("home-video")" style="display: none;">
+        <div id="player"></div>
+    </div>
+    <div id="replay-button" style="display: none;">
         <div class="background"></div>
         <img src="@routes.Assets.versioned("images/replay.png")" alt="" />
         Replay the video
@@ -57,7 +55,7 @@
                         </p>
                     </div>
                     <div class="col-xs-12 col-sm-3">
-                    @if(headline.getTopicID != null) {
+                    @if(headline.getTopicID != null && app.getOpinion(headline.getTopicID) != null) {
                         <div data-value="@app.getOpinion(headline.getTopicID).percentage()"
                             data-title="@{ 100 - app.getOpinion(headline.getTopicID).percentage() }% negative opinions" class="chart-gauge"></div>
                     } else {
