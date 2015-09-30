@@ -16,31 +16,11 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
     private int nbPositiveOpinions;
     private int nbNegativeOpinions;
     private int topicID;
-    private int percent = -1;
-
-    public void compute(TopicsManager manager, int nbReviews) {
-
-        Topic topic = manager.getTopic(topicID);
-        if (topic != null && topic.isSpecial()) {
-
-            double value = (nbReviews - (nbNegativeOpinions - nbPositiveOpinions) / topic.getGaugeThreshold()) / nbReviews;
-            value *= 100;
-            percent = (int) Math.max(0, Math.min(100, value));
-
-        }
-    }
+    private double generalOpinionValue;
 
     public int percentage() {
 
-        if (percent < 0) {
-            if (nbPositiveOpinions <= 0 && nbNegativeOpinions <= 0) {
-                percent = 0;
-            }
-
-            percent = Math.round(nbPositiveOpinions * 100 / (nbNegativeOpinions + nbPositiveOpinions));
-        }
-
-        return percent;
+        return (int) Math.floor(generalOpinionValue * 100);
     }
 
     public int getTotal() {

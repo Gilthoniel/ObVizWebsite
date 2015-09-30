@@ -32,6 +32,7 @@ public class AndroidApp implements Serializable {
     private Score score;
     private List<String> alternativeApps;
     private List<OpinionValue> opinionsSummary;
+    private double overallOpinionValue;
     private int nbParsedReviews;
 
     public AndroidApp(JsonObject json, MessageParser parser, TopicsManager topics) {
@@ -52,6 +53,7 @@ public class AndroidApp implements Serializable {
         alternativeApps = parser.fromJson(json.get("alternativeApps"), new TypeToken<List<String>>(){}.getType());
         opinionsSummary = parser.fromJson(json.get("opinionsSummary"), new TypeToken<List<OpinionValue>>(){}.getType());
         nbParsedReviews = json.has("nbParsedReviews") ? json.get("nbParsedReviews").getAsInt() : 0;
+        overallOpinionValue = json.has("overallOpinionValue") ? json.get("overallOpinionValue").getAsDouble() : 0.0;
 
         //* Remove topics without opinions
         if (opinionsSummary != null) {
@@ -61,8 +63,6 @@ public class AndroidApp implements Serializable {
 
                 if (!opinion.isValid()) {
                     it.remove();
-                } else {
-                    opinion.compute(topics, nbParsedReviews);
                 }
             }
 
@@ -237,19 +237,7 @@ public class AndroidApp implements Serializable {
 
     public int getGlobalOpinion() {
 
-        int totalPositive = 0;
-        int totalNegative = 0;
-
-        for (OpinionValue value : getOpinions()) {
-            totalPositive += value.getNumberPositive();
-            totalNegative += value.getNumberNegative();
-        }
-
-        if (totalPositive <= 0 && totalNegative <= 0) {
-            return -1;
-        }
-
-        return totalPositive * 100 / (totalPositive + totalNegative);
+        return (int) Math.floor(overallOpinionValue * 100);
     }
 
     public OpinionValue getOpinion(int topicID) {
