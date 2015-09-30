@@ -16,10 +16,9 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
     private int nbPositiveOpinions;
     private int nbNegativeOpinions;
     private int topicID;
-    private double generalOpinionValue;
+    private Double generalOpinionValue;
 
     public int percentage() {
-
         return (int) Math.floor(generalOpinionValue * 100);
     }
 
@@ -40,8 +39,7 @@ public class OpinionValue implements Comparable<OpinionValue>, Serializable {
     }
 
     public boolean isValid() {
-
-        return topicID > 0 && (nbNegativeOpinions > 0 || nbPositiveOpinions > 0);
+        return topicID > 0 && generalOpinionValue != null;
     }
 
     /**

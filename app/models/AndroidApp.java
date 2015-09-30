@@ -219,7 +219,6 @@ public class AndroidApp implements Serializable {
     }
 
     public int getMostPositive() {
-
         return opinionsSummary.get(0).getTopicID();
     }
 

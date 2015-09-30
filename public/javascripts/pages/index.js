@@ -6,8 +6,6 @@
 function onYouTubeIframeAPIReady() {
     console.log("Loading video");
     OBVIZ.video.setPlayer(new YT.Player('player', {
-        height: '360',
-        width: '640',
         videoId: 'PCahcqUqv3A',
         events: {
             'onReady': function(event) {
