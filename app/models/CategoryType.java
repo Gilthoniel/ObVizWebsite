@@ -31,7 +31,7 @@ public class CategoryType {
     }
 
     public String getIcon() {
-        return icon != null && !icon.isEmpty() ? icon : "default.png";
+        return icon != null ? icon : "";
     }
 
     public boolean isActive() {
