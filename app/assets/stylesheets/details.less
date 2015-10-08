@@ -64,71 +64,6 @@
   }
 }
 
-#alternatives {
-
-  margin: 20px;
-
-  .slick-alternatives {
-
-    .slick-slide {
-      padding: 10px;
-
-      .alternative-body {
-        box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        cursor: pointer;
-      }
-
-      .alternative-body:hover {
-        box-shadow: 0 0 5px #66afe9;
-      }
-    }
-  }
-
-  .alternative-body {
-    width: 200px;
-
-    .header {
-      position: relative;
-      width: 100%;
-      height: 150px;
-      background-position: center center;
-      background-size: cover;
-
-      .sub-header {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to top, white 20%, transparent);
-
-        table {
-          width: 100%;
-          height: 50px;
-          position: absolute;
-          bottom: 0;
-
-          td {
-            padding: 5px;
-            font-weight: normal;
-            font-size: 0.9em;
-          }
-
-          .logo {
-            width: 50px;
-            max-width: 50px;
-            height: 50px;
-
-            img { height: 100%; }
-          }
-        }
-      }
-    }
-  }
-}
-
-#anchor-comparison {
-  margin-top: 50px;
-}
-
 #details-aspects {
 
   margin: 20px;
@@ -141,7 +76,7 @@
       padding: 0;
 
       li {
-        width: 160px;
+        width: 120px;
         margin-right: 15px;
         display: inline-block;
       }
@@ -161,7 +96,7 @@
     .opinion-box:hover,
     .opinion-box.active {
 
-      border-radius: 25px;
+      border-radius: 5px;
       box-shadow: 0 0 10px #9ECFFF;
     }
 
@@ -194,68 +129,14 @@
 
 /* List of reviews of the spec app */
 #details-reviews {
-  position: relative;
-  padding: 10px;
 
-  h1 {
-    margin-bottom: 20px;
-    text-align: center;
-
-    a, a:link, a:focus {
-      color: rgb(79, 187, 222);
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: #3e3e3e;
-      text-decoration: none;
-    }
-
-    img {
-      vertical-align: bottom;
-    }
-
-    small {
-      color: #DDD;
-    }
-  }
-
-  #tab-description {
-    ul {
-      list-style: none;
-      padding: 0;
-
-      li {
-        display: inline-block;
-        margin-right: 20px;
-        vertical-align: middle;
-      }
-    }
-  }
-
-  #tab-screenshots {
-
-    ul {
-      list-style: none;
-      padding: 0;
-
-      li {
-        display: block;
-        text-align: center;
-        margin-bottom: 10px;
-      }
-    }
-  }
-
-  #tab-reviews,
-  #base-container {
-
+  #reviews-container {
     .review {
       width: 100%;
       padding: 10px;
-      margin-bottom: 10px;
+      margin: 20px;
       border: 1px solid rgb(243, 243, 243);
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
       .header {
         padding-bottom: 5px;
@@ -281,43 +162,64 @@
           font-family: 'Ubuntu', sans-serif;
         }
 
-        .clause-positive { color: @colorPositive; }
-        .clause-negative { color: @colorNegative; }
-      }
-    }
-
-    .compared {
-      .review {
-        background: @comparedBG;
-      }
-    }
-
-    .loading-message {
-      display: none;
-    }
-  }
-
-  #comparison-container {
-    .nav-tabs {
-      > li:first-child {
-        margin-left: 20px;
+        .clause-positive {
+          color: @colorPositive;
+        }
+        .clause-negative {
+          color: @colorNegative;
+        }
       }
     }
   }
 
-  form {
-    display: block;
-    text-align: center;
-    margin: 20px 0;
+  #details-alternatives {
+    ul {
+      list-style: none;
+      padding: 0;
 
-    label {
-      font-weight: lighter;
-      font-size: 1.4em;
-      margin-right: 10px;
-    }
+      li {
 
-    .selection-filter {
-      max-width: 200px;
+        .alternative-body {
+          width: 200px;
+          margin: auto;
+
+          .header {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background-position: center center;
+            background-size: cover;
+
+            .sub-header {
+              position: relative;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(to top, white 20%, transparent);
+
+              table {
+                width: 100%;
+                height: 50px;
+                position: absolute;
+                bottom: 0;
+
+                td {
+                  padding: 5px;
+                  font-weight: normal;
+                  font-size: 0.9em;
+                }
+
+                .logo {
+                  width: 50px;
+                  max-width: 50px;
+                  height: 50px;
+
+                  img { height: 100%; }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
