@@ -101,6 +101,11 @@ $(document).ready(function() {
 
             OBVIZ.alternatives.setGaugeTopic(topicID, $(this).data("title"));
             OBVIZ.reviews.get(true);
+
+            // Smooth scroll
+            $('body,html').animate({
+                scrollTop: $("#anchor-comparison").offset().top
+            });
         });
 
         return {
@@ -349,8 +354,10 @@ $(document).ready(function() {
             // Load the good reviews
             OBVIZ.reviews.get(true);
 
-            // Show the button to stop the comparison
-            $("#stop-comparison").fadeIn();
+            // Set the application's names
+            var $names = $("#applications-name");
+            $names.find("a").attr("href", $(this).data("url")).html($(this).data("name") + " &raquo;");
+            $names.slideDown();
         });
 
         $("#stop-comparison").click(function() {
@@ -367,7 +374,21 @@ $(document).ready(function() {
             OBVIZ.reviews.get(true);
 
             // Hide the button
-            $(this).fadeOut();
+            $(this).closest("#applications-name").slideUp();
+        }).hover(function() {
+            $(this).stop().html(".");
+            $(this).animate({
+                width: 160
+            }, function() {
+                $(this).html("Turn off the comparison");
+            });
+        }, function() {
+            $(this).stop().html(".");
+            $(this).animate({
+                width: 40
+            }, function() {
+                $(this).html('<span class="glyphicon glyphicon-off"></span>');
+            });
         });
 
         return {

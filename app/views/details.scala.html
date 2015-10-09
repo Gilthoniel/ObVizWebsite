@@ -59,14 +59,23 @@
 
         <div class="row" id="details-reviews">
             <div class="col-xs-8">
-                <h3>Reviews</h3>
-                <div class="filters">
+                <h3>
+                    <div class="filters">
+                        @views.html.templates.loading()
+                        @views.html.templates.reviews_filters()
+                    </div>
+                    Reviews
+                </h3>
+                @* Name of the applications when the user compares two apps *@
+                <div id="applications-name" style="display: none;">
+                    <div class="pull-left">@app.getName</div>
                     <div class="pull-right">
-                        <button id="stop-comparison" class="btn btn-danger" style="display: none;">Stop the comparison</button>
+                        <a href="#" data-url="@routes.Application.details("")">Name</a>
                     </div>
 
-                    @views.html.templates.reviews_filters()
-                    @views.html.templates.loading()
+                    <button id="stop-comparison" class="btn btn-default">
+                        <span class="glyphicon glyphicon-off"></span>
+                    </button>
                 </div>
 
                 <div id="reviews-container" data-url="@routes.AJAX.getReviews()"></div>
@@ -86,8 +95,8 @@
                         <ul>
                             @for(alternative <- related) {
                                 <li class="alternative">
-                                    <div class="alternative-body" data-id="@alternative.getAppID"
-                                        @if(!app.isParsed) {data-url="@routes.Application.details(alternative.getAppID)"}>
+                                    <div class="alternative-body" data-id="@alternative.getAppID" data-name="@alternative.getName"
+                                        data-url="@routes.Application.details(alternative.getAppID)">
 
                                         <div class="header" style="background-image: url('@alternative.getRandomScreen(400)')">
                                             <img src="@alternative.getImage" alt="" />

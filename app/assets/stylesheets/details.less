@@ -148,45 +148,69 @@
 /* List of reviews of the spec app */
 #details-reviews {
   position: relative;
+  margin-left: 15px;
 
   h3 {
     text-align: center;
     margin: 0;
-    padding: 10px 10px;
+    padding: 10px 0;
     font-weight: lighter;
     font-size: 2em;
 
     small {
       font-weight: lighter;
     }
+
+    .filters {
+      position: relative;
+      float: right;
+
+      label {
+        margin-right: 10px;
+        font-weight: normal;
+        font-size: 0.6em;
+        vertical-align: middle;
+      }
+
+      form, .box-loading {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .box-loading {
+        position: absolute;
+        top: 5px;
+        left: -40px;
+        width: 30px;
+        height: 30px;
+      }
+    }
   }
 
-  .filters {
-    margin-left: 20px;
+  #applications-name {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.5em;
+    font-weight: normal;
 
-    label {
-      margin-right: 10px;
-      font-weight: normal;
-      font-size: 1.2em;
-      vertical-align: middle;
+    a, a:link, a:focus {
+      color: #3D97DA;
     }
 
-    form, .box-loading {
-      display: inline-block;
-      vertical-align: middle;
-      margin: 0 10px 0 0;
+    a:hover {
+      color: black;
     }
 
-    .box-loading {
-      width: 30px;
-      height: 30px;
+    .btn {
+      width: 40px;
+      color: rgb(207, 101, 101);
     }
   }
 
   #reviews-container {
     .review {
       padding: 10px;
-      margin: 20px;
+      margin: 20px 0;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       border: 1px solid #e1e1e1;
