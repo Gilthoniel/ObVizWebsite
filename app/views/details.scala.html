@@ -21,20 +21,21 @@
     </div>
 
     @if(app.isParsed) {
+        <div id="anchor-comparison"></div>
         <div class="row" id="details-aspects">
             @* Global gauge *@
             <div class=" col-xs-12 col-md-3">
-                <div id="global-gauge" data-title="Global" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
+                <div id="global-gauge" data-topic="0" data-title="Global" data-value="@app.getGlobalOpinion" class="chart-gauge"></div>
             </div>
 
             @* List of all the topics *@
             <div class="col-xs-12 col-md-9 list-aspects">
                 <ul>
-                    @for((opinion, index) <- app.getMostImportantTopics.take(10).zipWithIndex) {
+                    @for((opinion, index) <- app.getMostImportantTopics.zipWithIndex) {
                         @if(index % 2 == 0) {
                             <li>
-                                <div class="opinion-box" data-topic="@opinion.getTopicID">
-                                    <div id="gauge-@opinion.getTopicID" data-title="@webpage.getTopics.getTitle(opinion.getTopicID)"
+                                <div class="opinion-box" data-topic="@opinion.getTopicID" data-title="@webpage.getTopics.getTitle(opinion.getTopicID)">
+                                    <div data-topic="@opinion.getTopicID" data-title="@webpage.getTopics.getTitle(opinion.getTopicID)"
                                     data-value="@opinion.percentage()" data-total="@opinion.getTotal" class="chart-gauge"></div>
                                 </div>
                             </li>
@@ -42,11 +43,11 @@
                     }
                 </ul>
                 <ul>
-                    @for((opinion, index) <- app.getMostImportantTopics.take(10).zipWithIndex) {
+                    @for((opinion, index) <- app.getMostImportantTopics.zipWithIndex) {
                         @if(index % 2 == 1) {
                             <li>
-                                <div class="opinion-box" data-topic="@opinion.getTopicID">
-                                    <div id="gauge-@opinion.getTopicID" data-title="@webpage.getTopics.getTitle(opinion.getTopicID)"
+                                <div class="opinion-box" data-topic="@opinion.getTopicID" data-title="@webpage.getTopics.getTitle(opinion.getTopicID)">
+                                    <div data-topic="@opinion.getTopicID" data-title="@webpage.getTopics.getTitle(opinion.getTopicID)"
                                     data-value="@opinion.percentage()" data-total="@opinion.getTotal" class="chart-gauge"></div>
                                 </div>
                             </li>
@@ -59,32 +60,50 @@
         <div class="row" id="details-reviews">
             <div class="col-xs-8">
                 <h3>Reviews</h3>
-                @views.html.templates.reviews_filters()
+                <div class="filters">
+                    <div class="pull-right">
+                        <button id="stop-comparison" class="btn btn-danger" style="display: none;">Stop the comparison</button>
+                    </div>
+
+                    @views.html.templates.reviews_filters()
+                    @views.html.templates.loading()
+                </div>
 
                 <div id="reviews-container" data-url="@routes.AJAX.getReviews()"></div>
-            </div>
-            <div class="col-xs-4" id="details-alternatives">
-                <h3>Alternatives</h3>
-                <ul>
-                    @for(alternative <- related) {
-                        <li>
-                            <div class="alternative-body" data-id="@alternative.getAppID"
-                                @if(!app.isParsed) {data-url="@routes.Application.details(alternative.getAppID)"}>
 
-                                <div class="header" style="background-image: url('@alternative.getRandomScreen(400)')">
-                                    <div class="sub-header">
-                                        <table>
-                                            <tr>
-                                                <td class="logo"><img src="@alternative.getImage" alt="" /></td>
-                                                <td>@alternative.getName</td>
-                                            </tr>
-                                        </table>
+                <div class="button-more">
+                    <button class="btn btn-default btn-more" style="display: none;">Give me more</button>
+                    @views.html.templates.loading()
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div id="details-alternatives">
+                    <h3>
+                        Alternatives<br>
+                        <small>Click to compare</small>
+                    </h3>
+                    <div class="scrollbars-container">
+                        <ul>
+                            @for(alternative <- related) {
+                                <li class="alternative">
+                                    <div class="alternative-body" data-id="@alternative.getAppID"
+                                        @if(!app.isParsed) {data-url="@routes.Application.details(alternative.getAppID)"}>
+
+                                        <div class="header" style="background-image: url('@alternative.getRandomScreen(400)')">
+                                            <img src="@alternative.getImage" alt="" />
+                                        </div>
+                                        <div class="body">
+                                            <ul>
+                                                <li><div class="chart-gauge gauge-alternative" data-value="@alternative.getGlobalOpinion"></div></li>
+                                                <li>@alternative.getName</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                    }
-                </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     } else {

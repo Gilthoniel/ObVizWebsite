@@ -6,9 +6,8 @@
 @colorBadShadow: #d6362e;
 
 .box-loading {
-
   position: relative;
-  top: 10px;
+  width: 40px;
   height: 40px;
   margin: 0 auto;
   text-align: center;
@@ -21,8 +20,8 @@
     border-left: 5px solid rgba(0,0,0,0);
     border-radius: 50px;
     box-shadow: 0 0 35px @colorGoodShadow;
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
     -moz-animation: spinPulse 1s infinite ease-in-out;
     -webkit-animation: spinPulse 1s infinite linear;
@@ -36,12 +35,11 @@
     border-right: 5px solid rgba(0,0,0,0);
     border-radius: 50px;
     box-shadow: 0 0 15px @colorGoodShadow;
-    width: 20px;
-    height: 20px;
-    margin-left: -10px;
+    width: 50%;
+    height: 50%;
     position: absolute;
-    top: 10px;
-    left: 50%;
+    top: 25%;
+    left: 25%;
     -moz-animation: spinoffPulse 1s infinite linear;
     -webkit-animation: spinoffPulse 1s infinite linear;
   }

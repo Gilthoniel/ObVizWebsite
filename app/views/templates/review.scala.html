@@ -1,22 +1,8 @@
 @import service.BaseUser
 @import service.BaseUserService
-@(review: Review, user: BaseUser)
+@(review: Review, user: BaseUser, position: String)
 
-<div class="review">
-    <div class="header">
-        @if(review.isQuestionable && user != null && user.right == BaseUserService.Rights.ADMIN) {
-            <div class="questionable pull-right">
-                <span class="glyphicon glyphicon-alert"></span>
-            </div>
-        }
-        <div class="rating pull-right">
-            @for(i <- 1 to review.starRatings) {
-                <img height="15" src="@routes.Assets.versioned("images/rating.png")" />
-            }
-        </div>
-
-        <small>@review.reviewDate.toString</small>
-    </div>
+<div class="review @if(position != null) {review-@position}">
     <div class="body">
         @review.getDisplayType match {
             case 0 => {
@@ -33,9 +19,24 @@
             }
         }
     </div>
-    <div>
-        @if(user != null && user.right == BaseUserService.Rights.ADMIN) {
-            <a href="@review.permalink">permalink</a>
+    <div class="footer">
+        <small>@review.reviewDate.toString</small>
+
+        <div class="rating">
+        @for(i <- 1 to review.starRatings) {
+            <img height="10" src="@routes.Assets.versioned("images/rating.png")" />
         }
+        </div>
     </div>
+    @if(user != null && user.right == BaseUserService.Rights.ADMIN) {
+        <div>
+            @if(review.isQuestionable && user != null) {
+                <div class="questionable pull-right">
+                    <span class="glyphicon glyphicon-alert"></span>
+                </div>
+            }
+
+            <a href="@review.permalink">permalink</a>
+        </div>
+    }
 </div>

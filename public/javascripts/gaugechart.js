@@ -242,14 +242,25 @@ function GaugeChart($element, options) {
         GaugeCharts.animate(this);
     };
 
-    this.cleanArrow = function() {
+    this.cleanArrow = function(index) {
 
-        this.arrows = [this.arrows[0]];
+        if (typeof index === 'number') {
+            if (this.arrows.length > index) {
+                this.arrows.splice(index, 1);
+            }
+        } else {
+            this.arrows = [];
+        }
         GaugeCharts.draw(this);
     };
 
     this.shakeArrow = function(index) {
         GaugeCharts.shake(this, index);
+    };
+
+    this.setText = function(text) {
+        this.options.text.value = text;
+        GaugeCharts.draw(this);
     };
 
     GaugeCharts.draw(this);

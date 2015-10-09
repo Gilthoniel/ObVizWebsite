@@ -11,7 +11,6 @@ function onYouTubeIframeAPIReady() {
             'onReady': function(event) {
                 if (OBVIZ.video.state()) {
                     OBVIZ.video.getContainer().slideDown();
-                    event.target.playVideo();
                 } else {
                     console.log(OBVIZ.video.getButton());
                     OBVIZ.video.getButton().slideDown();

@@ -98,27 +98,27 @@
             <div id="body-content">
                 @content
             </div>
+        </div>
 
-            @* Footer *@
-            <div id="footer">
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <ul>
-                            <li><a href="@routes.Application.contact()"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
-                            <li><a href="@routes.Application.disclaimer()"><span class="glyphicon glyphicon-info-sign"></span> Disclaimer</a></li>
-                            @if(webpage.isAdmin) {
-                                <li><a href="@routes.Administration.logs()"><span class="glyphicon glyphicon-cog"></span> Admin</a></li>
-                                <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
-                            }
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <p>
-                            Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
-                            from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by
-                            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
-                        </p>
-                    </div>
+        @* Footer *@
+        <div id="footer" class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <ul>
+                        <li><a href="@routes.Application.contact()"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+                        <li><a href="@routes.Application.disclaimer()"><span class="glyphicon glyphicon-info-sign"></span> Disclaimer</a></li>
+                        @if(webpage.isAdmin) {
+                            <li><a href="@routes.Administration.logs()"><span class="glyphicon glyphicon-cog"></span> Admin</a></li>
+                            <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()">Logout</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <p>
+                        Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
+                        from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by
+                        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+                    </p>
                 </div>
             </div>
         </div>

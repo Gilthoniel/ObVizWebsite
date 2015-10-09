@@ -67,7 +67,7 @@ public class Review implements Serializable {
 
     public int getDisplayType() {
 
-        if (reviewBody != null && reviewBody.length() > 0 && reviewTitle != null && reviewTitle.length() > 0) {
+        if (reviewBody != null && reviewBody.length() > 0 && parsedTitle != null && parsedTitle.size() > 0) {
 
             return 0;
         } else if (reviewBody != null && reviewBody.length() > 0) {
@@ -157,7 +157,7 @@ public class Review implements Serializable {
         return builder;
     }
 
-    public class ReviewContainer implements Serializable {
+    public static class ReviewContainer implements Serializable {
 
         private static final long serialVersionUID = -450393000052750910L;
         public List<Review> reviews;

@@ -6,6 +6,7 @@ import constants.Constants;
 import constants.Utils;
 import models.*;
 import models.errors.AJAXRequestException;
+import play.Logger;
 import play.libs.F;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -36,7 +37,7 @@ public class AJAX extends Controller {
      */
     public F.Promise<Result> getReviews() throws AJAXRequestException {
 
-        final String appID = request().getQueryString("id");
+        final String[] appID = request().getQueryString("id").split(":");
         final int topicID = Utils.parseInt(request().getQueryString("t"));
         final int page = Utils.parseInt(request().getQueryString("p"));
         final int size = Utils.parseInt(request().getQueryString("s"));
@@ -48,21 +49,51 @@ public class AJAX extends Controller {
             order = "RANDOM";
         }
 
-        F.Promise<Review.ReviewContainer> promise = wb.getReviews(appID, topicID, page, size, order);
-        return promise.map(container -> {
+
+        F.Promise<Review.ReviewContainer> promise;
+        if (appID.length > 0) {
+            promise = wb.getReviews(appID[0], topicID, page, size, order);
+        } else {
+            promise = F.Promise.pure(null);
+        }
+
+        F.Promise<Review.ReviewContainer> promiseOther;
+        if (appID.length > 1) {
+            promiseOther = wb.getReviews(appID[1], topicID, page, size, order);
+        } else {
+            promiseOther = F.Promise.pure(null);
+        }
+
+        return promise.flatMap(container -> promiseOther.map(containerOther -> {
             ObjectNode root = Json.newObject();
 
             ArrayNode reviews = root.putArray("reviews");
-            for (Review review : container.reviews) {
-                if (review.parsed && review.opinions != null && root.size() < 50) {
+            if (container != null && containerOther != null) {
+                Iterator<Review> it = container.reviews.iterator();
+                Iterator<Review> other = containerOther.reviews.iterator();
+                while (it.hasNext() || other.hasNext()) {
+                    if (it.hasNext()) {
+                        reviews.add(views.html.templates.review.render(it.next(), Login.getLocalUser(session()), "left").toString());
+                    }
 
-                    reviews.add(views.html.templates.review.render(review, Login.getLocalUser(session())).toString());
+                    if (other.hasNext()) {
+                        reviews.add(views.html.templates.review.render(other.next(), Login.getLocalUser(session()), "right").toString());
+                    }
                 }
-            }
 
-            root.put("nbPage", container.nbTotalPages);
+                root.put("nbPage", Math.max(container.nbTotalPages, containerOther.nbTotalPages));
+            } else if (container != null) {
+
+                for (Review review : container.reviews) {
+                    reviews.add(views.html.templates.review.render(review, Login.getLocalUser(session()), null).toString());
+                }
+
+                root.put("nbPage", container.nbTotalPages);
+            } else {
+                root.put("nbPage", 0);
+            }
             return ok(root);
-        });
+        }));
     }
 
     /**
