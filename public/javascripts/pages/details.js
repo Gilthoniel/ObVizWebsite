@@ -201,7 +201,7 @@ $(document).ready(function() {
 
         function endLoading() {
             $actions.stop().fadeIn(300, function() {
-                if (page < maxPage) {
+                if (page + 1 < maxPage) {
                     $button.show();
                 }
                 $loader.hide();
