@@ -6,7 +6,7 @@
         @for(category <- webpage.getCategories.getSuperCategories) {
             <li data-categories="@category.categories" data-title="@category.categoryType.title" data-action="@action">
                 <img height="40" class="mono-color"
-                src="@category.categoryType.getIcon" alt="" />
+                src="@category.categoryType.getIcon.replace("/colored", "")" alt="" />
                 <img height="40" class="colored"
                 src="@category.categoryType.getIcon" alt="" />
 

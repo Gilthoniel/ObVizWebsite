@@ -25,20 +25,14 @@ public class Topic implements Serializable {
     private String name;
     private List<String> categories;
     private String[] keys;
-    private boolean useSpecialGauge;
-    private double gaugeThreshold;
+    private String tooltip;
 
     public Topic(DynamicForm form) {
         _id = Utils.parseInt(form.get("id"));
         title = form.get("title");
         type = form.get("type");
         name = form.get("name");
-        gaugeThreshold = Double.parseDouble(form.get("threshold"));
-        if (gaugeThreshold <= 0) {
-            useSpecialGauge = false;
-        } else {
-            useSpecialGauge = true;
-        }
+        tooltip = form.get("tooltip");
 
         String tempKeys = form.get("keys");
         if (tempKeys != null && !tempKeys.isEmpty()) {
@@ -67,14 +61,6 @@ public class Topic implements Serializable {
         return _id > 0 && title != null && !title.isEmpty() && type != null && !type.isEmpty();
     }
 
-    public double getGaugeThreshold() {
-        return gaugeThreshold;
-    }
-
-    public boolean isSpecial() {
-        return useSpecialGauge;
-    }
-
     public int getID() {
         return _id;
     }
@@ -89,6 +75,10 @@ public class Topic implements Serializable {
         } else {
             return "Unknown";
         }
+    }
+
+    public String getTooltip() {
+        return tooltip;
     }
 
     public String getType() {

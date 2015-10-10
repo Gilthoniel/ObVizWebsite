@@ -1,0 +1,8 @@
+@(opinion: OpinionValue, webpage: WebPage)
+
+<li data-toggle="tooltip" title="@webpage.getTopics.getTopic(opinion.getTopicID).getTooltip">
+    <div class="opinion-box" data-topic="@opinion.getTopicID" data-title="@webpage.getTopics.getTitle(opinion.getTopicID)">
+        <div data-title="@webpage.getTopics.getTitle(opinion.getTopicID)"
+        data-value="@opinion.percentage()" class="chart-gauge"></div>
+    </div>
+</li>

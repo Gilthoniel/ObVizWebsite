@@ -1,9 +1,9 @@
-@()
+@(withText: Boolean)
 
 <div class="box-loading">
     <div class="circle"></div>
     <div class="inner-circle"></div>
-    <div class="text-error">
-        An error occurred, try to refresh or come back later
-    </div>
+    @if(withText) {
+        <div class="text-error">An error occurred during the request. Try to refresh the page</div>
+    }
 </div>

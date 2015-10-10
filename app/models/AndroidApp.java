@@ -213,6 +213,18 @@ public class AndroidApp implements Serializable {
         }
     }
 
+    public List<OpinionValue> getOpinions(boolean positive) {
+        if (positive) {
+            return opinionsSummary.subList(0, (int) Math.ceil(opinionsSummary.size() / 2.0));
+        } else {
+
+            List<OpinionValue> temp = new LinkedList<>(opinionsSummary);
+            Collections.reverse(temp);
+
+            return temp.subList(0, temp.size() / 2);
+        }
+    }
+
     public int getNbParsedReviews() {
 
         return nbParsedReviews;

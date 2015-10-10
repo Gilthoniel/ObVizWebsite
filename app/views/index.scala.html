@@ -2,14 +2,6 @@
 
 @main(webpage) {
 
-    @* Video
-
-        <div id="home-intro">
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/PCahcqUqv3A?rel=0&amp;showinfo=0&amp;autoplay=1"
-            frameborder="0" allowfullscreen></iframe>
-        </div>
-        *@
-
     <div id="home-intro" data-cookie="@webpage.getParam("home-video")" style="display: none;">
         <div class="wrapper">
             <div id="player"></div>
@@ -39,39 +31,43 @@
         </div>
     </div>
 
-    @defining(headline.getApps.head) { app =>
-        <div id="home-tip">
-            <div id="headline-container">
-                <div class="block-title"></div>
+    @if(headline != null && headline.getApps != null) {
+        @defining(headline.getApps.head) { app =>
+            <div id="home-tip">
+                <div id="headline-container">
+                    <div class="block-title"></div>
 
-                <div class="row">
-                    <div class="col-xs-12 col-sm-5">
-                        <h5>
-                            <a href="@routes.Application.details(app.getAppID)">
-                                <img height="60" src="@app.getImage" alt="Logo" />
-                                @headline.getTitle
-                            </a>
-                        </h5>
-                        <p>
-                        @app.getDescription
-                        </p>
-                    </div>
-                    <div class="col-xs-12 col-sm-3">
-                    @if(headline.getTopicID != null && app.getOpinion(headline.getTopicID) != null) {
-                        <div data-value="@app.getOpinion(headline.getTopicID).percentage()"
-                            data-title="@{ 100 - app.getOpinion(headline.getTopicID).percentage() }% negative opinions" class="chart-gauge"></div>
-                    } else {
-                        <div data-value="@app.getGlobalOpinion" data-title="Global" class="chart-gauge"></div>
-                    }
-                    </div>
-                    <div class="col-xs-12 col-sm-4 headline-alternatives">
-                        <h5><strong>Better</strong> alternatives</h5>
-                        <ul data-url="@routes.AJAX.getAlternativesHeadline()" data-id="@app.getAppID" data-topic="@headline.getTopicID">
-                        </ul>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5">
+                            <h5>
+                                <a href="@routes.Application.details(app.getAppID)">
+                                    <img height="60" src="@app.getImage" alt="Logo" />
+                                    @headline.getTitle
+                                </a>
+                            </h5>
+                            <p>
+                            @String.format("%1.255s", app.getDescription)
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                        @if(headline.getTopicID != null && app.getOpinion(headline.getTopicID) != null) {
+                            <div data-value="@app.getOpinion(headline.getTopicID).percentage()"
+                            data-title="@{
+                                100 - app.getOpinion(headline.getTopicID).percentage()
+                            }% negative opinions" class="chart-gauge"></div>
+                        } else {
+                            <div data-value="@app.getGlobalOpinion" data-title="Global" class="chart-gauge"></div>
+                        }
+                        </div>
+                        <div class="col-xs-12 col-sm-4 headline-alternatives">
+                            <h5><strong>Better</strong> alternatives</h5>
+                            <ul data-url="@routes.AJAX.getAlternativesHeadline()" data-id="@app.getAppID" data-topic="@headline.getTopicID">
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     }
 
     <div id="trending" data-url="@routes.AJAX.getTrending">
@@ -83,7 +79,7 @@
             <h1>Explore the trending apps</h1>
             @* Loading icon *@
             <div class="icon-loader">
-            @views.html.templates.loading()
+            @views.html.templates.loading(false)
             </div>
         </div>
 

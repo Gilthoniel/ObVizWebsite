@@ -80,7 +80,8 @@ public class Application extends Controller {
             return wb.getAppDetails(ids, Constants.Weight.LIGHT).map(apps -> {
 
                 WebPage webpage = getWebpage();
-                webpage.addPath(routes.Application.details(app.getAppID()), app.getName(), true);
+                webpage.addPath(routes.Application.index(), "Home");
+                webpage.addPath(null, app.getName());
                 return ok((play.twirl.api.Html) views.html.details.render(webpage, app, apps));
             });
         });

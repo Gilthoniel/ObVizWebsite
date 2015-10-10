@@ -47,6 +47,7 @@ $(document).ready(function() {
         var $gauges = $(".chart-gauge");
         var $boxes = $(".opinion-box");
         var topicID = 0;
+        var firstScroll = true;
 
         $gauges.each(function() {
             var text = {
@@ -65,8 +66,8 @@ $(document).ready(function() {
                 var arrow = {
                     value: Number($(this).data("value")),
                     color: "#505050",
-                    baseLength: 10,
-                    radius: 1.0,
+                    baseLength: 5,
+                    radius: 0.9,
                     innerRadius: 0.4
                 };
             }
@@ -103,9 +104,18 @@ $(document).ready(function() {
             OBVIZ.reviews.get(true);
 
             // Smooth scroll
-            $('body,html').animate({
-                scrollTop: $("#anchor-comparison").offset().top
-            });
+            if (!firstScroll) {
+                $('body,html').animate({
+                    scrollTop: $("#anchor-comparison").offset().top
+                });
+            } else {
+                firstScroll = false;
+            }
+        });
+
+        // Tooltips
+        $("[data-toggle='tooltip']").tooltip({
+            container: 'body'
         });
 
         return {
@@ -172,8 +182,12 @@ $(document).ready(function() {
                 });
 
                 endLoading();
+            }).fail(function() {
+                $loader.addClass("with-error");
+                $loader.each(function() {
+                    $(this).find(".text-error").detach().insertAfter($(this));
+                });
             });
-            // TODO : errors
         }
 
         function startLoading() {

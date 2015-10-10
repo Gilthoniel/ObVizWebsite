@@ -81,7 +81,7 @@
             <div class="form-group">
                 <label for="input-threshold" class="col-xs-2 control-label">Threshold</label>
                 <div class="col-xs-1">
-                    <input id="input-threshold" type="number" step="0.05" min="0" max="1" class="form-control" name="threshold" />
+                    <input id="input-threshold" type="text" class="form-control" name="tooltip" />
                 </div>
             </div>
             <div class="form-group">
@@ -109,7 +109,7 @@
                 <th data-width="0px">APP ID</th>
                 <th>NAME</th>
                 <th>CATEGORIES</th>
-                <th>THRESHOLD</th>
+                <th>TOOLTIP</th>
                 <th>KEYS</th>
             </tr>
         </thead>
@@ -123,7 +123,7 @@
                 <td>@topic.getAppID</td>
                 <td>@topic.getName</td>
                 <td>@for(category <- topic.getCategories) {@category,}</td>
-                <td>@topic.getGaugeThreshold</td>
+                <td>@topic.getTooltip</td>
                 <td>@for(key <- topic.getKeys.sorted) {@key, }</td>
             </tr>
         }
@@ -197,7 +197,7 @@
                 $editor.data("categories").clear();
             }
 
-            $editor.find("input[name='threshold']").val(data[7]);
+            $editor.find("input[name='tooltip']").val(data[7]);
             $editor.find("textarea[name='keys']").val(data[8]);
         }
     </script>
