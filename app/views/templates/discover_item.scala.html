@@ -3,16 +3,17 @@
 <div class="discover-item">
     @if(item.title != null) {
         <h3>
-        @item.title
+            @item.title
         </h3>
     }
-    <div class="scroll-container">
-        <ul class="discover-apps" style="width: @{380 * item.apps.size + 10}px">
+    <div class="results-wrapper">
+        <ul class="discover-apps">
             @for(app <- item.apps) {
-                <li>
-                    @views.html.templates.play_app.render(app, webpage)
-                </li>
+                @views.html.templates.play_app_search(app, webpage)
             }
         </ul>
+    </div>
+    <div class="get-more" style="display: none;">
+        Give me more
     </div>
 </div>

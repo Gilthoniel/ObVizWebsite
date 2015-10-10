@@ -110,7 +110,7 @@ public class AJAX extends Controller {
             ArrayNode root = Json.newArray();
             Iterator<AndroidApp> it = applications.iterator();
             while (it.hasNext() && root.size() < Constants.NUMBER_RESULT_SEARCH) {
-                root.add(views.html.templates.play_app.render(it.next(), webpage).toString());
+                root.add(views.html.templates.play_app_search.render(it.next(), webpage).toString());
             }
 
             return ok(root);

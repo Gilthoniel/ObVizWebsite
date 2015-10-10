@@ -54,6 +54,7 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
     }
 
     @Override
+    @With(WebPageInformation.class)
     protected F.Promise<Result> onProdServerError(Http.RequestHeader request, UsefulException exception) {
 
         final WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");

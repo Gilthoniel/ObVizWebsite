@@ -3,49 +3,109 @@
   position: relative;
   margin: 20px;
 
-  .mCSB_scrollTools_horizontal {
-    width: 80%;
-    left: 10%;
+  .results-container {
+    overflow: hidden;
   }
 
-  #search-result-applications {
+  .results-wrapper {
     width: 100%;
     overflow: hidden;
 
     .list-container {
       padding: 0;
+      margin: 0;
       list-style: none;
+      text-align: justify;
 
       > li {
-        width: 350px;
+        width: 300px;
         display: inline-block;
-        margin: 10px 10px;
+        margin: 10px;
         vertical-align: middle;
       }
     }
   }
+}
 
-  #search-result-discover {
-    width: 100%;
-    overflow: hidden;
+#discover-results {
+  position: relative;
+  margin: 20px;
 
-    .discover-item {
+  .discover-item {
+    margin: 10px 0;
 
-      h3 {
-        text-align: center;
-        font-weight: lighter;
-      }
+    h3 {
+      text-align: center;
+      font-weight: lighter;
+    }
 
-      .discover-apps {
-        padding: 0;
-        list-style: none;
+    .results-wrapper {
+      overflow: hidden;
+    }
 
-        > li {
-          display: inline-block;
-          width: 350px;
-          margin: 0 10px;
-        }
+    .discover-apps {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      text-align: justify;
+
+      > li {
+        display: inline-block;
+        width: 300px;
+        margin: 10px;
+        vertical-align: middle;
       }
     }
   }
+}
+
+.search-app {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  .media {
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #eaeaea;
+
+    .media-body, .media-right {
+      vertical-align: middle;
+    }
+  }
+
+  ul.opinions {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 5px;
+    min-height: 75px;
+
+    li {
+      display: inline-block;
+
+      .chart-gauge {
+        width: 95px;
+        height: 70px;
+      }
+    }
+  }
+
+  .description {
+    height: 75px;
+    max-height: 75px;
+    margin-bottom: 5px;
+    padding: 5px;
+  }
+}
+
+.get-more {
+  font-size: 1.2em;
+  text-align: center;
+  padding: 5px;
+  margin-top: 10px;
+  background: #e3e3e3;
+  cursor: pointer;
+}
+
+.get-more:hover {
+  background: #9ECFFF;
+  box-shadow: 0 0 10px #9ECFFF;
 }

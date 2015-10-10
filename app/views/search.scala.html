@@ -1,8 +1,7 @@
 @(webpage: WebPage, query: String)
 
 @main(webpage) {
-    <div id="search-results" data-search="@controllers.routes.AJAX.search()"
-    data-discover="@controllers.routes.AJAX.discover()" data-query="@query">
+    <div id="search-results" data-url="@controllers.routes.AJAX.search()" data-query="@query">
 
         @* Title with categories *@
         <div class="page-header">
@@ -17,19 +16,25 @@
 
         @* Storage for the results *@
         <div class="results-container">
-            <div id="search-result-applications">
+            <div class="results-wrapper">
                 <ul class="list-container"></ul>
             </div>
+        </div>
+        <div class="get-more" style="display: none;">
+            Give me more results
+        </div>
+    </div>
 
+    <div id="discover-results" data-url="@controllers.routes.AJAX.discover()" data-query="@query">
+        <div class="page-header">
             <h1>Discover more</h1>
             @* Loading icon *@
             <div class="icon-loader">
-            @views.html.templates.loading(false)
-            </div>
-            <div id="search-result-discover">
-
+                @views.html.templates.loading(false)
             </div>
         </div>
+
+        <div class="results-container"></div>
     </div>
 
     <script type="text/javascript" src="@routes.Assets.versioned("javascripts/pages/search.js")"></script>
