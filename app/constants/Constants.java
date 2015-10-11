@@ -18,7 +18,7 @@ public class Constants {
     public static final int TIMEOUT = 20000;
 
     public static final int NUMBER_PARSED_APP_PER_PAGE = 20;
-    public static final int NUMBER_RESULT_SEARCH = 20;
+    public static final int NUMBER_RESULT_SEARCH = 21;
     public static final int NUMBER_TRENDING_APPS = 20;
 
     /* Command builder */

@@ -20,19 +20,26 @@ GaugeCharts = {
 
     animate: function(chart) {
 
-        $({interpolation: 0}).animate({interpolation: 1}, {
-            duration: 1500,
-            step: function(now) {
-                $.each(chart.arrows, function(i, arrow) {
-
-                    if (!arrow.isAnimating) {
-                        arrow.animationValue = arrow.value * now;
-                    }
-                });
-
-                GaugeCharts.draw(chart);
-            }
+        var delay = 0;
+        $.each(chart.arrows, function(i, arrow) {
+            delay = Math.max(delay, Number(arrow.delay));
         });
+
+        $({interpolation: 0})
+            .delay(delay)
+            .animate({interpolation: 1}, {
+                duration: 1500,
+                step: function(now) {
+                    $.each(chart.arrows, function(i, arrow) {
+
+                        if (!arrow.isAnimating) {
+                            arrow.animationValue = arrow.value * now;
+                        }
+                    });
+
+                    GaugeCharts.draw(chart);
+                }
+            });
     },
 
     shake: function(chart, index) {

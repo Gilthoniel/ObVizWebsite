@@ -58,7 +58,7 @@ $(document).ready(function() {
                             radius: 0.9,
                             text: {
                                 value: $(this).data("title"),
-                                position: 1.0,
+                                position: 0.9,
                                 font: "12px Dosis"
                             }
                         }).addArrow({

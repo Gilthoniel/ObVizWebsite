@@ -10,18 +10,32 @@
             </div>
             <div class="media-body">
                 <h4 class="media-heading"><a href="@routes.Application.details(app.getAppID)">@app.getName</a></h4>
+                @if(webpage.isAdmin) {
+                    <div class="admin-link">
+                        <a href="@routes.Administration.training()#@app.getAppID">
+                            Admin training <span class="glyphicon glyphicon-share"></span>
+                        </a>
+                    </div>
+                }
             </div>
         </div>
-        <ul class="opinions">
+        @if(app.isParsed) {
+            <ul class="opinions">
             @for((opinion, index) <- app.getOpinions.take(3).zipWithIndex) {
-                <li @if(index > 1) {class="hidden-xs"}>
+                <li @if(index > 1) {
+                    class="hidden-xs"}>
                     <div data-value="@opinion.percentage()"
                     data-title="@webpage.getTopics.getTitle(opinion.getTopicID)" class="chart-gauge"></div>
                 </li>
             }
-        </ul>
-        <div class="description" style="display: none;">
-            @String.format("%1.130s", app.getDescription) ...
-        </div>
+            </ul>
+            <div class="description" style="display : none ;">
+                @String.format("%1.130s", app.getDescription) ...
+            </div>
+        } else {
+            <div class="description-no-opinions">
+                @String.format("%1.130s", app.getDescription) ...
+            </div>
+        }
     </div>
 </li>

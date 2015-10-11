@@ -194,6 +194,7 @@ function Trending() {
                             }));
                             $element.data("gauge").addArrow({
                                 value: Number($element.data("value")),
+                                delay: 1000,
                                 color: "rgb(0,0,0)",
                                 baseLength: 5,
                                 radius: 0.9

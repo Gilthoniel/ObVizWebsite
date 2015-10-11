@@ -65,6 +65,7 @@ $(document).ready(function() {
             if (typeof $(this).data("value") !== 'undefined') {
                 var arrow = {
                     value: Number($(this).data("value")),
+                    delay: 1000,
                     color: "#505050",
                     baseLength: 5,
                     radius: 0.9,
@@ -390,14 +391,14 @@ $(document).ready(function() {
             // Hide the button
             $(this).closest("#applications-name").slideUp();
         }).hover(function() {
-            $(this).stop().html(".");
+            $(this).stop().html("");
             $(this).animate({
                 width: 160
             }, function() {
                 $(this).html("Turn off the comparison");
             });
         }, function() {
-            $(this).stop().html(".");
+            $(this).stop().html("");
             $(this).animate({
                 width: 40
             }, function() {
