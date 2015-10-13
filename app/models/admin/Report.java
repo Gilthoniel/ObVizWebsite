@@ -47,10 +47,18 @@ public class Report {
                     appVersionCode = entry.getValue().getAsInt();
                     break;
                 case "TOTAL_MEM_SIZE":
-                    totalMemSize = entry.getValue().getAsLong();
+                    if (entry.getValue().isJsonObject()) {
+                        totalMemSize = entry.getValue().getAsJsonObject().get("$numberLong").getAsLong();
+                    } else {
+                        totalMemSize = entry.getValue().getAsLong();
+                    }
                     break;
                 case "AVAILABLE_MEM_SIZE":
-                    availableMemSize = entry.getValue().getAsLong();
+                    if (entry.getValue().isJsonObject()) {
+                        availableMemSize = entry.getValue().getAsJsonObject().get("$numberLong").getAsLong();
+                    } else {
+                        availableMemSize = entry.getValue().getAsLong();
+                    }
                     break;
                 case "USER_APP_START_DATE":
                     startDate = entry.getValue().getAsString();
