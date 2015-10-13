@@ -43,6 +43,7 @@ public class Constants {
     public static final String UPDATE_TOPIC = "Insert_App_Topic";
     public static final String INSERT_TYPE = "Insert_App_Category_Type";
     public static final String UPDATE_CATEGORY = "Update_App_Category";
+    public static final String GET_REPORTED_BUGS = "Get_Reported_Bugs";
 
     /* Cookies */
     public static final String COOKIE_VIDEO = "OBVIZ_VIDEO";

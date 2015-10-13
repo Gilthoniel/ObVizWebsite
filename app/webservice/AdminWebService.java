@@ -5,6 +5,7 @@ import constants.Constants;
 import models.*;
 import models.admin.Argument;
 import models.admin.Log;
+import models.admin.Report;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import play.Logger;
@@ -28,6 +29,14 @@ public class AdminWebService {
 
     @Inject
     private ConnectionService service;
+
+    public F.Promise<List<Report>> getReports() {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("cmd", Constants.GET_REPORTED_BUGS));
+
+        Type type = new TypeToken<List<Report>>(){}.getType();
+        return service.getNoCache(Constants.adminURL, params, type);
+    }
 
     /**
      * Get the list of parsed applications

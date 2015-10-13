@@ -30,6 +30,7 @@ GET         /admin/logs                           @controllers.Administration.lo
 GET         /admin/topics                         @controllers.Administration.topics()
 GET         /admin/categories                     @controllers.Administration.categories()
 GET         /admin/types                          @controllers.Administration.categoriesTypes()
+GET         /admin/reports                        @controllers.Administration.reports()
 POST        /admin/topicsupdate                   @controllers.Administration.updateTopic()
 POST        /admin/types                          @controllers.Administration.insertType()
 POST        /admin/categories                     @controllers.Administration.updateCategory()

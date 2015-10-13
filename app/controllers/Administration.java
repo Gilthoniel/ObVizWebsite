@@ -8,6 +8,7 @@ import models.*;
 import models.WebPage.WebPath;
 import models.admin.Argument;
 import models.admin.Log;
+import models.admin.Report;
 import models.errors.AJAXRequestException;
 import play.Logger;
 import play.data.DynamicForm;
@@ -63,6 +64,7 @@ public class Administration extends Controller {
         paths.add(new WebPath(routes.Administration.categories(), "Categories"));
         paths.add(new WebPath(routes.Administration.categoriesTypes(), "Types"));
         paths.add(new WebPath(routes.Administration.users(), "Users"));
+        paths.add(new WebPath(routes.Administration.reports(), "Reports"));
         paths.add(new WebPath(routes.Application.index(), "Back to website"));
     }
 
@@ -254,6 +256,22 @@ public class Administration extends Controller {
         return F.Promise.pure(redirect(routes.Administration.categoriesTypes()));
     }
 
+    public F.Promise<Result> reports() {
+
+        WebPage webpage = getWebpage();
+
+        return wb.getReports().map(reports -> {
+            Iterator<Report> it = reports.iterator();
+            while (it.hasNext()) {
+                if (!it.next().isValid()) {
+                    it.remove();
+                }
+            }
+
+            return ok((play.twirl.api.Html) views.html.administration.reports.render(webpage, reports));
+        });
+    }
+
     /** AJAX **/
 
     public F.Promise<Result> loadLogs() {
@@ -360,9 +378,9 @@ public class Administration extends Controller {
             Collections.sort(container.reviews, (review, other) -> {
 
                 int nbReview = review.opinions != null ? review.opinions.nbOpinions : 0;
-                boolean reviewBad = review.opinions != null ? review.opinions.containsBadOpinion() : false;
+                boolean reviewBad = review.opinions != null && review.opinions.containsBadOpinion();
                 int nbOther = other.opinions != null ? other.opinions.nbOpinions : 0;
-                boolean otherBad = other.opinions != null ? other.opinions.containsBadOpinion() : false;
+                boolean otherBad = other.opinions != null && other.opinions.containsBadOpinion();
 
                 if (!reviewBad && !otherBad) {
 
