@@ -1,52 +1,56 @@
 @(app: AndroidApp, webpage: WebPage)
 
-<ul class="information">
-    <li>
-        <h4>Rating</h4>
-        @for(i <- 1 to app.getScore) {
-            <img height="15" src="@routes.Assets.versioned("images/rating.png")" alt="" />
-        }
-    </li>
-    <li>
-        <h4>Version</h4>
-        @app.getMinOS
-    </li>
-    <li>
-        <h4>Publication</h4>
-        @app.getPublicationDate
-    </li>
-    <li>
-        <h4>Category</h4>
-        @webpage.getCategories.getFrom(app.getCategory).title
-    </li>
-    <li>
-        <h4>Price</h4>
-        @if(app.isFree) {
-            Free
-        } else {
-            @app.getPrice
-        }
-    </li>
-    <li class="visible-xs-inline-block">
-        <a class="btn-get-app" href="https://play.google.com/store/apps/details?id=@app.getAppID"></a>
-    </li>
-</ul>
-<ul class="information">
-    <li>
-        <h4>Installations</h4>
-        @app.getInstallations
-    </li>
-    <li>
-        <h4>Developer</h4>
-        @app.getDeveloper
-    </li>
-    <li class="pull-right hidden-xs">
-        <a class="btn-get-app" href="https://play.google.com/store/apps/details?id=@app.getAppID"></a>
-    </li>
-</ul>
+<div>
+    <ul class="information">
+        <li>
+            <h4>Rating</h4>
+            @for(i <- 1 to app.getScore) {
+                <img height="15" src="@routes.Assets.versioned("images/rating.png")" alt="" />
+            }
+        </li>
+        <li>
+            <h4>Version</h4>
+            @app.getMinOS
+        </li>
+        <li>
+            <h4>Publication</h4>
+            @app.getPublicationDate
+        </li>
+        <li>
+            <h4>Category</h4>
+            @webpage.getCategories.getFrom(app.getCategory).title
+        </li>
+        <li>
+            <h4>Price</h4>
+            @if(app.isFree) {
+                Free
+            } else {
+                @app.getPrice
+            }
+        </li>
+        <li class="visible-xs-inline-block">
+            <a class="btn-get-app" href="https://play.google.com/store/apps/details?id=@app.getAppID"></a>
+        </li>
+    </ul>
+    <ul class="information">
+        <li>
+            <h4>Installations</h4>
+            @app.getInstallations
+        </li>
+        <li>
+            <h4>Developer</h4>
+            @app.getDeveloper
+        </li>
+        <li class="pull-right hidden-xs">
+            <a class="btn-get-app" href="https://play.google.com/store/apps/details?id=@app.getAppID"></a>
+        </li>
+    </ul>
 
-<hr />
+    <hr />
 
-<p>
-@app.getDescription
-</p>
+    <div class="description">
+        <div class="desc-wrapper">
+            @app.getDescription
+        </div>
+    </div>
+</div>

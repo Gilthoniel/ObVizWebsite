@@ -22,6 +22,23 @@ $(document).ready(function() {
         }
     })();
 
+    /** Description **/
+    OBVIZ.description = (function() {
+        var $parent = $("#app-description");
+        var $container = $parent.find(".description");
+        var height = $container.height();
+
+        $container.hover(function() {
+            $container.stop().animate({
+                height: $container.find(".desc-wrapper").height() + 10
+            });
+        }, function() {
+            $container.stop().animate({
+                height: height
+            });
+        });
+    })();
+
     /** Screenshots carousel **/
     OBVIZ.carousel = (function() {
         var $slickScreenshots = $(".slick-screenshots");
