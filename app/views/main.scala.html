@@ -68,6 +68,11 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <div id="header-search-bar">
+                        <a href="https://play.google.com/store/apps/details?id=com.obviz.review">
+                            <img height="45" alt="Get it on Google Play"
+                                src="@routes.Assets.versioned("images/get_app.png")" />
+                        </a>
+
                         <form method="POST" action="@routes.Application.postSearch()">
                             <div class="wrapper-input">
                                 <input type="text" name="query" placeholder="Search for apps..." />

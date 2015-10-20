@@ -1,16 +1,14 @@
 package webservice;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import com.google.inject.Inject;
 import models.AndroidApp;
+import models.admin.Report;
 import models.Review;
 import models.adapters.AndroidAppDeserializer;
+import models.adapters.ReportDeserializer;
 import models.adapters.ReviewDeserializer;
 import play.Logger;
-import service.TopicsManager;
 
 import javax.inject.Singleton;
 import java.io.InputStream;
@@ -31,6 +29,7 @@ public class MessageParser {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Review.class, new ReviewDeserializer(this));
         builder.registerTypeAdapter(AndroidApp.class, android);
+        builder.registerTypeAdapter(Report.class, new ReportDeserializer());
 
         gson = builder.create();
     }

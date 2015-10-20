@@ -40,7 +40,6 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
     }
 
     @Override
-    @With(WebPageInformation.class)
     public F.Promise<Result> onClientError(Http.RequestHeader request, int statusCode, String message) {
         WebPage webpage = new WebPage(null, null, Http.Context.current().session());
 
@@ -54,10 +53,9 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
     }
 
     @Override
-    @With(WebPageInformation.class)
     protected F.Promise<Result> onProdServerError(Http.RequestHeader request, UsefulException exception) {
 
-        final WebPage webpage = (WebPage) Http.Context.current().args.get("com.obviz.webpage");
+        final WebPage webpage = new WebPage(null, null, Http.Context.current().session());
         String message = "It seems that the server is overloaded. Please come back later :-)";
 
         return F.Promise.pure(

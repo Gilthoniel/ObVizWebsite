@@ -1,0 +1,88 @@
+@(webpage: WebPage, reports: java.util.List[models.admin.Report])
+
+@administration.admin_main(webpage) {
+
+    <div class="row">
+        <div class="col-xs-2">
+            <ul class="list-group list-files" id="report-choice">
+                @for(report <- reports.take(50)) {
+                    <li class="list-group-item" data-id="@report.id">
+                        @report.crashDate
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-xs-10">
+            @for(report <- reports.take(50)) {
+                <div class="crash-report" data-id="@report.id" style="display: none;">
+                    <h1>Crash : @report.crashDate</h1>
+                    <div class="col-xs-8">
+                        <h2>Stack traces</h2>
+                        @Html(report.stack)
+                    </div>
+                    <div class="col-xs-4">
+                        Android Version: @report.androidVersion<br>
+                        App Code: @report.appVersionCode<br>
+                        App Version: @report.appVersionName<br>
+                        Total memory: @report.totalMemSize<br> bytes
+                        Available memory: @report.availableMemSize<br> bytes
+                        Phone model: @report.phoneModel
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-xs-4">
+                        <h2>Crash Configuration</h2>
+                        <dl>
+                            @for(entry <- report.crashConfiguration.entrySet()) {
+                                <dt>@entry.getKey</dt>
+                                <dd>@entry.getValue.toString</dd>
+                            }
+                        </dl>
+                    </div>
+                    <div class="col-xs-4">
+                        <h2>Initial Configuration</h2>
+                        <dl>
+                        @for(entry <- report.initialConfiguration.entrySet()) {
+                            <dt>@entry.getKey</dt>
+                            <dd>@entry.getValue.toString</dd>
+                        }
+                        </dl>
+                    </div>
+                    @if(report.display.has("0")) {
+                        <div class="col-xs-4">
+                            <h2>Display</h2>
+                            <dl>
+                            @for(entry <- report.display.get("0").getAsJsonObject.entrySet()) {
+                                <dt>@entry.getKey</dt>
+                                <dd>@entry.getValue.toString</dd>
+                            }
+                            </dl>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var $reports = $(".crash-report");
+            var $links = $("#report-choice").find("li");
+
+            $("#report-choice")
+                .on('click', 'li', function() {
+
+                    $links.removeClass("active");
+                    $(this).addClass("active");
+
+                    $reports.hide();
+
+                    $(".crash-report[data-id='" + $(this).data("id") + "']").show();
+                })
+                .find("li:first-child").click();
+
+        });
+    </script>
+}
